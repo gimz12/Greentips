@@ -13,11 +13,21 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
         <activity
+            android:name=".App.Admin.Activity.UserProfileManagement"
+            android:exported="false"
+            android:label="Add New Employee"
+            android:parentActivityName=".App.Admin.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".App.Admin.MainActivity" />
+        </activity>
+        <activity
             android:name=".App.Admin.Activity.EmployeeInsert"
             android:exported="false" />
         <activity
             android:name=".App.Admin.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Admin Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

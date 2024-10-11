@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="146dp"
+    android:layout_height="230dp"
     android:background="@color/white"
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+
     <ImageView
+        android:id="@+id/logoNavHeader"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:src="@drawable/green_tips_plantations_logo"/>
-
+        android:layout_marginStart="4dp"
+        android:scaleType="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/green_tips_plantations_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:queryHint="Search here"
-        android:iconifiedByDefault="false"
-        android:background="@drawable/searchview_border"
         android:layout_margin="8dp"
+        android:background="@drawable/searchview_border"
+        android:gravity="left"
+        android:padding="8dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search here"
         android:searchIcon="@drawable/ic_search"
-        android:gravity="left"/>
+        android:outlineAmbientShadowColor="@color/black"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoNavHeader" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
