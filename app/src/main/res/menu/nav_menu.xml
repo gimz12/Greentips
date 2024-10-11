@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+            android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_dashboard"
+            android:title="DashBoard"/>
+        <item
+            android:id="@+id/empfragment"
+            android:icon="@drawable/ic_employee_managment"
+            android:title="Employee Management"/>
+        <item
+            android:id="@+id/est_mngFragmnet"
+            android:icon="@drawable/ic_estate_managment"
+            android:title="Estate Management"/>
+        <item
+            android:id="@+id/buyer_mngFragment"
+            android:icon="@drawable/ic_buyer_management"
+            android:title="Buyer Management"/>
+        <item
+            android:id="@+id/coconut_infoFragment"
+            android:icon="@drawable/ic_coconuttree"
+            android:title="Coconut Tree Infomation"/>
+        <item
+            android:id="@+id/intercrops_infoFragment"
+            android:icon="@drawable/ic_intercrops_infomation"
+            android:title="Intercrops Infomation"/>
+        <item
+            android:id="@+id/harvest_infoFragmnet"
+            android:icon="@drawable/ic_harvest_infomation"
+            android:title="Harvest Infomation"/>
+        <item
+            android:id="@+id/sup_mngFragment"
+            android:icon="@drawable/ic_supplier_managament"
+            android:title="Supplier Management"/>
+        <item
+            android:id="@+id/res_mngFragmenet"
+            android:icon="@drawable/ic_resource_management"
+            android:title="Resource Management"/>
+        <item
+            android:id="@+id/fert_mngFragment"
+            android:icon="@drawable/ic_fertilizer_management"
+            android:title="Fertilizer Management"/>
+
+    </group>
+
+    <item
+        android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/log_out"
+                android:icon="@drawable/ic_logout"
+                android:title="Log Out"/>
+
+        </menu>
+
+
+    </item>
+
+
+</menu>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/search"
+        android:title="Seatch"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always"
+        app:actionViewClass="com.google.android.material.search.SearchView"/>
+
+    <item android:id="@+id/grouped_msg"
+        android:title="Groupped Messages"
+        android:icon="@drawable/ic_groupmessages"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/notifications"
+        android:title="Notofication "
+        android:icon="@drawable/ic_notifications"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/profile"
+        android:title="Notofication "
+        android:icon="@drawable/ic_person"
+        app:showAsAction="always"/>
+
+
+</menu>

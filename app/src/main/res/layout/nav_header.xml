@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="146dp"
+    android:background="@color/white"
+    android:gravity="bottom"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:src="@drawable/green_tips_plantations_logo"/>
+
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:queryHint="Search here"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/searchview_border"
+        android:layout_margin="8dp"
+        android:searchIcon="@drawable/ic_search"
+        android:gravity="left"/>
+
+
+
+</LinearLayout>
