@@ -5,4 +5,8 @@
 
     <color name="iconGrey">#3a3a3a</color>
     <color name="textGrey">#535353</color>
+    <color name="backgroundGrey">#E6E6E6</color>
+    <color name="darkGreen">#0B4E52</color>
+
+
 </resources>

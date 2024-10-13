@@ -15,8 +15,8 @@
         app:showAsAction="always"/>
 
     <item android:id="@+id/notifications"
-        android:title="Notofication "
-        android:icon="@drawable/ic_notifications"
+        android:title="Notification "
+        android:icon="@drawable/ic_anotifications"
         app:showAsAction="always"/>
 
     <item android:id="@+id/profile"

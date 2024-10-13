@@ -1,14 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GreentipsKotlin" parent="Theme.Material3.Light">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/black</item>
+    <style name="Base.Theme.GreentipsKotlin" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkGreen</item>
         <item name="colorPrimaryVariant">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
 
+        <!-- Add this to remove default ActionBar if you're using a custom one -->
 
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/textGrey</item>
     </style>
 
     <style name="Theme.GreentipsKotlin" parent="Base.Theme.GreentipsKotlin" />
+
 </resources>

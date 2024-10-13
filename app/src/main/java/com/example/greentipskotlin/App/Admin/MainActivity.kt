@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             return true
         }
 
-
         if (id == R.id.profile) {
             val groupMessageIntent = Intent(
                 this,
