@@ -11,6 +11,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.greentipskotlin.App.Admin.Activity.EmployeeInsert
+import com.example.greentipskotlin.App.Admin.Activity.EmployeePositionInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
@@ -64,9 +66,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (id == R.id.profile) {
             val groupMessageIntent = Intent(
                 this,
-                UserProfileManagement::class.java
+                EmployeeInsert::class.java
             )
             startActivity(groupMessageIntent)
+        }else if (id == R.id.notifications){
+            val notificationIntent = Intent(
+                this,
+                EmployeePositionInsert::class.java
+            )
+            startActivity(notificationIntent)
         }
 
         return true

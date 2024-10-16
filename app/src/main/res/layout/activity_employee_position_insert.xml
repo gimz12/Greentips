@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <!-- Position Name -->
+    <TextView
+        android:id="@+id/tvPositionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Position Name"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/etPositionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Position Name"
+        android:textColor="@color/black"/>
+
+    <!-- Position Description -->
+    <TextView
+        android:id="@+id/tvPositionDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Position Description"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/etPositionDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Position Description"
+        android:textColor="@color/black"/>
+
+    <!-- Position State (Active/Inactive) -->
+    <TextView
+        android:id="@+id/tvPositionState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Position State"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+
+    <RadioGroup
+        android:id="@+id/rgPositionState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active" />
+
+        <RadioButton
+            android:id="@+id/rbInactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inactive"
+            android:layout_marginStart="16dp" />
+    </RadioGroup>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="24dp" />
+</LinearLayout>

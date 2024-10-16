@@ -7,6 +7,13 @@
     <color name="textGrey">#535353</color>
     <color name="backgroundGrey">#E6E6E6</color>
     <color name="darkGreen">#0B4E52</color>
+    <color name="hintTextGrey">#898989</color>
+
+
+    //btns
+    <color name="okGreen">#205B3D</color>
+    <color name="WarningRed">#EB5757</color>
+
 
 
 </resources>

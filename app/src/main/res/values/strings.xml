@@ -5,4 +5,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="gender_string">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="position_string">
+        <item>CEO</item>
+        <item>Field_Manager</item>
+        <item>Finanace_Manager</item>
+        <item>Admin</item>
+        <item>Worker</item>
+    </string-array>
+
 </resources>
