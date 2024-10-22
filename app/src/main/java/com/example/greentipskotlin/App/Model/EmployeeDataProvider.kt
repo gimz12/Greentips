@@ -10,4 +10,8 @@ class EmployeeDataProvider (context: Context){
     fun insetEmployee(employee: Employee){
         greentipsDatabaseHelper.insertEmployee(employee)
     }
+
+    fun getAllEmployees(): List<Employee>{
+        return greentipsDatabaseHelper.getAllEmployees()
+    }
 }

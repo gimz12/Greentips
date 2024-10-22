@@ -4,6 +4,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -105,5 +108,41 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(COLUMN_PASSWORD,employee.password)
             put(COLUMN_EMPLOYEE_POSITION_ID_FR,employee.employeePositionId)
         }
+        db.insert(TABLE_EMPLOYEE, null, values)
+        db.close()
+    }
+
+    fun getAllEmployees(): List<Employee> {
+        val employees = ArrayList<Employee>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_EMPLOYEE", null)
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME))
+                val phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
+                val address = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ADDRESS))
+                val gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER))
+
+                // Parsing Date fields
+                val joinDateString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_JOIN_DATE))
+                val dateOfBirthString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB))
+                val joinDate = Date(joinDateString) // Or use a proper date format parser if needed
+                val dateOfBirth = Date(dateOfBirthString)
+
+                val age = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE))
+                val username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME))
+                val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
+                val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+                val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
+
+                // Add employee to the list
+                employees.add(Employee(name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return employees
     }
 }
