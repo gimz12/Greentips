@@ -26,6 +26,8 @@ class emp_mngFragment : Fragment() {
     // ViewModel initialization
     private val model: EmployeeViewModel by viewModels()
 
+    //creating a variable to know if the recycler view is sorted or not
+    private var isSorted: Boolean = false
 
 
     override fun onCreateView(
@@ -35,22 +37,24 @@ class emp_mngFragment : Fragment() {
         // Inflate the layout using DataBindingUtil
         _binding = FragmentEmpMngBinding.inflate(inflater, container, false)
 
+        //creating Instance of Layout Components
         val addEmployeeImage = binding.insertEmployeeImageView
+        val sortButton= binding.sortButton
 
-        addEmployeeImage.setOnClickListener {
-            onClickAddNewEmployee()
-        }
-
-        // Set onClickListener to trigger the method when the image is clicked
-        addEmployeeImage.setOnClickListener {
-            onClickAddNewEmployee()
-        }
-
+        //Initialize Recycler View
         employeeAdapter = EmployeeAdapter(model.getAllEmployees()) // Modify getAllCities to return the list of cities
         binding.employeeRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.employeeRecyclerView.adapter = employeeAdapter
 
+        //Listener for Add New Employee
+        addEmployeeImage.setOnClickListener {
+            onClickAddNewEmployee()
+        }
 
+        //Listener for Sort
+        sortButton.setOnClickListener {
+            toggleSort()
+        }
 
         return binding.root
     }
@@ -59,9 +63,30 @@ class emp_mngFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    //Intent to AddNewEmployee Activity
     private fun onClickAddNewEmployee() {
         val groupMessageIntent = Intent(requireContext(), EmployeeInsert::class.java)
         startActivity(groupMessageIntent)  // Start the EmployeeInsert activity
     }
+
+    //Method for SortEmployee using their Name
+    private fun toggleSort() {
+        if (isSorted) {
+            // If already sorted, show unsorted list
+            employeeAdapter.updateList(model.getAllEmployees())
+        } else {
+            // If unsorted, show sorted list
+            val sortedList = model.getAllEmployees().sortedBy { it.employeeName }
+            employeeAdapter.updateList(sortedList)
+        }
+        // Toggle the sorting state
+        isSorted = !isSorted
+    }
+
 
 }

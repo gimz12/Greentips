@@ -93,6 +93,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    //Method for insert a new employee
     fun insertEmployee(employee: Employee){
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -112,6 +113,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    //to get all employees
     fun getAllEmployees(): List<Employee> {
         val employees = ArrayList<Employee>()
         val db = this.readableDatabase
@@ -145,4 +147,5 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return employees
     }
+
 }

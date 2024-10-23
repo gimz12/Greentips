@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.databinding.EmployeeCardBinding
 
-class EmployeeAdapter (private val employees: List<Employee>) :
+class EmployeeAdapter (private var employees: List<Employee>) :
     RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
@@ -20,6 +20,13 @@ class EmployeeAdapter (private val employees: List<Employee>) :
 
     override fun getItemCount(): Int = employees.size
 
+    //method for getting employees to a new list and notify
+    fun updateList(newList: List<Employee>) {
+        employees = newList
+        notifyDataSetChanged()
+    }
+
+    //binding data with List<Employee>
     class EmployeeViewHolder(private val binding: EmployeeCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(employee: Employee) {

@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Initialize Drawer
         drawerLayout = findViewById(R.id.drawer_layout)
 
-
-
         // Initialize navigationView and set listener
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
@@ -80,7 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-
+    //to navigate Through the navigation drawer
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(dashboardFragment())
