@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
+import com.example.greentipskotlin.App.Model.Estate
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -35,6 +36,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_EMAIL = "email"
         const val COLUMN_PASSWORD = "password"
         const val COLUMN_EMPLOYEE_POSITION_ID_FR = "employeePositionId"
+
+        //Estate table
+        const val TABLE_ESTATE = "Estate"
+        const val Estate_ID = "id"
+        const val COLUMN_ESTATE_NAME = "estateName"
+        const val COLUMN_ESTATE_LOCATION = "estateLocation"
+        const val COLUMN_ESTATE_SIZE = "estateSize"
+        const val COLUMN_ESTATE_ADDITIONAL_INFO = "estateAdditionalInfo"
 
     }
 
@@ -69,6 +78,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             )
         """
 
+        val createEstateTable= """
+            
+            CREATE TABLE $TABLE_ESTATE (
+                $Estate_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_ESTATE_NAME TEXT,
+                $COLUMN_ESTATE_LOCATION TEXT,
+                $COLUMN_ESTATE_SIZE TEXT,
+                $COLUMN_ESTATE_ADDITIONAL_INFO TEXT)
+            
+        """
+
+        db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
     }
@@ -76,8 +97,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEE_POSITION")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ESTATE")
         onCreate(db)
     }
+
+    //Employee------------------------------------------------------------------------------------------------
+
 
     // Method to insert a new position
     fun insertEmployeePosition(employeePosition: EmployeePosition){
@@ -146,6 +171,46 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return employees
+    }
+
+    //Estate--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    fun insertEstate(estate: Estate){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_ESTATE_NAME,estate.estateName)
+            put(COLUMN_ESTATE_LOCATION,estate.estateLocation)
+            put(COLUMN_ESTATE_SIZE,estate.estateSize)
+            put(COLUMN_ESTATE_ADDITIONAL_INFO,estate.estateAdditionalInfo)
+        }
+        db.insert(TABLE_ESTATE,null,values)
+        db.close()
+
+    }
+
+    fun getAllEstates():List<Estate>{
+        val estates = ArrayList<Estate>()
+        val db =this.readableDatabase
+        val cursor=db.rawQuery("SELECT * FROM $TABLE_ESTATE", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val estateID=cursor.getInt(cursor.getColumnIndexOrThrow(Estate_ID))
+                val estateName=cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_NAME))
+                val estateLocation=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_ESTATE_LOCATION))
+                val estateSize=cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_SIZE))
+                val estateAdditionalInfo=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_ESTATE_ADDITIONAL_INFO))
+
+                estates.add(Estate(estateID,estateName,estateLocation,estateSize,estateAdditionalInfo))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return estates
     }
 
 }
