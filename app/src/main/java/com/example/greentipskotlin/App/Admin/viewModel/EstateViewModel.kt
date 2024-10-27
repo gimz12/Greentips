@@ -22,4 +22,6 @@ class EstateViewModel (application: Application) : AndroidViewModel(application)
     }
 
 
+
+
 }

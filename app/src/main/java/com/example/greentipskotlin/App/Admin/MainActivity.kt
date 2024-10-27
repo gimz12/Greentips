@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.greentipskotlin.App.Admin.Activity.CoconutInsert
 import com.example.greentipskotlin.App.Admin.Activity.EmployeeInsert
 import com.example.greentipskotlin.App.Admin.Activity.EmployeePositionInsert
 import com.example.greentipskotlin.App.Admin.Activity.EstateInsert
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }else if (id == R.id.notifications){
             val notificationIntent = Intent(
                 this,
-                EstateInsert::class.java
+                CoconutInsert::class.java
             )
             startActivity(notificationIntent)
         }

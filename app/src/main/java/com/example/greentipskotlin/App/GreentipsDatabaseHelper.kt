@@ -2,6 +2,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
@@ -44,6 +45,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_ESTATE_LOCATION = "estateLocation"
         const val COLUMN_ESTATE_SIZE = "estateSize"
         const val COLUMN_ESTATE_ADDITIONAL_INFO = "estateAdditionalInfo"
+
+        //Coconut Table
+        const val TABLE_COCONUT = "Coconut"
+        const val Coconut_ID = "id"
+        const val COLUMN_COCONUT_PLANT_DATE = "plantDate"
+        const val COLUMN_NUMBER_OF_COCONUTS = "numberOfCoconuts"
+        const val COLUMN_COCONUT_TREE_AGE= "coconutTreeAge"
+        const val COLUMN_TREE_HEALTH= "treeHealth"
+        const val COLUMN_COCONUT_TREE_TYPE= "coconutTreeType"
+        const val COLUMN_COCONUT_ADDITIONAL_INFO= "additionalInfo"
+        const val COLUMN_COCONUT_ESTATE_ID_FR = "employeePositionId"
 
     }
 
@@ -89,15 +101,32 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createCoconutTable="""
+            CREATE TABLE $TABLE_COCONUT(
+            $Coconut_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_COCONUT_PLANT_DATE TEXT,
+            $COLUMN_NUMBER_OF_COCONUTS TEXT,
+            $COLUMN_COCONUT_TREE_AGE TEXT,
+            $COLUMN_TREE_HEALTH TEXT,
+            $COLUMN_COCONUT_TREE_TYPE TEXT,
+            $COLUMN_COCONUT_ADDITIONAL_INFO TEXT,
+            $COLUMN_EMPLOYEE_POSITION_ID_FR INTEGER,
+        FOREIGN KEY($COLUMN_COCONUT_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+            )
+            
+        """
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
+        db.execSQL(createCoconutTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEE_POSITION")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ESTATE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_COCONUT")
         onCreate(db)
     }
 
@@ -212,5 +241,57 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return estates
     }
+
+
+    //Coconut----------------------------------------------------------------------------------------
+
+    fun insertCoconuts(coconut: Coconut){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_COCONUT_PLANT_DATE,coconut.plantDate)
+            put(COLUMN_NUMBER_OF_COCONUTS,coconut.numberOfCoconuts)
+            put(COLUMN_COCONUT_TREE_AGE,coconut.coconutTreeAge)
+            put(COLUMN_TREE_HEALTH,coconut.treeHealthStatus)
+            put(COLUMN_COCONUT_TREE_TYPE,coconut.coconutType)
+            put(COLUMN_COCONUT_ADDITIONAL_INFO,coconut.additionalCoconutInfo)
+            put(COLUMN_COCONUT_ESTATE_ID_FR,coconut.estateId)
+
+        }
+        db.insert(TABLE_COCONUT,null,values)
+        db.close()
+    }
+
+
+    fun getAllCoconuts():List<Coconut>{
+        val coconuts = ArrayList<Coconut>()
+        val db =this.readableDatabase
+        val cursor=db.rawQuery("SELECT * FROM $TABLE_COCONUT", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val coconutId=cursor.getInt(cursor.getColumnIndexOrThrow(Coconut_ID))
+                val estateID=cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_COCONUT_ESTATE_ID_FR))
+                val coconutTreeType=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_COCONUT_TREE_TYPE))
+                val coconutPlantedDate=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_COCONUT_PLANT_DATE))
+                val coconutAge=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_COCONUT_TREE_AGE))
+                val coconutHealth=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_TREE_HEALTH))
+                val coconutNumber=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_NUMBER_OF_COCONUTS))
+                val coconutAddtionalInfo=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_COCONUT_ADDITIONAL_INFO))
+
+                coconuts.add(Coconut(coconutId,coconutPlantedDate,coconutNumber,coconutAge,coconutHealth,coconutTreeType,coconutAddtionalInfo,estateID))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return coconuts
+    }
+
 
 }
