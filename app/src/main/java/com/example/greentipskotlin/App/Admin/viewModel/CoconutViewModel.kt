@@ -23,7 +23,7 @@ class CoconutViewModel (application: Application):AndroidViewModel(application) 
     }
 
     fun getAllCoconutTrees():List<Coconut>{
-        Log.d("EmployeeRepository", "Number of employees: ${coconuts.size}")
+        Log.d("CoconutRepository", "Number of Coconuts: ${coconuts.size}")
         return coconuts
     }
 

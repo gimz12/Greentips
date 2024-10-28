@@ -2,6 +2,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.greentipskotlin.App.Model.Buyer
 import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
@@ -56,6 +57,20 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_COCONUT_TREE_TYPE= "coconutTreeType"
         const val COLUMN_COCONUT_ADDITIONAL_INFO= "additionalInfo"
         const val COLUMN_COCONUT_ESTATE_ID_FR = "employeePositionId"
+
+        //Buyer Table
+
+        const val TABLE_BUYER = "Buyer"
+        const val BUYER_ID = "id"
+        const val COLUMN_BUYER_NAME = "buyerName"
+        const val COLUMN_BUYER_PHONE_NUMBER="buyerPhoneNumber"
+        const val COLUMN_BUYER_COMPANY_NAME="companyName"
+        const val COLUMN_BUYER_COMPANY_PHONE_NUMBER="companyPhoneNumber"
+        const val COLUMN_BUYER_COMPANY_ADDRESS="companyAddress"
+        const val COLUMN_BUYER_TYPE="buyerType"
+        const val COLUMN_BUYER_EMAIL="buyerEmail"
+        const val COLUMN_BUYER_USERNAME="buyerUsername"
+        const val COLUMN_BUYER_PASSWORD="buyerPassword"
 
     }
 
@@ -116,10 +131,24 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createBuyerTable=""" CREATE TABLE $TABLE_BUYER(
+            $BUYER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_BUYER_NAME TEXT,
+            $COLUMN_BUYER_PHONE_NUMBER TEXT,
+            $COLUMN_BUYER_COMPANY_NAME TEXT,
+            $COLUMN_BUYER_COMPANY_PHONE_NUMBER TEXT,
+            $COLUMN_BUYER_COMPANY_ADDRESS TEXT,
+            $COLUMN_BUYER_TYPE TEXT,
+            $COLUMN_BUYER_EMAIL TEXT,
+            $COLUMN_BUYER_USERNAME TEXT,
+            $COLUMN_BUYER_PASSWORD TEXT)"""
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
         db.execSQL(createCoconutTable)
+        db.execSQL(createBuyerTable)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -127,6 +156,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ESTATE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_COCONUT")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER")
         onCreate(db)
     }
 
@@ -292,6 +322,62 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return coconuts
     }
+
+    //Buyer--------------------------------------------------------------------------------------------------------------
+
+    fun insertBuyer(buyer: Buyer){
+        val db=writableDatabase
+        val values=ContentValues().apply {
+            put(COLUMN_BUYER_NAME,buyer.Buyer_Name)
+            put(COLUMN_BUYER_PHONE_NUMBER,buyer.Buyer_PhoneNumber)
+            put(COLUMN_BUYER_COMPANY_NAME,buyer.Buyer_Company_Name)
+            put(COLUMN_BUYER_COMPANY_PHONE_NUMBER,buyer.Buyer_Company_Number)
+            put(COLUMN_BUYER_COMPANY_ADDRESS,buyer.Buyer_Company_Address)
+            put(COLUMN_BUYER_TYPE,buyer.Buyer_Type)
+            put(COLUMN_BUYER_EMAIL,buyer.Buyer_Email)
+            put(COLUMN_BUYER_USERNAME,buyer.Buyer_Username)
+            put(COLUMN_BUYER_PASSWORD,buyer.Buyer_password)
+        }
+        db.insert(TABLE_BUYER,null,values)
+        db.close()
+    }
+
+    fun getAllBuyers():List<Buyer>{
+        val buyers = ArrayList<Buyer>()
+        val db =this.readableDatabase
+        val cursor=db.rawQuery("SELECT * FROM $TABLE_BUYER", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val buyerID=cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ID))
+                val buyerName=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_NAME))
+                val buyerPhoneNumber=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_PHONE_NUMBER))
+                val buyerCompanyName=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_COMPANY_NAME))
+                val buyerCompanyPhoneNumber=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_COMPANY_PHONE_NUMBER))
+                val buyerCompanyAddress=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_COMPANY_ADDRESS))
+                val buyerType=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_TYPE))
+                val buyerEmail=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_EMAIL))
+                val buyerUsername=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_USERNAME))
+                val buyerPassword=cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_BUYER_PASSWORD))
+
+
+                buyers.add(Buyer(buyerID,buyerName,buyerPhoneNumber,buyerCompanyName,buyerCompanyPhoneNumber,buyerCompanyAddress,buyerType,buyerEmail,buyerUsername,buyerPassword))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return buyers
+    }
+
 
 
 }

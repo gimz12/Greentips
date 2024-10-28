@@ -16,7 +16,7 @@
         <!-- Title Section -->
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/coconut_card"
+            android:id="@+id/buyer_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,30 +32,29 @@
                 android:padding="15dp">
 
                 <ImageView
-                    android:id="@+id/coconutCardImageview"
+                    android:id="@+id/buyerCardImageview"
                     android:layout_width="97dp"
                     android:layout_height="60dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/coconutfragment"
+                    android:src="@drawable/buyerinsert"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/addNewEstateTextView"
+                    android:id="@+id/addNewBuyerTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Add a New Coconut
-                    Tree"
+                    android:text="Add a New Buyer"
                     android:textColor="@color/black"
 
 
                     android:textSize="19sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/coconutCardImageview"
+                    app:layout_constraintStart_toStartOf="@+id/buyerCardImageview"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -64,13 +63,13 @@
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="1dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Fill all the fields to add a Coconut Tree"
+                    android:text="Fill all the fields to add a new Buyer"
                     android:textColor="@color/hintTextGrey"
 
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/coconutCardImageview"
-                    app:layout_constraintTop_toBottomOf="@+id/addNewEstateTextView" />
+                    app:layout_constraintStart_toStartOf="@+id/buyerCardImageview"
+                    app:layout_constraintTop_toBottomOf="@+id/addNewBuyerTextView" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,58 +78,29 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/coconutEstate_TextView"
+            android:id="@+id/buyerFirstName_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Select Estate"
+            android:text="First Name"
             android:textColor="@color/hintTextGrey"
 
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconut_card" />
-
-        <Spinner
-            android:id="@+id/estate_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/edit_text_border"
-            android:backgroundTint="@color/backgroundGrey"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coconutEstate_TextView"/>
-
-        <TextView
-            android:id="@+id/coconutType_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Coconut Type"
-            android:textColor="@color/hintTextGrey"
-
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/estate_spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/buyer_card" />
 
         <EditText
-            android:id="@+id/coconutType_txt"
+            android:id="@+id/buyerFirstName_txt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Enter The Type Of Coconut"
+            android:hint="Enter The First Name Of Buyer"
             android:textColorHint="@color/hintTextGrey"
             android:textSize="12sp"
             android:padding="12sp"
@@ -138,60 +108,32 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutType_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerFirstName_TextView" />
 
         <TextView
-            android:id="@+id/plantedDate_TextView"
+            android:id="@+id/buyerLastName_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/hintTextGrey"
-            android:text="Planted Date"
-
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutType_txt" />
-
-        <DatePicker
-            android:id="@+id/plantedDate_Picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/textGrey"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plantedDate_TextView"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/numberOfCoconuts_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Number Of Coconuts"
+            android:text="Last Name"
             android:textColor="@color/hintTextGrey"
 
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plantedDate_Picker" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerFirstName_txt" />
 
         <EditText
-            android:id="@+id/numberOfCoconuts_txt"
+            android:id="@+id/buyerLastName_txt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Enter Number of Coconuts Harvested From This Tree"
+            android:hint="Enter The Location of Estate"
             android:textColorHint="@color/hintTextGrey"
             android:textSize="12sp"
             android:padding="12sp"
@@ -199,32 +141,32 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/numberOfCoconuts_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerLastName_TextView" />
 
         <TextView
-            android:id="@+id/coconutTreeHealth_TextView"
+            android:id="@+id/buyerPhoneNumber_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Health Conditions Of Tree"
+            android:text="Phone Number"
             android:textColor="@color/hintTextGrey"
             android:textSize="12sp"
             android:textStyle="bold"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/numberOfCoconuts_txt" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerLastName_txt" />
 
         <EditText
-            android:id="@+id/coconutTreeAgeHealth_txt"
+            android:id="@+id/buyerPhoneNumber_txt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Enter The Health Conditions Of The Tree"
+            android:hint="Enter The Phone Number"
             android:textColorHint="@color/hintTextGrey"
             android:textSize="12sp"
             android:padding="12sp"
@@ -232,32 +174,32 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutTreeHealth_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerPhoneNumber_TextView" />
 
         <TextView
-            android:id="@+id/coconutAdditionalInfo_TextView"
+            android:id="@+id/buyerCompanyName_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Addtional Infomation"
+            android:text="Company Name"
             android:textColor="@color/hintTextGrey"
 
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutTreeAgeHealth_txt" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerPhoneNumber_txt" />
 
         <EditText
-            android:id="@+id/coconutAdditionalInfo_txt"
+            android:id="@+id/buyerCompanyName_txt"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Enter Additional Infomation About This Tree"
+            android:hint="Enter Company Name"
             android:textColorHint="@color/hintTextGrey"
             android:textSize="12sp"
             android:padding="12sp"
@@ -265,24 +207,223 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutAdditionalInfo_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyName_TextView" />
+
+        <TextView
+            android:id="@+id/buyerCompanyPhoneNumber_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Company Phone Number"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyName_txt" />
+
+        <EditText
+            android:id="@+id/buyerCompanyPhoneNumber_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Company Phone Number"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyPhoneNumber_TextView" />
+
+        <TextView
+            android:id="@+id/buyerCompanyAddress_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Comapny Address"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyPhoneNumber_txt" />
+
+        <EditText
+            android:id="@+id/buyerCompanyAddress_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Company Address"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyAddress_TextView" />
+
+        <TextView
+            android:id="@+id/buyerType_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Buyer Type"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerCompanyAddress_txt" />
+
+        <EditText
+            android:id="@+id/buyerType_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Buyer Type"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerType_TextView" />
+
+        <TextView
+            android:id="@+id/buyerEmail_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Buyer Email"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerType_txt" />
+
+        <EditText
+            android:id="@+id/buyerEmail_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Buyer Email"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerEmail_TextView" />
+
+        <TextView
+            android:id="@+id/buyerUsername_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Buyer Username"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerEmail_txt" />
+
+        <EditText
+            android:id="@+id/buyerUsername_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Buyer Username"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerUsername_TextView" />
+
+        <TextView
+            android:id="@+id/buyerPassword_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Buyer Password"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerUsername_txt" />
+
+        <EditText
+            android:id="@+id/buyerPassword_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Buyer Password"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buyerPassword_TextView" />
+
 
 
         <Button
-            android:id="@+id/addCoconutBtn"
+            android:id="@+id/addBuyer_btn"
             android:layout_width="157dp"
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
             android:background="@drawable/okbutton_background"
-            android:text="Add Estate"
+            android:text="Add Buyer"
             android:fontFamily="@font/poppins_regular"
             android:padding="14dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.009"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutAdditionalInfo_txt"
+            app:layout_constraintTop_toBottomOf="@+id/buyerPassword_txt"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
@@ -299,7 +440,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.766"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coconutAdditionalInfo_txt"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
 
