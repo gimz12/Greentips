@@ -7,6 +7,7 @@ import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
+import com.example.greentipskotlin.App.Model.Intercrops
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -72,6 +73,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_BUYER_USERNAME="buyerUsername"
         const val COLUMN_BUYER_PASSWORD="buyerPassword"
 
+        //Intercrop Table
+        const val TABLE_INTERCROP = "Intercrop"
+        const val INTERCROPS_ID ="id"
+        const val COLUMN_INTERCROP_TYPE= "intercropType"
+        const val COLUMN_INTERCROP_PLANTED_DATE="plantedDate"
+        const val COLUMN_INTERCROP_ADDITIONAL_INFO="addtionalInfo"
+        const val COLUMN_INTERCROPS_ESTATE_ID_FR="estateId"
+
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -125,7 +134,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_TREE_HEALTH TEXT,
             $COLUMN_COCONUT_TREE_TYPE TEXT,
             $COLUMN_COCONUT_ADDITIONAL_INFO TEXT,
-            $COLUMN_EMPLOYEE_POSITION_ID_FR INTEGER,
+            $COLUMN_COCONUT_ESTATE_ID_FR INTEGER,
         FOREIGN KEY($COLUMN_COCONUT_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
             )
             
@@ -143,11 +152,21 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_BUYER_USERNAME TEXT,
             $COLUMN_BUYER_PASSWORD TEXT)"""
 
+        val createIntercropTable=""" CREATE TABLE $TABLE_INTERCROP(
+            $INTERCROPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_INTERCROP_TYPE TEXT,
+            $COLUMN_INTERCROP_PLANTED_DATE TEXT,
+            $COLUMN_INTERCROP_ADDITIONAL_INFO TEXT,
+            $COLUMN_INTERCROPS_ESTATE_ID_FR INTEGER,
+            FOREIGN KEY ($COLUMN_INTERCROPS_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+        )"""
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
         db.execSQL(createCoconutTable)
         db.execSQL(createBuyerTable)
+        db.execSQL(createIntercropTable)
 
     }
 
@@ -157,6 +176,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ESTATE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_COCONUT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_INTERCROP")
         onCreate(db)
     }
 
@@ -378,6 +398,43 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return buyers
     }
 
+    //Intercrops--------------------------------------------------------------------------------------------------------------
 
+    fun insertInterCrops(intercrops: Intercrops){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(INTERCROPS_ID,intercrops.intercropId)
+            put(COLUMN_INTERCROP_TYPE,intercrops.intercropType)
+            put(COLUMN_INTERCROP_PLANTED_DATE,intercrops.intercropPlantedDate)
+            put(COLUMN_INTERCROP_ADDITIONAL_INFO,intercrops.intercropAddtionalInfo)
+        }
+        db.insert(TABLE_INTERCROP,null,values)
+        db.close()
+    }
+
+    fun getAllIntercrops():List<Intercrops>{
+        val intercrops = ArrayList<Intercrops>()
+        val db = writableDatabase
+        val cursor=db.rawQuery("SELECT * FROM $TABLE_INTERCROP",null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val intercropId = cursor.getInt(cursor.getColumnIndexOrThrow(INTERCROPS_ID))
+                val intercropEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_INTERCROPS_ESTATE_ID_FR))
+                val intercropsType = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_INTERCROP_TYPE))
+                val intercropPlantedDate = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_INTERCROP_PLANTED_DATE))
+                val intercropAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_INTERCROP_ADDITIONAL_INFO))
+                intercrops.add(Intercrops(intercropId,intercropsType,intercropPlantedDate,intercropAdditionalInfo,intercropEstateId))
+            }while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return intercrops
+    }
 
 }
