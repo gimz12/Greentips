@@ -42,7 +42,7 @@ class emp_mngFragment : Fragment() {
         val sortButton= binding.sortButton
 
         //Initialize Recycler View
-        employeeAdapter = EmployeeAdapter(model.getAllEmployees()) // Modify getAllCities to return the list of cities
+        employeeAdapter = EmployeeAdapter(emptyList()) // Modify getAllCities to return the list of cities
         binding.employeeRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.employeeRecyclerView.adapter = employeeAdapter
 
@@ -56,11 +56,21 @@ class emp_mngFragment : Fragment() {
             toggleSort()
         }
 
+        model.employees.observe(viewLifecycleOwner) { updatedList ->
+            val listToDisplay = if (isSorted) updatedList.sortedBy { it.employeeName } else updatedList
+            employeeAdapter.updateList(listToDisplay)
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        model.refreshData() // Refresh data whenever the fragment resumes
     }
 
     override fun onDestroyView() {
@@ -76,16 +86,10 @@ class emp_mngFragment : Fragment() {
 
     //Method for SortEmployee using their Name
     private fun toggleSort() {
-        if (isSorted) {
-            // If already sorted, show unsorted list
-            employeeAdapter.updateList(model.getAllEmployees())
-        } else {
-            // If unsorted, show sorted list
-            val sortedList = model.getAllEmployees().sortedBy { it.employeeName }
-            employeeAdapter.updateList(sortedList)
-        }
-        // Toggle the sorting state
         isSorted = !isSorted
+        model.employees.value?.let { updatedList ->
+            employeeAdapter.updateList(if (isSorted) updatedList.sortedBy { it.employeeName } else updatedList)
+        }
     }
 
 

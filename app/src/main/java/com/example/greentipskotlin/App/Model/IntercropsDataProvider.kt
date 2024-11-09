@@ -11,6 +11,11 @@ class IntercropsDataProvider (context: Context) {
         greentipsDatabaseHelper.insertInterCrops(intercrops)
     }
 
+    fun getIntercropsForEstate(estateId: Int): List<Intercrops> {
+        return greentipsDatabaseHelper.getIntercropsForEstate(estateId)
+    }
+
+
     fun getAllInterCrops():List<Intercrops>{
         return greentipsDatabaseHelper.getAllIntercrops()
     }

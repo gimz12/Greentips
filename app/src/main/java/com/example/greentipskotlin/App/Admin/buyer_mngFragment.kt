@@ -41,7 +41,7 @@ class buyer_mngFragment : Fragment() {
         val addBuyerImg = binding.insertBuyerImageView
         val sortButton = binding.sortButton
 
-        buyerAdapter=BuyerAdapter(model.getAllBuyers())
+        buyerAdapter=BuyerAdapter(emptyList())
         binding.buyerRecyclerView.layoutManager= LinearLayoutManager(context)
         binding.buyerRecyclerView.adapter= buyerAdapter
 
@@ -52,20 +52,24 @@ class buyer_mngFragment : Fragment() {
             toggleSort()
         }
 
+        model.buyers.observe(viewLifecycleOwner){updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.Buyer_Name } else updateList
+            buyerAdapter.updateList(listToDisplay)
+        }
+
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        model.refreshData() // Refresh data whenever the fragment resumes
+    }
+
     private fun toggleSort() {
-        if (isSorted) {
-            // If already sorted, show unsorted list
-            buyerAdapter.updateList(model.getAllBuyers())
-        } else {
-            // If unsorted, show sorted list
-            val sortedList = model.getAllBuyers().sortedBy { it.Buyer_Name }
-            buyerAdapter.updateList(sortedList)
-        }
-        // Toggle the sorting state
         isSorted = !isSorted
+        model.buyers.value?.let { updatedList ->
+            buyerAdapter.updateList(if (isSorted) updatedList.sortedBy { it.Buyer_Name }else updatedList)
+        }
     }
 
     private fun onClickAddNewBuyer() {

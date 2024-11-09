@@ -11,71 +11,58 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greentipskotlin.App.Admin.Activity.IntercropAdapter
 import com.example.greentipskotlin.App.Admin.Activity.IntercropsInsert
 import com.example.greentipskotlin.App.Admin.viewModel.IntercropsViewModel
-import com.example.greentipskotlin.R
-import com.example.greentipskotlin.databinding.FragmentCoconutInfoBinding
 import com.example.greentipskotlin.databinding.FragmentIntercropsInfoBinding
 
 class intercrops_infoFragment : Fragment() {
 
-
-    private var _binding:FragmentIntercropsInfoBinding? = null
+    private var _binding: FragmentIntercropsInfoBinding? = null
     private val binding get() = _binding!!
 
-    private val model:IntercropsViewModel by viewModels()
-
+    private val model: IntercropsViewModel by viewModels()
     private lateinit var intercropsAdapter: IntercropAdapter
 
     private var isSorted: Boolean = false
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentIntercropsInfoBinding.inflate(inflater,container,false)
+        _binding = FragmentIntercropsInfoBinding.inflate(inflater, container, false)
 
-        val intercropAddImg = binding.insertIntercropsImageView
-        val sortButton = binding.sortButton
+        intercropsAdapter = IntercropAdapter(emptyList())
+        binding.interCropsRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.interCropsRecyclerView.adapter = intercropsAdapter
 
-        intercropsAdapter = IntercropAdapter(model.getAllIntercrop())
-        binding.interCropsRecyclerView.layoutManager=LinearLayoutManager(context)
-        binding.interCropsRecyclerView.adapter=intercropsAdapter
-
-        intercropAddImg.setOnClickListener(){
-            onClickAddNewInterCrop()
+        binding.insertIntercropsImageView.setOnClickListener {
+            startActivity(Intent(requireContext(), IntercropsInsert::class.java))
         }
 
-        sortButton.setOnClickListener(){
+        binding.sortButton.setOnClickListener {
             toggleSort()
+        }
+
+        model.intercrops.observe(viewLifecycleOwner) { updatedList ->
+            val listToDisplay = if (isSorted) updatedList.sortedBy { it.intercropType } else updatedList
+            intercropsAdapter.updateList(listToDisplay)
         }
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        model.refreshData() // Refresh data whenever the fragment resumes
+    }
+
     private fun toggleSort() {
-        if (isSorted) {
-            // If already sorted, show unsorted list
-            intercropsAdapter.updateList(model.getAllIntercrop())
-        } else {
-            // If unsorted, show sorted list
-            val sortedList = model.getAllIntercrop().sortedBy { it.intercropType }
-            intercropsAdapter.updateList(sortedList)
-        }
-        // Toggle the sorting state
         isSorted = !isSorted
+        model.intercrops.value?.let { updatedList ->
+            intercropsAdapter.updateList(if (isSorted) updatedList.sortedBy { it.intercropType } else updatedList)
+        }
     }
 
-    private fun onClickAddNewInterCrop() {
-        val intercropsIntent = Intent(requireContext(),IntercropsInsert::class.java)
-        startActivity(intercropsIntent)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-
-
 }

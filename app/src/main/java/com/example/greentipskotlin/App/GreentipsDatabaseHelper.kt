@@ -7,6 +7,7 @@ import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
+import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -80,6 +81,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_INTERCROP_PLANTED_DATE="plantedDate"
         const val COLUMN_INTERCROP_ADDITIONAL_INFO="addtionalInfo"
         const val COLUMN_INTERCROPS_ESTATE_ID_FR="estateId"
+
+        //Harvest Table
+        const val TABLE_HARVEST_INFO = "HarvestInfo"
+        const val COLUMN_HARVEST_INFO_ID ="id"
+        const val COLUMN_HARVEST_INFO_TYPE= "harvestType"
+        const val COLUMN_HARVEST_INFO_HARVESTED_DATE="harvestedDate"
+        const val COLUMN_HARVEST_INFO_QUANTITY="harvestedQuantity"
+        const val COLUMN_HARVEST_INFO_ADDITIONAL_INFO="addtionalInfo"
+        const val COLUMN_HARVEST_INFO_ESTATE_ID_FR="estateId"
 
     }
 
@@ -161,12 +171,23 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             FOREIGN KEY ($COLUMN_INTERCROPS_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
         )"""
 
+        val createHarvestTable=""" CREATE TABLE $TABLE_HARVEST_INFO(
+            $COLUMN_HARVEST_INFO_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_HARVEST_INFO_TYPE TEXT,
+            $COLUMN_HARVEST_INFO_HARVESTED_DATE TEXT,
+            $COLUMN_HARVEST_INFO_QUANTITY INTEGER,
+            $COLUMN_HARVEST_INFO_ADDITIONAL_INFO TEXT,
+            $COLUMN_HARVEST_INFO_ESTATE_ID_FR INTEGER,
+            FOREIGN KEY ($COLUMN_HARVEST_INFO_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+        )"""
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
         db.execSQL(createCoconutTable)
         db.execSQL(createBuyerTable)
         db.execSQL(createIntercropTable)
+        db.execSQL(createHarvestTable)
 
     }
 
@@ -177,6 +198,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_COCONUT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_INTERCROP")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_HARVEST_INFO")
         onCreate(db)
     }
 
@@ -407,6 +429,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(COLUMN_INTERCROP_TYPE,intercrops.intercropType)
             put(COLUMN_INTERCROP_PLANTED_DATE,intercrops.intercropPlantedDate)
             put(COLUMN_INTERCROP_ADDITIONAL_INFO,intercrops.intercropAddtionalInfo)
+            put(COLUMN_INTERCROPS_ESTATE_ID_FR,intercrops.intercropEstateID)
         }
         db.insert(TABLE_INTERCROP,null,values)
         db.close()
@@ -437,4 +460,44 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return intercrops
     }
 
+    fun getIntercropsForEstate(estateId: Int): List<Intercrops> {
+        val intercrops = mutableListOf<Intercrops>()
+        val db = this.readableDatabase
+        val cursor = db.query(
+            TABLE_INTERCROP,
+            null,
+            "$COLUMN_INTERCROPS_ESTATE_ID_FR = ?",
+            arrayOf(estateId.toString()),
+            null, null, null
+        )
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow(INTERCROPS_ID))
+                val intercropType = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_TYPE))
+                val plantedDate = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_PLANTED_DATE))
+                val additionalInfo = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_ADDITIONAL_INFO))
+                intercrops.add(Intercrops(id, intercropType, plantedDate, additionalInfo, estateId))
+            }
+        }
+        cursor.close()
+        return intercrops
+    }
+
+
+
+    //HarvestInfo--------------------------------------------------------------------------------------------------------------
+
+    fun insertHarvestInfo(harvestInfo: HarvestInfo){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_HARVEST_INFO_ID,harvestInfo.harvestID)
+            put(COLUMN_HARVEST_INFO_TYPE,harvestInfo.harvestType)
+            put(COLUMN_HARVEST_INFO_HARVESTED_DATE,harvestInfo.harvestDate)
+            put(COLUMN_HARVEST_INFO_QUANTITY,harvestInfo.harvestQuantity)
+            put(COLUMN_HARVEST_INFO_ADDITIONAL_INFO,harvestInfo.harvestAddtional_Info)
+            put(COLUMN_HARVEST_INFO_ESTATE_ID_FR,harvestInfo.harvestEstate)
+        }
+        db.insert(TABLE_HARVEST_INFO,null,values)
+        db.close()
+    }
 }

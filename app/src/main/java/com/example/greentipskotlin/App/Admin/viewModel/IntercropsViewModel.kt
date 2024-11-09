@@ -2,28 +2,34 @@ package com.example.greentipskotlin.App.Admin.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.greentipskotlin.App.Model.Estate
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.greentipskotlin.App.Model.EstateDataProvider
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.IntercropsDataProvider
 
-class IntercropsViewModel (application: Application): AndroidViewModel(application) {
+class IntercropsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val intercropsDataProvider = IntercropsDataProvider(application.applicationContext)
     private val estateDataProvider = EstateDataProvider(application.applicationContext)
-    private val intercrops = intercropsDataProvider.getAllInterCrops()
 
-    fun insertInterCrops(intercrops: Intercrops){
-        intercropsDataProvider.insertInterCrops(intercrops)
+    private val _intercrops = MutableLiveData<List<Intercrops>>()
+    val intercrops: LiveData<List<Intercrops>> get() = _intercrops
+
+    init {
+        refreshData() // Load initial data
     }
 
-    fun getAllIntercrop():List<Intercrops>{
-        return intercrops
+    fun refreshData() {
+        _intercrops.value = intercropsDataProvider.getAllInterCrops()
     }
 
-    fun getAllEstateNames():List<String>{
-        val names = estateDataProvider.getAllEstates()
-        return names.map { it.estateName }
+    fun insertInterCrops(intercrop: Intercrops) {
+        intercropsDataProvider.insertInterCrops(intercrop)
+        refreshData() // Refresh the list after insertion
     }
 
+    fun getAllEstateNames(): List<String> {
+        return estateDataProvider.getAllEstates().map { it.estateName }
+    }
 }

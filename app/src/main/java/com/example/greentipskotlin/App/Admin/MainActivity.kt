@@ -15,7 +15,9 @@ import com.example.greentipskotlin.App.Admin.Activity.CoconutInsert
 import com.example.greentipskotlin.App.Admin.Activity.EmployeeInsert
 import com.example.greentipskotlin.App.Admin.Activity.EmployeePositionInsert
 import com.example.greentipskotlin.App.Admin.Activity.EstateInsert
+import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
+import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
@@ -72,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }else if (id == R.id.notifications){
             val notificationIntent = Intent(
                 this,
-                CoconutInsert::class.java
+                HarvestInfomationInsert::class.java
             )
             startActivity(notificationIntent)
         }

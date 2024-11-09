@@ -13,6 +13,9 @@
         android:theme="@style/Theme.GreentipsKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".App.Admin.Activity.HarvestInfomationInsert"
+            android:exported="false" />
+        <activity
             android:name=".App.Admin.Activity.IntercropsInsert"
             android:exported="false" />
         <activity

@@ -13,6 +13,7 @@ class IntercropAdapter(private var intercrops:List<Intercrops>):RecyclerView.Ada
         fun bind (intercrops: Intercrops){
             binding.tvIntercropID.text= intercrops.intercropId.toString()
             binding.tvIntercropType.text = intercrops.intercropType
+            binding.tvIntercropPlantedDate.text = intercrops.intercropPlantedDate
             binding.tvIntercropEstateID.text = intercrops.intercropEstateID.toString()
             binding.tvCoconutAdditionalInfo.text = intercrops.intercropAddtionalInfo
         }
