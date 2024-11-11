@@ -7,8 +7,13 @@ class HarvestInfoDataProvider (context: Context) {
 
     private val greentipsDatabaseHelper=GreentipsDatabaseHelper(context)
 
+
     fun insertHarvestInfo(harvestInfo: HarvestInfo){
         greentipsDatabaseHelper.insertHarvestInfo(harvestInfo)
+    }
+
+    fun getAllHarvestInfo():List<HarvestInfo>{
+        return greentipsDatabaseHelper.getAllHarvestInfo()
     }
 
 }

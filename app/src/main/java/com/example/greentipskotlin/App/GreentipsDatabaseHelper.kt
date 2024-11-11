@@ -9,6 +9,7 @@ import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
+import com.example.greentipskotlin.App.Model.Supplier
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -90,6 +91,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_HARVEST_INFO_QUANTITY="harvestedQuantity"
         const val COLUMN_HARVEST_INFO_ADDITIONAL_INFO="addtionalInfo"
         const val COLUMN_HARVEST_INFO_ESTATE_ID_FR="estateId"
+
+        //Supplier
+        const val TABLE_SUPPLIER = "Supplier"
+        const val SUPPLIER_ID = "id"
+        const val COLUMN_SUPPLIER_NAME = "supplierName"
+        const val COLUMN_SUPPLIER_PHONE_NUMBER="supplierPhoneNumber"
+        const val COLUMN_SUPPLIER_COMPANY_NAME="companyName"
+        const val COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER="companyPhoneNumber"
+        const val COLUMN_SUPPLIER_COMPANY_ADDRESS="companyAddress"
+        const val COLUMN_SUPPLIER_TYPE="supplierType"
+        const val COLUMN_SUPPLIER_EMAIL="supplierEmail"
+        const val COLUMN_SUPPLIER_USERNAME="supplierUsername"
+        const val COLUMN_SUPPLIER_PASSWORD="supplierPassword"
 
     }
 
@@ -181,6 +195,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             FOREIGN KEY ($COLUMN_HARVEST_INFO_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
         )"""
 
+        val createSupplierTable=""" CREATE TABLE $TABLE_SUPPLIER(
+            $SUPPLIER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_SUPPLIER_NAME TEXT,
+            $COLUMN_SUPPLIER_PHONE_NUMBER TEXT,
+            $COLUMN_SUPPLIER_COMPANY_NAME TEXT,
+            $COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER TEXT,
+            $COLUMN_SUPPLIER_COMPANY_ADDRESS TEXT,
+            $COLUMN_SUPPLIER_TYPE TEXT,
+            $COLUMN_SUPPLIER_EMAIL TEXT,
+            $COLUMN_SUPPLIER_USERNAME TEXT,
+            $COLUMN_SUPPLIER_PASSWORD TEXT)"""
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
@@ -188,6 +214,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createBuyerTable)
         db.execSQL(createIntercropTable)
         db.execSQL(createHarvestTable)
+        db.execSQL(createSupplierTable)
 
     }
 
@@ -199,6 +226,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_INTERCROP")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_HARVEST_INFO")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER")
         onCreate(db)
     }
 
@@ -500,4 +528,124 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.insert(TABLE_HARVEST_INFO,null,values)
         db.close()
     }
+
+    fun getAllHarvestInfo():List<HarvestInfo>{
+        val harvestInfos= ArrayList<HarvestInfo>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_HARVEST_INFO",null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val harvestInfoId = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_ID))
+
+                val harvestInfoEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_ESTATE_ID_FR))
+
+                val harvestInfoCropType = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_TYPE))
+
+                val harvestInfoDate = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_HARVESTED_DATE))
+
+                val harvestInfoQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_QUANTITY))
+
+                val harvestInfoAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_HARVEST_INFO_ADDITIONAL_INFO))
+
+                harvestInfos.add(
+                    HarvestInfo(harvestInfoId,
+                    harvestInfoCropType,
+                    harvestInfoDate,
+                    harvestInfoQuantity,
+                    harvestInfoAdditionalInfo,
+                    harvestInfoEstateId)
+                )
+            }
+                while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return harvestInfos
+    }
+
+    //Supplier--------------------------------------------------------------------------------------------------------------
+
+    fun insertSupplier(supplier: Supplier){
+        val db = writableDatabase
+        val values=ContentValues().apply {
+            put(SUPPLIER_ID,supplier.Supplier_Id)
+            put(COLUMN_SUPPLIER_NAME,supplier.Supplier_Name)
+            put(COLUMN_SUPPLIER_PHONE_NUMBER,supplier.Supplier_PhoneNumber)
+            put(COLUMN_SUPPLIER_COMPANY_NAME,supplier.Supplier_Company_Name)
+            put(COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER,supplier.Supplier_Company_Number)
+            put(COLUMN_SUPPLIER_COMPANY_ADDRESS,supplier.Supplier_Company_Address)
+            put(COLUMN_SUPPLIER_TYPE,supplier.Supplier_Type)
+            put(COLUMN_SUPPLIER_EMAIL,supplier.Supplier_Email)
+            put(COLUMN_SUPPLIER_USERNAME,supplier.Supplier_Username)
+            put(COLUMN_SUPPLIER_PASSWORD,supplier.Supplier_password)
+        }
+        db.insert(TABLE_SUPPLIER,null,values)
+        db.close()
+    }
+
+    fun getAllSupplier():List<Supplier>{
+        val suppliers= ArrayList<Supplier>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_SUPPLIER",null)
+
+        if (cursor.moveToFirst()){
+            do{
+                val supplierId = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ID))
+
+                val supplierName = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_NAME))
+
+                val supplierPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_PHONE_NUMBER))
+
+                val supplierCompanyName = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_COMPANY_NAME))
+
+                val supplierCompanyPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER))
+
+                val supplierComapnyAddress = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_COMPANY_ADDRESS))
+
+                val supllierType = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_TYPE))
+
+                val supplierEmail = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_EMAIL))
+
+                val supplierUsername = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_USERNAME))
+
+                val supplierPassword = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_SUPPLIER_PASSWORD))
+
+                suppliers.add(Supplier(supplierId,
+                    supplierName,
+                    supplierPhoneNumber,
+                    supplierCompanyName,
+                    supplierCompanyPhoneNumber,
+                    supplierComapnyAddress,
+                    supllierType,
+                    supplierEmail,
+                    supplierUsername,
+                    supplierPassword)
+                )
+
+            }
+                while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return suppliers
+    }
+
+
+
 }

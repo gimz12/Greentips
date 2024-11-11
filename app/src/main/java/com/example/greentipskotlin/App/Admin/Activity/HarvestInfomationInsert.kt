@@ -79,8 +79,7 @@ class HarvestInfomationInsert : AppCompatActivity() {
         // Handle the "Add Harvest Info" button click
         binding.addHarvestInfoBtn.setOnClickListener {
             // Get selected crop type ID (convert selectedItemId to Int)
-            val cropType = binding.cropIdSpinner.selectedItemId.toInt()
-
+            val cropType = binding.cropIdSpinner.selectedItem.toString()
             // Get the selected date
             val day = binding.harvestedDatePicker.dayOfMonth
             val month = binding.harvestedDatePicker.month
@@ -98,7 +97,7 @@ class HarvestInfomationInsert : AppCompatActivity() {
 
             val quantity = harvestedQuantity.toIntOrNull() ?: 0 // Convert harvested quantity to int, default to 0 if invalid
 
-            if (cropType != 0 && harvestedDate.isNotEmpty() && harvestedQuantity.isNotEmpty() && harvestedEstate != null) {
+            if (cropType.isNotEmpty() && harvestedDate.isNotEmpty() && harvestedQuantity.isNotEmpty() && harvestedEstate != null) {
                 model.insertHarvestInfo(
                     HarvestInfo(
                         null,

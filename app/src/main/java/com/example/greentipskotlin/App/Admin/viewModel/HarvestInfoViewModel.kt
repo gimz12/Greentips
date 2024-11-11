@@ -2,6 +2,8 @@ package com.example.greentipskotlin.App.Admin.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.greentipskotlin.App.Model.Estate
 import com.example.greentipskotlin.App.Model.EstateDataProvider
 import com.example.greentipskotlin.App.Model.HarvestInfo
@@ -15,14 +17,21 @@ class HarvestInfoViewModel (application: Application): AndroidViewModel(applicat
     private val intercropsDataProvider = IntercropsDataProvider(application.applicationContext)
     private val estateDataProvider = EstateDataProvider(application.applicationContext)
 
+    private val _harvestInfos = MutableLiveData<List<HarvestInfo>>()
+    val harvestInfos: LiveData<List<HarvestInfo>> get() = _harvestInfos
+
+    init {
+        refreshData()
+    }
+
+    fun refreshData(){
+        _harvestInfos.value = harvestInfoDataProvider.getAllHarvestInfo()
+    }
+
     fun insertHarvestInfo(harvestInfo: HarvestInfo){
         harvestInfoDataProvider.insertHarvestInfo(harvestInfo)
     }
 
-    fun getAllEstatesnames():List<String>{
-        val names = estateDataProvider.getAllEstates()
-        return names.map { it.estateName }
-    }
 
     fun getAllEstates():List<Estate>{
         return estateDataProvider.getAllEstates()

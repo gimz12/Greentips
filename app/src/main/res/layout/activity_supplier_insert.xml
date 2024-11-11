@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+
+        <!-- Title Section -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/supplier_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/backgroundGrey"
+            android:padding="17dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp">
+
+                <ImageView
+                    android:id="@+id/supplierCardImageview"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/supplier_insert"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/addNewSupplierTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="112dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Add a New Supplier"
+                    android:textColor="@color/black"
+
+
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/supplierCardImageview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="112dp"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Fill all the fields to add a new Supplier"
+                    android:textColor="@color/hintTextGrey"
+
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/supplierCardImageview"
+                    app:layout_constraintTop_toBottomOf="@+id/addNewSupplierTextView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/supplierFirstName_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="First Name"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplier_card" />
+
+        <EditText
+            android:id="@+id/supplierFirstName_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter The First Name Of Supplier"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierFirstName_TextView" />
+
+        <TextView
+            android:id="@+id/supplierLastName_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Last Name"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierFirstName_txt" />
+
+        <EditText
+            android:id="@+id/supplierLastName_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter The Last Name Of Supplier"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierLastName_TextView" />
+
+        <TextView
+            android:id="@+id/supplierPhoneNumber_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Phone Number"
+            android:textColor="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierLastName_txt" />
+
+        <EditText
+            android:id="@+id/supplierPhoneNumber_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter The Phone Number"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierPhoneNumber_TextView" />
+
+        <TextView
+            android:id="@+id/supplierCompanyName_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Company Name"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierPhoneNumber_txt" />
+
+        <EditText
+            android:id="@+id/supplierCompanyName_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Company Name"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyName_TextView" />
+
+        <TextView
+            android:id="@+id/supplierCompanyPhoneNumber_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Company Phone Number"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyName_txt" />
+
+        <EditText
+            android:id="@+id/supplierCompanyPhoneNumber_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Company Phone Number"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyPhoneNumber_TextView" />
+
+        <TextView
+            android:id="@+id/supplierCompanyAddress_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Comapny Address"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyPhoneNumber_txt" />
+
+        <EditText
+            android:id="@+id/supplierCompanyAddress_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Company Address"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyAddress_TextView" />
+
+        <TextView
+            android:id="@+id/supplierType_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Supplier Type"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyAddress_txt" />
+
+        <EditText
+            android:id="@+id/supplierType_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Supplier Type"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierType_TextView" />
+
+        <TextView
+            android:id="@+id/supplierEmail_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Supplier Email"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierType_txt" />
+
+        <EditText
+            android:id="@+id/supplierEmail_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Supplier Email"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierEmail_TextView" />
+
+        <TextView
+            android:id="@+id/supplierUsername_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Supplier Username"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierEmail_txt" />
+
+        <EditText
+            android:id="@+id/supplierUsername_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Supplier Username"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierUsername_TextView" />
+
+        <TextView
+            android:id="@+id/supplierPassword_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Supplier Password"
+            android:textColor="@color/hintTextGrey"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierUsername_txt" />
+
+        <EditText
+            android:id="@+id/supplierPassword_txt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Enter Supplier Password"
+            android:textColorHint="@color/hintTextGrey"
+            android:textSize="12sp"
+            android:padding="12sp"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierPassword_TextView" />
+
+
+
+        <Button
+            android:id="@+id/addSupplierBtn"
+            android:layout_width="157dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/okbutton_background"
+            android:text="Add Supplier"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="14dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supplierPassword_txt"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="157dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/warningbutton_background"
+            android:text="Back"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="14dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.766"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
