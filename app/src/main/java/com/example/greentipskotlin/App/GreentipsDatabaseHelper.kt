@@ -7,6 +7,7 @@ import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
+import com.example.greentipskotlin.App.Model.Fertilizer
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Supplier
@@ -104,6 +105,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_SUPPLIER_EMAIL="supplierEmail"
         const val COLUMN_SUPPLIER_USERNAME="supplierUsername"
         const val COLUMN_SUPPLIER_PASSWORD="supplierPassword"
+
+        const val TABLE_FERTILIZER = "Fertilizer"
+        const val FERTILIZER_ID = "id"
+        const val COLUMN_FERTILIZER_NAME = "fertilizerName"
+        const val COLUMN_FERTILIZER_TYPE = "fertilizerType"
+        const val COLUMN_FERTILIZER_DATE = "fertilizerDate"
+        const val COLUMN_FERTILIZER_QUANTITY = "fertilizerQuantity"
+        const val COLUMN_FERTILIZER_COMPOSITION = "fertilizerComposition"
+        const val COLUMN_FERTILIZER_ADDITIONAL_INFO = "fertilizerAdditionalInfo"
+        const val COLUMN_FERTILIZE_ESTATE_ID_FR = "estateId"
 
     }
 
@@ -207,6 +218,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_SUPPLIER_USERNAME TEXT,
             $COLUMN_SUPPLIER_PASSWORD TEXT)"""
 
+        val createFertilizerTable="""CREATE TABLE $TABLE_FERTILIZER(
+            $FERTILIZER_ID INTEGER PRIMARY KEY AUTOINCREMENT, 
+            $COLUMN_FERTILIZER_NAME TEXT,
+            $COLUMN_FERTILIZER_TYPE TEXT, 
+            $COLUMN_FERTILIZER_DATE TEXT,
+            $COLUMN_FERTILIZER_QUANTITY INTEGER,
+            $COLUMN_FERTILIZER_COMPOSITION TEXT,
+            $COLUMN_FERTILIZER_ADDITIONAL_INFO TEXT,
+            $COLUMN_FERTILIZE_ESTATE_ID_FR INTEGER,
+            FOREIGN KEY ($COLUMN_FERTILIZE_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID))"""
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
@@ -215,6 +237,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createIntercropTable)
         db.execSQL(createHarvestTable)
         db.execSQL(createSupplierTable)
+        db.execSQL(createFertilizerTable)
 
     }
 
@@ -227,6 +250,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_INTERCROP")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_HARVEST_INFO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_FERTILIZER")
         onCreate(db)
     }
 
@@ -644,6 +668,63 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return suppliers
+    }
+
+    //Fertilizer--------------------------------------------------------------------------------------------------------------
+
+    fun insertFertilizer(fertilizer: Fertilizer){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(FERTILIZER_ID,fertilizer.fertilizerId)
+            put(COLUMN_FERTILIZER_NAME,fertilizer.fertilizerName)
+            put(COLUMN_FERTILIZER_TYPE,fertilizer.fertilizerType)
+            put(COLUMN_FERTILIZER_QUANTITY,fertilizer.fertilizerQuantity)
+            put(COLUMN_FERTILIZER_DATE,fertilizer.fertilizerDate)
+            put(COLUMN_FERTILIZER_COMPOSITION,fertilizer.fertilizerComposition)
+            put(COLUMN_FERTILIZER_ADDITIONAL_INFO,fertilizer.fertilizerAdditionalInfo)
+            put(COLUMN_FERTILIZE_ESTATE_ID_FR,fertilizer.fertilizerEstateId)
+        }
+        db.insert(TABLE_FERTILIZER,null,values)
+        db.close()
+    }
+
+    fun getAllFertilizer():List<Fertilizer>{
+        val fertilizers= ArrayList<Fertilizer>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_FERTILIZER",null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val fertilizerId = cursor.getInt(cursor.getColumnIndexOrThrow(FERTILIZER_ID))
+
+                val fertilizerName = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_NAME))
+                val fertilizerType = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_TYPE))
+                val fertilizerDate = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_DATE))
+                val fertilizerQuantity = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_QUANTITY))
+                val fertilizerComposition = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_COMPOSITION))
+                val fertilizerAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZER_ADDITIONAL_INFO))
+                val fertilizerEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_FERTILIZE_ESTATE_ID_FR))
+
+                fertilizers.add(Fertilizer(fertilizerId,fertilizerName,
+                    fertilizerType,
+                    fertilizerDate,
+                    fertilizerQuantity,
+                    fertilizerComposition,
+                    fertilizerAdditionalInfo,
+                    fertilizerEstateId))
+
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return fertilizers
     }
 
 

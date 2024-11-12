@@ -1,14 +1,183 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".App.Admin.fert_mngFragment">
+    android:padding="7dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <!-- Title Section -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fertilizerCountCard"
+        android:layout_width="185dp"
+        android:layout_height="120dp"
+        app:cardBackgroundColor="@color/backgroundGrey"
+        android:padding="17dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/insertFertilizer">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/fertilizerCardImageview"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/fertilizer"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fertilizerCountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Total Fertilizer"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintStart_toEndOf="@+id/fertilizerCardImageview"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fertilizerCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="21"
+                android:textColor="@color/black"
+
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/fertilizerCardImageview"
+                app:layout_constraintTop_toBottomOf="@+id/fertilizerCountTextView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/insertFertilizer"
+        android:layout_width="185dp"
+        android:layout_height="120dp"
+        app:cardBackgroundColor="@color/backgroundGrey"
+        android:padding="17dp"
+        android:layout_margin="10dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="15dp"
+
+        app:layout_constraintStart_toEndOf="@id/fertilizerCountCard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/insertFertilizerImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/insert_employee"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a New Fertilizer"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insertFertilizerImageView"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/fertilizerFilterTab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkGreen"
+        android:padding="17dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp"
 
-</FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/fertilizerCountCard"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/viewFertilizerDetailsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Fertilizer Details"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
+                android:id="@+id/sortButton"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:text="Sort By Name"
+                android:textSize="7sp"
+                android:background="@color/okGreen"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fertilizerRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fertilizerFilterTab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
