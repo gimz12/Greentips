@@ -1,13 +1,27 @@
 package com.example.greentipskotlin.App.Admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.greentipskotlin.R
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.Activity.ResourceAdapter
+import com.example.greentipskotlin.App.Admin.Activity.ResourceInsert
+import com.example.greentipskotlin.App.Admin.viewModel.ResourcesViewModel
+import com.example.greentipskotlin.databinding.FragmentResourceMngBinding
 
 class resource_mngFragment : Fragment() {
+
+    private var _binding: FragmentResourceMngBinding? = null
+    private val binding get() = _binding!!
+
+    private val model: ResourcesViewModel by viewModels()
+    private lateinit var resourceAdapter: ResourceAdapter
+
+    private var isSorted: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +31,43 @@ class resource_mngFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_resource_mng, container, false)
+        _binding = FragmentResourceMngBinding.inflate(inflater,container,false)
+
+        resourceAdapter = ResourceAdapter(emptyList())
+        binding.resourceRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.resourceRecyclerView.adapter = resourceAdapter
+
+        binding.insertResourceImageView.setOnClickListener(){
+            startActivity(Intent(requireContext(),ResourceInsert::class.java))
+        }
+
+        binding.sortButton.setOnClickListener(){
+            toggleSort()
+        }
+
+        model.resources.observe(viewLifecycleOwner){ updatedList->
+            val listToDisplay = if (isSorted) updatedList.sortedBy { it.description } else updatedList
+            resourceAdapter.updateList(listToDisplay)
+        }
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        model.refreshData() // Refresh data whenever the fragment resumes
+    }
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        model.resources.value?.let { updatedList ->
+            resourceAdapter.updateList(if (isSorted) updatedList.sortedBy { it.description } else updatedList)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

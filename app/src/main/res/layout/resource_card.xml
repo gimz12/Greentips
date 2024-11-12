@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvResourceID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resource ID"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvResourceEstateID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resource Estate ID"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/tvResourceDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resource Description"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+
+        <TextView
+            android:id="@+id/tvResourceDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp"/>
+
+
+        <TextView
+            android:id="@+id/tvResourceBillNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resource Bill Number"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvResourceAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resource Amount"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@ import com.example.greentipskotlin.App.Model.Estate
 import com.example.greentipskotlin.App.Model.Fertilizer
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
+import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -106,6 +107,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_SUPPLIER_USERNAME="supplierUsername"
         const val COLUMN_SUPPLIER_PASSWORD="supplierPassword"
 
+        //Fertilizer
         const val TABLE_FERTILIZER = "Fertilizer"
         const val FERTILIZER_ID = "id"
         const val COLUMN_FERTILIZER_NAME = "fertilizerName"
@@ -116,6 +118,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_FERTILIZER_ADDITIONAL_INFO = "fertilizerAdditionalInfo"
         const val COLUMN_FERTILIZE_ESTATE_ID_FR = "estateId"
 
+        //Resources
+        const val TABLE_RESOURCES = "Resources"
+        const val RESOURCE_ID = "id"
+        const val COLUMN_RESOURCES_DESCRIPTION = "resourcesDescription"
+        const val COLUMN_RESOURCES_DATE = "resourcesDate"
+        const val COLUMN_RESOURCES_BILL_NUMBER = "resourceBillNumber"
+        const val COLUMN_RESOURCES_AMOUNT = "resourceAmount"
+        const val COLUMN_RESOURCES_ESTATE_ID_FR = "estateId"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -229,6 +239,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_FERTILIZE_ESTATE_ID_FR INTEGER,
             FOREIGN KEY ($COLUMN_FERTILIZE_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID))"""
 
+
+        val createResourcesTable = """ CREATE TABLE $TABLE_RESOURCES(
+        $RESOURCE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        $COLUMN_RESOURCES_DESCRIPTION TEXT,
+        $COLUMN_RESOURCES_DATE TEXT,
+        $COLUMN_RESOURCES_BILL_NUMBER TEXT ,
+        $COLUMN_RESOURCES_AMOUNT REAL,
+        $COLUMN_RESOURCES_ESTATE_ID_FR INTEGER,
+        FOREIGN KEY ($COLUMN_RESOURCES_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+        )
+            
+        """
+
         db.execSQL(createEstateTable)
         db.execSQL(createEmployeePositionTable)
         db.execSQL(createEmployeeTable)
@@ -238,6 +261,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createHarvestTable)
         db.execSQL(createSupplierTable)
         db.execSQL(createFertilizerTable)
+        db.execSQL(createResourcesTable)
 
     }
 
@@ -251,6 +275,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_HARVEST_INFO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FERTILIZER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_RESOURCES")
         onCreate(db)
     }
 
@@ -727,6 +752,55 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return fertilizers
     }
 
+    //Resources--------------------------------------------------------------------------------------------------------------
+
+    fun insertResource(resources: Resources){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(RESOURCE_ID,resources.resourcesID)
+            put(COLUMN_RESOURCES_DESCRIPTION,resources.description)
+            put(COLUMN_RESOURCES_DATE,resources.date)
+            put(COLUMN_RESOURCES_BILL_NUMBER,resources.billNumber)
+            put(COLUMN_RESOURCES_AMOUNT,resources.amount)
+            put(COLUMN_RESOURCES_ESTATE_ID_FR,resources.resourcesEstate)
+
+        }
+        db.insert(TABLE_RESOURCES,null,values)
+        db.close()
+    }
+
+    fun getAllResources():List<Resources>{
+        val resources= ArrayList<Resources>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_RESOURCES",null)
+
+        if (cursor.moveToFirst()){
+            do {
+                val resourcesId = cursor.getInt(cursor.getColumnIndexOrThrow(RESOURCE_ID))
+
+                val resourcesDescription = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_RESOURCES_DESCRIPTION))
+                val resourcesDate = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_RESOURCES_DATE))
+                val resourcesBillNumber = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_RESOURCES_BILL_NUMBER))
+                val resourcesAmount = cursor.getDouble(cursor.getColumnIndexOrThrow(
+                    COLUMN_RESOURCES_AMOUNT))
+                val resourcesEstate = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_RESOURCES_ESTATE_ID_FR))
+
+                resources.add(Resources(resourcesId,resourcesDescription,
+                    resourcesDate,
+                    resourcesBillNumber,
+                    resourcesAmount,
+                    resourcesEstate))
+
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return resources
+    }
 
 
 }
