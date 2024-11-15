@@ -15,4 +15,14 @@ class ResourcesDataProvider(context: Context) {
     fun getAllResources():List<Resources>{
         return greentipsDatabaseHelper.getAllResources()
     }
+
+    fun updateResource(resource: Resources) {
+        greentipsDatabaseHelper.updateResource(resource)
+    }
+
+    fun deleteResource(resourceId: Int) {
+        greentipsDatabaseHelper.deleteResource(resourceId)
+
+    }
+
 }

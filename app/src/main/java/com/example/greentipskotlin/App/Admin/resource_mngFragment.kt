@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greentipskotlin.App.Admin.Activity.ResourceAdapter
+import com.example.greentipskotlin.App.Admin.Activity.ResourceDetailsActivity
 import com.example.greentipskotlin.App.Admin.Activity.ResourceInsert
 import com.example.greentipskotlin.App.Admin.viewModel.ResourcesViewModel
 import com.example.greentipskotlin.databinding.FragmentResourceMngBinding
@@ -33,12 +34,10 @@ class resource_mngFragment : Fragment() {
     ): View? {
         _binding = FragmentResourceMngBinding.inflate(inflater,container,false)
 
-        resourceAdapter = ResourceAdapter(emptyList())
-        binding.resourceRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.resourceRecyclerView.adapter = resourceAdapter
+
 
         binding.insertResourceImageView.setOnClickListener(){
-            startActivity(Intent(requireContext(),ResourceInsert::class.java))
+            startActivity(Intent(requireContext(),ResourceDetailsActivity::class.java))
         }
 
         binding.sortButton.setOnClickListener(){
@@ -49,6 +48,23 @@ class resource_mngFragment : Fragment() {
             val listToDisplay = if (isSorted) updatedList.sortedBy { it.description } else updatedList
             resourceAdapter.updateList(listToDisplay)
         }
+
+        resourceAdapter = ResourceAdapter(emptyList()) { resource ->
+            val intent = Intent(requireContext(), ResourceDetailsActivity::class.java).apply {
+                putExtra("RESOURCE_ID", resource.resourcesID)
+                putExtra("RESOURCE_DESCRIPTION", resource.description)
+                putExtra("RESOURCE_DATE", resource.date)
+                putExtra("RESOURCE_BILL_NUMBER", resource.billNumber)
+                putExtra("RESOURCE_AMOUNT", resource.amount)
+                putExtra("RESOURCES_ESTATE_ID_FR", resource.resourcesEstate)
+            }
+            startActivity(intent)
+        }
+        binding.resourceRecyclerView.adapter = resourceAdapter
+
+        binding.resourceRecyclerView.layoutManager = LinearLayoutManager(context)
+
+
 
         return binding.root
     }

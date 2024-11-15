@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:inputType="date"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editTextBillNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bill Number"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editTextAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"/>
+    <EditText
+        android:id="@+id/editEstateId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Estate"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Resource"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Resource"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

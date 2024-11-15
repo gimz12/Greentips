@@ -432,6 +432,46 @@
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_TextView" />
 
 
+        <TextView
+            android:id="@+id/profileimagetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Image"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/hintTextGrey"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_password_txt"/>
+
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Employee profile image"
+            android:scaleType="centerCrop"
+            android:background="@drawable/edit_text_border"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileimagetxt"/>
+
+        <Button
+            android:id="@+id/selectImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Image"
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImageView"/>
+
+
+
 
     <Button
         android:id="@+id/addEmployee_btn"
@@ -447,7 +487,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirm_password_txt"
+        app:layout_constraintTop_toBottomOf="@id/selectImageBtn"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
@@ -464,7 +504,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.766"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirm_password_txt"
+        app:layout_constraintTop_toBottomOf="@id/selectImageBtn"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

@@ -32,4 +32,15 @@ class ResourcesViewModel(application: Application):AndroidViewModel(application)
         return estateDataProvider.getAllEstates().map { it.estateName }
     }
 
+    fun updateResource(resource: Resources) {
+        resourcesDataProvider.updateResource(resource)
+        refreshData() // Refresh list to show updated data
+    }
+
+    fun deleteResource(resourceId: Int) {
+        resourcesDataProvider.deleteResource(resourceId)
+        refreshData() // Refresh list to show updated data
+    }
+
+
 }

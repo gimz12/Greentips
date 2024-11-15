@@ -43,6 +43,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_EMAIL = "email"
         const val COLUMN_PASSWORD = "password"
         const val COLUMN_EMPLOYEE_POSITION_ID_FR = "employeePositionId"
+        const val COLUMN_PROFILE_IMAGE = "profileImage"
 
         //Estate table
         const val TABLE_ESTATE = "Estate"
@@ -155,6 +156,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 $COLUMN_EMAIL TEXT,
                 $COLUMN_PASSWORD TEXT,
                 $COLUMN_EMPLOYEE_POSITION_ID_FR INTEGER,
+                $COLUMN_PROFILE_IMAGE TEXT,
         FOREIGN KEY($COLUMN_EMPLOYEE_POSITION_ID_FR) REFERENCES $TABLE_EMPLOYEE_POSITION($EMPLOYEE_POSITION_ID)
             )
         """
@@ -311,6 +313,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(COLUMN_EMAIL,employee.email)
             put(COLUMN_PASSWORD,employee.password)
             put(COLUMN_EMPLOYEE_POSITION_ID_FR,employee.employeePositionId)
+            put(COLUMN_PROFILE_IMAGE, employee.profileImage)
         }
         db.insert(TABLE_EMPLOYEE, null, values)
         db.close()
@@ -325,6 +328,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         if (cursor.moveToFirst()) {
             do {
+                val employeeId=cursor.getInt(cursor.getColumnIndexOrThrow(Employee_ID))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME))
                 val phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
                 val address = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ADDRESS))
@@ -343,7 +347,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
 
                 // Add employee to the list
-                employees.add(Employee(name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId))
+                employees.add(Employee(employeeId,name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId))
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -800,6 +804,23 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return resources
+    }
+
+    fun deleteResource(id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_RESOURCES, "$RESOURCE_ID=?", arrayOf(id.toString()))
+    }
+
+    fun updateResource(resource: Resources): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_RESOURCES_DESCRIPTION, resource.description)
+            put(COLUMN_RESOURCES_DATE, resource.date)
+            put(COLUMN_RESOURCES_BILL_NUMBER, resource.billNumber)
+            put(COLUMN_RESOURCES_AMOUNT, resource.amount)
+            put(COLUMN_RESOURCES_ESTATE_ID_FR, resource.resourcesEstate)
+        }
+        return db.update(TABLE_RESOURCES, values, "$RESOURCE_ID=?", arrayOf(resource.resourcesID.toString()))
     }
 
 
