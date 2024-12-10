@@ -35,4 +35,8 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
     fun insertEmployee(employee: Employee){
         employeeDataProvider.insetEmployee(employee)
     }
+
+    fun validateUser(username: String, password: String): LiveData<Int?> {
+        return employeeDataProvider.validateUser(username, password)
+    }
 }

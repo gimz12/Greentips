@@ -50,10 +50,9 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Add a New Buyer"
                     android:textColor="@color/black"
-
-
                     android:textSize="19sp"
                     android:textStyle="bold"
+
                     app:layout_constraintStart_toStartOf="@+id/buyerCardImageview"
                     app:layout_constraintTop_toTopOf="parent" />
 

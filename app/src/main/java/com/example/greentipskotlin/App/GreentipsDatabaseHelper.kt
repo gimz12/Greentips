@@ -1,5 +1,6 @@
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Buyer
@@ -353,6 +354,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return employees
+    }
+
+    fun validateUser(username: String, password: String): Cursor? {
+        val db = this.readableDatabase
+        return db.rawQuery(
+            "SELECT employeePositionId FROM $TABLE_EMPLOYEE WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?",
+            arrayOf(username, password)
+        )
     }
 
     //Estate--------------------------------------------------------------------------------------------------------------------------------
