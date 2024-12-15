@@ -39,4 +39,10 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
     fun validateUser(username: String, password: String): LiveData<Int?> {
         return employeeDataProvider.validateUser(username, password)
     }
+
+    fun getLoggedInUserDetails(username: String, password: String): Employee? {
+        return employeeDataProvider.getLoggedInUserDetails(username, password)
+    }
+
+
 }

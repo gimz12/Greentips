@@ -12,6 +12,7 @@
     </string-array>
 
     <string-array name="position_string">
+        <item>Choose a Position</item>
         <item>CEO</item>
         <item>Field_Manager</item>
         <item>Finanace_Manager</item>

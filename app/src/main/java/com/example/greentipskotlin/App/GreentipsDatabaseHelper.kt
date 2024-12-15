@@ -346,9 +346,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
                 val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
                 val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
+                val profilePicture = cursor.getString(cursor.getColumnIndexOrThrow(
+                    COLUMN_PROFILE_IMAGE))
 
                 // Add employee to the list
-                employees.add(Employee(employeeId,name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId))
+                employees.add(Employee(employeeId,name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId,profilePicture))
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -363,6 +365,48 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             arrayOf(username, password)
         )
     }
+
+    fun getLoggedInUserDetails(username: String, password: String): Employee? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_EMPLOYEE WHERE $COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?",
+            arrayOf(username, password)
+        )
+
+        var employee: Employee? = null
+
+        if (cursor.moveToFirst()) {
+            // Extract data for the employee
+            val employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employee_ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME))
+            val phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
+            val address = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ADDRESS))
+            val gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER))
+
+            // Parsing Date fields
+            val joinDateString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_JOIN_DATE))
+            val dateOfBirthString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB))
+            val joinDate = Date(joinDateString) // Use a proper date format parser if necessary
+            val dateOfBirth = Date(dateOfBirthString)
+
+            val age = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE))
+            val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
+            val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+            val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
+            val profilePicture = cursor.getString(cursor.getColumnIndexOrThrow(
+                COLUMN_PROFILE_IMAGE))
+
+            // Create an Employee object with the data from the cursor
+            employee = Employee(employeeId, name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId,profilePicture)
+        }
+
+        cursor.close()
+        db.close()
+
+        return employee // Return the employee details or null if not found
+    }
+
+
 
     //Estate--------------------------------------------------------------------------------------------------------------------------------
 

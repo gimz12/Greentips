@@ -31,4 +31,9 @@ class EmployeeDataProvider (context: Context){
         return liveData
     }
 
+    fun getLoggedInUserDetails(username: String, password: String): Employee? {
+        return greentipsDatabaseHelper.getLoggedInUserDetails(username, password)
+    }
+
+
 }
