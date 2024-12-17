@@ -3,6 +3,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
 import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
@@ -45,6 +46,13 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_PASSWORD = "password"
         const val COLUMN_EMPLOYEE_POSITION_ID_FR = "employeePositionId"
         const val COLUMN_PROFILE_IMAGE = "profileImage"
+
+        //Admin Table
+        const val TABLE_ADMIN = "Admin"
+        const val Admin_Employee_ID = "employee_id"
+        const val Admin_Shift_Start_Time  = "shift_start_time"
+        const val Admin_Shift_End_Time  = "shift_end_time"
+
 
         //Estate table
         const val TABLE_ESTATE = "Estate"
@@ -162,6 +170,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             )
         """
 
+        val createAdminTable="""
+           
+            CREATE TABLE $TABLE_ADMIN (
+                $Admin_Employee_ID INTEGER PRIMARY KEY ,
+                $Admin_Shift_Start_Time TEXT,
+                $Admin_Shift_End_Time TEXT)
+            
+        """
+
         val createEstateTable= """
             
             CREATE TABLE $TABLE_ESTATE (
@@ -265,6 +282,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createSupplierTable)
         db.execSQL(createFertilizerTable)
         db.execSQL(createResourcesTable)
+        db.execSQL(createAdminTable)
 
     }
 
@@ -279,6 +297,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FERTILIZER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_RESOURCES")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMIN")
         onCreate(db)
     }
 
@@ -366,6 +385,21 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         )
     }
 
+    fun getEmployeeIdByUsername(username: String): Int? {
+        val db = this.readableDatabase
+        val query = "SELECT $Employee_ID FROM $TABLE_EMPLOYEE WHERE $COLUMN_USERNAME = ?"
+        val cursor = db.rawQuery(query, arrayOf(username))
+
+        return if (cursor.moveToFirst()) {
+            val employeeId = cursor.getInt(cursor.getColumnIndex("$Employee_ID"))
+            cursor.close()
+            employeeId
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
     fun getLoggedInUserDetails(username: String, password: String): Employee? {
         val db = this.readableDatabase
         val cursor = db.rawQuery(
@@ -405,6 +439,75 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         return employee // Return the employee details or null if not found
     }
+
+    fun updateEmployee(employee: Employee): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_EMPLOYEE_NAME, employee.employeeName)
+            put(COLUMN_EMPLOYEE_POSITION_ID_FR, employee.employeePositionId)
+            put(COLUMN_PHONE, employee.phoneNumber)
+            put(COLUMN_EMAIL, employee.email)
+            put(COLUMN_AGE, employee.age)
+        }
+        // Update the employee in the database by matching the employee ID
+        val rowsAffected = db.update(
+            TABLE_EMPLOYEE,
+            values,
+            "$Employee_ID=?",
+            arrayOf(employee.employeeId.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
+
+
+    fun getEmployeeById(id: Int): Employee? {
+        val db = this.readableDatabase
+        var employee: Employee? = null
+
+        val query = "SELECT * FROM $TABLE_EMPLOYEE WHERE $Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            employee = Employee(
+                employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employee_ID)),
+                employeeName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME)),
+                phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
+                email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
+                employeePositionId = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    COLUMN_EMPLOYEE_POSITION_ID_FR)),
+                gender = null,
+                joinDate = null,
+                dateOfBirth = null,
+                age = null,
+                username = null,
+                address = null,
+                password = null,
+                profileImage = null
+            )
+        }
+        cursor.close()
+        db.close()
+        return employee
+    }
+
+
+
+    //Admin--------------------------------------------------------------------------------------------------------------------------------
+
+    fun insertAdminDetails(admin: Admin){
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(Admin_Employee_ID, admin.EmployerId)
+            put(Admin_Shift_Start_Time, admin.ShiftStartTime)
+            put(Admin_Shift_End_Time, admin.ShiftEndTime)
+        }
+
+        // Insert the row and return the result
+        db.insert(TABLE_ADMIN, null, values)
+        db.close()
+    }
+
 
 
 

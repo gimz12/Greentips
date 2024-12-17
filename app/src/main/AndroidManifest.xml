@@ -18,29 +18,23 @@
         android:theme="@style/Theme.GreentipsKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".App.Admin.Activity.EmployeeDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".App.Admin.Activity.AdminDetails"
+            android:exported="false" />
+        <activity
             android:name=".App.Supplier.SupplierMenu"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".App.CEO.CEOMenu"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".App.Staff_Login"
             android:exported="false" />
         <activity
             android:name=".App.StaffLoginFrontPage"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".App.Admin.Activity.ResourceDetailsActivity"
             android:exported="false" />
@@ -90,9 +84,13 @@
         </activity>
         <activity
             android:name=".App.Admin.MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="Admin Dashboard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

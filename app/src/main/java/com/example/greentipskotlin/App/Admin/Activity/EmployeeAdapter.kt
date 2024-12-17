@@ -6,40 +6,49 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.databinding.EmployeeCardBinding
 
-class EmployeeAdapter (private var employees: List<Employee>) :
-    RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
+class EmployeeAdapter(
+    private var employees: List<Employee>,
+    private val onItemClick: (Employee) -> Unit // Lambda function for handling clicks
+) : RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
-        val binding =EmployeeCardBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        val binding = EmployeeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EmployeeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: EmployeeAdapter.EmployeeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
         holder.bind(employees[position])
     }
 
     override fun getItemCount(): Int = employees.size
 
-    //method for getting employees to a new list and notify
     fun updateList(newList: List<Employee>) {
         employees = newList
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, employees.size) // Optimize data updates
     }
 
-    //binding data with List<Employee>
-    class EmployeeViewHolder(private val binding: EmployeeCardBinding) :
+    inner class EmployeeViewHolder(private val binding: EmployeeCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            // Set up click listener on the item view
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(employees[position])
+                }
+            }
+        }
+
         fun bind(employee: Employee) {
-            binding.tvEmployeeName.text = employee.employeeName
-            binding.tvUsername.text = employee.username
-            binding.tvPosition.text = employee.employeePositionId.toString()
-            binding.tvPhoneNumber.text = employee.phoneNumber
-            binding.tvGender.text = employee.gender
-            binding.tvJoinDate.text = employee.joinDate.toString()
-            binding.tvAge.text = employee.age.toString()
-            binding.tvEmail.text = employee.email
-
-
+            binding.tvEmployeeName.text = employee.employeeName ?: "N/A"
+            binding.tvUsername.text = employee.username ?: "N/A"
+            binding.tvPosition.text = employee.employeePositionId?.toString() ?: "N/A"
+            binding.tvPhoneNumber.text = employee.phoneNumber ?: "N/A"
+            binding.tvGender.text = employee.gender ?: "N/A"
+            binding.tvJoinDate.text = employee.joinDate?.toString() ?: "N/A"
+            binding.tvAge.text = employee.age?.toString() ?: "N/A"
+            binding.tvEmail.text = employee.email ?: "N/A"
         }
     }
 }

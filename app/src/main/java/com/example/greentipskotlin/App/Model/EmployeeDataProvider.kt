@@ -35,5 +35,14 @@ class EmployeeDataProvider (context: Context){
         return greentipsDatabaseHelper.getLoggedInUserDetails(username, password)
     }
 
+    fun updateEmployee(employee: Employee): Int {
+        return greentipsDatabaseHelper.updateEmployee(employee)
+    }
+
+
+    fun getEmployeeById(id: Int): Employee?{
+        return greentipsDatabaseHelper.getEmployeeById(id)
+    }
+
 
 }

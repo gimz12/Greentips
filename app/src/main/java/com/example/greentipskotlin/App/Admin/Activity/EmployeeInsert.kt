@@ -38,6 +38,7 @@ class EmployeeInsert : AppCompatActivity() {
         // Button to add employee
         binding.addEmployeeBtn.setOnClickListener {
             addEmployee()
+
         }
     }
 
@@ -99,8 +100,8 @@ class EmployeeInsert : AppCompatActivity() {
         if (employeeName.isNotEmpty() && phoneNumber.isNotEmpty() && address.isNotEmpty() &&
             gender.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && positionId != 0
         ) {
-            // Insert new employee data into database
-            model.insertEmployee(Employee(
+            // Insert new employee data into database and get the employeeId (auto-incremented)
+            val employeeId = model.insertEmployee(Employee(
                 null,
                 employeeName,
                 phoneNumber,
@@ -117,11 +118,22 @@ class EmployeeInsert : AppCompatActivity() {
             ))
 
             Toast.makeText(this, "Employee Inserted", Toast.LENGTH_SHORT).show()
-            finish() // Close the activity
+
+            // If the employee's position is admin (positionId == 4), pass data to AdminDetails activity
+            if (positionId == 4) {
+                val intent = Intent(this, AdminDetails::class.java)
+                intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
+                intent.putExtra("username", username)  // Pass the username
+                startActivity(intent)  // Start the AdminDetails activity
+            } else {
+                finish()  // Close the current activity if not admin
+            }
         } else {
             Toast.makeText(this, "Please enter all required details", Toast.LENGTH_SHORT).show()
         }
+
     }
+
 
     // Method to calculate age based on date of birth
     private fun calculateAge(year: Int, month: Int, day: Int): Int {

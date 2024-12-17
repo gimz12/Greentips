@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greentipskotlin.App.Admin.Activity.EmployeeAdapter
+import com.example.greentipskotlin.App.Admin.Activity.EmployeeDetailsActivity
 import com.example.greentipskotlin.App.Admin.Activity.EmployeeInsert
 import com.example.greentipskotlin.App.Admin.viewModel.EmployeeViewModel
 import com.example.greentipskotlin.R
@@ -23,35 +24,34 @@ class emp_mngFragment : Fragment() {
 
     private lateinit var employeeAdapter: EmployeeAdapter
 
-    // ViewModel initialization
     private val model: EmployeeViewModel by viewModels()
 
-    //creating a variable to know if the recycler view is sorted or not
     private var isSorted: Boolean = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout using DataBindingUtil
         _binding = FragmentEmpMngBinding.inflate(inflater, container, false)
 
-        //creating Instance of Layout Components
         val addEmployeeImage = binding.insertEmployeeImageView
-        val sortButton= binding.sortButton
+        val sortButton = binding.sortButton
 
-        //Initialize Recycler View
-        employeeAdapter = EmployeeAdapter(emptyList()) // Modify getAllCities to return the list of cities
+        // Initialize RecyclerView with Adapter
+        employeeAdapter = EmployeeAdapter(emptyList()) { selectedEmployee ->
+            val intent = Intent(requireContext(), EmployeeDetailsActivity::class.java).apply {
+                putExtra("EMPLOYEE_ID", selectedEmployee.employeeId)
+            }
+            startActivity(intent)
+        }
+
         binding.employeeRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.employeeRecyclerView.adapter = employeeAdapter
 
-        //Listener for Add New Employee
         addEmployeeImage.setOnClickListener {
             onClickAddNewEmployee()
         }
 
-        //Listener for Sort
         sortButton.setOnClickListener {
             toggleSort()
         }
@@ -64,10 +64,6 @@ class emp_mngFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onResume() {
         super.onResume()
         model.refreshData() // Refresh data whenever the fragment resumes
@@ -78,19 +74,15 @@ class emp_mngFragment : Fragment() {
         _binding = null
     }
 
-    //Intent to AddNewEmployee Activity
     private fun onClickAddNewEmployee() {
         val groupMessageIntent = Intent(requireContext(), EmployeeInsert::class.java)
-        startActivity(groupMessageIntent)  // Start the EmployeeInsert activity
+        startActivity(groupMessageIntent)
     }
 
-    //Method for SortEmployee using their Name
     private fun toggleSort() {
         isSorted = !isSorted
         model.employees.value?.let { updatedList ->
             employeeAdapter.updateList(if (isSorted) updatedList.sortedBy { it.employeeName } else updatedList)
         }
     }
-
-
 }
