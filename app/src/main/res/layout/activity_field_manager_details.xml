@@ -13,28 +13,39 @@
         android:textColor="@color/black"
         android:fontFamily="@font/poppins_regular"/>
 
+    <Spinner
+        android:id="@+id/estate_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edit_text_border"
+        android:backgroundTint="@color/backgroundGrey" />
+
     <EditText
-        android:id="@+id/shiftStartTime"
+        android:id="@+id/experienceTxT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shift Start Time"
+        android:hint="Experience"
         android:inputType="text"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/shiftEndTime"
+        android:id="@+id/qualificationTxT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shift End Time"
-        android:inputType="date"
+        android:hint="Qualification"
+        android:inputType="text"
         android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Admin"
-        android:textColor="@color/black"/>
+        android:text="Update Field Manager"
+        android:textColor="@color/white"
+        android:background="@drawable/okbutton_background"/>
 
 
 </LinearLayout>

@@ -1,96 +1,77 @@
 package com.example.greentipskotlin.App.Admin.Activity
 
-import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.greentipskotlin.App.Admin.emp_mngFragment
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.greentipskotlin.App.Admin.viewModel.EmployeeViewModel
 import com.example.greentipskotlin.App.Model.Admin
+import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityAdminDetailsBinding
-import java.util.Calendar
 
 class AdminDetails : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAdminDetailsBinding
+    private lateinit var binding:ActivityAdminDetailsBinding
     private val model: EmployeeViewModel by viewModels()
+    private var employeeId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAdminDetailsBinding.inflate(layoutInflater)
+        binding=ActivityAdminDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("username")  // Get the username
+        employeeId = intent.getIntExtra("EMPLOYEE_ID", -1)
 
-        // Observe the LiveData returned by the ViewModel
-        if (username != null) {
-            model.getEmployeeIdByUsername(username).observe(this, { employeeId ->
-                // Log employeeId to verify it's being fetched correctly
-                Log.d("AdminDetails", "Employee ID: $employeeId")
+        // Check for invalid employee ID
+        if (employeeId == -1) {
+            Toast.makeText(this, "Invalid Employee ID", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
-                // Display username on the screen
-                val usernameTextView = binding.usernameTextView
-                usernameTextView.text = "Admin: $username"
+        val existingAdmin = model.getAdminById(employeeId)
+        existingAdmin?.let {
+            populateAdminDetails(it)
+        }
 
-                // Handle shift start and end times with TimePickers
-                val shiftStartEditText = binding.shiftStartTime
-                val shiftEndEditText = binding.shiftEndTime
+        binding.buttonUpdate.setOnClickListener {
+            saveUpdatedEmployeeDetails(existingAdmin)
+        }
 
-                shiftStartEditText.setOnClickListener { showTimePicker(shiftStartEditText) }
-                shiftEndEditText.setOnClickListener { showTimePicker(shiftEndEditText) }
+    }
 
-                // Insert admin details when the insert button is clicked
-                val insertButton = binding.buttonUpdate
-                insertButton.setOnClickListener {
-                    val shiftStart = shiftStartEditText.text.toString().trim()
-                    val shiftEnd = shiftEndEditText.text.toString().trim()
+    //populate Admin
+    fun populateAdminDetails(admin: Admin) {
+        admin.EmployerId?.let { binding.usernameTextView.setText(it.toString()) }
+        binding.shiftStartTime.setText(admin.ShiftStartTime)
+        binding.shiftEndTime.setText(admin.ShiftEndTime)
+    }
 
-                    if (shiftStart.isNotEmpty() && shiftEnd.isNotEmpty() && employeeId != null) {
-                        // Create an Admin object and insert into the database
-                        val admin = Admin(employeeId, shiftStart, shiftEnd)
-                        model.insertAdminDetails(admin)
 
-                        Toast.makeText(this, "Admin details inserted successfully!", Toast.LENGTH_SHORT).show()
+    private fun saveUpdatedEmployeeDetails(existingAdmin: Admin?) {
+        if (existingAdmin == null) {
+            Toast.makeText(this, "Employee data is not available", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-                        // Navigate back to the EmployeeFragment
-                        navigateToEmployeeFragment()
-                    } else {
-                        Toast.makeText(this, "Please enter both start and end times, and ensure employee ID is valid.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
+        // Gather updated values, preserving non-updated fields
+        val updatedAdmin = existingAdmin.copy(
+            ShiftStartTime = binding.shiftStartTime.text.toString().ifBlank { existingAdmin.ShiftStartTime },
+            ShiftEndTime = binding.shiftEndTime.text.toString().ifBlank { existingAdmin.ShiftEndTime },
+        )
+
+        // Update employee using ViewModel
+        val rowsAffected = model.updateAdmin(updatedAdmin)
+        if (rowsAffected > 0) {
+            Toast.makeText(this, "Admin updated successfully", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            Toast.makeText(this, "Failed to update Admin", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Function to show TimePickerDialog
-    private fun showTimePicker(editText: EditText) {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-            editText.setText(formattedTime)
-        }, hour, minute, true)
-
-        timePickerDialog.show()
-    }
-
-    // Function to replace the current activity with the EmployeeFragment
-    private fun navigateToEmployeeFragment() {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        // Replace the current fragment with EmployeeFragment
-        fragmentTransaction.replace(R.id.fragment_container, emp_mngFragment())  // Use correct container ID
-        fragmentTransaction.addToBackStack(null)  // Optional if you want to keep the back stack
-        fragmentTransaction.commit()
-
-        finish()  // Close the activity after fragment transaction
-    }
 }
-

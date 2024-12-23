@@ -14,27 +14,31 @@
         android:fontFamily="@font/poppins_regular"/>
 
     <EditText
-        android:id="@+id/shiftStartTime"
+        android:id="@+id/skillsTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shift Start Time"
+        android:hint="Skills"
         android:inputType="text"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/shiftEndTime"
+        android:id="@+id/experienceTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shift End Time"
-        android:inputType="date"
+        android:hint="Experience"
+        android:inputType="text"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Admin"
-        android:textColor="@color/black"/>
+        android:text="Insert CEO"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"
+        android:background="@drawable/okbutton_background"/>
 
 
 </LinearLayout>

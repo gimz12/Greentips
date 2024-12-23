@@ -1,5 +1,6 @@
 package com.example.greentipskotlin.App.Admin.Activity
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,34 @@ class EmployeeAdapter(
                     onItemClick(employees[position])
                 }
             }
+
+            binding.editRoleInfo.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val employee = employees[position]
+                    if (employee.employeePositionId == 1) {
+                        val context = itemView.context
+                        val intent = Intent(context, CeoDetails::class.java).apply {
+                            putExtra("EMPLOYEE_ID", employee.employeeId)
+                        }
+                        context.startActivity(intent)
+                    } else if (employee.employeePositionId == 2) {
+                        val context = itemView.context
+                        val intent = Intent(context, FieldManagerDetails::class.java).apply {
+                            putExtra("EMPLOYEE_ID", employee.employeeId)
+                        }
+                        context.startActivity(intent)
+                    }else if (employee.employeePositionId == 4) {
+                        val context = itemView.context
+                        val intent = Intent(context, AdminDetails::class.java).apply {
+                            putExtra("EMPLOYEE_ID", employee.employeeId)
+                        }
+                        context.startActivity(intent)
+                    }
+                }
+            }
+
+
         }
 
         fun bind(employee: Employee) {

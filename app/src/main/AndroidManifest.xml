@@ -18,14 +18,29 @@
         android:theme="@style/Theme.GreentipsKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".App.Admin.Activity.EmployeeDetailsActivity"
+            android:name=".App.Admin.Activity.FieldManagerDetails"
+            android:exported="false" />
+        <activity
+            android:name=".App.Admin.Activity.FieldManagerDetailsInsert"
+            android:exported="false" />
+        <activity
+            android:name=".App.Admin.Activity.CeoDetails"
             android:exported="false" />
         <activity
             android:name=".App.Admin.Activity.AdminDetails"
             android:exported="false" />
         <activity
+            android:name=".App.Admin.Activity.CeoDetailsInsert"
+            android:exported="false" />
+        <activity
+            android:name=".App.Admin.Activity.EmployeeDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".App.Admin.Activity.AdminDetailsInsert"
+            android:exported="false" />
+        <activity
             android:name=".App.Supplier.SupplierMenu"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".App.CEO.CEOMenu"
             android:exported="false" />

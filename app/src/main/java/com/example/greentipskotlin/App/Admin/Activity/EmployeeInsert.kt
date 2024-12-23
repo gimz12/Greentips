@@ -120,8 +120,20 @@ class EmployeeInsert : AppCompatActivity() {
             Toast.makeText(this, "Employee Inserted", Toast.LENGTH_SHORT).show()
 
             // If the employee's position is admin (positionId == 4), pass data to AdminDetails activity
-            if (positionId == 4) {
-                val intent = Intent(this, AdminDetails::class.java)
+            if (positionId == 1) {
+                val intent = Intent(this, CeoDetailsInsert::class.java)
+                intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
+                intent.putExtra("username", username)  // Pass the username
+                startActivity(intent)  // Start the AdminDetails activity
+            }
+            else if (positionId == 2) {
+                val intent = Intent(this, FieldManagerDetailsInsert::class.java)
+                intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
+                intent.putExtra("username", username)  // Pass the username
+                startActivity(intent)  // Start the AdminDetails activity
+            }
+            else if (positionId == 4) {
+                val intent = Intent(this, AdminDetailsInsert::class.java)
                 intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
                 intent.putExtra("username", username)  // Pass the username
                 startActivity(intent)  // Start the AdminDetails activity

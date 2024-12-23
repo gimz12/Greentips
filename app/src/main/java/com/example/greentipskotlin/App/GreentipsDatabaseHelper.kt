@@ -5,11 +5,14 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
+import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
 import com.example.greentipskotlin.App.Model.Fertilizer
+import com.example.greentipskotlin.App.Model.FieldManager
+import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Resources
@@ -52,6 +55,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val Admin_Employee_ID = "employee_id"
         const val Admin_Shift_Start_Time  = "shift_start_time"
         const val Admin_Shift_End_Time  = "shift_end_time"
+
+        //CEO Table
+        const val TABLE_CEO = "Ceo"
+        const val CEO_Employee_ID = "employee_id"
+        const val CEO_Skills  = "skills"
+        const val CEO_Experience  = "experience"
+
+        //FieldManager Table
+        const val TABLE_FIELD_MANAGER = "FieldManager"
+        const val FIELD_MANAGER_Employee_ID = "employee_id"
+        const val FIELD_MANAGER_ESTATE_ID_FR  = "estate_id"
+        const val FIELD_MANAGER_EXPERIENCE   = "experience"
+        const val FIELD_MANAGER_QUALIFICATION    = "qualification"
 
 
         //Estate table
@@ -179,6 +195,27 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createCEOTable="""
+           
+            CREATE TABLE $TABLE_CEO (
+                $CEO_Employee_ID INTEGER PRIMARY KEY ,
+                $CEO_Skills TEXT,
+                $CEO_Experience TEXT)
+            
+        """
+
+        val createFieldManagerTable="""
+           
+            CREATE TABLE $TABLE_FIELD_MANAGER (
+                $FIELD_MANAGER_Employee_ID INTEGER PRIMARY KEY,
+                $FIELD_MANAGER_ESTATE_ID_FR INTEGER,
+                $FIELD_MANAGER_EXPERIENCE TEXT,
+                $FIELD_MANAGER_QUALIFICATION TEXT,
+                FOREIGN KEY($FIELD_MANAGER_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+);
+
+        """
+
         val createEstateTable= """
             
             CREATE TABLE $TABLE_ESTATE (
@@ -283,6 +320,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createFertilizerTable)
         db.execSQL(createResourcesTable)
         db.execSQL(createAdminTable)
+        db.execSQL(createCEOTable)
+        db.execSQL(createFieldManagerTable)
 
     }
 
@@ -298,6 +337,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FERTILIZER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_RESOURCES")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMIN")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_CEO")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_FIELD_MANAGER")
         onCreate(db)
     }
 
@@ -508,6 +549,150 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    fun getAdminById(id: Int): Admin? {
+        val db = this.readableDatabase
+        var admin: Admin? = null
+
+        val query = "SELECT * FROM $TABLE_ADMIN WHERE $Admin_Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            admin = Admin(
+                EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(Admin_Employee_ID)),
+                ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(
+                    Admin_Shift_Start_Time)),
+                ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(Admin_Shift_End_Time))
+            )
+        }
+        cursor.close()
+        db.close()
+        return admin
+    }
+
+    fun updateAdmin(admin: Admin): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(Admin_Shift_Start_Time, admin.ShiftStartTime)
+            put(Admin_Shift_End_Time, admin.ShiftEndTime)
+        }
+        // Update the employee in the database by matching the employee ID
+        val rowsAffected = db.update(
+            TABLE_ADMIN,
+            values,
+            "$Admin_Employee_ID=?",
+            arrayOf(admin.EmployerId.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
+
+
+    //CEO--------------------------------------------------------------------------------------------------------------------------------
+
+    fun insertCEODetails(ceo: Ceo){
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(CEO_Employee_ID, ceo.EmployerId)
+            put(CEO_Skills, ceo.Skills)
+            put(CEO_Experience, ceo.Experience)
+        }
+
+        // Insert the row and return the result
+        db.insert(TABLE_CEO, null, values)
+        db.close()
+    }
+
+    fun getCEOById(id: Int): Ceo? {
+        val db = this.readableDatabase
+        var ceo: Ceo? = null
+
+        val query = "SELECT * FROM $TABLE_CEO WHERE $CEO_Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            ceo = Ceo(
+                EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(CEO_Employee_ID)),
+                Skills = cursor.getString(cursor.getColumnIndexOrThrow(
+                    CEO_Skills)),
+                Experience  = cursor.getString(cursor.getColumnIndexOrThrow(CEO_Experience))
+            )
+        }
+        cursor.close()
+        db.close()
+        return ceo
+    }
+
+    fun updateCEO(ceo: Ceo): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(CEO_Skills, ceo.Skills)
+            put(CEO_Experience, ceo.Experience)
+        }
+        // Update the employee in the database by matching the employee ID
+        val rowsAffected = db.update(
+            TABLE_CEO,
+            values,
+            "$CEO_Employee_ID=?",
+            arrayOf(ceo.EmployerId.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
+
+    //FieldManager--------------------------------------------------------------------------------------------------------------------------------
+
+    fun insertFieldManager(fieldManager: FieldManager){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(FIELD_MANAGER_Employee_ID,fieldManager.EmployerId)
+            put(FIELD_MANAGER_ESTATE_ID_FR,fieldManager.Estate_ID)
+            put(FIELD_MANAGER_EXPERIENCE,fieldManager.Experience)
+            put(FIELD_MANAGER_QUALIFICATION,fieldManager.Qualification)
+        }
+        db.insert(TABLE_FIELD_MANAGER,null,values)
+        db.close()
+
+    }
+
+    fun getFieldManagerById(id: Int): FieldManager? {
+        val db = this.readableDatabase
+        var fieldManager: FieldManager? = null
+
+        val query = "SELECT * FROM $TABLE_FIELD_MANAGER WHERE $FIELD_MANAGER_Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            fieldManager = FieldManager(
+                EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(FIELD_MANAGER_Employee_ID)),
+                Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(FIELD_MANAGER_ESTATE_ID_FR)),
+                Experience = cursor.getString(cursor.getColumnIndexOrThrow(
+                    FIELD_MANAGER_EXPERIENCE)),
+                Qualification  = cursor.getString(cursor.getColumnIndexOrThrow(
+                    FIELD_MANAGER_QUALIFICATION))
+            )
+        }
+        cursor.close()
+        db.close()
+        return fieldManager
+    }
+
+    fun updateFieldManager(fieldManager: FieldManager): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(FIELD_MANAGER_ESTATE_ID_FR, fieldManager.Estate_ID)
+            put(FIELD_MANAGER_QUALIFICATION, fieldManager.Qualification)
+            put(FIELD_MANAGER_EXPERIENCE, fieldManager.Experience)
+        }
+        // Update the employee in the database by matching the employee ID
+        val rowsAffected = db.update(
+            TABLE_FIELD_MANAGER,
+            values,
+            "$FIELD_MANAGER_Employee_ID=?",
+            arrayOf(fieldManager.EmployerId.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
 
 
 

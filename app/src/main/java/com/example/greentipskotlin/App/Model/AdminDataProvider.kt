@@ -23,5 +23,14 @@ class AdminDataProvider (context: Context) {
         return result
     }
 
+    fun getAdminById(id: Int): Admin?{
+        return greentipsDatabaseHelper.getAdminById(id)
+    }
+
+    fun updateAdmin(admin: Admin): Int {
+        return greentipsDatabaseHelper.updateAdmin(admin)
+    }
+
+
 
 }
