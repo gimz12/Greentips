@@ -17,6 +17,7 @@ import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
+import com.example.greentipskotlin.App.Model.Worker
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -68,6 +69,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val FIELD_MANAGER_ESTATE_ID_FR  = "estate_id"
         const val FIELD_MANAGER_EXPERIENCE   = "experience"
         const val FIELD_MANAGER_QUALIFICATION    = "qualification"
+
+
+        //Worker Table
+        const val TABLE_WORKER = "Worker"
+        const val WORKER_Employee_ID = "employee_id"
+        const val WORKER_ESTATE_ID_FR  = "estate_id"
+        const val WORKER_Shift_Start_Time  = "shift_start_time"
+        const val WORKER_Shift_End_Time   = "shift_end_time"
+        const val WORKER_EXPERIENCE   = "qualification"
 
 
         //Estate table
@@ -216,6 +226,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         """
 
+        val createWorkerTable="""
+           
+            CREATE TABLE $TABLE_WORKER (
+                $WORKER_Employee_ID INTEGER PRIMARY KEY ,
+                $WORKER_ESTATE_ID_FR INTEGER,
+                $WORKER_Shift_Start_Time TEXT,
+                $WORKER_Shift_End_Time TEXT,
+                $WORKER_EXPERIENCE TEXT,
+                FOREIGN KEY($WORKER_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID))
+            
+        """
+
         val createEstateTable= """
             
             CREATE TABLE $TABLE_ESTATE (
@@ -322,6 +344,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createAdminTable)
         db.execSQL(createCEOTable)
         db.execSQL(createFieldManagerTable)
+        db.execSQL(createWorkerTable)
 
     }
 
@@ -694,7 +717,64 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return rowsAffected
     }
 
+    //Worker--------------------------------------------------------------------------------------------------------------------------------
 
+    fun insertWorker(worker: Worker){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(WORKER_Employee_ID,worker.EmployerId)
+            put(WORKER_ESTATE_ID_FR,worker.Estate_ID)
+            put(WORKER_Shift_Start_Time,worker.ShiftStartTime)
+            put(WORKER_Shift_End_Time,worker.ShiftEndTime)
+            put(WORKER_EXPERIENCE,worker.Experience)
+        }
+        db.insert(TABLE_WORKER,null,values)
+        db.close()
+
+    }
+
+    fun getWorkerById(id: Int): Worker? {
+        val db = this.readableDatabase
+        var worker: Worker? = null
+
+        val query = "SELECT * FROM $TABLE_WORKER WHERE $WORKER_Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            worker = Worker(
+                EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
+                Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
+                ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(
+                    WORKER_Shift_Start_Time)),
+                ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(
+                    WORKER_Shift_End_Time)),
+                Experience  = cursor.getString(cursor.getColumnIndexOrThrow(
+                    WORKER_EXPERIENCE))
+            )
+        }
+        cursor.close()
+        db.close()
+        return worker
+    }
+
+    fun updateWorker(worker: Worker): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(WORKER_ESTATE_ID_FR, worker.Estate_ID)
+            put(WORKER_Shift_Start_Time, worker.ShiftStartTime)
+            put(WORKER_Shift_End_Time, worker.ShiftEndTime)
+            put(WORKER_EXPERIENCE, worker.Experience)
+        }
+        // Update the employee in the database by matching the employee ID
+        val rowsAffected = db.update(
+            TABLE_WORKER,
+            values,
+            "$WORKER_Employee_ID=?",
+            arrayOf(worker.EmployerId.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
 
     //Estate--------------------------------------------------------------------------------------------------------------------------------
 

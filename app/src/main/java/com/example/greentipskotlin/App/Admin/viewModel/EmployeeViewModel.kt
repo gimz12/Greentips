@@ -18,6 +18,8 @@ import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Resources
+import com.example.greentipskotlin.App.Model.Worker
+import com.example.greentipskotlin.App.Model.WorkerDataProvider
 
 class EmployeeViewModel (application: Application) : AndroidViewModel(application)  {
 
@@ -28,6 +30,7 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
     private val ceoDataProvider = CeoDataProvider(application.applicationContext)
     private val fieldManagerDataProvider = FieldManagerDataProvider(application.applicationContext)
     private val estateDataProvider = EstateDataProvider(application.applicationContext)
+    private val workerDataProvider = WorkerDataProvider(application.applicationContext)
 
     private val _employees = MutableLiveData<List<Employee>>()
     val employees: LiveData<List<Employee>> get() = _employees
@@ -120,6 +123,20 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
 
     fun getAllEstateNames(): List<String> {
         return estateDataProvider.getAllEstates().map { it.estateName }
+    }
+
+    //Worker
+
+    fun insertWorker(worker: Worker){
+        workerDataProvider.insertWorker(worker)
+    }
+
+    fun getWorkerById(id :Int): Worker?{
+        return workerDataProvider.getWorkerById(id)
+    }
+
+    fun updateWorker(worker: Worker): Int {
+        return workerDataProvider.updateWorker(worker)
     }
 
 

@@ -56,9 +56,15 @@ class EmployeeAdapter(
                             putExtra("EMPLOYEE_ID", employee.employeeId)
                         }
                         context.startActivity(intent)
-                    }else if (employee.employeePositionId == 4) {
+                    } else if (employee.employeePositionId == 4) {
                         val context = itemView.context
                         val intent = Intent(context, AdminDetails::class.java).apply {
+                            putExtra("EMPLOYEE_ID", employee.employeeId)
+                        }
+                        context.startActivity(intent)
+                    }else if (employee.employeePositionId == 5) {
+                        val context = itemView.context
+                        val intent = Intent(context, WorkerDetails::class.java).apply {
                             putExtra("EMPLOYEE_ID", employee.employeeId)
                         }
                         context.startActivity(intent)

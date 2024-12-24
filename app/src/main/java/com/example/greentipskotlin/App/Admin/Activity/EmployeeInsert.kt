@@ -137,7 +137,12 @@ class EmployeeInsert : AppCompatActivity() {
                 intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
                 intent.putExtra("username", username)  // Pass the username
                 startActivity(intent)  // Start the AdminDetails activity
-            } else {
+            } else if (positionId == 5) {
+                val intent = Intent(this, WorkerDetailsInsert::class.java)
+                intent.putExtra("employeeId", employeeId.toString())  // Pass the auto-incremented employeeId
+                intent.putExtra("username", username)  // Pass the username
+                startActivity(intent)  // Start the AdminDetails activity
+            }else {
                 finish()  // Close the current activity if not admin
             }
         } else {
