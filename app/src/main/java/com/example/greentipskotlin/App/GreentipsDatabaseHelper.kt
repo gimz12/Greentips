@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
+import com.example.greentipskotlin.App.Model.Catalogue
 import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.Employee
@@ -78,6 +79,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val WORKER_Shift_Start_Time  = "shift_start_time"
         const val WORKER_Shift_End_Time   = "shift_end_time"
         const val WORKER_EXPERIENCE   = "qualification"
+
+        //Catalogue Table
+        const val TABLE_CATALOGUE = "Catalogue"
+        const val CATALOGUE_ID = "catalogue_id"
+        const val CATALOGUE_NAME  = "catalogue_name"
+        const val CATALOGUE_ITEM_TYPE  = "catalogue_item_type"
+        const val CATALOGUE_ITEM_PRICE   = "catalogue_item_price"
+        const val CATALOGUE_ITEM_QUANTITY   = "catalogue_item_quantity"
+        const val CATALOGUE_ITEM_DESCRIPTION   = "catalogue_item_description"
+        const val CATALOGUE_ITEM_AVAILABILITY   = "catalogue_item_availability"
+        const val CATALOGUE_ITEM_IMAGE = "catalogue_item_image"
 
 
         //Estate table
@@ -238,6 +250,21 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createCatalogueTable= """
+            
+            CREATE TABLE $TABLE_CATALOGUE (
+                $CATALOGUE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $CATALOGUE_NAME TEXT,
+                $CATALOGUE_ITEM_TYPE TEXT,
+                $CATALOGUE_ITEM_PRICE Double,
+                $CATALOGUE_ITEM_QUANTITY INTEGER,
+                $CATALOGUE_ITEM_DESCRIPTION TEXT,
+                $CATALOGUE_ITEM_AVAILABILITY TEXT,
+                $CATALOGUE_ITEM_IMAGE TEXT
+                )
+            
+        """
+
         val createEstateTable= """
             
             CREATE TABLE $TABLE_ESTATE (
@@ -345,6 +372,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createCEOTable)
         db.execSQL(createFieldManagerTable)
         db.execSQL(createWorkerTable)
+        db.execSQL(createCatalogueTable)
 
     }
 
@@ -362,6 +390,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMIN")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CEO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FIELD_MANAGER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_WORKER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_CATALOGUE")
         onCreate(db)
     }
 
@@ -716,6 +746,23 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close() // Ensure database is closed
         return rowsAffected
     }
+
+    fun insertCatalogueItem(catalogue: Catalogue){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(CATALOGUE_NAME,catalogue.Catalogue_Name)
+            put(CATALOGUE_ITEM_TYPE,catalogue.Catalogue_Item_Type)
+            put(CATALOGUE_ITEM_PRICE,catalogue.Catalogue_Item_Price)
+            put(CATALOGUE_ITEM_QUANTITY,catalogue.Catalogue_Item_Quantity)
+            put(CATALOGUE_ITEM_DESCRIPTION,catalogue.Catalogue_Item_Description)
+            put(CATALOGUE_ITEM_AVAILABILITY,catalogue.Catalogue_Item_Availability)
+            put(CATALOGUE_ITEM_IMAGE,catalogue.Catalogue_Item_Image)
+
+        }
+        db.insert(TABLE_CATALOGUE,null,values)
+        db.close()
+    }
+
 
     //Worker--------------------------------------------------------------------------------------------------------------------------------
 

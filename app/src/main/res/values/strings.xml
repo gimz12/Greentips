@@ -11,6 +11,18 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="catalog_item_type_string">
+        <item>Buyer</item>
+        <item>Supplier</item>
+    </string-array>
+
+    <string-array name="catalog_item_availability_string">
+        <item>Available</item>
+        <item>Unavailable</item>
+        <item>Need</item>
+        <item>NoNeed</item>
+    </string-array>
+
     <string-array name="position_string">
         <item>Choose a Position</item>
         <item>CEO</item>

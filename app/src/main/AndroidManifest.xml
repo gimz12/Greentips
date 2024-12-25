@@ -18,6 +18,9 @@
         android:theme="@style/Theme.GreentipsKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".App.FieldManager.CatalogueItemInsert"
+            android:exported="false" />
+        <activity
             android:name=".App.Admin.Activity.WorkerDetails"
             android:exported="false" />
         <activity
