@@ -47,7 +47,7 @@
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Add a New Item"
+                    android:text="Update Item"
                     android:textColor="@color/black"
 
 
@@ -56,19 +56,6 @@
                     app:layout_constraintStart_toStartOf="@+id/empCardImageview"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="112dp"
-                    android:layout_marginTop="1dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Fill all the fields to add new Item to Catalogue"
-                    android:textColor="@color/hintTextGrey"
-
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/empCardImageview"
-                    app:layout_constraintTop_toBottomOf="@+id/addNewEmployeeTextView" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -314,13 +301,13 @@
 
 
         <Button
-            android:id="@+id/addItem_btn"
+            android:id="@+id/updateItem_btn"
             android:layout_width="157dp"
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
             android:background="@drawable/okbutton_background"
-            android:text="Add Item"
+            android:text="Update Item"
             android:fontFamily="@font/poppins_regular"
             android:padding="14dp"
 

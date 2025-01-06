@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.AdminDataProvider
+import com.example.greentipskotlin.App.Model.Buyer
+import com.example.greentipskotlin.App.Model.BuyerDataProvider
 import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.CeoDataProvider
 import com.example.greentipskotlin.App.Model.Employee
@@ -18,6 +20,8 @@ import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Resources
+import com.example.greentipskotlin.App.Model.Supplier
+import com.example.greentipskotlin.App.Model.SupplierDataProvider
 import com.example.greentipskotlin.App.Model.Worker
 import com.example.greentipskotlin.App.Model.WorkerDataProvider
 
@@ -31,6 +35,8 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
     private val fieldManagerDataProvider = FieldManagerDataProvider(application.applicationContext)
     private val estateDataProvider = EstateDataProvider(application.applicationContext)
     private val workerDataProvider = WorkerDataProvider(application.applicationContext)
+    private val buyerDataProvider = BuyerDataProvider(application.applicationContext)
+    private val supplierDataProvider = SupplierDataProvider(application.applicationContext)
 
     private val _employees = MutableLiveData<List<Employee>>()
     val employees: LiveData<List<Employee>> get() = _employees
@@ -138,6 +144,21 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
     fun updateWorker(worker: Worker): Int {
         return workerDataProvider.updateWorker(worker)
     }
+
+    //Buyer & Supplier
+
+    fun authenticateUser(username: String, password: String): Pair<String, Int>? {
+        return employeeDataProvider.authenticateUser(username,password)
+    }
+
+    fun getBuyerDetailsById(buyerId: Int): Buyer? {
+        return buyerDataProvider.getBuyerDetailsById(buyerId)
+    }
+
+    fun getSupplierDetailsById(supplierId: Int): Supplier? {
+        return supplierDataProvider.getSupplierDetailsById(supplierId)
+    }
+
 
 
 

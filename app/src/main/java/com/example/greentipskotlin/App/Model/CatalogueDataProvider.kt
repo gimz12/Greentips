@@ -11,4 +11,20 @@ class CatalogueDataProvider(context: Context) {
         greentipsDatabaseHelper.insertCatalogueItem(catalogue)
     }
 
+    fun getAllBuyerCatalogueItems():List<Catalogue>{
+        return greentipsDatabaseHelper.getAllBuyerCatalogueItems()
+    }
+
+    fun getAllCatalogueItems():List<Catalogue>{
+        return greentipsDatabaseHelper.getAllCatalogueItems()
+    }
+
+    fun getItemByCatalogueId(id :Int):Catalogue?{
+        return greentipsDatabaseHelper.getItemByCatalogueId(id)
+    }
+
+    fun updateCatalogueItem(catalogue: Catalogue): Int {
+        return greentipsDatabaseHelper.updateCatalogueItem(catalogue)
+    }
+
 }

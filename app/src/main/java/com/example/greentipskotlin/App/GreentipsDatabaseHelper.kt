@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
+import com.example.greentipskotlin.App.Model.Cart
 import com.example.greentipskotlin.App.Model.Catalogue
 import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.Coconut
@@ -90,6 +91,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val CATALOGUE_ITEM_DESCRIPTION   = "catalogue_item_description"
         const val CATALOGUE_ITEM_AVAILABILITY   = "catalogue_item_availability"
         const val CATALOGUE_ITEM_IMAGE = "catalogue_item_image"
+
+        //Cart table
+        const val TABLE_CART = "Cart"
+        const val CART_ID = "cart_id"
+        const val CART_USER_ID  = "cart_user_id"
+        const val CART_ITEM_NAME  = "cart_item_name"
+        const val CART_ITEM_PRICE  = "cart_item_price"
+        const val CART_ITEM_DATE  = "cart_item_date"
+        const val CART_ITEM_QUANTITY  = "cart_item_quantity"
+        const val CART_ITEM_TOTAL_PRICE  = "cart_item_total_price"
 
 
         //Estate table
@@ -265,6 +276,21 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createCartTable= """
+            
+            CREATE TABLE $TABLE_CART (
+                $CART_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $CART_USER_ID INTEGER NOT NULL,
+                $CART_ITEM_NAME TEXT NOT NULL,
+                $CART_ITEM_PRICE Double NOT NULL,
+                $CART_ITEM_QUANTITY INTEGER NOT NULL,
+                $CART_ITEM_DATE TEXT NOT NULL,
+                $CART_ITEM_TOTAL_PRICE Double NOT NULL,
+                FOREIGN KEY($CART_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID))
+
+            
+        """
+
         val createEstateTable= """
             
             CREATE TABLE $TABLE_ESTATE (
@@ -373,6 +399,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createFieldManagerTable)
         db.execSQL(createWorkerTable)
         db.execSQL(createCatalogueTable)
+        db.execSQL(createCartTable)
 
     }
 
@@ -392,6 +419,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FIELD_MANAGER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_WORKER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CATALOGUE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_CART")
         onCreate(db)
     }
 
@@ -478,6 +506,115 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             arrayOf(username, password)
         )
     }
+
+    fun authenticateUser(username: String, password: String): Pair<String, Int>? {
+        val db = readableDatabase
+
+        // Query Buyer Table
+        val buyerCursor = db.rawQuery(
+            "SELECT $BUYER_ID FROM $TABLE_BUYER WHERE $COLUMN_BUYER_USERNAME = ? AND $COLUMN_BUYER_PASSWORD = ?",
+            arrayOf(username, password)
+        )
+        if (buyerCursor.moveToFirst()) {
+            val buyerId = buyerCursor.getInt(0)
+            buyerCursor.close()
+            return Pair("Buyer", buyerId)
+        }
+        buyerCursor.close()
+
+        // Query Supplier Table
+        val supplierCursor = db.rawQuery(
+            "SELECT $SUPPLIER_ID FROM $TABLE_SUPPLIER WHERE $COLUMN_SUPPLIER_USERNAME = ? AND $COLUMN_SUPPLIER_PASSWORD = ?",
+            arrayOf(username, password)
+        )
+        if (supplierCursor.moveToFirst()) {
+            val supplierId = supplierCursor.getInt(0)
+            supplierCursor.close()
+            return Pair("Supplier", supplierId)
+        }
+        supplierCursor.close()
+
+        return null // User not found
+    }
+
+    fun getSupplierDetailsById(supplierId: Int): Supplier? {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT $SUPPLIER_ID, $COLUMN_SUPPLIER_NAME, $COLUMN_SUPPLIER_PHONE_NUMBER, $COLUMN_SUPPLIER_COMPANY_NAME, $COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER, $COLUMN_SUPPLIER_COMPANY_ADDRESS, $COLUMN_SUPPLIER_TYPE, $COLUMN_SUPPLIER_EMAIL, $COLUMN_SUPPLIER_USERNAME, $COLUMN_SUPPLIER_PASSWORD FROM $TABLE_SUPPLIER WHERE $SUPPLIER_ID = ?",
+            arrayOf(supplierId.toString())
+        )
+        return if (cursor.moveToFirst()) {
+            val supplierId = cursor.getInt(0)
+            val supplierName = cursor.getString(1)
+            val supplierPhoneNumber = cursor.getString(2)
+            val supplierCompanyName = cursor.getString(3)
+            val supplierCompanyNumber = cursor.getString(4)
+            val supplierCompanyAddress = cursor.getString(5)
+            val supplierType = cursor.getString(6)
+            val supplierEmail = cursor.getString(7)
+            val supplierUsername = cursor.getString(8)
+            val supplierPassword = cursor.getString(9)
+
+            cursor.close()
+            Supplier(
+                supplierId,
+                supplierName,
+                supplierPhoneNumber,
+                supplierCompanyName,
+                supplierCompanyNumber,
+                supplierCompanyAddress,
+                supplierType,
+                supplierEmail,
+                supplierUsername,
+                supplierPassword
+            )
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+
+    fun getBuyerDetailsById(buyerId: Int): Buyer? {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT $BUYER_ID, $COLUMN_BUYER_NAME, $COLUMN_BUYER_PHONE_NUMBER, $COLUMN_BUYER_COMPANY_NAME, $COLUMN_BUYER_COMPANY_PHONE_NUMBER, $COLUMN_BUYER_COMPANY_ADDRESS, $COLUMN_BUYER_TYPE, $COLUMN_BUYER_EMAIL, $COLUMN_BUYER_USERNAME, $COLUMN_BUYER_PASSWORD FROM $TABLE_BUYER WHERE $BUYER_ID = ?",
+            arrayOf(buyerId.toString())
+        )
+        return if (cursor.moveToFirst()) {
+            val buyerId = cursor.getInt(0)
+            val buyerName = cursor.getString(1)
+            val buyerPhoneNumber = cursor.getString(2)
+            val buyerCompanyName = cursor.getString(3)
+            val buyerCompanyPhoneNumber = cursor.getString(4)
+            val buyerCompanyAddress = cursor.getString(5)
+            val buyerType = cursor.getString(6)
+            val buyerEmail = cursor.getString(7)
+            val buyerUsername = cursor.getString(8)
+            val buyerPassword = cursor.getString(9)
+
+            cursor.close()
+            Buyer(
+                Buyer_Id = buyerId,
+                Buyer_Name = buyerName,
+                Buyer_PhoneNumber = buyerPhoneNumber,
+                Buyer_Company_Name = buyerCompanyName,
+                Buyer_Company_Number = buyerCompanyPhoneNumber,
+                Buyer_Company_Address = buyerCompanyAddress,
+                Buyer_Type = buyerType,
+                Buyer_Email = buyerEmail,
+                Buyer_Username = buyerUsername,
+                Buyer_password = buyerPassword
+            )
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+
+
+
 
     fun getEmployeeIdByUsername(username: String): Int? {
         val db = this.readableDatabase
@@ -763,6 +900,55 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    fun getItemByCatalogueId(id: Int): Catalogue? {
+        val db = this.readableDatabase
+        var catalogue: Catalogue? = null
+
+        val query = "SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        if (cursor.moveToFirst()) {
+            catalogue = Catalogue(
+                Catalogue_Id = cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID)),
+                Catalogue_Name = cursor.getString(cursor.getColumnIndexOrThrow(CATALOGUE_NAME)),
+                Catalogue_Item_Type = cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_TYPE)),
+                Catalogue_Item_Price = cursor.getDouble(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_PRICE)),
+                Catalogue_Item_Quantity  = cursor.getInt(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_QUANTITY)),
+                Catalogue_Item_Description = cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_DESCRIPTION)),
+                Catalogue_Item_Availability = cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_AVAILABILITY))
+            )
+        }
+        cursor.close()
+        db.close()
+        return catalogue
+    }
+
+    fun updateCatalogueItem(catalogue: Catalogue): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(CATALOGUE_NAME, catalogue.Catalogue_Name)
+            put(CATALOGUE_ITEM_TYPE, catalogue.Catalogue_Item_Type)
+            put(CATALOGUE_ITEM_PRICE, catalogue.Catalogue_Item_Price)
+            put(CATALOGUE_ITEM_QUANTITY, catalogue.Catalogue_Item_Quantity)
+            put(CATALOGUE_ITEM_DESCRIPTION, catalogue.Catalogue_Item_Description)
+            put(CATALOGUE_ITEM_AVAILABILITY, catalogue.Catalogue_Item_Availability)
+        }
+        // Update the Catalogue Item in the database by matching the Catalogue ID
+        val rowsAffected = db.update(
+            TABLE_CATALOGUE,
+            values,
+            "$CATALOGUE_ID=?",
+            arrayOf(catalogue.Catalogue_Id.toString())
+        )
+        db.close() // Ensure database is closed
+        return rowsAffected
+    }
+
 
     //Worker--------------------------------------------------------------------------------------------------------------------------------
 
@@ -862,6 +1048,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return estates
     }
+
+
 
 
     //Coconut----------------------------------------------------------------------------------------
@@ -968,6 +1156,135 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return buyers
     }
+
+    fun getAllBuyerCatalogueItems():List<Catalogue>{
+        val catalogues = ArrayList<Catalogue>()
+        val db =this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Buyer'", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_NAME))
+                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_TYPE))
+                val cataloguePrice=cursor.getDouble(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_PRICE))
+                val catalogueQuantity=cursor.getInt(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_QUANTITY))
+                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_DESCRIPTION))
+                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_AVAILABILITY))
+                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_IMAGE))
+
+
+
+                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,cataloguePrice,catalogueQuantity,catalogueDescription,catalogueAvailability,catalogueItemImage))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return catalogues
+    }
+
+
+    fun getAllCatalogueItems():List<Catalogue>{
+        val catalogues = ArrayList<Catalogue>()
+        val db =this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_NAME))
+                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_TYPE))
+                val cataloguePrice=cursor.getDouble(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_PRICE))
+                val catalogueQuantity=cursor.getInt(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_QUANTITY))
+                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_DESCRIPTION))
+                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_AVAILABILITY))
+                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_IMAGE))
+
+
+
+                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,cataloguePrice,catalogueQuantity,catalogueDescription,catalogueAvailability,catalogueItemImage))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return catalogues
+    }
+
+    fun addItemToCart(cart: Cart){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(CART_USER_ID,cart.CART_USER_ID)
+            put(CART_ITEM_NAME,cart.CART_ITEM_NAME)
+            put(CART_ITEM_PRICE,cart.CART_ITEM_PRICE)
+            put(CART_ITEM_QUANTITY,cart.CART_ITEM_QUANTITY)
+            put(CART_ITEM_DATE,cart.CART_ITEM_DATE)
+            put(CART_ITEM_TOTAL_PRICE,cart.CART_ITEM_TOTAL_PRICE)
+        }
+        db.insert(TABLE_CART,null,values)
+        db.close()
+    }
+
+    fun getCartItemsByUserId(userId: Int): List<Cart> {
+        val cartList = mutableListOf<Cart>()
+        val db = readableDatabase
+
+        val query = "SELECT * FROM $TABLE_CART WHERE $CART_USER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val cart = Cart(
+                    Cart_Id = cursor.getInt(cursor.getColumnIndexOrThrow(CART_ID)),
+                    CART_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(CART_USER_ID)),
+                    CART_ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(CART_ITEM_NAME)),
+                    CART_ITEM_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(CART_ITEM_PRICE)),
+                    CART_ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(CART_ITEM_QUANTITY)),
+                    CART_ITEM_DATE = cursor.getString(cursor.getColumnIndexOrThrow(CART_ITEM_DATE)),
+                    CART_ITEM_TOTAL_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(CART_ITEM_TOTAL_PRICE))
+                )
+                cartList.add(cart)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        return cartList
+    }
+
+    fun deleteCartItem(cartId: Int?, userId: Int): Boolean {
+        val db = writableDatabase
+
+        // Define the WHERE clause using Cart_ID and userId
+        val whereClause = "$CART_ID = ? AND $CART_USER_ID = ?"
+        val whereArgs = arrayOf(cartId.toString(), userId.toString())
+
+        // Execute delete query
+        val result = db.delete(TABLE_CART, whereClause, whereArgs)
+
+        db.close()
+
+        // Return true if at least one row was deleted
+        return result > 0
+    }
+
+
+
+
+
 
     //Intercrops--------------------------------------------------------------------------------------------------------------
 

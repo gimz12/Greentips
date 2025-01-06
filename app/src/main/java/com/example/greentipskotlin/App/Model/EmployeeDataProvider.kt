@@ -31,6 +31,10 @@ class EmployeeDataProvider (context: Context){
         return liveData
     }
 
+    fun authenticateUser(username: String, password: String): Pair<String, Int>? {
+        return greentipsDatabaseHelper.authenticateUser(username,password)
+    }
+
     fun getLoggedInUserDetails(username: String, password: String): Employee? {
         return greentipsDatabaseHelper.getLoggedInUserDetails(username, password)
     }

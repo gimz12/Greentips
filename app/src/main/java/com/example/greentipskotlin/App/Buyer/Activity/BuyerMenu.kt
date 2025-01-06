@@ -1,4 +1,4 @@
-package com.example.greentipskotlin.App.CEO
+package com.example.greentipskotlin.App.Buyer.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,24 +13,29 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
 import com.example.greentipskotlin.App.Admin.dashboardFragment
+import com.example.greentipskotlin.App.Buyer.BuyerCartFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCatalogueFragment
-import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
-import com.example.greentipskotlin.App.Model.Catalogue
+import com.example.greentipskotlin.App.Buyer.BuyerDashboardFragment
+import com.example.greentipskotlin.App.Buyer.BuyerOrderHistoryFragment
+import com.example.greentipskotlin.App.Buyer.BuyerReviewFragment
+import com.example.greentipskotlin.App.Buyer.PaymentMethodFragment
+import com.example.greentipskotlin.App.CEO.sup_Order_HistoryFragment
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
 private lateinit var drawerLayout: DrawerLayout
 private lateinit var toggle: ActionBarDrawerToggle
 
-class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ceomenu)
+        setContentView(R.layout.activity_buyer_menu)
 
-        drawerLayout = findViewById(R.id.drawer_layout_CEO)
+        drawerLayout = findViewById(R.id.drawer_layout_Buyer)
 
         // Initialize navigationView and set listener
-        val navigationView = findViewById<NavigationView>(R.id.nav_view_CEO)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view_Buyer)
         navigationView.setNavigationItemSelectedListener(this)
 
         // Initialize ActionBar and Drawer Toggle
@@ -51,6 +56,7 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             replaceFragment(dashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -80,16 +86,13 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.homeFragment -> replaceFragment(ceoDashboardFragment())
-            R.id.assignTaskFragment -> replaceFragment(assignTaskFragment())
-            R.id.task_HistoryFragment -> replaceFragment(task_HistoryFragment())
-            R.id.supplier_Reg_ReqFragment -> replaceFragment(supplier_Reg_ReqFragment())
-            R.id.buyer_RegFragment -> replaceFragment(buyer_RegFragment())
-            R.id.supplier_order_reqFragment -> replaceFragment(supplier_order_reqFragment())
-            R.id.sup_Order_HistoryFragment -> replaceFragment(sup_Order_HistoryFragment())
-            R.id.buyer_Order_HisFragment -> replaceFragment(buyer_Order_HisFragment())
-            R.id.financial_ReportFragment -> replaceFragment(CatalogueItemManageFragment())
-            R.id.custom_ReportsFragment -> replaceFragment(BuyerCatalogueFragment())
+            R.id.homeFragment -> replaceFragment(BuyerDashboardFragment())
+            R.id.viewCatalogueFragment -> replaceFragment(BuyerCatalogueFragment())
+            R.id.viewCartFragment -> replaceFragment(BuyerCartFragment())
+            R.id.orderHistoryFragment -> replaceFragment(BuyerOrderHistoryFragment())
+            R.id.paymentMethodFragment -> replaceFragment(PaymentMethodFragment())
+            R.id.reviewHistoryFragment -> replaceFragment(BuyerReviewFragment())
+            R.id.yourProfileFragment -> replaceFragment(sup_Order_HistoryFragment())
 
 
             // Other fragments...

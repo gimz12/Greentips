@@ -15,4 +15,8 @@ class BuyerDataProvider (context: Context) {
         return greentipsDatabaseHelper.getAllBuyers()
     }
 
+    fun getBuyerDetailsById(buyerId: Int): Buyer? {
+        return greentipsDatabaseHelper.getBuyerDetailsById(buyerId)
+    }
+
 }

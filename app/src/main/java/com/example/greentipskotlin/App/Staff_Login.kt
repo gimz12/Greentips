@@ -17,6 +17,7 @@ import com.example.greentipskotlin.App.Admin.Activity.IntercropsInsert
 import com.example.greentipskotlin.App.Admin.MainActivity
 import com.example.greentipskotlin.App.Admin.viewModel.CoconutViewModel
 import com.example.greentipskotlin.App.Admin.viewModel.EmployeeViewModel
+import com.example.greentipskotlin.App.FieldManager.CatalogueItemInsert
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityStaffLoginBinding
@@ -33,6 +34,7 @@ class Staff_Login : AppCompatActivity() {
         val usernameEditText = binding.usernameTxt
         val passwordEditText = binding.passwordTxt
         val loginButton = binding.loginBtn
+
 
         loginButton.setOnClickListener(){
             val username = usernameEditText.text.toString().trim()
@@ -59,7 +61,7 @@ class Staff_Login : AppCompatActivity() {
     private fun navigateToDashboard(positionId: Int) {
         val intent = when (positionId) {
             1 -> Intent(this, EmployeeInsert::class.java)
-            2 -> Intent(this, EstateInsert::class.java)
+            2 -> Intent(this, CatalogueItemInsert::class.java)
             3 -> Intent(this, MainActivity::class.java)
             4 -> Intent(this, MainActivity::class.java)
             5 -> Intent(this, IntercropsInsert::class.java)

@@ -16,4 +16,8 @@ class SupplierDataProvider(context: Context) {
         return greentipsDatabaseHelper.getAllSupplier()
     }
 
+    fun getSupplierDetailsById(supplierId: Int): Supplier? {
+        return greentipsDatabaseHelper.getSupplierDetailsById(supplierId)
+    }
+
 }
