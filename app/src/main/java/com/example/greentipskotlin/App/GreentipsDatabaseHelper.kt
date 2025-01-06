@@ -1281,6 +1281,92 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return result > 0
     }
 
+    fun updateCatalogueQuantity(itemName: String, quantitySold: Int): Boolean {
+        val db = this.writableDatabase
+
+        // Fetch the current quantity from the catalogue
+        val cursor = db.query(
+            TABLE_CATALOGUE,
+            arrayOf(CATALOGUE_ITEM_QUANTITY),
+            "$CATALOGUE_NAME = ?",
+            arrayOf(itemName),
+            null, null, null
+        )
+
+        var isUpdated = false
+        if (cursor != null && cursor.moveToFirst()) {
+            val currentQuantity = cursor.getInt(cursor.getColumnIndex(CATALOGUE_ITEM_QUANTITY))
+
+            // Calculate the new quantity
+            val newQuantity = currentQuantity - quantitySold
+
+            // Update the quantity in the Catalogue table
+            val values = ContentValues().apply {
+                put(CATALOGUE_ITEM_QUANTITY, newQuantity)
+            }
+
+            val selection = "$CATALOGUE_NAME = ?"
+            val selectionArgs = arrayOf(itemName)
+
+            val rowsUpdated = db.update(
+                TABLE_CATALOGUE,
+                values,
+                selection,
+                selectionArgs
+            )
+
+            if (rowsUpdated > 0) {
+                isUpdated = true
+            }
+        }
+
+        cursor?.close()
+        return isUpdated
+    }
+
+    fun updateCatalogueQuantityRemove(itemName: String, quantitySold: Int): Boolean {
+        val db = this.writableDatabase
+
+        // Fetch the current quantity from the catalogue
+        val cursor = db.query(
+            TABLE_CATALOGUE,
+            arrayOf(CATALOGUE_ITEM_QUANTITY),
+            "$CATALOGUE_NAME = ?",
+            arrayOf(itemName),
+            null, null, null
+        )
+
+        var isUpdated = false
+        if (cursor != null && cursor.moveToFirst()) {
+            val currentQuantity = cursor.getInt(cursor.getColumnIndex(CATALOGUE_ITEM_QUANTITY))
+
+            // Calculate the new quantity
+            val newQuantity = currentQuantity + quantitySold
+
+            // Update the quantity in the Catalogue table
+            val values = ContentValues().apply {
+                put(CATALOGUE_ITEM_QUANTITY, newQuantity)
+            }
+
+            val selection = "$CATALOGUE_NAME = ?"
+            val selectionArgs = arrayOf(itemName)
+
+            val rowsUpdated = db.update(
+                TABLE_CATALOGUE,
+                values,
+                selection,
+                selectionArgs
+            )
+
+            if (rowsUpdated > 0) {
+                isUpdated = true
+            }
+        }
+
+        cursor?.close()
+        return isUpdated
+    }
+
 
 
 

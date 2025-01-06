@@ -35,4 +35,12 @@ class CatalogueViewModel(application: Application):AndroidViewModel(application)
         return catalogueDataProvider.updateCatalogueItem(catalogue)
     }
 
+    fun updateCatalogueQuantity(itemName: String, quantitySold: Int, callback: (Boolean) -> Unit) {
+        catalogueDataProvider.updateCatalogueQuantity(itemName, quantitySold, callback)
+    }
+
+    fun updateCatalogueQuantityRemove(itemName: String, quantitySold: Int, callback: (Boolean) -> Unit) {
+        catalogueDataProvider.updateCatalogueQuantityRemove(itemName, quantitySold, callback)
+    }
+
 }

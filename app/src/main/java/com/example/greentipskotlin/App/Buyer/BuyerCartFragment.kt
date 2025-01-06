@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greentipskotlin.App.Admin.viewModel.CartViewModel
+import com.example.greentipskotlin.App.Admin.viewModel.CatalogueViewModel
 import com.example.greentipskotlin.databinding.FragmentBuyerCartBinding
 
 class BuyerCartFragment : Fragment() {
@@ -19,6 +20,7 @@ class BuyerCartFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val model: CartViewModel by viewModels()
+    private val catalogueViewModel: CatalogueViewModel by viewModels() // Add Catalogue ViewModel
 
     private lateinit var cartAdapter: CartAdapter
 
@@ -43,12 +45,19 @@ class BuyerCartFragment : Fragment() {
                 val isDeleted = model.deleteCartItem(cart.Cart_Id, userId)
 
                 if (isDeleted) {
-                    // If deletion is successful, remove the item from the adapter
-                    cartAdapter.removeItem(cart) { totalPrice ->
-                        // Update the total price after deletion
-                        binding.totalPrice.text = "Total Price : $${"%.2f".format(totalPrice)}"
+                    // Deduct the quantity from the catalogue
+                    catalogueViewModel.updateCatalogueQuantityRemove(cart.CART_ITEM_NAME.toString(), cart.CART_ITEM_QUANTITY.toInt()) { isUpdated ->
+                        if (isUpdated) {
+                            // If update is successful, remove the item from the adapter
+                            cartAdapter.removeItem(cart) { totalPrice ->
+                                // Update the total price after deletion
+                                binding.totalPrice.text = "Total Price : $${"%.2f".format(totalPrice)}"
+                            }
+                            Toast.makeText(requireContext(), "Item deleted and quantity updated in catalogue", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "Failed to update catalogue quantity", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                    Toast.makeText(requireContext(), "Item deleted successfully", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireContext(), "Failed to delete item", Toast.LENGTH_SHORT).show()
                 }

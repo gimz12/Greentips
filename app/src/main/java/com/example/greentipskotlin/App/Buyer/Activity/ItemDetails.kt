@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.greentipskotlin.App.Admin.viewModel.CartViewModel
+import com.example.greentipskotlin.App.Admin.viewModel.CatalogueViewModel
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityItemDetailsBinding
 import com.example.greentipskotlin.App.Model.Cart
@@ -18,7 +19,8 @@ import java.util.*
 class ItemDetails : AppCompatActivity() {
 
     private lateinit var binding: ActivityItemDetailsBinding
-    private val model:CartViewModel by viewModels()
+    private val model: CartViewModel by viewModels()
+    private val catalogueViewModel: CatalogueViewModel by viewModels()  // ViewModel for catalogue
     private var totalQuantity: Int = 1
     private var totalPrice: Double = 0.0
 
@@ -31,7 +33,7 @@ class ItemDetails : AppCompatActivity() {
         val name = intent.getStringExtra("CATALOGUE_NAME")
         val description = intent.getStringExtra("CATALOGUE_DESCRIPTION")
         val price = intent.getStringExtra("CATALOGUE_PRICE")
-        val quantityAvailable = intent.getStringExtra("CATALOGUE_QUANTITY")
+        var quantityAvailable = intent.getStringExtra("CATALOGUE_QUANTITY")
         val imageUri = intent.getStringExtra("CATALOGUE_IMAGE")
 
         // Populate the UI
@@ -49,8 +51,9 @@ class ItemDetails : AppCompatActivity() {
 
         // Calculate price and quantity
         val itemPrice = price!!.toDouble()
-        val quantityAvailableInt = quantityAvailable!!.toInt()
+        var quantityAvailableInt = quantityAvailable!!.toInt()
 
+        // Add quantity
         binding.addItem.setOnClickListener {
             if (totalQuantity < quantityAvailableInt) {
                 totalQuantity++
@@ -60,6 +63,7 @@ class ItemDetails : AppCompatActivity() {
             }
         }
 
+        // Remove quantity
         binding.removeItem.setOnClickListener {
             if (totalQuantity > 1) {
                 totalQuantity--
@@ -69,12 +73,13 @@ class ItemDetails : AppCompatActivity() {
             }
         }
 
+        // Add to cart and update catalogue
         binding.addToCart.setOnClickListener {
-            addToCart(name, itemPrice)
+            addToCart(name, itemPrice, quantityAvailableInt)
         }
     }
 
-    private fun addToCart(itemName: String?, itemPrice: Double) {
+    private fun addToCart(itemName: String?, itemPrice: Double, quantityAvailableInt: Int) {
         if (itemName == null) {
             Toast.makeText(this, "Invalid item details!", Toast.LENGTH_SHORT).show()
             return
@@ -105,5 +110,22 @@ class ItemDetails : AppCompatActivity() {
         // Add to Cart database
         model.addItemToCart(cart)
         Toast.makeText(this, "$itemName added to cart successfully!", Toast.LENGTH_SHORT).show()
+
+        // Update catalogue quantity and refresh UI
+        catalogueViewModel.updateCatalogueQuantity(itemName, totalQuantity) { isUpdated ->
+            if (isUpdated) {
+                Toast.makeText(this, "Catalogue updated successfully!", Toast.LENGTH_SHORT).show()
+
+                // Update the displayed quantity in the UI
+                val newQuantityAvailable = quantityAvailableInt - totalQuantity
+                binding.detailedQuantity.text = "Quantity: $newQuantityAvailable"
+
+                // You can also update the quantityAvailable value to keep it synchronized
+                //quantityAvailable = newQuantityAvailable.toString()
+
+            } else {
+                Toast.makeText(this, "Failed to update catalogue.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -27,4 +27,14 @@ class CatalogueDataProvider(context: Context) {
         return greentipsDatabaseHelper.updateCatalogueItem(catalogue)
     }
 
+    fun updateCatalogueQuantity(itemName: String, quantitySold: Int, callback: (Boolean) -> Unit) {
+        val isUpdated = greentipsDatabaseHelper.updateCatalogueQuantity(itemName, quantitySold)
+        callback(isUpdated)
+    }
+
+    fun updateCatalogueQuantityRemove(itemName: String, quantitySold: Int, callback: (Boolean) -> Unit) {
+        val isUpdated = greentipsDatabaseHelper.updateCatalogueQuantityRemove(itemName, quantitySold)
+        callback(isUpdated)
+    }
+
 }
