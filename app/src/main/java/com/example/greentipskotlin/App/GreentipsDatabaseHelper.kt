@@ -102,6 +102,35 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val CART_ITEM_QUANTITY  = "cart_item_quantity"
         const val CART_ITEM_TOTAL_PRICE  = "cart_item_total_price"
 
+        //Buyer Order Table
+        const val TABLE_BUYER_ORDER = "Buyer_Order"
+        const val BUYER_ORDER_ID = "order_id"
+        const val BUYER_USER_ID = "user_id"
+        const val BUYER_ORDER_COST = "order_cost"
+        const val BUYER_ORDER_DATE = "order_date"
+        const val BUYER_ORDER_STATUS = "order_status"
+        const val BUYER_ORDER_SHIPPING_ADDRESS = "shipping_address"
+
+        //Order Item Table
+        const val TABLE_ORDER_ITEM = "Order_Item"
+        const val ORDER_ITEM_ID = "order_item_id"
+        const val ORDER_ITEM_ORDER_ID = "order_id"
+        const val ORDER_ITEM_NAME = "order_item_name"
+        const val ORDER_ITEM_QUANTITY ="order_item_quantity"
+        const val ORDER_ITEM_PRICE ="order_item_price"
+        const val ORDER_ITEM_TOTAL_PRICE ="order_item_total_price"
+
+        //Buyer Payment Table
+        const val TABLE_BUYER_PAYMENT = "Buyer_Payment"
+        const val PAYMENT_ID = "payment_id"
+        const val PAYMENT_ORDER_ID = "order_id"
+        const val PAYMENT_USER_ID = "user_id"
+        const val PAYMENT_AMOUNT ="payment_amount"
+        const val PAYMENT_STATUS ="payment_status"
+        const val PAYMENT_METHOD ="payment_method"
+        const val PAYMENT_DATE_TIME ="payment_date_time"
+
+
 
         //Estate table
         const val TABLE_ESTATE = "Estate"
@@ -276,6 +305,33 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createBuyerOrderTable= """
+            
+            CREATE TABLE $TABLE_BUYER_ORDER (
+                $BUYER_ORDER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $BUYER_USER_ID INTEGER NOT NULL,
+                $BUYER_ORDER_COST Double NOT NULL,
+                $BUYER_ORDER_DATE TEXT NOT NULL,
+                $BUYER_ORDER_STATUS TEXT NOT NULL,
+                $BUYER_ORDER_SHIPPING_ADDRESS TEXT NOT NULL,
+                FOREIGN KEY($BUYER_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID))
+
+            
+        """
+
+        val createBuyerOrderItems= """
+            
+            CREATE TABLE $TABLE_ORDER_ITEM (
+                $ORDER_ITEM_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $ORDER_ITEM_ORDER_ID INTEGER NOT NULL,
+                $ORDER_ITEM_QUANTITY INTEGER NOT NULL,
+                $ORDER_ITEM_PRICE Double NOT NULL,
+                $ORDER_ITEM_TOTAL_PRICE Double NOT NULL,
+                FOREIGN KEY($ORDER_ITEM_ORDER_ID) REFERENCES $TABLE_BUYER_ORDER($BUYER_ORDER_ID))
+
+            
+        """
+
         val createCartTable= """
             
             CREATE TABLE $TABLE_CART (
@@ -287,6 +343,22 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 $CART_ITEM_DATE TEXT NOT NULL,
                 $CART_ITEM_TOTAL_PRICE Double NOT NULL,
                 FOREIGN KEY($CART_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID))
+
+            
+        """
+
+        val createBuyerPayment= """
+            
+            CREATE TABLE $TABLE_BUYER_PAYMENT (
+                $PAYMENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $PAYMENT_ORDER_ID INTEGER NOT NULL,
+                $PAYMENT_USER_ID INTEGER NOT NULL,
+                $PAYMENT_AMOUNT Double NOT NULL,
+                $PAYMENT_STATUS TEXT NOT NULL,
+                $PAYMENT_METHOD TEXT NOT NULL,
+                $PAYMENT_DATE_TIME Double NOT NULL,
+                FOREIGN KEY($PAYMENT_ORDER_ID) REFERENCES $TABLE_BUYER_ORDER($BUYER_ORDER_ID),
+                FOREIGN KEY($PAYMENT_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID))
 
             
         """
@@ -400,6 +472,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createWorkerTable)
         db.execSQL(createCatalogueTable)
         db.execSQL(createCartTable)
+        db.execSQL(createBuyerOrderTable)
+        db.execSQL(createBuyerOrderItems)
+        db.execSQL(createBuyerPayment)
 
     }
 
@@ -420,6 +495,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_WORKER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CATALOGUE")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CART")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER_ORDER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER_PAYMENT")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ORDER_ITEM")
         onCreate(db)
     }
 

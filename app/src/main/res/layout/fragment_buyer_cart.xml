@@ -6,14 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".App.Buyer.BuyerCartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-
-
 
         <ImageView
             android:id="@+id/cart_img"
@@ -54,14 +52,28 @@
             android:background="@color/darkGreen"
             android:padding="10dp"
             android:text="Total Price : $300"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="15sp"
             android:fontFamily="@font/poppins_medium"
             android:textStyle="bold"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/paymentMethod"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/poppins_medium"
+            android:entries="paymentMethod"
+            android:background="@color/darkGreen"
+
+            app:layout_constraintStart_toStartOf="total_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"

@@ -23,6 +23,10 @@
         <item>NoNeed</item>
     </string-array>
 
+    <string-array name="paymentMethod">
+        <item>Cash On Delivery</item>
+    </string-array>
+
     <string-array name="position_string">
         <item>Choose a Position</item>
         <item>CEO</item>
