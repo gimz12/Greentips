@@ -1,33 +1,37 @@
 package com.example.greentipskotlin.App.Buyer
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.Activity.BuyerAdapter
+import com.example.greentipskotlin.App.Admin.Activity.BuyerInsert
+import com.example.greentipskotlin.App.Admin.viewModel.CreditCardViewModel
+import com.example.greentipskotlin.App.Buyer.Activity.AddCreditCard
+import com.example.greentipskotlin.App.Buyer.Activity.CreditCardAdapter
 import com.example.greentipskotlin.R
+import com.example.greentipskotlin.databinding.FragmentBuyerCatalogueBinding
+import com.example.greentipskotlin.databinding.FragmentPaymentMethodBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PaymentMethodFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PaymentMethodFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentPaymentMethodBinding? = null
+    private val binding get() = _binding!!
+
+    private val model :CreditCardViewModel by viewModels()
+    private var isSorted: Boolean = false
+
+    private lateinit var creditCardAdapter: CreditCardAdapter
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +39,56 @@ class PaymentMethodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_method, container, false)
+        _binding = FragmentPaymentMethodBinding.inflate(inflater, container, false)
+
+
+        creditCardAdapter=CreditCardAdapter(emptyList())
+        binding.creditCardRecyclerView.layoutManager= LinearLayoutManager(context)
+        binding.creditCardRecyclerView.adapter= creditCardAdapter
+
+        binding.insertCreditCardImageView.setOnClickListener(){
+            val creditCardIntent = Intent(requireContext(), AddCreditCard::class.java)
+            startActivity(creditCardIntent)
+        }
+
+        binding.sortButton.setOnClickListener(){
+            toggleSort()
+        }
+
+        model.creditCards.observe(viewLifecycleOwner){updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.cardId } else updateList
+            creditCardAdapter.updateList(listToDisplay)
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PaymentMethodFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PaymentMethodFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("USER_ID", -1)
+
+        if (userId != -1) {
+            model.getCreditCards(userId) // Refresh data with valid userId
+        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        val updatedList = if (isSorted) {
+            model.creditCards.value?.sortedBy { it.cardId }
+        } else {
+            model.creditCards.value
+        }
+        updatedList?.let { creditCardAdapter.updateList(it) }
+    }
+
 }

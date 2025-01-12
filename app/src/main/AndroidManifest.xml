@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.greentipskotlin">
+    package="com.example.greentipskotlin" >
     <!-- Permissions for accessing storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,17 +16,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GreentipsKotlin"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".App.Buyer.Activity.BuyerOrderPlaced"
+            android:exported="false" />
+        <activity
+            android:name=".App.Buyer.Activity.AddCreditCard"
+            android:exported="false" />
         <activity
             android:name=".App.User_Login"
-            android:exported="true">
-
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".App.Buyer.Activity.BuyerMenu"
@@ -72,9 +76,7 @@
             android:exported="false" />
         <activity
             android:name=".App.CEO.CEOMenu"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".App.Staff_Login"
             android:exported="false" />
@@ -115,7 +117,7 @@
             android:name=".App.Admin.Activity.UserProfileManagement"
             android:exported="false"
             android:label="Add New Employee"
-            android:parentActivityName=".App.Admin.MainActivity">
+            android:parentActivityName=".App.Admin.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".App.Admin.MainActivity" />
@@ -123,7 +125,7 @@
         <activity
             android:name=".App.Admin.Activity.EmployeeInsert"
             android:exported="false"
-            android:parentActivityName=".App.Admin.MainActivity">
+            android:parentActivityName=".App.Admin.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".App.Admin.MainActivity" />
@@ -131,11 +133,7 @@
         <activity
             android:name=".App.Admin.MainActivity"
             android:exported="true"
-            android:label="Admin Dashboard" >
-
-
-
-        </activity>
+            android:label="Admin Dashboard" />
     </application>
 
 </manifest>

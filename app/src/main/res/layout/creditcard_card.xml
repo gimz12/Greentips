@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvCreditCardID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreditCard ID"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvCreditCardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreditCard Number"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/tvCreditCardExpireDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreditCard Expire Date"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+
+        <TextView
+            android:id="@+id/tvCreditCardHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreditCard Holder`s Name"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

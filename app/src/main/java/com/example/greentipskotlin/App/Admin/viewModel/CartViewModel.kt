@@ -33,6 +33,11 @@ class CartViewModel(application: Application): AndroidViewModel(application) {
         return cartDataProvider.deleteCartItem(cartId,userId)
     }
 
+    fun clearCart(userId: Int) {
+        cartDataProvider.clearCart(userId)
+    }
+
+
 
 
 

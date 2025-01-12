@@ -5,10 +5,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
+import com.example.greentipskotlin.App.Model.BuyerOrder
 import com.example.greentipskotlin.App.Model.Cart
 import com.example.greentipskotlin.App.Model.Catalogue
 import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.Coconut
+import com.example.greentipskotlin.App.Model.CreditCard
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
@@ -17,6 +19,7 @@ import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
+import com.example.greentipskotlin.App.Model.OrderItem
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
 import com.example.greentipskotlin.App.Model.Worker
@@ -129,6 +132,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val PAYMENT_STATUS ="payment_status"
         const val PAYMENT_METHOD ="payment_method"
         const val PAYMENT_DATE_TIME ="payment_date_time"
+
+        //CreditCard
+        const val TABLE_CREDIT_CARDS = "CreditCards"
+        const val COLUMN_CARD_ID = "CardId"
+        const val COLUMN_USER_ID = "UserId"
+        const val COLUMN_CARD_NUMBER = "CardNumber"
+        const val COLUMN_EXPIRY_DATE = "ExpiryDate"
+        const val COLUMN_CARD_HOLDER_NAME = "CardHolderName"
 
 
 
@@ -324,6 +335,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             CREATE TABLE $TABLE_ORDER_ITEM (
                 $ORDER_ITEM_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $ORDER_ITEM_ORDER_ID INTEGER NOT NULL,
+                $ORDER_ITEM_NAME TEXT NOT NULL,
                 $ORDER_ITEM_QUANTITY INTEGER NOT NULL,
                 $ORDER_ITEM_PRICE Double NOT NULL,
                 $ORDER_ITEM_TOTAL_PRICE Double NOT NULL,
@@ -362,6 +374,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
             
         """
+
+        val createCreditCardsTable= """
+            
+                CREATE TABLE $TABLE_CREDIT_CARDS (
+                $COLUMN_CARD_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_USER_ID INTEGER NOT NULL,
+                $COLUMN_CARD_NUMBER TEXT NOT NULL,
+                $COLUMN_EXPIRY_DATE TEXT NOT NULL,
+                $COLUMN_CARD_HOLDER_NAME TEXT NOT NULL,
+                FOREIGN KEY ($COLUMN_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID)
+    )
+"""
+        
 
         val createEstateTable= """
             
@@ -475,6 +500,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createBuyerOrderTable)
         db.execSQL(createBuyerOrderItems)
         db.execSQL(createBuyerPayment)
+        db.execSQL(createCreditCardsTable)
 
     }
 
@@ -498,6 +524,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER_ORDER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER_PAYMENT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ORDER_ITEM")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_CREDIT_CARDS")
         onCreate(db)
     }
 
@@ -1444,6 +1471,116 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor?.close()
         return isUpdated
     }
+
+    fun insertCreditCard(creditCard: CreditCard): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_USER_ID, creditCard.userId)
+            put(COLUMN_CARD_NUMBER, creditCard.cardNumber)
+            put(COLUMN_EXPIRY_DATE, creditCard.expiryDate)
+            put(COLUMN_CARD_HOLDER_NAME, creditCard.cardHolderName)
+        }
+        return db.insert(TABLE_CREDIT_CARDS, null, values)
+    }
+
+    fun getCreditCardsByUserId(userId: Int): List<CreditCard> {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_CREDIT_CARDS,
+            null,
+            "$COLUMN_USER_ID = ?",
+            arrayOf(userId.toString()),
+            null,
+            null,
+            null
+        )
+        val creditCards = mutableListOf<CreditCard>()
+        while (cursor.moveToNext()) {
+            creditCards.add(
+                CreditCard(
+                    cardId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CARD_ID)),
+                    userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_USER_ID)),
+                    cardNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CARD_NUMBER)),
+                    expiryDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EXPIRY_DATE)),
+                    cardHolderName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CARD_HOLDER_NAME))
+                )
+            )
+        }
+        cursor.close()
+        return creditCards
+    }
+
+    fun placeOrder(buyerOrder: BuyerOrder): Long{
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(BUYER_USER_ID,buyerOrder.USER_ID)
+            put(BUYER_ORDER_COST,buyerOrder.ORDER_COST)
+            put(BUYER_ORDER_DATE,buyerOrder.ORDER_DATE)
+            put(BUYER_ORDER_STATUS,buyerOrder.ORDER_STATUS)
+            put(BUYER_ORDER_SHIPPING_ADDRESS,buyerOrder.ORDER_SHIPPING_ADDRESS)
+        }
+        val orderId = db.insert(TABLE_BUYER_ORDER, null, values)
+        db.close()
+        return orderId
+    }
+
+    fun clearCartForUser(userId: Int): Boolean {
+        val db = this.writableDatabase
+        return try {
+            // Delete all cart items for the given user
+            val rowsAffected = db.delete(TABLE_CART, "$CART_USER_ID = ?", arrayOf(userId.toString()))
+            rowsAffected > 0
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        } finally {
+            db.close()
+        }
+    }
+
+    fun insertOrderItem(orderItem: OrderItem){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(ORDER_ITEM_ORDER_ID,orderItem.ORDER_ITEM_ORDER_ID)
+            put(ORDER_ITEM_NAME,orderItem.ORDER_ITEM_NAME)
+            put(ORDER_ITEM_PRICE,orderItem.ORDER_ITEM_PRICE)
+            put(ORDER_ITEM_QUANTITY,orderItem.ORDER_ITEM_QUANTITY)
+            put(ORDER_ITEM_TOTAL_PRICE,orderItem.ORDER_ITEM_TOTAL_PRICE)
+        }
+        db.insert(TABLE_ORDER_ITEM,null,values)
+        db.close()
+    }
+
+    fun getOrderItemsByOrderId(orderId: Int): List<OrderItem> {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_ORDER_ITEM,
+            null, // Select all columns
+            "$ORDER_ITEM_ORDER_ID = ?", // WHERE clause
+            arrayOf(orderId.toString()), // Arguments for WHERE clause
+            null, // GROUP BY
+            null, // HAVING
+            null  // ORDER BY
+        )
+
+        val orderItems = mutableListOf<OrderItem>()
+        while (cursor.moveToNext()) {
+            val item = OrderItem(
+                ORDER_ITEM_ID = cursor.getInt(cursor.getColumnIndexOrThrow(ORDER_ITEM_ID)),
+                ORDER_ITEM_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(ORDER_ITEM_ORDER_ID)),
+                ORDER_ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(ORDER_ITEM_NAME)),
+                ORDER_ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(ORDER_ITEM_QUANTITY)),
+                ORDER_ITEM_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(ORDER_ITEM_PRICE)),
+                ORDER_ITEM_TOTAL_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(
+                    ORDER_ITEM_TOTAL_PRICE))
+            )
+            orderItems.add(item)
+        }
+        cursor.close()
+        return orderItems
+    }
+
+
 
 
 

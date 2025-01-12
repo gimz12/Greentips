@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <EditText
+        android:id="@+id/cardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Credit Card Number"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/expireDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expire Date"
+        android:inputType="date"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/cardHoldersName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Card Holder`s Name"
+        android:inputType="date"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/buttonInsert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Credit Card"
+        android:textColor="@color/black"/>
+
+
+</LinearLayout>

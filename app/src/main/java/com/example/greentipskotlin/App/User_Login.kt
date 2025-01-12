@@ -66,6 +66,7 @@ class User_Login : AppCompatActivity() {
                             editor.putString("USER_EMAIL", buyer.Buyer_Email)
                             editor.putString("COMPANY_NAME", buyer.Buyer_Company_Name)
                             editor.putString("PHONE_NUMBER", buyer.Buyer_PhoneNumber)
+                            editor.putString("ADDRESS", buyer.Buyer_Company_Address)
                             editor.apply()
 
                             // Navigate to BuyerMenu

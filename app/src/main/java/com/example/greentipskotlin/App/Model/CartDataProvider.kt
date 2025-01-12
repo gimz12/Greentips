@@ -19,6 +19,10 @@ class CartDataProvider(context: Context) {
         return greentipsDatabaseHelper.deleteCartItem(cartId,userId)
     }
 
+    fun clearCart(userId: Int) {
+        greentipsDatabaseHelper.clearCartForUser(userId)
+    }
+
 
 
 
