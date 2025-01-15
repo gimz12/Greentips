@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.greentipskotlin.App.Model.Admin
 import com.example.greentipskotlin.App.Model.Buyer
 import com.example.greentipskotlin.App.Model.BuyerOrder
+import com.example.greentipskotlin.App.Model.BuyerPayment
 import com.example.greentipskotlin.App.Model.Cart
 import com.example.greentipskotlin.App.Model.Catalogue
 import com.example.greentipskotlin.App.Model.Ceo
@@ -1578,6 +1579,77 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         }
         cursor.close()
         return orderItems
+    }
+
+    fun getBuyerOrdersByUserId(userId: Int): List<BuyerOrder> {
+        val orderList = mutableListOf<BuyerOrder>()
+        val db = readableDatabase
+
+        val query = "SELECT * FROM $TABLE_BUYER_ORDER WHERE $BUYER_USER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val buyerOrder = BuyerOrder(
+                    ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ORDER_ID)),
+                    USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_USER_ID)),
+                    ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
+                    ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
+                    ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
+                    ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(
+                        BUYER_ORDER_SHIPPING_ADDRESS)),
+                )
+                orderList.add(buyerOrder)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        return orderList
+    }
+
+    fun insertBuyerPayment(buyerPayment: BuyerPayment){
+        val db=writableDatabase
+        val values = ContentValues().apply {
+            put(PAYMENT_ID,buyerPayment.PAYMENT_ID)
+            put(PAYMENT_ORDER_ID,buyerPayment.PAYMENT_ORDER_ID)
+            put(PAYMENT_USER_ID,buyerPayment.PAYMENT_USER_ID)
+            put(PAYMENT_AMOUNT,buyerPayment.PAYMENT_AMOUNT)
+            put(PAYMENT_STATUS,buyerPayment.PAYMENT_STATUS)
+            put(PAYMENT_METHOD,buyerPayment.PAYMENT_METHOD)
+            put(PAYMENT_DATE_TIME,buyerPayment.PAYMENT_DATE_TIME)
+        }
+        db.insert(TABLE_BUYER_PAYMENT,null,values)
+        db.close()
+    }
+
+    fun getBuyerPaymentsByUserId(userId: Int): List<BuyerPayment> {
+        val buyerPaymentList = mutableListOf<BuyerPayment>()
+        val db = readableDatabase
+
+        val query = "SELECT * FROM $TABLE_BUYER_PAYMENT WHERE $PAYMENT_USER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val buyerPayment = BuyerPayment(
+                    PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_ID)),
+                    PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_ORDER_ID)),
+                    PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_USER_ID)),
+                    PAYMENT_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(PAYMENT_AMOUNT)),
+                    PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT_STATUS)),
+                    PAYMENT_METHOD = cursor.getString(cursor.getColumnIndexOrThrow(
+                        PAYMENT_METHOD)),
+                    PAYMENT_DATE_TIME = cursor.getString(cursor.getColumnIndexOrThrow(
+                        PAYMENT_DATE_TIME)),
+                )
+                buyerPaymentList.add(buyerPayment)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        return buyerPaymentList
     }
 
 

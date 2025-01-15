@@ -14,8 +14,16 @@ class BuyerOrderViewModel(application: Application):AndroidViewModel(application
     private val _buyerOrders = MutableLiveData<List<BuyerOrder>>()
     val buyerOrders: LiveData<List<BuyerOrder>> get()=_buyerOrders
 
+
     fun placeOrders (buyerOrder: BuyerOrder):Long{
         return buyerOrderDataProvider.placeOrders(buyerOrder)
     }
+
+    fun refreshData(userId: Int){
+        val orderList = buyerOrderDataProvider.getBuyerOrdersByUserId(userId)
+        _buyerOrders.value = orderList
+    }
+
+
 
 }

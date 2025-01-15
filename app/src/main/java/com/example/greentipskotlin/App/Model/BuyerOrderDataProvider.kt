@@ -11,6 +11,10 @@ class BuyerOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.placeOrder(buyerOrder)
     }
 
+    fun getBuyerOrdersByUserId(userId: Int): List<BuyerOrder> {
+        return greentipsDatabaseHelper.getBuyerOrdersByUserId(userId)
+    }
+
 
 
 }

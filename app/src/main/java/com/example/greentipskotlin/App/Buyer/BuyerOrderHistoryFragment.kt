@@ -1,33 +1,34 @@
 package com.example.greentipskotlin.App.Buyer
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.Activity.BuyerAdapter
+import com.example.greentipskotlin.App.Admin.viewModel.BuyerOrderViewModel
+import com.example.greentipskotlin.App.Buyer.Activity.OrderAdapter
 import com.example.greentipskotlin.R
+import com.example.greentipskotlin.databinding.FragmentBuyerMngBinding
+import com.example.greentipskotlin.databinding.FragmentBuyerOrderHistoryBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BuyerOrderHistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BuyerOrderHistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentBuyerOrderHistoryBinding? = null
+    private val binding get() = _binding!!
+
+    private val model:BuyerOrderViewModel by viewModels()
+
+    private lateinit var orderAdapter: OrderAdapter
+
+    private var isSorted: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +36,41 @@ class BuyerOrderHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buyer_order_history, container, false)
+
+        _binding=FragmentBuyerOrderHistoryBinding.inflate(inflater,container,false)
+
+        val sortButton = binding.sortButton
+
+        sortButton.setOnClickListener(){
+            toggleSort()
+        }
+
+        orderAdapter= OrderAdapter(emptyList())
+        binding.buyerRecyclerView.layoutManager= LinearLayoutManager(context)
+        binding.buyerRecyclerView.adapter= orderAdapter
+
+        model.buyerOrders.observe(viewLifecycleOwner){updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
+            orderAdapter.updateList(listToDisplay)
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BuyerOrderHistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BuyerOrderHistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("USER_ID", -1)
+
+        model.refreshData(userId) // Refresh data whenever the fragment resumes
     }
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        model.buyerOrders.value?.let { updatedList ->
+            orderAdapter.updateList(if (isSorted) updatedList.sortedBy { it.ORDER_ID }else updatedList)
+        }
+    }
+
 }

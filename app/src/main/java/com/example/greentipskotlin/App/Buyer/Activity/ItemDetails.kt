@@ -51,6 +51,7 @@ class ItemDetails : AppCompatActivity() {
 
         // Calculate price and quantity
         val itemPrice = price!!.toDouble()
+        totalPrice=itemPrice
         var quantityAvailableInt = quantityAvailable!!.toInt()
 
         // Add quantity
@@ -82,6 +83,12 @@ class ItemDetails : AppCompatActivity() {
     private fun addToCart(itemName: String?, itemPrice: Double, quantityAvailableInt: Int) {
         if (itemName == null) {
             Toast.makeText(this, "Invalid item details!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Check if the item is out of stock
+        if (quantityAvailableInt <= 0) {
+            Toast.makeText(this, "This item is currently out of stock and cannot be added to the cart.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -120,12 +127,10 @@ class ItemDetails : AppCompatActivity() {
                 val newQuantityAvailable = quantityAvailableInt - totalQuantity
                 binding.detailedQuantity.text = "Quantity: $newQuantityAvailable"
 
-                // You can also update the quantityAvailable value to keep it synchronized
-                //quantityAvailable = newQuantityAvailable.toString()
-
             } else {
                 Toast.makeText(this, "Failed to update catalogue.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }
