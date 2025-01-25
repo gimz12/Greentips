@@ -59,7 +59,7 @@ class BuyerCartFragment : Fragment() {
 
         setupPaymentMethodSpinner()
 
-        binding.buyNowBtn.setOnClickListener {
+        binding.proceedToCheckoutBtn.setOnClickListener {
             placeOrder()
         }
 
@@ -79,7 +79,7 @@ class BuyerCartFragment : Fragment() {
         cartViewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.updateList(cartItems)
             val totalPrice = cartItems.sumOf { it.CART_ITEM_TOTAL_PRICE.toDouble() }
-            binding.totalPrice.text = "Total Price: $${"%.2f".format(totalPrice)}"
+            binding.cartSubtotal.text = "Total Price: $${"%.2f".format(totalPrice)}"
         }
     }
 
@@ -125,7 +125,7 @@ class BuyerCartFragment : Fragment() {
             val isDeleted = cartViewModel.deleteCartItem(cart.Cart_Id, userId)
             if (isDeleted) {
                 cartAdapter.removeItem(cart) { totalPrice ->
-                    binding.totalPrice.text = "Total Price: $${"%.2f".format(totalPrice)}"
+                    binding.cartSubtotal.text = "Total Price: $${"%.2f".format(totalPrice)}"
                 }
 
                 // Update catalog quantity
@@ -150,7 +150,7 @@ class BuyerCartFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getInt("USER_ID", -1)
         val address = sharedPreferences.getString("ADDRESS", "Company Address")
-        val totalPriceText = binding.totalPrice.text.toString()
+        val totalPriceText = binding.cartSubtotal.text.toString()
         val totalPrice = totalPriceText.substringAfter("Total Price: $").toDoubleOrNull()
         val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
@@ -196,7 +196,7 @@ class BuyerCartFragment : Fragment() {
                 buyerPaymentViewModel.insertBuyerPayment(buyerPayment)
 
                 cartViewModel.clearCart(userId)
-                binding.totalPrice.text = "Total Price: $0.00"
+                binding.cartSubtotal.text = "Total Price: $0.00"
 
                 Toast.makeText(requireContext(), "Order placed successfully", Toast.LENGTH_SHORT).show()
 

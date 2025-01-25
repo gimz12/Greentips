@@ -61,6 +61,7 @@ class CoconutInsert : AppCompatActivity() {
                     coconutAdditionalInfo,
                     coconutEstateId))
                 Toast.makeText(this,"Tree Inserted", Toast.LENGTH_SHORT).show()
+                finish()
             }else{
                 Toast.makeText(this,"Please Enter Valid Coconut Tree Data", Toast.LENGTH_SHORT).show()
             }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_dashboard"
+            android:title="DashBoard"/>
+        <item
+            android:id="@+id/PaymentRecordsFragment"
+            android:icon="@drawable/ic_coconuttree"
+            android:title="Payment Records"/>
+        <item
+            android:id="@+id/confirmedSupplierOrderFragment"
+            android:icon="@drawable/ic_intercrops_infomation"
+            android:title="Confirmed Supplier Orders"/>
+        <item
+            android:id="@+id/harvestingManagement"
+            android:icon="@drawable/ic_harvest_infomation"
+            android:title="Harvesting Management "/>
+        <item
+            android:id="@+id/fertilizerManagement"
+            android:icon="@drawable/ic_fertilizer_management"
+            android:title="Fertilizer Management"/>
+        <item
+            android:id="@+id/resourceManagement"
+            android:icon="@drawable/ic_resource_management"
+            android:title="Resource Management"/>
+        <item
+            android:id="@+id/catalogueManagement"
+            android:icon="@drawable/catalogue"
+            android:title="Catalogue Management"/>
+        <item
+            android:id="@+id/buyerOrderManagement"
+            android:icon="@drawable/ic_buyer_order_history"
+            android:title="Buyer Order Managemet"/>
+        <item
+            android:id="@+id/reportChallenges"
+            android:icon="@drawable/ic_custom_reports"
+            android:title="Report Challenges to CEO"/>
+        <item
+            android:id="@+id/requestGoods"
+            android:icon="@drawable/ic_supplier_managament"
+            android:title="Request Goods"/>
+
+    </group>
+
+    <item
+        android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/log_out"
+                android:icon="@drawable/ic_logout"
+                android:title="Log Out"/>
+
+        </menu>
+
+
+    </item>
+
+
+</menu>

@@ -1,60 +1,90 @@
 package com.example.greentipskotlin.App.Supplier
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.viewModel.CatalogueViewModel
+import com.example.greentipskotlin.App.Buyer.Activity.BuyerCatalogueAdapter
+import com.example.greentipskotlin.App.Buyer.Activity.ItemDetails
+import com.example.greentipskotlin.App.Supplier.Activity.SupplierCatalogueAdapter
+import com.example.greentipskotlin.App.Supplier.Activity.SupplyDetails
 import com.example.greentipskotlin.R
+import com.example.greentipskotlin.databinding.FragmentBuyerCatalogueBinding
+import com.example.greentipskotlin.databinding.FragmentSupplierViewCatalogBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [supplierViewCatalogFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class supplierViewCatalogFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentSupplierViewCatalogBinding? = null
+    private val binding get() = _binding!!
+
+    private val model: CatalogueViewModel by viewModels()
+    private lateinit var supplierCatalogueAdapter: SupplierCatalogueAdapter
+    private var isSorted: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_supplier_view_catalog, container, false)
+        _binding = FragmentSupplierViewCatalogBinding.inflate(inflater, container, false)
+        supplierCatalogueAdapter = SupplierCatalogueAdapter(emptyList()) { selectedCatalogue ->
+            val intent = Intent(requireContext(), SupplyDetails::class.java).apply {
+                putExtra("CATALOGUE_NAME", selectedCatalogue.Catalogue_Name)
+                putExtra("CATALOGUE_DESCRIPTION", selectedCatalogue.Catalogue_Item_Description)
+                putExtra("CATALOGUE_IMAGE", selectedCatalogue.Catalogue_Item_Image) // Add image as a URI or resource ID
+            }
+            startActivity(intent)
+        }
+
+
+
+        // Set up RecyclerView
+        binding.buyerCatalogueRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.buyerCatalogueRecyclerView.adapter = supplierCatalogueAdapter
+
+        // Set up sort button listener
+        binding.sortButton.setOnClickListener {
+            toggleSort()
+        }
+
+        // Observe data changes in the ViewModel
+        model.catalogItems.observe(viewLifecycleOwner) { updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.Catalogue_Name } else updateList
+            supplierCatalogueAdapter.updateList(listToDisplay)
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment supplierViewCatalogFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            supplierViewCatalogFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        model.refreshDataSupplier() // Refresh data whenever the fragment resumes
+        val count = supplierCatalogueAdapter.itemCount
+        binding.totalItems.text = count.toString()
     }
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        model.catalogItems.value?.let { updatedList ->
+            supplierCatalogueAdapter.updateList(
+                if (isSorted) updatedList.sortedBy { it.Catalogue_Name } else updatedList
+            )
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Prevent memory leaks
+    }
+
 }

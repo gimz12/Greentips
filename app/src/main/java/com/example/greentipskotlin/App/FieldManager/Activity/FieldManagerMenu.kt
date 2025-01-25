@@ -1,4 +1,4 @@
-package com.example.greentipskotlin.App.Buyer.Activity
+package com.example.greentipskotlin.App.FieldManager.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,13 +13,17 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
 import com.example.greentipskotlin.App.Admin.dashboardFragment
-import com.example.greentipskotlin.App.Buyer.BuyerCartFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCatalogueFragment
-import com.example.greentipskotlin.App.Buyer.BuyerDashboardFragment
-import com.example.greentipskotlin.App.Buyer.BuyerOrderHistoryFragment
-import com.example.greentipskotlin.App.Buyer.BuyerReviewFragment
-import com.example.greentipskotlin.App.Buyer.PaymentMethodFragment
+import com.example.greentipskotlin.App.CEO.assignTaskFragment
+import com.example.greentipskotlin.App.CEO.buyer_Order_HisFragment
+import com.example.greentipskotlin.App.CEO.buyer_RegFragment
+import com.example.greentipskotlin.App.CEO.ceoDashboardFragment
 import com.example.greentipskotlin.App.CEO.sup_Order_HistoryFragment
+import com.example.greentipskotlin.App.CEO.supplier_Reg_ReqFragment
+import com.example.greentipskotlin.App.CEO.supplier_order_reqFragment
+import com.example.greentipskotlin.App.CEO.task_HistoryFragment
+import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
+import com.example.greentipskotlin.App.FieldManager.FieldManagerDashboard
 import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
@@ -27,16 +31,15 @@ import com.google.android.material.navigation.NavigationView
 private lateinit var drawerLayout: DrawerLayout
 private lateinit var toggle: ActionBarDrawerToggle
 
-class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
-
+class FieldManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_buyer_menu)
+        setContentView(R.layout.activity_field_manager_menu)
 
-        drawerLayout = findViewById(R.id.drawer_layout_Buyer)
+        drawerLayout = findViewById(R.id.drawer_layout_FieldManager)
 
         // Initialize navigationView and set listener
-        val navigationView = findViewById<NavigationView>(R.id.nav_view_Buyer)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view_FieldManager)
         navigationView.setNavigationItemSelectedListener(this)
 
         // Initialize ActionBar and Drawer Toggle
@@ -57,7 +60,6 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             replaceFragment(dashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,20 +89,22 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.homeFragment -> replaceFragment(BuyerDashboardFragment())
-            R.id.viewCatalogueFragment -> replaceFragment(BuyerCatalogueFragment())
-            R.id.viewCartFragment -> replaceFragment(BuyerCartFragment())
-            R.id.orderHistoryFragment -> replaceFragment(BuyerOrderHistoryFragment())
-            R.id.paymentMethodFragment -> replaceFragment(PaymentMethodFragment())
-            R.id.reviewHistoryFragment -> replaceFragment(BuyerReviewFragment())
-            R.id.yourProfileFragment -> replaceFragment(sup_Order_HistoryFragment())
+            R.id.homeFragment -> replaceFragment(FieldManagerDashboard())
+            R.id.coconutTreeManagement -> replaceFragment(assignTaskFragment())
+            R.id.intercropsManagement -> replaceFragment(task_HistoryFragment())
+            R.id.harvestingManagement -> replaceFragment(supplier_Reg_ReqFragment())
+            R.id.fertilizerManagement -> replaceFragment(buyer_RegFragment())
+            R.id.resourceManagement -> replaceFragment(supplier_order_reqFragment())
+            R.id.catalogueManagement -> replaceFragment(CatalogueItemManageFragment())
+            R.id.buyerOrderManagement -> replaceFragment(buyer_Order_HisFragment())
+            R.id.reportChallenges -> replaceFragment(CatalogueItemManageFragment())
+            R.id.requestGoods -> replaceFragment(BuyerCatalogueFragment())
 
 
             // Other fragments...
             R.id.log_out -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
 
-                // Redirect to UserLogin activity
                 val intent = Intent(this, User_Login::class.java)
                 startActivity(intent)
                 finish()
@@ -116,4 +120,5 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
+
 }

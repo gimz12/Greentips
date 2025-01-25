@@ -19,8 +19,12 @@ class CatalogueViewModel(application: Application):AndroidViewModel(application)
         catalogueDataProvider.insertCatalogueItem(catalogue)
     }
 
-    fun refreshData(){
+    fun refreshDataBuyer(){
         _catalogItems.value = catalogueDataProvider.getAllBuyerCatalogueItems()
+    }
+
+    fun refreshDataSupplier(){
+        _catalogItems.value = catalogueDataProvider.getAllSupplierCatalogueItems()
     }
 
     fun refreshDataFieldManager(){

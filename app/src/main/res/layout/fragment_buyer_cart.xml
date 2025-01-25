@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".App.Buyer.BuyerCartFragment">
 
+    <!-- Toolbar and Header -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint1"
+
+    <!-- Cart RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/cart_details_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/cart_img"
-            android:layout_width="400dp"
-            android:layout_height="300dp"
-            android:src="@drawable/cart"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.3"/>
+    <!-- Cart Details Layout -->
+    <LinearLayout
+        android:id="@+id/cart_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/proceed_to_checkout_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/cart_subtotal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            app:layout_constraintVertical_bias="0"
+            android:text="Subtotal: Rs 5000.00"
             android:textColor="@color/black"
-            android:text="Your cart is empty. Add some delicious items to start your order!"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cart_img"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/total_price"
-            android:layout_width="match_parent"
+            android:id="@+id/cart_shipping_details"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/darkGreen"
-            android:padding="10dp"
-            android:text="Total Price : $300"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_medium"
-            android:textStyle="bold"
+            android:text="Shipping Details - Free Shipping\nShipping to New Town, Anuradhapura, Sri Lanka."
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/cart_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tax: Rs 0.00"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/cart_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: Rs 5000.00"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:id="@+id/paymentMethod"
@@ -71,35 +81,21 @@
             app:layout_constraintStart_toStartOf="@id/total_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
+    <!-- Proceed to Checkout Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/proceed_to_checkout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/darkGreen"
+        android:text="Proceed to Checkout"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            app:layout_constraintBottom_toTopOf="@+id/buy_now_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/total_price"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buy_now_btn"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#D01C1C"
-            android:text="Place Order"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,9 @@ class buyer_mngFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        model.refreshData() // Refresh data whenever the fragment resumes
+        model.refreshData()
+        val count = buyerAdapter.itemCount
+        binding.totalBuyers.text = count.toString()
     }
 
     private fun toggleSort() {

@@ -23,6 +23,7 @@ import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.OrderItem
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
+import com.example.greentipskotlin.App.Model.SupplierOrder
 import com.example.greentipskotlin.App.Model.Worker
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -124,6 +125,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val ORDER_ITEM_PRICE ="order_item_price"
         const val ORDER_ITEM_TOTAL_PRICE ="order_item_total_price"
 
+        //Supplier Order Table
+        const val TABLE_SUPPLIER_ORDER ="Supplier_Order"
+        const val SUPPLIER_ORDER_ID = "order_id"
+        const val SUPPLIER_USER_ID = "user_id"
+        const val SUPPLIER_ITEM_NAME = "item_name"
+        const val SUPPLIER_ITEM_QUANTITY = "item_quantity"
+        const val SUPPLIER_ITEM_DESCRIPTION = "item_description"
+        const val SUPPLIER_ESTIMATE_DELIVERY_DATE = "estimate_delivery_date"
+        const val SUPPLIER_QUANTITY_PRICE = "quantity_price"
+        const val SUPPLIER_TOTAL_AMOUNT = "total_amount"
+        const val SUPPLIER_FIELDMANAGER_STATUS = "field_manager_status"
+        const val SUPPLIER_CEO_STATUS = "ceo_status"
+
         //Buyer Payment Table
         const val TABLE_BUYER_PAYMENT = "Buyer_Payment"
         const val PAYMENT_ID = "payment_id"
@@ -141,8 +155,6 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val COLUMN_CARD_NUMBER = "CardNumber"
         const val COLUMN_EXPIRY_DATE = "ExpiryDate"
         const val COLUMN_CARD_HOLDER_NAME = "CardHolderName"
-
-
 
         //Estate table
         const val TABLE_ESTATE = "Estate"
@@ -376,6 +388,24 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createSupplierOrder= """
+            
+            CREATE TABLE $TABLE_SUPPLIER_ORDER (
+                $SUPPLIER_ORDER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $SUPPLIER_USER_ID INTEGER NOT NULL,
+                $SUPPLIER_ITEM_NAME TEXT NOT NULL,
+                $SUPPLIER_ITEM_QUANTITY INTEGER NOT NULL,
+                $SUPPLIER_ITEM_DESCRIPTION TEXT NOT NULL,
+                $SUPPLIER_ESTIMATE_DELIVERY_DATE TEXT NOT NULL,
+                $SUPPLIER_QUANTITY_PRICE Double NOT NULL,
+                $SUPPLIER_TOTAL_AMOUNT Double NOT NULL,
+                $SUPPLIER_FIELDMANAGER_STATUS TEXT NOT NULL,
+                $SUPPLIER_CEO_STATUS TEXT NOT NULL,
+                FOREIGN KEY($SUPPLIER_USER_ID) REFERENCES $TABLE_SUPPLIER($SUPPLIER_ID))
+
+            
+        """
+
         val createCreditCardsTable= """
             
                 CREATE TABLE $TABLE_CREDIT_CARDS (
@@ -502,6 +532,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createBuyerOrderItems)
         db.execSQL(createBuyerPayment)
         db.execSQL(createCreditCardsTable)
+        db.execSQL(createSupplierOrder)
 
     }
 
@@ -1266,7 +1297,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     fun getAllBuyerCatalogueItems():List<Catalogue>{
         val catalogues = ArrayList<Catalogue>()
         val db =this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Buyer'", null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Buyer' AND $CATALOGUE_ITEM_AVAILABILITY = 'Available'", null)
 
         if(cursor.moveToFirst()){
             do{
@@ -1289,6 +1320,35 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
 
                 catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,cataloguePrice,catalogueQuantity,catalogueDescription,catalogueAvailability,catalogueItemImage))
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return catalogues
+    }
+
+    fun getAllSupplierCatalogueItems():List<Catalogue>{
+        val catalogues = ArrayList<Catalogue>()
+        val db =this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Supplier' AND $CATALOGUE_ITEM_AVAILABILITY = 'Need'", null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_NAME))
+                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_TYPE))
+                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_DESCRIPTION))
+                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_AVAILABILITY))
+                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
+                    CATALOGUE_ITEM_IMAGE))
+
+
+
+                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,null,null,catalogueDescription,catalogueAvailability,catalogueItemImage))
             }while (cursor.moveToNext())
         }
         cursor.close()
@@ -1912,6 +1972,104 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return fertilizers
+    }
+
+    fun insertSupplierOrder(supplierOrder: SupplierOrder){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(SUPPLIER_ORDER_ID,supplierOrder.ORDER_ID)
+            put(SUPPLIER_USER_ID,supplierOrder.USER_ID)
+            put(SUPPLIER_ITEM_NAME,supplierOrder.ITEM_NAME)
+            put(SUPPLIER_ITEM_QUANTITY,supplierOrder.ITEM_QUANTITY)
+            put(SUPPLIER_ITEM_DESCRIPTION,supplierOrder.ITEM_DESCRIPTION)
+            put(SUPPLIER_ESTIMATE_DELIVERY_DATE,supplierOrder.ESTIMATE_DELIVERY_DATE)
+            put(SUPPLIER_QUANTITY_PRICE,supplierOrder.QUANTITY_PRICE)
+            put(SUPPLIER_TOTAL_AMOUNT,supplierOrder.TOTAL_AMOUNT)
+            put(SUPPLIER_FIELDMANAGER_STATUS,supplierOrder.FIELDMANAGER_STATUS)
+            put(SUPPLIER_CEO_STATUS,supplierOrder.CEO_STATUS)
+        }
+        db.insert(TABLE_SUPPLIER_ORDER,null,values)
+        db.close()
+    }
+
+    fun getFieldManagerApprovedSupplierOrders(): List<SupplierOrder> {
+        val orders = mutableListOf<SupplierOrder>()
+        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved'"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(mapCursorToSupplierOrder(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return orders
+    }
+
+    fun getCeoApprovedSupplierOrders(): List<SupplierOrder> {
+        val orders = mutableListOf<SupplierOrder>()
+        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_CEO_STATUS = 'Approved'"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(mapCursorToSupplierOrder(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return orders
+    }
+
+    fun getUnapprovedSupplierOrders(): List<SupplierOrder> {
+        val orders = mutableListOf<SupplierOrder>()
+        val query = """
+            SELECT * FROM $TABLE_SUPPLIER_ORDER 
+            WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Pending' 
+              AND $SUPPLIER_CEO_STATUS = 'Pending'
+        """
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(mapCursorToSupplierOrder(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return orders
+    }
+
+    fun getSupplierOrders(): List<SupplierOrder> {
+        val orders = mutableListOf<SupplierOrder>()
+        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(mapCursorToSupplierOrder(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return orders
+    }
+
+    // Helper function to map Cursor to SupplierOrder
+    private fun mapCursorToSupplierOrder(cursor: Cursor): SupplierOrder {
+        return SupplierOrder(
+            ORDER_ID = cursor.getInt(cursor.getColumnIndex(SUPPLIER_ORDER_ID)),
+            USER_ID = cursor.getInt(cursor.getColumnIndex(SUPPLIER_USER_ID)),
+            ITEM_NAME = cursor.getString(cursor.getColumnIndex(SUPPLIER_ITEM_NAME)),
+            ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndex(SUPPLIER_ITEM_QUANTITY)),
+            ITEM_DESCRIPTION = cursor.getString(cursor.getColumnIndex(SUPPLIER_ITEM_DESCRIPTION)),
+            ESTIMATE_DELIVERY_DATE = cursor.getString(cursor.getColumnIndex(SUPPLIER_ESTIMATE_DELIVERY_DATE)),
+            QUANTITY_PRICE = cursor.getDouble(cursor.getColumnIndex(SUPPLIER_QUANTITY_PRICE)),
+            TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndex(SUPPLIER_TOTAL_AMOUNT)),
+            FIELDMANAGER_STATUS = cursor.getString(cursor.getColumnIndex(SUPPLIER_FIELDMANAGER_STATUS)),
+            CEO_STATUS = cursor.getString(cursor.getColumnIndex(SUPPLIER_CEO_STATUS))
+        )
     }
 
     //Resources--------------------------------------------------------------------------------------------------------------

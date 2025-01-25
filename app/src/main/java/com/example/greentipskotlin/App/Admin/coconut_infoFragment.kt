@@ -10,14 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greentipskotlin.App.Admin.Activity.CoconutAdapter
 import com.example.greentipskotlin.App.Admin.Activity.CoconutInsert
-import com.example.greentipskotlin.App.Admin.Activity.EstateAdapter
-import com.example.greentipskotlin.App.Admin.Activity.EstateInsert
 import com.example.greentipskotlin.App.Admin.viewModel.CoconutViewModel
-import com.example.greentipskotlin.App.Admin.viewModel.EstateViewModel
-import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.FragmentCoconutInfoBinding
-import com.example.greentipskotlin.databinding.FragmentEstMngBinding
-
 
 class coconut_infoFragment : Fragment() {
 
@@ -25,55 +19,63 @@ class coconut_infoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val model: CoconutViewModel by viewModels()
-
     private lateinit var coconutAdapter: CoconutAdapter
-
     private var isSorted: Boolean = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentCoconutInfoBinding.inflate(inflater, container, false)
 
-        _binding=FragmentCoconutInfoBinding.inflate(inflater,container,false)
-
-        val addCoconutImg = binding.insertCoconutTreeImageView
-        val sortButton = binding.sortButton
-
-        coconutAdapter = CoconutAdapter(model.getAllCoconutTrees())
-        binding.coconutRecyclerView.layoutManager=LinearLayoutManager(context)
-        binding.coconutRecyclerView.adapter=coconutAdapter
-
-        addCoconutImg.setOnClickListener(){
-            onClickAddNewCoconutTree()
-        }
-        sortButton.setOnClickListener(){
-            toggleSort()
-        }
+        setupRecyclerView()
+        setupListeners()
+        observeData()
 
         return binding.root
     }
 
-    fun onClickAddNewCoconutTree(){
-        val groupMessageIntent = Intent(requireContext(), CoconutInsert::class.java)
-        startActivity(groupMessageIntent)
+    override fun onResume() {
+        super.onResume()
+        model.refreshData() // Ensure fresh data on returning to the fragment
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupRecyclerView() {
+        coconutAdapter = CoconutAdapter(emptyList())
+        binding.coconutRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.coconutRecyclerView.adapter = coconutAdapter
+    }
+
+    private fun setupListeners() {
+        binding.insertCoconutTreeImageView.setOnClickListener {
+            openCoconutInsertActivity()
+        }
+        binding.sortButton.setOnClickListener {
+            toggleSort()
+        }
+    }
+
+    private fun observeData() {
+        model.coconutTrees.observe(viewLifecycleOwner) { coconutList ->
+            coconutAdapter.updateList(coconutList)
+            binding.totalTrees.text = coconutList.size.toString()
+        }
+    }
+
+    private fun openCoconutInsertActivity() {
+        val intent = Intent(requireContext(), CoconutInsert::class.java)
+        startActivity(intent)
     }
 
     private fun toggleSort() {
-        if (isSorted) {
-            // If already sorted, show unsorted list
-            coconutAdapter.updateList(model.getAllCoconutTrees())
-        } else {
-            // If unsorted, show sorted list
-            val sortedList = model.getAllCoconutTrees().sortedBy { it.coconutType }
-            coconutAdapter.updateList(sortedList)
-        }
-        // Toggle the sorting state
+        val currentList = model.coconutTrees.value ?: return
+        val sortedList = if (isSorted) currentList else currentList.sortedBy { it.coconutType }
+        coconutAdapter.updateList(sortedList)
         isSorted = !isSorted
     }
-
 }

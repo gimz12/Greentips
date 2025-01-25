@@ -15,6 +15,10 @@ class CatalogueDataProvider(context: Context) {
         return greentipsDatabaseHelper.getAllBuyerCatalogueItems()
     }
 
+    fun getAllSupplierCatalogueItems():List<Catalogue>{
+        return greentipsDatabaseHelper.getAllSupplierCatalogueItems()
+    }
+
     fun getAllCatalogueItems():List<Catalogue>{
         return greentipsDatabaseHelper.getAllCatalogueItems()
     }

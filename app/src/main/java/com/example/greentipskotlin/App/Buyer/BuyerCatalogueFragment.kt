@@ -63,7 +63,9 @@ class BuyerCatalogueFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        model.refreshData() // Refresh data whenever the fragment resumes
+        model.refreshDataBuyer() // Refresh data whenever the fragment resumes
+        val count = buyerCatalogueAdapter.itemCount
+        binding.totalItems.text = count.toString()
     }
 
     private fun toggleSort() {
