@@ -15,6 +15,18 @@ class BuyerOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.getBuyerOrdersByUserId(userId)
     }
 
+    fun getAllBuyerPendingOrders(): List<BuyerOrder>{
+        return greentipsDatabaseHelper.getAllBuyerProcessingOrder()
+    }
+
+    fun updateOrderStatus(orderId: Int, newStatus: String): Boolean {
+        return greentipsDatabaseHelper.updateOrderStatus(orderId,newStatus)
+    }
+
+    fun getOrderStatus(orderId: Int): String? {
+        return greentipsDatabaseHelper.getOrderStatus(orderId)
+    }
+
 
 
 }

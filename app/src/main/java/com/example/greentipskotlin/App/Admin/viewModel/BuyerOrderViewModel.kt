@@ -14,6 +14,9 @@ class BuyerOrderViewModel(application: Application):AndroidViewModel(application
     private val _buyerOrders = MutableLiveData<List<BuyerOrder>>()
     val buyerOrders: LiveData<List<BuyerOrder>> get()=_buyerOrders
 
+    private val _orderStatus = MutableLiveData<String>()
+    val orderStatus: LiveData<String> get() = _orderStatus
+
 
     fun placeOrders (buyerOrder: BuyerOrder):Long{
         return buyerOrderDataProvider.placeOrders(buyerOrder)
@@ -22,6 +25,28 @@ class BuyerOrderViewModel(application: Application):AndroidViewModel(application
     fun refreshData(userId: Int){
         val orderList = buyerOrderDataProvider.getBuyerOrdersByUserId(userId)
         _buyerOrders.value = orderList
+    }
+
+    fun refreshAllOrders(){
+        val orderList = buyerOrderDataProvider.getAllBuyerPendingOrders()
+        _buyerOrders.value = orderList
+    }
+
+
+    fun getOrderStatus(orderId: Int): String? {
+        return buyerOrderDataProvider.getOrderStatus(orderId)
+    }
+
+    fun updateOrderStatus(orderId: Int, newStatus: String): Boolean {
+        val success = buyerOrderDataProvider.updateOrderStatus(orderId, newStatus)
+        if (success) {
+            _orderStatus.value = newStatus
+        }
+        return success
+    }
+
+    fun loadOrderStatus(orderId: Int) {
+        _orderStatus.value = buyerOrderDataProvider.getOrderStatus(orderId) ?: "Processing"
     }
 
 

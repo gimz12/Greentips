@@ -1086,6 +1086,38 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return rowsAffected
     }
 
+    fun updateOrderStatus(orderId: Int, newStatus: String): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(BUYER_ORDER_STATUS, newStatus)
+        }
+
+        val rowsUpdated = db.update(TABLE_BUYER_ORDER, values, "$BUYER_ORDER_ID = ?", arrayOf(orderId.toString()))
+        db.close()
+        return rowsUpdated > 0
+    }
+
+    fun getOrderStatus(orderId: Int): String? {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_BUYER_ORDER,
+            arrayOf(BUYER_ORDER_STATUS),
+            "$BUYER_ORDER_ID = ?",
+            arrayOf(orderId.toString()),
+            null,
+            null,
+            null
+        )
+
+        var status: String? = null
+        if (cursor.moveToFirst()) {
+            status = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS))
+        }
+        cursor.close()
+        db.close()
+        return status
+    }
+
 
     //Worker--------------------------------------------------------------------------------------------------------------------------------
 
@@ -1647,6 +1679,33 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         val query = "SELECT * FROM $TABLE_BUYER_ORDER WHERE $BUYER_USER_ID = ?"
         val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val buyerOrder = BuyerOrder(
+                    ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ORDER_ID)),
+                    USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_USER_ID)),
+                    ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
+                    ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
+                    ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
+                    ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(
+                        BUYER_ORDER_SHIPPING_ADDRESS)),
+                )
+                orderList.add(buyerOrder)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        return orderList
+    }
+
+    fun getAllBuyerProcessingOrder(): List<BuyerOrder> {
+        val orderList = mutableListOf<BuyerOrder>()
+        val db = readableDatabase
+
+        val query = "SELECT * FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_STATUS != 'Delivered'"
+        val cursor = db.rawQuery(query, null)
 
         if (cursor.moveToFirst()) {
             do {

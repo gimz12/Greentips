@@ -1,6 +1,7 @@
 package com.example.greentipskotlin.App.Admin.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +18,7 @@ class OrderItemViewModel (application: Application) : AndroidViewModel(applicati
     // Load order items for a specific orderId
     fun loadOrderItems(orderId: Int) {
         val items = orderItemDataProvider.getOrderItemsByOrderId(orderId)
+        Log.d("OrderItems", "Loaded items: $items")
         _orderItems.postValue(items)
     }
 
