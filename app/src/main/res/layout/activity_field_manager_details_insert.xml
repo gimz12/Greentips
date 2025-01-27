@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -11,33 +12,54 @@
         android:layout_height="wrap_content"
         android:text="Username"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"/>
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
         android:id="@+id/estate_spinner"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
-        android:backgroundTint="@color/cardview_dark_background" />
+        android:backgroundTint="@color/cardview_dark_background"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView"/>
 
     <EditText
         android:id="@+id/experienceTxT"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:hint="Experience"
         android:inputType="text"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estate_spinner"/>
 
     <EditText
         android:id="@+id/qualificationTxT"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:hint="Qualification"
         android:inputType="text"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/experienceTxT"/>
 
     <Button
         android:id="@+id/buttonInsert"
@@ -45,7 +67,12 @@
         android:layout_height="wrap_content"
         android:text="Insert Field Manager"
         android:textColor="@color/white"
-        android:background="@drawable/okbutton_background"/>
+        android:background="@drawable/okbutton_background"
+        android:layout_marginTop="15dp"
 
 
-</LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qualificationTxT"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
