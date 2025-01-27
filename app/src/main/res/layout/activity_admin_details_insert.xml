@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+
+    <TextView
+        android:id="@+id/ad_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Add Shift Time"
+        android:textAlignment="center"
+        android:textSize="20dp"
+
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/usernameTextView"
@@ -11,7 +29,12 @@
         android:layout_height="wrap_content"
         android:text="Username"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"/>
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_txt"/>
 
     <EditText
         android:id="@+id/shiftStartTime"
@@ -19,7 +42,12 @@
         android:layout_height="wrap_content"
         android:hint="Shift Start Time"
         android:inputType="text"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView"/>
 
     <EditText
         android:id="@+id/shiftEndTime"
@@ -27,14 +55,25 @@
         android:layout_height="wrap_content"
         android:hint="Shift End Time"
         android:inputType="date"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shiftStartTime"/>
 
     <Button
         android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Insert Admin"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shiftEndTime"
+        tools:layout_editor_absoluteY="157dp" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
