@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSupplierOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supplier Order ID"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvSupplierID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supplier ID"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvOrderItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Item"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvOrderItemQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Quantity"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvSupplierEstimateDeliveryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estimate Delivery Date"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvQuantityPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity Price"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvOrderTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Amount"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnApprove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approve"
+                android:textColor="@android:color/white"
+                android:background="@drawable/okbutton_background" />
+
+            <Button
+                android:id="@+id/btnDecline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decline"
+                android:layout_marginStart="8dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/warningbutton_background" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

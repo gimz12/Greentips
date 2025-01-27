@@ -42,9 +42,9 @@
             android:icon="@drawable/ic_custom_reports"
             android:title="Report Challenges to CEO"/>
         <item
-            android:id="@+id/requestGoods"
+            android:id="@+id/supplierOrderManagement"
             android:icon="@drawable/ic_supplier_managament"
-            android:title="Request Goods"/>
+            android:title="Supplier Offers"/>
 
     </group>
 

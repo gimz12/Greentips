@@ -2131,6 +2131,41 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         )
     }
 
+    fun updateFieldManagerStatus(orderId: Int?, status: String): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(SUPPLIER_FIELDMANAGER_STATUS, status)
+        }
+
+        val rowsAffected = db.update(
+            TABLE_SUPPLIER_ORDER,
+            values,
+            "$SUPPLIER_ORDER_ID = ?",
+            arrayOf(orderId.toString())
+        )
+
+        db.close()
+        return rowsAffected > 0
+    }
+
+    fun updateCeoStatus(orderId: Int, status: String): Boolean {
+        val db = writableDatabase
+        val contentValues = ContentValues().apply {
+            put(SUPPLIER_CEO_STATUS, status)
+        }
+
+        val rowsUpdated = db.update(
+            TABLE_SUPPLIER_ORDER,
+            contentValues,
+            "$SUPPLIER_ORDER_ID = ?",
+            arrayOf(orderId.toString())
+        )
+
+        db.close()
+        return rowsUpdated > 0 // Return true if at least one row was updated
+    }
+
+
     //Resources--------------------------------------------------------------------------------------------------------------
 
     fun insertResource(resources: Resources){
