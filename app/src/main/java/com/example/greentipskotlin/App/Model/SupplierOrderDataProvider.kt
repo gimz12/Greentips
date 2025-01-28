@@ -5,9 +5,9 @@ import android.content.Context
 
 class SupplierOrderDataProvider(context: Context) {
 
-    private val greentipsDatabaseHelper=GreentipsDatabaseHelper(context)
+    private val greentipsDatabaseHelper = GreentipsDatabaseHelper(context)
 
-    fun insertSupplierOrder(supplierOrder: SupplierOrder){
+    fun insertSupplierOrder(supplierOrder: SupplierOrder) {
         greentipsDatabaseHelper.insertSupplierOrder(supplierOrder)
     }
 
@@ -27,4 +27,11 @@ class SupplierOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.getSupplierOrders()
     }
 
+    fun updateFieldManagerStatus(orderId: Int?, status: String): Boolean {
+        return greentipsDatabaseHelper.updateFieldManagerStatus(orderId, status)
+    }
+
+    fun updateCeoStatus(orderId: Int, status: String): Boolean {
+        return greentipsDatabaseHelper.updateCeoStatus(orderId, status)
+    }
 }
