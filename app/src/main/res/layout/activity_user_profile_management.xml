@@ -121,7 +121,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="First Name"
                     android:textColor="@color/textGrey"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,12 +131,12 @@
                     android:id="@+id/FirstName_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="First Name"
                     android:textColor="@color/textGrey"
-                    android:textSize="8sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -151,22 +151,22 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Email"
                     android:textColor="@color/textGrey"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/FirstName_txt"  />
+                    app:layout_constraintTop_toBottomOf="@id/FirstName_txt" />
 
                 <TextView
                     android:id="@+id/Email_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="kumalillankoon@gmail.com"
                     android:textColor="@color/textGrey"
-                    android:textSize="8sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -181,22 +181,22 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Phone Number"
                     android:textColor="@color/textGrey"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/Email_txt"  />
+                    app:layout_constraintTop_toBottomOf="@id/Email_txt" />
 
                 <TextView
                     android:id="@+id/Phone_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="0769980743"
                     android:textColor="@color/textGrey"
-                    android:textSize="8sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -211,22 +211,22 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Address"
                     android:textColor="@color/textGrey"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/Phone_txt"  />
+                    app:layout_constraintTop_toBottomOf="@id/Phone_txt" />
 
                 <TextView
                     android:id="@+id/Address_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="23/18 Boboid"
                     android:textColor="@color/textGrey"
-                    android:textSize="8sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -254,16 +254,16 @@
                 android:id="@+id/viewPersonalInfoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Personal Infomation"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="10sp"
-                android:textStyle="bold"
+                android:text="Personal Infomation"
                 android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
