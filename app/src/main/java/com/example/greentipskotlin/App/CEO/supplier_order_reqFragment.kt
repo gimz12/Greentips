@@ -5,29 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.viewModel.SupplierOrderViewModel
+import com.example.greentipskotlin.App.FieldManager.Activity.SupplierOrderAdapter
+import com.example.greentipskotlin.App.Model.SupplierOrder
 import com.example.greentipskotlin.R
+import com.example.greentipskotlin.databinding.CustomAlertDialogBinding
+import com.example.greentipskotlin.databinding.FragmentSupplierOfferManagementBinding
+import com.example.greentipskotlin.databinding.FragmentSupplierOrderReqBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [supplier_order_reqFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class supplier_order_reqFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding:FragmentSupplierOrderReqBinding? = null
+    private val binding get() = _binding!!
+
+    private val model: SupplierOrderViewModel by viewModels()
+
+    private lateinit var supplierOrderAdapter: SupplierOrderAdapter
+
+    private var isSorted: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +37,64 @@ class supplier_order_reqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_supplier_order_req, container, false)
+        _binding = FragmentSupplierOrderReqBinding.inflate(inflater, container, false)
+
+        supplierOrderAdapter = SupplierOrderAdapter(emptyList()) { supplierOrder, newStatus ->
+            showConfirmationDialog(supplierOrder, newStatus)
+        }
+
+        binding.supplierOfferRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.supplierOfferRecyclerView.adapter = supplierOrderAdapter
+
+        model.supplierOffersApprovedByFieldManager.observe(viewLifecycleOwner) { updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
+            supplierOrderAdapter.updateList(listToDisplay)
+        }
+
+        binding.sortButton.setOnClickListener {
+            toggleSort()
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment supplier_order_reqFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            supplier_order_reqFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onResume() {
+        super.onResume()
+        model.refreshFieldManagerApprovedOrders()
+    }
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        model.supplierOffersApprovedByFieldManager.value?.let { updatedList ->
+            supplierOrderAdapter.updateList(if (isSorted) updatedList.sortedBy { it.ORDER_ID } else updatedList)
+        }
+    }
+
+    private fun showConfirmationDialog(supplierOrder: SupplierOrder, newStatus: String) {
+
+        val dialogBinding = CustomAlertDialogBinding.inflate(layoutInflater)
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())  // Fix context for fragment
+        builder.setView(dialogBinding.root)
+            .setPositiveButton("Yes") { _, _ ->
+                if (newStatus == "Approved") {
+                    model.updateCeoStatus(supplierOrder.ORDER_ID, "Approved")
+                } else {
+                    model.updateCeoStatus(supplierOrder.ORDER_ID, "Declined")
                 }
             }
+            .setNegativeButton("No", null)
+            .show()
+
+        dialogBinding.dialogTitle.text = "Order Status Update"  // Title for the dialog
+
+        // Set different messages based on the status
+        val message = if (newStatus == "Approved") {
+            "Are you sure you want to approve this order?"
+        } else {
+            "Are you sure you want to decline this order?"
+        }
+        dialogBinding.dialogMessage.text = message
     }
+
 }
