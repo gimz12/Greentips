@@ -17,8 +17,10 @@ import com.example.greentipskotlin.App.Admin.Activity.IntercropsInsert
 import com.example.greentipskotlin.App.Admin.MainActivity
 import com.example.greentipskotlin.App.Admin.viewModel.CoconutViewModel
 import com.example.greentipskotlin.App.Admin.viewModel.EmployeeViewModel
+import com.example.greentipskotlin.App.CEO.CEOMenu
 import com.example.greentipskotlin.App.FieldManager.Activity.FieldManagerMenu
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemInsert
+import com.example.greentipskotlin.App.FinanceManager.Activity.FinanceManagerMenu
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityStaffLoginBinding
@@ -61,9 +63,9 @@ class Staff_Login : AppCompatActivity() {
 
     private fun navigateToDashboard(positionId: Int) {
         val intent = when (positionId) {
-            1 -> Intent(this, EmployeeInsert::class.java)
+            1 -> Intent(this, CEOMenu::class.java)
             2 -> Intent(this, FieldManagerMenu::class.java)
-            3 -> Intent(this, MainActivity::class.java)
+            3 -> Intent(this, FinanceManagerMenu::class.java)
             4 -> Intent(this, MainActivity::class.java)
             5 -> Intent(this, IntercropsInsert::class.java)
             else -> null

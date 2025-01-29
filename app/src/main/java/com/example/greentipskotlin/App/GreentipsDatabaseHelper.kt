@@ -2053,7 +2053,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     fun getFieldManagerApprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
-        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved'"
+        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved' AND $SUPPLIER_CEO_STATUS = 'Pending'"
         val db = this.readableDatabase
         val cursor = db.rawQuery(query, null)
 
@@ -2148,7 +2148,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return rowsAffected > 0
     }
 
-    fun updateCeoStatus(orderId: Int, status: String): Boolean {
+    fun updateCeoStatus(orderId: Int?, status: String): Boolean {
         val db = writableDatabase
         val contentValues = ContentValues().apply {
             put(SUPPLIER_CEO_STATUS, status)

@@ -31,7 +31,7 @@ class SupplierOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.updateFieldManagerStatus(orderId, status)
     }
 
-    fun updateCeoStatus(orderId: Int, status: String): Boolean {
+    fun updateCeoStatus(orderId: Int?, status: String): Boolean {
         return greentipsDatabaseHelper.updateCeoStatus(orderId, status)
     }
 }
