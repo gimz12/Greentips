@@ -1,66 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="187dp"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
+
+        <TextView
+            android:id="@+id/or_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Order ID : "
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
             android:id="@+id/tvOrderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Order ID"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+
+            app:layout_constraintStart_toEndOf="@+id/or_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/or_co"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Order Cost : "
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_id" />
 
         <TextView
             android:id="@+id/tvOrderCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Order Cost"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+
+            app:layout_constraintStart_toEndOf="@+id/or_co"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderID" />
+
+        <TextView
+            android:id="@+id/or_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Order Date : "
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_co" />
 
 
         <TextView
             android:id="@+id/tvOrderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Order Date"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toEndOf="@+id/or_date"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderCost" />
+
+        <TextView
+            android:id="@+id/or_sts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Order Status : "
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_date" />
 
 
         <TextView
             android:id="@+id/tvOrderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Order Status"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toEndOf="@+id/or_sts"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderDate" />
+
+        <TextView
+            android:id="@+id/or_ship_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Shipping Address : "
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_sts" />
 
 
         <TextView
             android:id="@+id/tvOrderShippingAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Order Shipping Address"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toEndOf="@+id/or_ship_add"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
