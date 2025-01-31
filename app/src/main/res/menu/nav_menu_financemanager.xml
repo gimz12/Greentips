@@ -18,9 +18,9 @@
             android:icon="@drawable/ic_intercrops_infomation"
             android:title="Confirmed Supplier Orders"/>
         <item
-            android:id="@+id/harvestingManagement"
+            android:id="@+id/pendingSupplierOrderFragment"
             android:icon="@drawable/ic_harvest_infomation"
-            android:title="Harvesting Management "/>
+            android:title="Supplier Pending Payments "/>
         <item
             android:id="@+id/fertilizerManagement"
             android:icon="@drawable/ic_fertilizer_management"

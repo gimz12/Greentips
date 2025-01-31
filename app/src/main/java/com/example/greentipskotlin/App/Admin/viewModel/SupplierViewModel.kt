@@ -27,4 +27,8 @@ class SupplierViewModel(application: Application):AndroidViewModel(application) 
         supplierDataProvider.insertSupplier(supplier)
     }
 
+    fun getSupplierDetailsById(supplierId: Int): Supplier? {
+        return supplierDataProvider.getSupplierDetailsById(supplierId)
+    }
+
 }

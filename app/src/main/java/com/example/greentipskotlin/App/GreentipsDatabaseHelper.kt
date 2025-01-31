@@ -24,6 +24,7 @@ import com.example.greentipskotlin.App.Model.OrderItem
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
 import com.example.greentipskotlin.App.Model.SupplierOrder
+import com.example.greentipskotlin.App.Model.SupplierPayment
 import com.example.greentipskotlin.App.Model.Worker
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -137,6 +138,20 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val SUPPLIER_TOTAL_AMOUNT = "total_amount"
         const val SUPPLIER_FIELDMANAGER_STATUS = "field_manager_status"
         const val SUPPLIER_CEO_STATUS = "ceo_status"
+
+        //Supplier Payment Table
+        const val TABLE_SUPPLIER_PAYMENT ="Supplier_Payment"
+        const val SUPPLIER_PAYMENT_ID = "payment_id"
+        const val SUPPLIER_PAYMENT_ORDER_ID = "order_id"
+        const val SUPPLIER_PAYMENT_USER_ID = "supplier_id"
+        const val SUPPLIER_PAYMENT_DATE = "payment_date"
+        const val SUPPLIER_PAYMENT_TIME = "payment_time"
+        const val SUPPLIER_PAYMENT_TYPE = "payment_type"
+        const val SUPPLIER_PAYMENT_STATUS = "payment_status"
+        const val SUPPLIER_REMAIN_AMOUNT = "remain_amount"
+        const val SUPPLIER_PAID_AMOUNT = "paid_amount"
+        const val SUPPLIER_PAYMENT_TOTAL_AMOUNT = "total_amount"
+
 
         //Buyer Payment Table
         const val TABLE_BUYER_PAYMENT = "Buyer_Payment"
@@ -406,6 +421,25 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createSupplierPayment= """
+            
+            CREATE TABLE $TABLE_SUPPLIER_PAYMENT (
+                $SUPPLIER_PAYMENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $SUPPLIER_PAYMENT_ORDER_ID INTEGER NOT NULL,
+                $SUPPLIER_PAYMENT_USER_ID INTEGER NOT NULL,
+                $SUPPLIER_PAYMENT_DATE TEXT NOT NULL,
+                $SUPPLIER_PAYMENT_TIME TEXT NOT NULL,
+                $SUPPLIER_PAYMENT_TYPE TEXT NOT NULL,
+                $SUPPLIER_PAYMENT_STATUS TEXT NOT NULL,
+                $SUPPLIER_REMAIN_AMOUNT Double NOT NULL,
+                $SUPPLIER_PAID_AMOUNT Double NOT NULL,
+                $SUPPLIER_PAYMENT_TOTAL_AMOUNT Double NOT NULL,
+                FOREIGN KEY($SUPPLIER_PAYMENT_ORDER_ID) REFERENCES $TABLE_SUPPLIER_ORDER($SUPPLIER_ORDER_ID),
+                FOREIGN KEY($SUPPLIER_PAYMENT_USER_ID) REFERENCES $TABLE_SUPPLIER($SUPPLIER_ID))
+
+            
+        """
+
         val createCreditCardsTable= """
             
                 CREATE TABLE $TABLE_CREDIT_CARDS (
@@ -533,6 +567,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createBuyerPayment)
         db.execSQL(createCreditCardsTable)
         db.execSQL(createSupplierOrder)
+        db.execSQL(createSupplierPayment)
 
     }
 
@@ -557,6 +592,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_BUYER_PAYMENT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ORDER_ITEM")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CREDIT_CARDS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_ORDER")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_PAYMENT")
         onCreate(db)
     }
 
@@ -2051,6 +2088,24 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    fun insertSupplierPayment(supplierPayment: SupplierPayment){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(SUPPLIER_PAYMENT_ID,supplierPayment.PAYMENT_ID)
+            put(SUPPLIER_PAYMENT_ORDER_ID,supplierPayment.PAYMENT_ORDER_ID)
+            put(SUPPLIER_PAYMENT_USER_ID,supplierPayment.PAYMENT_USER_ID)
+            put(SUPPLIER_PAYMENT_DATE,supplierPayment.PAYMENT_DATE)
+            put(SUPPLIER_PAYMENT_TIME,supplierPayment.PAYMENT_TIME)
+            put(SUPPLIER_PAYMENT_TYPE,supplierPayment.PAYMENT_TYPE)
+            put(SUPPLIER_PAYMENT_STATUS,supplierPayment.PAYMENT_STATUS)
+            put(SUPPLIER_REMAIN_AMOUNT,supplierPayment.REMAIN_AMOUNT)
+            put(SUPPLIER_PAID_AMOUNT,supplierPayment.PAID_AMOUNT)
+            put(SUPPLIER_PAYMENT_TOTAL_AMOUNT,supplierPayment.TOTAL_AMOUNT)
+        }
+        db.insert(TABLE_SUPPLIER_PAYMENT,null,values)
+        db.close()
+    }
+
     fun getFieldManagerApprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
         val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved' AND $SUPPLIER_CEO_STATUS = 'Pending'"
@@ -2068,7 +2123,13 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     fun getCeoApprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
-        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_CEO_STATUS = 'Approved'"
+        val query = """
+        SELECT * FROM $TABLE_SUPPLIER_ORDER 
+        WHERE $SUPPLIER_CEO_STATUS = 'Approved' 
+        AND $SUPPLIER_ORDER_ID NOT IN (
+            SELECT $SUPPLIER_PAYMENT_ORDER_ID FROM $TABLE_SUPPLIER_PAYMENT
+        )
+    """
         val db = this.readableDatabase
         val cursor = db.rawQuery(query, null)
 
@@ -2080,6 +2141,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         return orders
     }
+
 
     fun getUnapprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
@@ -2164,6 +2226,75 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return rowsUpdated > 0 // Return true if at least one row was updated
     }
+
+    fun getSupplierPaymentsByStatus(status: String): List<SupplierPayment> {
+        val db = readableDatabase
+        val payments = mutableListOf<SupplierPayment>()
+
+        val cursor = db.query(
+            TABLE_SUPPLIER_PAYMENT,
+            null,
+            "$SUPPLIER_PAYMENT_STATUS = ?",
+            arrayOf(status),
+            null,
+            null,
+            null
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val payment = SupplierPayment(
+                    PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
+                    PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
+                    PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
+                    PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
+                    PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
+                    PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
+                    PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
+                    REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
+                    PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
+                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+                )
+                payments.add(payment)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return payments
+    }
+
+    fun getPartialPaidSupplierPayments(): List<SupplierPayment> {
+        val partialPaidPayments = mutableListOf<SupplierPayment>()
+        val query = """
+        SELECT * FROM $TABLE_SUPPLIER_PAYMENT 
+        WHERE $SUPPLIER_PAYMENT_STATUS = 'Partial Paid'
+    """
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val payment = SupplierPayment(
+                    PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
+                    PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
+                    PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
+                    PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
+                    PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
+                    PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
+                    PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
+                    REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
+                    PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
+                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+                )
+                partialPaidPayments.add(payment)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return partialPaidPayments
+    }
+
 
 
     //Resources--------------------------------------------------------------------------------------------------------------
