@@ -9,9 +9,11 @@
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
         android:text="Username"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"/>
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
     <Spinner
         android:id="@+id/estate_spinner"
@@ -28,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Shift Start Time"
+        android:layout_marginTop="5dp"
         android:inputType="text"
         android:textColor="@color/black"/>
 
@@ -37,6 +40,7 @@
         android:layout_height="wrap_content"
         android:hint="Shift End Time"
         android:inputType="text"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
 
     <EditText
@@ -45,6 +49,7 @@
         android:layout_height="wrap_content"
         android:hint="Experience"
         android:inputType="text"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
 
 
@@ -54,6 +59,7 @@
         android:layout_height="wrap_content"
         android:text="Insert Worker"
         android:textColor="@color/white"
+        android:layout_marginTop="5dp"
         android:background="@drawable/okbutton_background"/>
 
 

@@ -22,10 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order Item ID : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,10 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Item Name : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_it_id" />
@@ -81,7 +81,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Item Quantity : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
 
             app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +109,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Item Price : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_it_qu" />
@@ -122,7 +122,7 @@
             android:id="@+id/tvOrderItemPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="34dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Item Price"
@@ -139,10 +139,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Total Amount : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_it_price" />

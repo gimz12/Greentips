@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
+            android:textSize="13dp"
             android:text="Employee Name : "
             android:fontFamily="@font/poppins_regular"
 
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="38dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:text="Employee Name"
             android:textColor="@android:color/black"
             android:textSize="14sp"
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:text="Employee Username : "
             android:fontFamily="@font/poppins_regular"
 
@@ -81,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Employee Position : "
 
@@ -110,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:text="Contact Number : "
             android:fontFamily="@font/poppins_regular"
 
@@ -121,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text="Phone Number"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@android:color/darker_gray"
@@ -139,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:text="Employee Gender : "
             android:fontFamily="@font/poppins_regular"
 
@@ -150,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text="Gender"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@android:color/darker_gray"
@@ -168,6 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:text="Employee Join Date : "
             android:fontFamily="@font/poppins_regular"
 
@@ -179,7 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text="Join Date"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@android:color/darker_gray"
@@ -197,6 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Employee Age : "
 
@@ -225,6 +232,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Employee Email : "
 
@@ -236,7 +244,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Email"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@android:color/darker_gray"
@@ -260,11 +268,12 @@
             android:text="Edit Role Info"
 
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintHorizontal_bias="0.525"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/e_email"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

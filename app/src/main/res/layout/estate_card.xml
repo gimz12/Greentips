@@ -1,67 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
 
         <!-- Employee Name -->
+
+        <TextView
+            android:id="@+id/Es_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate ID : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Employee Username -->
+
         <TextView
             android:id="@+id/tvEstateID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estate ID"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="13dp"
 
-        <!-- Employee Username -->
+            android:text="Estate ID"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/Es_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Es_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate Name : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Es_id" />
+
+        <!-- Employee Position -->
         <TextView
             android:id="@+id/tvEstateName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="10dp"
             android:text="Estate Name"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
 
-        <!-- Employee Position -->
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Es_name"
+            app:layout_constraintTop_toBottomOf="@+id/tvEstateID" />
+
+        <TextView
+            android:id="@+id/Es_loca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate Location : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Es_name" />
+
+        <!-- Employee Phone Number -->
+
         <TextView
             android:id="@+id/tvEstateLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
             android:text="Estate Location"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
 
-        <!-- Employee Phone Number -->
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Es_loca"
+            app:layout_constraintTop_toBottomOf="@+id/tvEstateName" />
+
+        <TextView
+            android:id="@+id/Es_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate Size : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Es_loca" />
+
+        <!-- Employee Gender -->
+
         <TextView
             android:id="@+id/tvEstateSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="12dp"
             android:text="Estate Size"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
 
-        <!-- Employee Gender -->
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Es_size"
+            app:layout_constraintTop_toBottomOf="@+id/tvEstateLocation" />
+
+        <TextView
+            android:id="@+id/Es_infor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate Information : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Es_size" />
+
         <TextView
             android:id="@+id/tvEstateAdditionalInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="Estate Addtional Infomation"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Es_infor"
+            app:layout_constraintTop_toBottomOf="@+id/tvEstateSize" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

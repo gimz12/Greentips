@@ -21,10 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="9dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order ID : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,10 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order Cost : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_id" />
@@ -78,10 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order Date : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_co" />
@@ -95,8 +95,9 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order Date"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:textSize="15sp"
+            android:textStyle="normal"
 
             app:layout_constraintStart_toEndOf="@+id/or_date"
             app:layout_constraintTop_toBottomOf="@+id/tvOrderCost" />
@@ -106,10 +107,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="14dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Order Status : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_date" />
@@ -134,10 +135,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Shipping Address : "
-            android:textSize="15sp"
+            android:textSize="13sp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/or_sts" />

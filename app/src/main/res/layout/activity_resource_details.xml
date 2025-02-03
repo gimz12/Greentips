@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="Description"
         android:inputType="text"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"/>
 
     <EditText
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:hint="Date"
         android:inputType="date"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
 
     <EditText
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:hint="Bill Number"
         android:inputType="text"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
 
     <EditText
@@ -34,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount"
+        android:layout_marginTop="5dp"
         android:inputType="numberDecimal"
         android:textColor="@color/black"/>
     <EditText
@@ -42,6 +46,7 @@
         android:layout_height="wrap_content"
         android:hint="Estate"
         android:inputType="text"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
 
     <Button
@@ -49,13 +54,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Resource"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:background="@drawable/okbutton_background"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete Resource"
-        android:textColor="@color/black"/>
+        android:background="@drawable/warningbutton_background"
+        android:textColor="@color/white"/>
 
 </LinearLayout>
