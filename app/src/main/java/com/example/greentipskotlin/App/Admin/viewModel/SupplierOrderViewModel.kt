@@ -20,6 +20,10 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
     private val _supplierOffersApprovedByFieldManager = MutableLiveData<List<SupplierOrder>>()
     val supplierOffersApprovedByFieldManager: LiveData<List<SupplierOrder>> get() = _supplierOffersApprovedByFieldManager
 
+    private val _supplierOffersApprovedByCEO = MutableLiveData<List<SupplierOrder>>()
+    val supplierOffersApprovedByCEO: LiveData<List<SupplierOrder>> get() = _supplierOffersApprovedByCEO
+
+
     fun insertSupplierOrder(supplierOrder: SupplierOrder){
         return supplierOrderDataProvider.insertSupplierOrder(supplierOrder)
     }
@@ -39,11 +43,11 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
         _supplierOffersApprovedByFieldManager.value = orderList
     }
 
-
-    fun getApprovedByCeo() {
+    fun refreshCEOApprovedOrders() {
         val approvedOrders = supplierOrderDataProvider.getCeoApprovedOrders()
-        _supplierOrders.value = approvedOrders
+        _supplierOffersApprovedByCEO.value = approvedOrders
     }
+
 
     fun getPendingApproval() {
         val pendingOrders = supplierOrderDataProvider.getUnapprovedOrders()
@@ -61,4 +65,6 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
         refreshFieldManagerApprovedOrders() // Refresh data after update
         return result
     }
+
+
 }

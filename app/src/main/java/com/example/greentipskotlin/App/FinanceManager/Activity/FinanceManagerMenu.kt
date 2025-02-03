@@ -25,6 +25,8 @@ import com.example.greentipskotlin.App.CEO.supplier_order_reqFragment
 import com.example.greentipskotlin.App.CEO.task_HistoryFragment
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
 import com.example.greentipskotlin.App.FieldManager.FieldManagerDashboard
+import com.example.greentipskotlin.App.FinanceManager.ConfirmedSupplierOrderFragment
+import com.example.greentipskotlin.App.FinanceManager.PendingSupplierOrdersFragment
 import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
@@ -91,8 +93,8 @@ class FinanceManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(FieldManagerDashboard())
-            R.id.coconutTreeManagement -> replaceFragment(assignTaskFragment())
-            R.id.intercropsManagement -> replaceFragment(task_HistoryFragment())
+            R.id.confirmedSupplierOrderFragment -> replaceFragment(ConfirmedSupplierOrderFragment())
+            R.id.pendingSupplierOrderFragment -> replaceFragment(PendingSupplierOrdersFragment())
             R.id.harvestingManagement -> replaceFragment(supplier_Reg_ReqFragment())
             R.id.fertilizerManagement -> replaceFragment(buyer_RegFragment())
             R.id.resourceManagement -> replaceFragment(supplier_order_reqFragment())
