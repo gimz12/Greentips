@@ -19,4 +19,8 @@ class FieldManagerDataProvider(context: Context) {
         return greentipsDatabaseHelper.updateFieldManager(fieldManager)
     }
 
+    fun getEstateIdByEmployeeId(employeeId: Int): Int? {
+        return greentipsDatabaseHelper.getEstateIdByEmployeeId(employeeId)
+    }
+
 }

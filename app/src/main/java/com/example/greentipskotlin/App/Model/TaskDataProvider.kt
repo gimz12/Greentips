@@ -23,4 +23,8 @@ class TaskDataProvider(context: Context) {
         return greentipsDatabaseHelper.getAllTasks()
     }
 
+    fun getTasksByEstateId(estateId: Int?): List<Task> {
+        return greentipsDatabaseHelper.getTasksByEstateId(estateId)
+    }
+
 }

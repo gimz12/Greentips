@@ -127,6 +127,10 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
         return rowsAffected
     }
 
+    fun getEstateIdByEmployeeId(employeeId: Int): Int? {
+        return fieldManagerDataProvider.getEstateIdByEmployeeId(employeeId)
+    }
+
     fun getAllEstateNames(): List<String> {
         return estateDataProvider.getAllEstates().map { it.estateName }
     }

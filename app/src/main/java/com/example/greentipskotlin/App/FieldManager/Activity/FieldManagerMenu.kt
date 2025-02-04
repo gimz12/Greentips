@@ -25,6 +25,7 @@ import com.example.greentipskotlin.App.CEO.task_HistoryFragment
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
 import com.example.greentipskotlin.App.FieldManager.FieldManagerDashboard
 import com.example.greentipskotlin.App.FieldManager.FieldManagerManageBuyerOrderFragment
+import com.example.greentipskotlin.App.FieldManager.ManageTaskFragment
 import com.example.greentipskotlin.App.FieldManager.SupplierOfferManagementFragment
 import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
@@ -99,7 +100,7 @@ class FieldManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
             R.id.resourceManagement -> replaceFragment(supplier_order_reqFragment())
             R.id.catalogueManagement -> replaceFragment(CatalogueItemManageFragment())
             R.id.buyerOrderManagement -> replaceFragment(FieldManagerManageBuyerOrderFragment())
-            R.id.reportChallenges -> replaceFragment(CatalogueItemManageFragment())
+            R.id.taskManagement -> replaceFragment(ManageTaskFragment())
             R.id.supplierOrderManagement -> replaceFragment(SupplierOfferManagementFragment())
 
 

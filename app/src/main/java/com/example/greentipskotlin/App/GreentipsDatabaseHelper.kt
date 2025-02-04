@@ -1106,6 +1106,36 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return taskList
     }
+    fun getTasksByEstateId(estateId: Int?): List<Task> {
+        val taskList = mutableListOf<Task>()
+        val db = this.readableDatabase
+
+        val query = "SELECT * FROM $TABLE_TASK WHERE $TASK_ESTATE_ID_FR = ?"
+        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val task = Task(
+                    TASK_ID = cursor.getInt(cursor.getColumnIndexOrThrow(TASK_ID)),
+                    TASK_ESTATE_ID_FR = cursor.getInt(cursor.getColumnIndexOrThrow(TASK_ESTATE_ID_FR)),
+                    TASK_NAME = cursor.getString(cursor.getColumnIndexOrThrow(TASK_NAME)),
+                    TASK_DESCRIPTION = cursor.getString(cursor.getColumnIndexOrThrow(TASK_DESCRIPTION)),
+                    TASK_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_TYPE)),
+                    TASK_ASSIGN_DATE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_ASSIGN_DATE)),
+                    TASK_PROGRESS = cursor.getString(cursor.getColumnIndexOrThrow(TASK_PROGRESS)),
+                    TASK_DUE_DATE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_DUE_DATE)),
+                    TASK_CHALLENGES = cursor.getString(cursor.getColumnIndexOrThrow(TASK_CHALLENGES)),
+                    TASK_SOLUTION = cursor.getString(cursor.getColumnIndexOrThrow(TASK_SOLUTION))
+                )
+                taskList.add(task)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return taskList
+    }
+
 
 
 
@@ -1261,6 +1291,23 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return status
     }
+
+   fun getEstateIdByEmployeeId(employeeId: Int): Int? {
+        val db = this.readableDatabase
+        var estateId: Int? = null
+
+        val query = "SELECT $FIELD_MANAGER_ESTATE_ID_FR FROM $TABLE_FIELD_MANAGER WHERE $FIELD_MANAGER_Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(employeeId.toString()))
+
+        if (cursor.moveToFirst()) {
+            estateId = cursor.getInt(cursor.getColumnIndexOrThrow(FIELD_MANAGER_ESTATE_ID_FR))
+        }
+
+        cursor.close()
+        db.close()
+        return estateId
+    }
+
 
 
     //Worker--------------------------------------------------------------------------------------------------------------------------------
