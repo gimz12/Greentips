@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#001F1F"
     android:padding="16dp"
-    tools:context=".App.FinanceManager.Activity.SupplierPaymentDetails">
+    tools:context=".App.FinanceManager.Activity.SupplierOrderDetails">
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,14 +75,6 @@
             app:layout_constraintTop_toBottomOf="@+id/firstLinerLayout">
 
             <TextView
-                android:id="@+id/tvSupplierPaymentId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Supplier Payment ID:"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
-            <TextView
                 android:id="@+id/tvSupplierOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,6 +116,35 @@
                 android:text="Supplier Email:"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvSupplierOrderItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Item Name:"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvSupplierOrderItemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Item Quantity (in kg)"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvSupplierOrderItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Item Price (per kg)"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvSupplierEstimateDeliveryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estimate Delivery Date:"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/tvPaymentDate"
                 android:layout_width="wrap_content"
@@ -175,86 +196,6 @@
                 android:textSize="14sp" />
 
         </LinearLayout>
-
-        <!-- Buttons Section -->
-
-        <TextView
-            android:id="@+id/tvReceivingBankAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Receiving Bank Account Number"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLinerLayout"
-            />
-
-        <EditText
-            android:id="@+id/receivingBankAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="321323"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvReceivingBankAccount"/>
-
-        <TextView
-            android:id="@+id/tvSendingBankAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sending Bank Account Number"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/receivingBankAccount"
-            />
-
-        <EditText
-            android:id="@+id/sendingBankAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="321323"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSendingBankAccount"/>
-
-
-        <TextView
-            android:id="@+id/tvPayingAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paying Amount"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sendingBankAccount"
-            />
-
-        <EditText
-            android:id="@+id/PayingAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="321323"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPayingAmount" />
-
-        <Button
-            android:id="@+id/makePayment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/okbutton_background"
-            android:drawablePadding="8dp"
-            android:text="Make Payment"
-            android:textColor="#FFFFFF"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/PayingAmount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

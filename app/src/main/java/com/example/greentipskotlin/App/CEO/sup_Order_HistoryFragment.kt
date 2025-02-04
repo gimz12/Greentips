@@ -1,33 +1,35 @@
 package com.example.greentipskotlin.App.CEO
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.greentipskotlin.App.Admin.viewModel.SupplierOrderViewModel
+import com.example.greentipskotlin.App.CEO.Activity.SupplierOrderHistory
+import com.example.greentipskotlin.App.FinanceManager.Activity.SupplierConfirmedOrderAdapter
+import com.example.greentipskotlin.App.FinanceManager.Activity.SupplierOrderDetails
 import com.example.greentipskotlin.R
+import com.example.greentipskotlin.databinding.FragmentConfirmedSupplierOrderBinding
+import com.example.greentipskotlin.databinding.FragmentSupOrderHistoryBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [sup_Order_HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class sup_Order_HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentSupOrderHistoryBinding? = null
+    private val binding get() = _binding!!
+
+    private val model: SupplierOrderViewModel by viewModels()
+
+    private lateinit var supplierConfirmedOrderAdapter: SupplierConfirmedOrderAdapter
+
+    private var isSorted: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +37,50 @@ class sup_Order_HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sup__order__history, container, false)
+        _binding = FragmentSupOrderHistoryBinding.inflate(inflater, container, false)
+
+        val sortButton = binding.sortButton
+
+        sortButton.setOnClickListener(){
+            toggleSort()
+        }
+
+        supplierConfirmedOrderAdapter = SupplierConfirmedOrderAdapter(emptyList()) { selectedOrder ->
+            val intent = Intent(requireContext(), SupplierOrderHistory::class.java).apply {
+                putExtra("ORDER_ID", selectedOrder.ORDER_ID)
+                putExtra("USER_ID", selectedOrder.USER_ID)
+                putExtra("ITEM_NAME", selectedOrder.ITEM_NAME)
+                putExtra("ITEM_QUANTITY", selectedOrder.ITEM_QUANTITY)
+                putExtra("ESTIMATE_DELIVERY_DATE", selectedOrder.ESTIMATE_DELIVERY_DATE)
+                putExtra("QUANTITY_PRICE", selectedOrder.QUANTITY_PRICE)
+                putExtra("TOTAL_AMOUNT", selectedOrder.TOTAL_AMOUNT)
+            }
+            startActivity(intent)
+        }
+
+        // Set up RecyclerView
+        binding.supplierOfferRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.supplierOfferRecyclerView.adapter = supplierConfirmedOrderAdapter
+
+        model.supplierApprovedOrders.observe(viewLifecycleOwner){updateList ->
+            val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
+            supplierConfirmedOrderAdapter.updateList(listToDisplay)
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment sup_Order_HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            sup_Order_HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        model.refreshApprovedOrders()
     }
+
+    private fun toggleSort() {
+        isSorted = !isSorted
+        model.supplierApprovedOrders.value?.let { updatedList ->
+            supplierConfirmedOrderAdapter.updateList(if (isSorted) updatedList.sortedBy { it.ORDER_ID } else updatedList)
+        }
+    }
+
+
 }

@@ -35,5 +35,24 @@ class SupplierPaymentViewModel(application: Application) : AndroidViewModel(appl
         return supplierPaymentDataProvider.getPartialPaidSupplierPayments()
     }
 
+    fun updateSupplierPayment(
+        paymentId: Int,
+        newPaymentDate: String,
+        newPaymentTime: String,
+        newPaidAmount: Double,
+        newRemainAmount: Double,
+        newPaymentStatus: String
+    ): Int {
+        return supplierPaymentDataProvider.updateSupplierPayment(paymentId,newPaymentDate,newPaymentTime,newPaidAmount,newRemainAmount,newPaymentStatus)
+    }
+
+    fun getPaymentStatus(orderId: Int): String? {
+        return supplierPaymentDataProvider.getPaymentStatus(orderId)
+    }
+
+    fun getSupplierPaymentByOrderId(orderId: Int): SupplierPayment? {
+        return supplierPaymentDataProvider.getSupplierPaymentByOrderId(orderId)
+    }
+
 
 }

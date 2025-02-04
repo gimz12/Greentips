@@ -25,6 +25,7 @@ import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
 import com.example.greentipskotlin.App.Model.SupplierOrder
 import com.example.greentipskotlin.App.Model.SupplierPayment
+import com.example.greentipskotlin.App.Model.Task
 import com.example.greentipskotlin.App.Model.Worker
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -86,6 +87,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val WORKER_Shift_Start_Time  = "shift_start_time"
         const val WORKER_Shift_End_Time   = "shift_end_time"
         const val WORKER_EXPERIENCE   = "qualification"
+
+        //Task Table
+        const val TABLE_TASK = "Task"
+        const val TASK_ID = "task_id"
+        const val TASK_ESTATE_ID_FR  = "estate_id"
+        const val TASK_NAME  = "task_name"
+        const val TASK_DESCRIPTION  = "task_description"
+        const val TASK_TYPE   = "task_type"
+        const val TASK_ASSIGN_DATE   = "task_assign_date"
+        const val TASK_PROGRESS   = "task_progress"
+        const val TASK_DUE_DATE   = "task_due_date"
+        const val TASK_CHALLENGES   = "task_challenges"
+        const val TASK_SOLUTION   = "task_solution"
 
         //Catalogue Table
         const val TABLE_CATALOGUE = "Catalogue"
@@ -464,6 +478,24 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createTaskTable= """
+            
+            CREATE TABLE $TABLE_TASK (
+                $TASK_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $TASK_ESTATE_ID_FR INTEGER NOT NULL,
+                $TASK_NAME TEXT NOT NULL,
+                $TASK_DESCRIPTION TEXT NOT NULL,
+                $TASK_TYPE TEXT NOT NULL,
+                $TASK_ASSIGN_DATE TEXT NOT NULL,
+                $TASK_PROGRESS TEXT NOT NULL,
+                $TASK_DUE_DATE TEXT NOT NULL,
+                $TASK_CHALLENGES TEXT ,
+                $TASK_SOLUTION TEXT,
+                FOREIGN KEY($TASK_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
+                )
+            
+        """
+
         val createCoconutTable="""
             CREATE TABLE $TABLE_COCONUT(
             $Coconut_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -568,6 +600,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createCreditCardsTable)
         db.execSQL(createSupplierOrder)
         db.execSQL(createSupplierPayment)
+        db.execSQL(createTaskTable)
 
     }
 
@@ -594,6 +627,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CREDIT_CARDS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_ORDER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_PAYMENT")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_TASK")
         onCreate(db)
     }
 
@@ -1002,6 +1036,79 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close() // Ensure database is closed
         return rowsAffected
     }
+
+    fun insertTask(task: Task){
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_ESTATE_ID_FR, task.TASK_ESTATE_ID_FR)
+            put(TASK_NAME, task.TASK_NAME)
+            put(TASK_DESCRIPTION, task.TASK_DESCRIPTION)
+            put(TASK_TYPE, task.TASK_TYPE)
+            put(TASK_ASSIGN_DATE, task.TASK_ASSIGN_DATE)
+            put(TASK_PROGRESS, task.TASK_PROGRESS)
+            put(TASK_DUE_DATE, task.TASK_DUE_DATE)
+            put(TASK_CHALLENGES, task.TASK_CHALLENGES)
+            put(TASK_SOLUTION, task.TASK_SOLUTION)
+        }
+        db.insert(TABLE_TASK, null, values)
+        db.close()
+    }
+    fun updateTask(task: Task): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_ESTATE_ID_FR, task.TASK_ESTATE_ID_FR)
+            put(TASK_NAME, task.TASK_NAME)
+            put(TASK_DESCRIPTION, task.TASK_DESCRIPTION)
+            put(TASK_TYPE, task.TASK_TYPE)
+            put(TASK_ASSIGN_DATE, task.TASK_TYPE)
+            put(TASK_PROGRESS, task.TASK_PROGRESS)
+            put(TASK_DUE_DATE, task.TASK_DUE_DATE)
+            put(TASK_CHALLENGES, task.TASK_CHALLENGES)
+            put(TASK_SOLUTION, task.TASK_SOLUTION)
+        }
+        // Update task by its TASK_ID
+        val result = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(task.TASK_ID.toString()))
+        db.close()
+        return result
+    }
+
+    fun deleteTask(taskId: Int): Int {
+        val db = this.writableDatabase
+        // Delete task by its TASK_ID
+        val result = db.delete(TABLE_TASK, "$TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+        return result // returns the number of rows deleted
+    }
+
+    fun getAllTasks(): List<Task> {
+        val taskList = mutableListOf<Task>()
+        val db = this.readableDatabase
+        val cursor = db.query(TABLE_TASK, null, null, null, null, null, null)
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                val task = Task(
+                    TASK_ID = cursor.getInt(cursor.getColumnIndex(TASK_ID)),
+                    TASK_ESTATE_ID_FR = cursor.getInt(cursor.getColumnIndex(TASK_ESTATE_ID_FR)),
+                    TASK_NAME = cursor.getString(cursor.getColumnIndex(TASK_NAME)),
+                    TASK_DESCRIPTION = cursor.getString(cursor.getColumnIndex(TASK_DESCRIPTION)),
+                    TASK_TYPE = cursor.getString(cursor.getColumnIndex(TASK_TYPE)),
+                    TASK_ASSIGN_DATE = cursor.getString(cursor.getColumnIndex(TASK_ASSIGN_DATE)),
+                    TASK_PROGRESS = cursor.getString(cursor.getColumnIndex(TASK_PROGRESS)),
+                    TASK_DUE_DATE = cursor.getString(cursor.getColumnIndex(TASK_DUE_DATE)),
+                    TASK_CHALLENGES = cursor.getString(cursor.getColumnIndex(TASK_CHALLENGES)),
+                    TASK_SOLUTION = cursor.getString(cursor.getColumnIndex(TASK_SOLUTION))
+                )
+                taskList.add(task)
+            } while (cursor.moveToNext())
+        }
+        cursor?.close()
+        db.close()
+        return taskList
+    }
+
+
+
 
     //FieldManager--------------------------------------------------------------------------------------------------------------------------------
 
@@ -2142,6 +2249,25 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return orders
     }
 
+    fun getApprovedSupplierOrders(): List<SupplierOrder> {
+        val orders = mutableListOf<SupplierOrder>()
+        val query = """
+            SELECT * FROM $TABLE_SUPPLIER_ORDER 
+            WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved' 
+              AND $SUPPLIER_CEO_STATUS = 'Approved'
+        """
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(mapCursorToSupplierOrder(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return orders
+    }
+
 
     fun getUnapprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
@@ -2293,6 +2419,134 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         cursor.close()
         db.close()
         return partialPaidPayments
+    }
+
+    fun updateSupplierPayment(
+        paymentId: Int,
+        newPaymentDate: String,
+        newPaymentTime: String,
+        newPaidAmount: Double,
+        newRemainAmount: Double,
+        newPaymentStatus: String
+    ): Int {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(SUPPLIER_PAYMENT_DATE, newPaymentDate)
+            put(SUPPLIER_PAYMENT_TIME, newPaymentTime)
+            put(SUPPLIER_PAID_AMOUNT, newPaidAmount)
+            put(SUPPLIER_REMAIN_AMOUNT, newRemainAmount)
+            put(SUPPLIER_PAYMENT_STATUS, newPaymentStatus)
+        }
+
+        val rowsUpdated = db.update(
+            TABLE_SUPPLIER_PAYMENT,
+            values,
+            "$SUPPLIER_PAYMENT_ID = ?",
+            arrayOf(paymentId.toString())
+        )
+        db.close()
+        return rowsUpdated
+    }
+
+    fun getPaymentStatus(orderId: Int): String? {
+        val db = readableDatabase
+        val query = "SELECT $SUPPLIER_PAYMENT_STATUS FROM $TABLE_SUPPLIER_PAYMENT WHERE $SUPPLIER_PAYMENT_ORDER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(orderId.toString()))
+
+        var paymentStatus: String? = null
+        if (cursor.moveToFirst()) {
+            paymentStatus = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS))
+        }
+        cursor.close()
+        db.close()
+        return paymentStatus
+    }
+
+    fun getSupplierOrdersByUserId(userId: Int): List<SupplierOrder> {
+        val db = readableDatabase
+        val supplierOrders = mutableListOf<SupplierOrder>()
+
+        // Define the query
+        val cursor = db.query(
+            TABLE_SUPPLIER_ORDER, // Table name
+            null, // All columns, you can specify columns if needed
+            "$SUPPLIER_USER_ID = ?", // WHERE clause
+            arrayOf(userId.toString()), // The value for USER_ID
+            null, // GROUP BY clause
+            null, // HAVING clause
+            null // ORDER BY clause (can be added if needed)
+        )
+
+        // Loop through the results and map them to SupplierOrder objects
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                val order = SupplierOrder(
+                    ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ORDER_ID)),
+                    USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_USER_ID)),
+                    ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_NAME)),
+                    ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_QUANTITY)),
+                    ITEM_DESCRIPTION = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_DESCRIPTION)),
+                    ESTIMATE_DELIVERY_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ESTIMATE_DELIVERY_DATE)),
+                    QUANTITY_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_QUANTITY_PRICE)),
+                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_TOTAL_AMOUNT)),
+                    FIELDMANAGER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_FIELDMANAGER_STATUS)),
+                    CEO_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_CEO_STATUS))
+                )
+                supplierOrders.add(order)
+            } while (cursor.moveToNext())
+        }
+
+        cursor?.close()
+        db.close()
+
+        return supplierOrders
+    }
+
+    fun updateSupplierOrder(supplierOrder: SupplierOrder) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(SUPPLIER_ITEM_QUANTITY, supplierOrder.ITEM_QUANTITY)
+            put(SUPPLIER_ESTIMATE_DELIVERY_DATE, supplierOrder.ESTIMATE_DELIVERY_DATE)
+            put(SUPPLIER_QUANTITY_PRICE, supplierOrder.QUANTITY_PRICE)
+        }
+        // Update the record where the ORDER_ID matches
+        val whereClause = "$SUPPLIER_ORDER_ID = ?"
+        val whereArgs = arrayOf(supplierOrder.ORDER_ID.toString())
+        db.update(TABLE_SUPPLIER_ORDER, values, whereClause, whereArgs)
+        db.close()
+    }
+
+    fun deleteSupplierOrder(orderId: Int) {
+        val db = writableDatabase
+        db.delete(TABLE_SUPPLIER_ORDER, "$SUPPLIER_ORDER_ID = ?", arrayOf(orderId.toString()))
+        db.close()
+    }
+
+    fun getSupplierPaymentByOrderId(orderId: Int): SupplierPayment? {
+        val db = readableDatabase
+        var supplierPayment: SupplierPayment? = null
+
+        val query = "SELECT * FROM $TABLE_SUPPLIER_PAYMENT WHERE $SUPPLIER_PAYMENT_ORDER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(orderId.toString()))
+
+        if (cursor.moveToFirst()) {
+            supplierPayment = SupplierPayment(
+                PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
+                PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
+                PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
+                PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
+                PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
+                PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
+                PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
+                REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
+                PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
+                TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+            )
+        }
+
+        cursor.close()
+        db.close()
+        return supplierPayment
     }
 
 

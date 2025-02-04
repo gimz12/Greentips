@@ -82,7 +82,7 @@ class SupplierOrderDetails : AppCompatActivity() {
 
             // Create SupplierPayment Object
             val supplierPayment = SupplierPayment(
-                PAYMENT_ID = 0, // Auto-generated or provide the ID
+                PAYMENT_ID = null, // Auto-generated or provide the ID
                 PAYMENT_ORDER_ID = orderId,
                 PAYMENT_USER_ID = userId,
                 PAYMENT_DATE = currentDate,

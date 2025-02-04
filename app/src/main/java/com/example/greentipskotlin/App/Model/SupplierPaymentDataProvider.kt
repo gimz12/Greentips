@@ -20,4 +20,23 @@ class SupplierPaymentDataProvider(context: Context) {
         return greentipsDatabaseHelper.getPartialPaidSupplierPayments()
     }
 
+    fun updateSupplierPayment(
+        paymentId: Int,
+        newPaymentDate: String,
+        newPaymentTime: String,
+        newPaidAmount: Double,
+        newRemainAmount: Double,
+        newPaymentStatus: String
+    ): Int {
+        return greentipsDatabaseHelper.updateSupplierPayment(paymentId,newPaymentDate,newPaymentTime,newPaidAmount,newRemainAmount,newPaymentStatus)
+    }
+
+    fun getPaymentStatus(orderId: Int): String? {
+        return greentipsDatabaseHelper.getPaymentStatus(orderId)
+    }
+
+    fun getSupplierPaymentByOrderId(orderId: Int): SupplierPayment? {
+        return greentipsDatabaseHelper.getSupplierPaymentByOrderId(orderId)
+    }
+
 }
