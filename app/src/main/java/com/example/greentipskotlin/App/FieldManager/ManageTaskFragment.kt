@@ -16,6 +16,7 @@ import com.example.greentipskotlin.App.Admin.viewModel.TaskViewModel
 import com.example.greentipskotlin.App.FieldManager.Activity.BuyerOrderAdapter
 import com.example.greentipskotlin.App.FieldManager.Activity.OrderDetails
 import com.example.greentipskotlin.App.FieldManager.Activity.TaskAdapter
+import com.example.greentipskotlin.App.FieldManager.Activity.TaskDetails
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.FragmentFieldManagerManageBuyerOrderBinding
 import com.example.greentipskotlin.databinding.FragmentManageTaskBinding
@@ -50,14 +51,17 @@ class ManageTaskFragment : Fragment() {
         }
 
         taskAdapter = TaskAdapter(emptyList()) { selectedOrder ->
-            val intent = Intent(requireContext(), OrderDetails::class.java).apply {
+            val intent = Intent(requireContext(), TaskDetails::class.java).apply {
                 putExtra("TASK_ID", selectedOrder.TASK_ID)
+                putExtra("TASK_ESTATE_ID_FR", selectedOrder.TASK_ESTATE_ID_FR)
                 putExtra("Task_NAME", selectedOrder.TASK_NAME)
                 putExtra("TASK_DESCRIPTION", selectedOrder.TASK_DESCRIPTION)
                 putExtra("TASK_TYPE", selectedOrder.TASK_TYPE)
                 putExtra("TASK_ASSIGN_DATE", selectedOrder.TASK_ASSIGN_DATE)
                 putExtra("TASK_DUE_DATE", selectedOrder.TASK_DUE_DATE)
                 putExtra("TASK_PROGRESS", selectedOrder.TASK_PROGRESS)
+                putExtra("TASK_CHALLENGES", selectedOrder.TASK_CHALLENGES)
+                putExtra("TASK_SOLUTION", selectedOrder.TASK_SOLUTION)
             }
             startActivity(intent)
         }
@@ -65,6 +69,7 @@ class ManageTaskFragment : Fragment() {
         // Set up RecyclerView
         binding.taskRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.taskRecyclerView.adapter = taskAdapter
+        binding.taskCounter.text=taskAdapter.itemCount.toString()
 
         model.tasksByEstateId.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.TASK_NAME } else updateList

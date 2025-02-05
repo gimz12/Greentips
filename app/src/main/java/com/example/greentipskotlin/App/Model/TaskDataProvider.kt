@@ -27,4 +27,42 @@ class TaskDataProvider(context: Context) {
         return greentipsDatabaseHelper.getTasksByEstateId(estateId)
     }
 
+    fun assignTaskToWorker(taskId: Int, workerId: Int) {
+        greentipsDatabaseHelper.assignTaskToWorker(taskId,workerId)
+    }
+
+    fun getWorkersByTaskId(taskId: Int): List<Int> {
+        return greentipsDatabaseHelper.getWorkersByTaskId(taskId)
+    }
+
+    fun removeWorkerFromTask(taskId: Int, workerId: Int) {
+        greentipsDatabaseHelper.removeWorkerFromTask(taskId,workerId)
+    }
+
+    fun getWorkersByEstateId(estateId: Int): List<Worker> {
+        return greentipsDatabaseHelper.getWorkersByEstateId(estateId)
+    }
+
+    fun getEmployeeNamesByEstateId(estateId: Int): List<String> {
+        return greentipsDatabaseHelper.getEmployeeNamesByEstateId(estateId)
+    }
+
+    fun getEmployeeNameById(employeeId: Int?): String {
+        return greentipsDatabaseHelper.getEmployeeNameById(employeeId)
+    }
+
+    fun getAllWorkersByEstate(estateId: Int): List<Worker> {
+        return greentipsDatabaseHelper.getAllWorkersByEstate(estateId)
+    }
+
+    fun updateTaskChallenges(taskId: Int, newChallenges: String): Int {
+        return greentipsDatabaseHelper.updateTaskChallenges(taskId,newChallenges)
+    }
+
+    fun updateTaskProgress(taskId: Int, newProgress: String) {
+        greentipsDatabaseHelper.updateTaskProgress(taskId,newProgress)
+    }
+
+
+
 }

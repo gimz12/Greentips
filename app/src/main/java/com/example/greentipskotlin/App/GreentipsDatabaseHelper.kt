@@ -88,6 +88,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val WORKER_Shift_End_Time   = "shift_end_time"
         const val WORKER_EXPERIENCE   = "qualification"
 
+        //Task Assignment Table
+        const val TABLE_TASK_ASSIGNMENT = "Task_Assignment"
+        const val TASK_ASSIGNMENT_ID = "task_assignment_id"
+        const val TASK_ASSIGNMENT_TASK_ID  = "task_id"
+        const val TASK_ASSIGNMENT_WORKER_ID  = "employee_id"
+
         //Task Table
         const val TABLE_TASK = "Task"
         const val TASK_ID = "task_id"
@@ -496,6 +502,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
+        val createTaskAssignmentTable = """
+            
+            CREATE TABLE $TABLE_TASK_ASSIGNMENT (
+                $TASK_ASSIGNMENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $TASK_ID INTEGER NOT NULL,
+                $WORKER_Employee_ID INTEGER NOT NULL,
+                FOREIGN KEY($TASK_ID) REFERENCES $TABLE_TASK($TASK_ID),
+                FOREIGN KEY($WORKER_Employee_ID) REFERENCES $TABLE_WORKER($WORKER_Employee_ID)
+    )
+"""
+
+
         val createCoconutTable="""
             CREATE TABLE $TABLE_COCONUT(
             $Coconut_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -601,6 +619,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createSupplierOrder)
         db.execSQL(createSupplierPayment)
         db.execSQL(createTaskTable)
+        db.execSQL(createTaskAssignmentTable)
+
 
     }
 
@@ -628,6 +648,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_ORDER")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_SUPPLIER_PAYMENT")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TASK")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_TASK_ASSIGNMENT")
         onCreate(db)
     }
 
@@ -1072,6 +1093,27 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return result
     }
 
+    fun updateTaskChallenges(taskId: Int, newChallenges: String): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_CHALLENGES, newChallenges)
+        }
+        val rowsUpdated = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+        return rowsUpdated
+    }
+
+    fun updateTaskProgress(taskId: Int, newProgress: String) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_PROGRESS, newProgress)
+        }
+
+        val rowsAffected = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+    }
+
+
     fun deleteTask(taskId: Int): Int {
         val db = this.writableDatabase
         // Delete task by its TASK_ID
@@ -1110,8 +1152,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         val taskList = mutableListOf<Task>()
         val db = this.readableDatabase
 
-        val query = "SELECT * FROM $TABLE_TASK WHERE $TASK_ESTATE_ID_FR = ?"
-        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))
+        // Update the query to filter out tasks with 'Task Completed' progress
+        val query = "SELECT * FROM $TABLE_TASK WHERE $TASK_ESTATE_ID_FR = ? AND $TASK_PROGRESS != ?"
+        val cursor = db.rawQuery(query, arrayOf(estateId.toString(), "Task Complete"))
 
         if (cursor.moveToFirst()) {
             do {
@@ -1135,6 +1178,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return taskList
     }
+
 
 
 
@@ -1308,6 +1352,39 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return estateId
     }
 
+    fun assignTaskToWorker(taskId: Int, workerId: Int) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_ID, taskId)
+            put(WORKER_Employee_ID, workerId)
+        }
+        db.insert(TABLE_TASK_ASSIGNMENT, null, values)
+        db.close()
+    }
+
+    fun getWorkersByTaskId(taskId: Int): List<Int> {
+        val db = readableDatabase
+        val workers = mutableListOf<Int>()
+        val query = "SELECT $WORKER_Employee_ID FROM $TABLE_TASK_ASSIGNMENT WHERE $TASK_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(taskId.toString()))
+
+        while (cursor.moveToNext()) {
+            workers.add(cursor.getInt(0))
+        }
+        cursor.close()
+        db.close()
+        return workers
+    }
+
+    fun removeWorkerFromTask(taskId: Int, workerId: Int) {
+        val db = writableDatabase
+        db.delete(TABLE_TASK_ASSIGNMENT, "$TASK_ID = ? AND $WORKER_Employee_ID = ?", arrayOf(taskId.toString(), workerId.toString()))
+        db.close()
+    }
+
+
+
+
 
 
     //Worker--------------------------------------------------------------------------------------------------------------------------------
@@ -1368,6 +1445,97 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close() // Ensure database is closed
         return rowsAffected
     }
+
+    fun getWorkersByEstateId(estateId: Int): List<Worker> {
+        val workersList = mutableListOf<Worker>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_WORKER WHERE $WORKER_ESTATE_ID_FR = ?"
+        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val worker = Worker(
+                    EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
+                    Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
+                    ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_Start_Time)),
+                    ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_End_Time)),
+                    Experience = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_EXPERIENCE))
+                )
+                workersList.add(worker)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return workersList
+    }
+
+    fun getAllWorkersByEstate(estateId: Int): List<Worker> {
+        val workersList = mutableListOf<Worker>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_WORKER WHERE $WORKER_ESTATE_ID_FR = ?"  // Add estateId condition here
+        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))  // Pass estateId as a parameter to the query
+
+        if (cursor.moveToFirst()) {
+            do {
+                val worker = Worker(
+                    EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
+                    Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
+                    ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_Start_Time)),
+                    ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_End_Time)),
+                    Experience = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_EXPERIENCE))
+                )
+                workersList.add(worker)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return workersList
+    }
+
+
+
+    fun getEmployeeNamesByEstateId(estateId: Int): List<String> {
+        val employeeNames = mutableListOf<String>()
+        val db = readableDatabase
+
+        val query = """
+        SELECT e.$COLUMN_EMPLOYEE_NAME
+        FROM $TABLE_EMPLOYEE e
+        INNER JOIN $TABLE_WORKER w ON e.$Employee_ID = w.$WORKER_Employee_ID
+        WHERE w.$WORKER_ESTATE_ID_FR = ?
+    """
+
+        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME))
+                employeeNames.add(name)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return employeeNames
+    }
+
+
+    fun getEmployeeNameById(employeeId: Int?): String {
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_EMPLOYEE_NAME FROM $TABLE_EMPLOYEE WHERE $Employee_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(employeeId.toString()))
+
+        val name = if (cursor.moveToFirst()) cursor.getString(0) else "Unknown"
+        cursor.close()
+        db.close()
+        return name
+    }
+
+
+
 
     //Estate--------------------------------------------------------------------------------------------------------------------------------
 

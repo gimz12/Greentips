@@ -45,7 +45,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Total Orders"
+                android:text="Total Tasks"
                 android:textColor="@color/black"
                 android:textSize="10sp"
                 android:textStyle="bold"
@@ -55,6 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/taskCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -95,7 +96,7 @@
                 android:id="@+id/viewBuyerDetailsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="View Order Details"
+                android:text="View Task Details"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
