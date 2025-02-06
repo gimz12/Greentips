@@ -31,12 +31,16 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
         taskDataProvider.insertTask(task)
     }
 
-    fun updateTask(task: Task): Int {
-        return taskDataProvider.updateTask(task)
+    fun updateTask(taskId: Int, taskName: String, taskDescription: String, taskType: String, taskAssignDate: String, taskDueDate: String, taskEstateId: Int): Int {
+        return taskDataProvider.updateTask(taskId,taskName,taskDescription,taskType,taskAssignDate,taskDueDate,taskEstateId)
     }
 
     fun deleteTask(taskId: Int): Int {
         return taskDataProvider.deleteTask(taskId)
+    }
+
+    fun deleteTaskAssignmentByTaskId(taskId: Int): Boolean {
+        return taskDataProvider.deleteTaskAssignmentByTaskId(taskId)
     }
 
     fun getTasksByEstateId(estateId: Int?) {
@@ -44,7 +48,6 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
         _tasksByEstateId.postValue(orders) // Post the data to LiveData
     }
 
-    // Inside TaskViewModel
     fun getWorkersByEstateId(estateId: Int): LiveData<List<Worker>> {
         val workersLiveData = MutableLiveData<List<Worker>>()
         workersLiveData.value = taskDataProvider.getWorkersByEstateId(estateId) // Assuming this method returns a list of workers
@@ -56,8 +59,6 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
         workersLiveData.value = taskDataProvider.getAllWorkersByEstate(estateId)  // Pass the estateId here
         return workersLiveData
     }
-
-
 
 
     fun assignTaskToWorker(taskId: Int, workerId: Int) {
@@ -89,6 +90,10 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
 
     fun updateTaskProgress(taskId: Int, newProgress: String) {
         taskDataProvider.updateTaskProgress(taskId,newProgress)
+    }
+
+    fun updateTaskSolution(taskId: Int, taskSolution: String): Int {
+        return taskDataProvider.updateTaskSolution(taskId,taskSolution)
     }
 
 

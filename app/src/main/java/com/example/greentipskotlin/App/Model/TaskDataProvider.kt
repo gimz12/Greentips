@@ -11,8 +11,8 @@ class TaskDataProvider(context: Context) {
         greentipsDatabaseHelper.insertTask(task)
     }
 
-    fun updateTask(task: Task): Int {
-        return greentipsDatabaseHelper.updateTask(task)
+    fun updateTask(taskId: Int, taskName: String, taskDescription: String, taskType: String, taskAssignDate: String, taskDueDate: String, taskEstateId: Int): Int {
+        return greentipsDatabaseHelper.updateTask(taskId,taskName,taskDescription,taskType,taskAssignDate,taskDueDate,taskEstateId)
     }
 
     fun deleteTask(taskId: Int): Int {
@@ -61,6 +61,14 @@ class TaskDataProvider(context: Context) {
 
     fun updateTaskProgress(taskId: Int, newProgress: String) {
         greentipsDatabaseHelper.updateTaskProgress(taskId,newProgress)
+    }
+
+    fun updateTaskSolution(taskId: Int, taskSolution: String): Int {
+        return greentipsDatabaseHelper.updateTaskSolution(taskId,taskSolution)
+    }
+
+    fun deleteTaskAssignmentByTaskId(taskId: Int): Boolean {
+        return greentipsDatabaseHelper.deleteTaskAssignmentByTaskId(taskId)
     }
 
 

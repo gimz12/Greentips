@@ -1074,24 +1074,25 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.insert(TABLE_TASK, null, values)
         db.close()
     }
-    fun updateTask(task: Task): Int {
+
+    fun updateTask(taskId: Int, taskName: String, taskDescription: String, taskType: String, taskAssignDate: String, taskDueDate: String, taskEstateId: Int): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(TASK_ESTATE_ID_FR, task.TASK_ESTATE_ID_FR)
-            put(TASK_NAME, task.TASK_NAME)
-            put(TASK_DESCRIPTION, task.TASK_DESCRIPTION)
-            put(TASK_TYPE, task.TASK_TYPE)
-            put(TASK_ASSIGN_DATE, task.TASK_TYPE)
-            put(TASK_PROGRESS, task.TASK_PROGRESS)
-            put(TASK_DUE_DATE, task.TASK_DUE_DATE)
-            put(TASK_CHALLENGES, task.TASK_CHALLENGES)
-            put(TASK_SOLUTION, task.TASK_SOLUTION)
+            put(TASK_NAME, taskName)
+            put(TASK_DESCRIPTION, taskDescription)
+            put(TASK_TYPE, taskType)
+            put(TASK_ASSIGN_DATE, taskAssignDate)
+            put(TASK_DUE_DATE, taskDueDate)
+            put(TASK_ESTATE_ID_FR, taskEstateId)
         }
+
         // Update task by its TASK_ID
-        val result = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(task.TASK_ID.toString()))
+        val result = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(taskId.toString()))
         db.close()
+
         return result
     }
+
 
     fun updateTaskChallenges(taskId: Int, newChallenges: String): Int {
         val db = this.writableDatabase
@@ -1113,6 +1114,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
+    fun updateTaskSolution(taskId: Int, taskSolution: String): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(TASK_SOLUTION, taskSolution)
+        }
+
+        // Update only TASK_SOLUTION by TASK_ID
+        val result = db.update(TABLE_TASK, values, "$TASK_ID = ?", arrayOf(taskId.toString()))
+        db.close()
+
+        return result
+    }
 
     fun deleteTask(taskId: Int): Int {
         val db = this.writableDatabase
@@ -1121,6 +1134,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return result // returns the number of rows deleted
     }
+
+    fun deleteTaskAssignmentByTaskId(taskId: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_TASK_ASSIGNMENT, "$TASK_ID=?", arrayOf(taskId.toString()))
+        db.close()
+        return result > 0
+    }
+
 
     fun getAllTasks(): List<Task> {
         val taskList = mutableListOf<Task>()

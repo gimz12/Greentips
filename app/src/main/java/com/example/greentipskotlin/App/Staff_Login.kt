@@ -22,6 +22,7 @@ import com.example.greentipskotlin.App.FieldManager.Activity.FieldManagerMenu
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemInsert
 import com.example.greentipskotlin.App.FinanceManager.Activity.FinanceManagerMenu
 import com.example.greentipskotlin.App.Model.Employee
+import com.example.greentipskotlin.App.Worker.Activity.WorkerMenu
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityStaffLoginBinding
 
@@ -67,7 +68,7 @@ class Staff_Login : AppCompatActivity() {
             2 -> Intent(this, FieldManagerMenu::class.java)
             3 -> Intent(this, FinanceManagerMenu::class.java)
             4 -> Intent(this, MainActivity::class.java)
-            5 -> Intent(this, IntercropsInsert::class.java)
+            5 -> Intent(this, WorkerMenu::class.java)
             else -> null
         }
         if (intent != null) {

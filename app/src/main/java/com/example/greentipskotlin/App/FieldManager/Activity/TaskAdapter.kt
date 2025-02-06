@@ -16,6 +16,7 @@ class TaskAdapter(
             binding.tvTaskName.text=task.TASK_NAME
             binding.tvTaskDes.text=task.TASK_DESCRIPTION
             binding.tvTaskType.text=task.TASK_TYPE
+            binding.tvTaskProgress.text=task.TASK_PROGRESS
             binding.tvTaskAssignDate.text=task.TASK_ASSIGN_DATE
             binding.tvTaskDueDate.text=task.TASK_DUE_DATE
 
