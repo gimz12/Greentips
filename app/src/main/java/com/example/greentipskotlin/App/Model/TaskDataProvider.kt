@@ -71,6 +71,14 @@ class TaskDataProvider(context: Context) {
         return greentipsDatabaseHelper.deleteTaskAssignmentByTaskId(taskId)
     }
 
+    fun getTasksByEmpId(workerEmpId: Int): List<Task> {
+        return greentipsDatabaseHelper.getTasksByEmpId(workerEmpId)
+    }
+
+    fun getCompletedTasksByEmpId(workerEmpId: Int): List<Task> {
+        return greentipsDatabaseHelper.getCompletedTasksByEmpId(workerEmpId)
+    }
+
 
 
 }

@@ -12,6 +12,10 @@ import com.example.greentipskotlin.App.Admin.viewModel.OrderItemViewModel
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityOrderDetailsBinding
 import com.example.greentipskotlin.databinding.CustomAlertDialogBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OrderDetails : AppCompatActivity() {
 
@@ -62,6 +66,21 @@ class OrderDetails : AppCompatActivity() {
             if (orderStatus in listOf("Processing")) {
                 if (buyerOrderViewModel.updateOrderStatus(orderId, "Dispatched")) {
                     updateButtonStates("Dispatched")
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val invoiceSent = EmailHelper.sendOrderDispatchedEmail(
+                            "kumalillankoon12@gmail.com",
+                            orderId
+                        )
+                        withContext(Dispatchers.Main) {  // Update UI on main thread
+                            if (invoiceSent) {
+                                println("Invoice email sent successfully.")
+                            } else {
+                                println("Failed to send invoice email.")
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -70,6 +89,20 @@ class OrderDetails : AppCompatActivity() {
             if (orderStatus == "Dispatched") {
                 if (buyerOrderViewModel.updateOrderStatus(orderId, "Delivered")) {
                     updateButtonStates("Delivered")
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val invoiceSent = EmailHelper.sendOrderDeliveredEmail(
+                            "kumalillankoon12@gmail.com",
+                            orderId
+                        )
+                        withContext(Dispatchers.Main) {  // Update UI on main thread
+                            if (invoiceSent) {
+                                println("Invoice email sent successfully.")
+                            } else {
+                                println("Failed to send invoice email.")
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -77,6 +110,20 @@ class OrderDetails : AppCompatActivity() {
         binding.cancelBtn.setOnClickListener {
             if (orderStatus !in listOf("Delivered", "Cancelled")) {
                 showCancelConfirmationDialog(orderId)
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val invoiceSent = EmailHelper.sendOrderCanceledEmail(
+                    "kumalillankoon12@gmail.com",
+                    orderId
+                )
+                withContext(Dispatchers.Main) {  // Update UI on main thread
+                    if (invoiceSent) {
+                        println("Invoice email sent successfully.")
+                    } else {
+                        println("Failed to send invoice email.")
+                    }
+                }
             }
         }
 

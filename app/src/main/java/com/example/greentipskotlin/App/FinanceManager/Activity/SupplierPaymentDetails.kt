@@ -12,6 +12,9 @@ import com.example.greentipskotlin.App.Admin.viewModel.SupplierViewModel
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivitySupplierOrderDetailsBinding
 import com.example.greentipskotlin.databinding.ActivitySupplierPaymentDetailsBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SupplierPaymentDetails : AppCompatActivity() {
 
@@ -90,6 +93,28 @@ class SupplierPaymentDetails : AppCompatActivity() {
                 newRemainAmount = newRemainAmount,
                 newPaymentStatus = newPaymentStatus
             )
+
+            CoroutineScope(Dispatchers.Main).launch {
+                val emailSent = EmailHelper.notifySupplierPartialPayment(
+                    supplierEmail = "kumalillankoon12@gmail.com",
+                    paymentId = paymentId,
+                    orderId = orderId,
+                    supplierName = supplier?.Supplier_Name.toString(),
+                    paymentDate = currentDate,
+                    paymentTime = currentTime,
+                    paymentType = "Bank Transfer",
+                    paymentStatus = newPaymentStatus,
+                    paidAmount = newPaidAmount,
+                    remainingAmount = newRemainAmount,
+                    totalAmount = totalAmount
+                )
+
+                if (emailSent) {
+                    println("Partial payment email sent successfully.")
+                } else {
+                    println("Failed to send partial payment email.")
+                }
+            }
 
             if (rowsUpdated > 0) {
                 // Update UI

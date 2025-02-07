@@ -20,7 +20,9 @@ import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
+import com.example.greentipskotlin.App.Model.Invoice
 import com.example.greentipskotlin.App.Model.OrderItem
+import com.example.greentipskotlin.App.Model.Receipt
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
 import com.example.greentipskotlin.App.Model.SupplierOrder
@@ -93,6 +95,24 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val TASK_ASSIGNMENT_ID = "task_assignment_id"
         const val TASK_ASSIGNMENT_TASK_ID  = "task_id"
         const val TASK_ASSIGNMENT_WORKER_ID  = "employee_id"
+
+        //Invoice Table
+        const val TABLE_INVOICE = "Invoice"
+        const val INVOICE_ID = "invoice_id"
+        const val INVOICE_ORDER_ID = "buyer_order_id"
+        const val INVOICE_ORDER_PAYMENT_ID  = "buyer_payment"
+        const val INVOICE_DATE  = "date"
+        const val INVOICE_TIME  = "time"
+        const val INVOICE_SUBTOTAL  = "subtotal"
+        const val INVOICE_TOTAL  = "total"
+
+        //Receipt Table
+        const val TABLE_RECEIPT = "Receipt"
+        const val RECEIPT_ID = "invoice_id"
+        const val RECEIPT_INVOICE_ID = "invoice_id"
+        const val RECEIPT_DATE  = "date"
+        const val RECEIPT_TIME  = "time"
+
 
         //Task Table
         const val TABLE_TASK = "Task"
@@ -513,6 +533,29 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     )
 """
 
+        val createInvoiceTable = """
+            CREATE TABLE $TABLE_INVOICE (
+                $INVOICE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $INVOICE_ORDER_ID INTEGER ,
+                $INVOICE_ORDER_PAYMENT_ID INTEGER,
+                $INVOICE_DATE TEXT,
+                $INVOICE_TIME TEXT,
+                $INVOICE_SUBTOTAL REAL,
+                $INVOICE_TOTAL REAL,
+                FOREIGN KEY($INVOICE_ORDER_ID) REFERENCES $TABLE_BUYER_ORDER($BUYER_ORDER_ID),
+                FOREIGN KEY($INVOICE_ORDER_PAYMENT_ID) REFERENCES $TABLE_BUYER_PAYMENT($PAYMENT_ID)
+            )
+        """
+
+        val createReceiptTable = """
+            CREATE TABLE $TABLE_RECEIPT (
+                $RECEIPT_INVOICE_ID TEXT PRIMARY KEY,
+                $RECEIPT_DATE TEXT,
+                $RECEIPT_TIME TEXT,
+                FOREIGN KEY ($RECEIPT_INVOICE_ID) REFERENCES $TABLE_INVOICE($INVOICE_ORDER_ID)
+            )
+        """
+
 
         val createCoconutTable="""
             CREATE TABLE $TABLE_COCONUT(
@@ -620,6 +663,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createSupplierPayment)
         db.execSQL(createTaskTable)
         db.execSQL(createTaskAssignmentTable)
+        db.execSQL(createInvoiceTable)
+        db.execSQL(createReceiptTable)
+
 
 
     }
@@ -1201,7 +1247,76 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
+    //Invoice & Receipts--------------------------------------------------------------------------------------------------------------------------
 
+    fun insertInvoice(invoice: Invoice): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(INVOICE_ORDER_ID, invoice.orderId)
+            put(INVOICE_ORDER_PAYMENT_ID, invoice.paymentId)
+            put(INVOICE_DATE, invoice.date)
+            put(INVOICE_TIME, invoice.time)
+            put(INVOICE_SUBTOTAL, invoice.subtotal)
+            put(INVOICE_TOTAL, invoice.total)
+        }
+        // Insert data into the invoice table
+        return db.insert(TABLE_INVOICE, null, values)
+    }
+
+    // Insert Receipt
+    fun insertReceipt(receipt: Receipt): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(RECEIPT_INVOICE_ID, receipt.invoiceId)
+            put(RECEIPT_DATE, receipt.date)
+            put(RECEIPT_TIME, receipt.time)
+        }
+        // Insert data into the receipt table
+        return db.insert(TABLE_RECEIPT, null, values)
+    }
+
+    // Optional: Retrieve all invoices
+    fun getAllInvoices(): List<Invoice> {
+        val db = readableDatabase
+        val cursor = db.query(TABLE_INVOICE, null, null, null, null, null, null)
+        val invoices = mutableListOf<Invoice>()
+
+        with(cursor) {
+            while (moveToNext()) {
+                val invoiceId = getInt(getColumnIndex(INVOICE_ID))
+                val orderId = getInt(getColumnIndex(INVOICE_ORDER_ID))
+                val paymentId = getInt(getColumnIndex(INVOICE_ORDER_PAYMENT_ID))
+                val date = getString(getColumnIndex(INVOICE_DATE))
+                val time = getString(getColumnIndex(INVOICE_TIME))
+                val subtotal = getDouble(getColumnIndex(INVOICE_SUBTOTAL))
+                val total = getDouble(getColumnIndex(INVOICE_TOTAL))
+
+                invoices.add(Invoice(invoiceId, orderId, paymentId, date, time, subtotal, total))
+            }
+        }
+        cursor.close()
+        return invoices
+    }
+
+    // Optional: Retrieve all receipts
+    fun getAllReceipts(): List<Receipt> {
+        val db = readableDatabase
+        val cursor = db.query(TABLE_RECEIPT, null, null, null, null, null, null)
+        val receipts = mutableListOf<Receipt>()
+
+        with(cursor) {
+            while (moveToNext()) {
+                val receiptId = getInt(getColumnIndex(RECEIPT_ID))
+                val invoiceId = getString(getColumnIndex(RECEIPT_INVOICE_ID))
+                val date = getString(getColumnIndex(RECEIPT_DATE))
+                val time = getString(getColumnIndex(RECEIPT_TIME))
+
+                receipts.add(Receipt(receiptId, invoiceId, date, time))
+            }
+        }
+        cursor.close()
+        return receipts
+    }
 
 
 
@@ -1554,6 +1669,98 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return name
     }
+
+    fun getTasksByEmpId(workerEmpId: Int): List<Task> {
+        val taskList = mutableListOf<Task>()
+        val db = readableDatabase
+        val query = """
+        SELECT t.*
+        FROM $TABLE_TASK t
+        JOIN $TABLE_TASK_ASSIGNMENT ta ON t.$TASK_ID = ta.$TASK_ID
+        WHERE ta.$WORKER_Employee_ID = ? 
+        AND t.$TASK_PROGRESS != 'Task Complete'
+    """
+        val cursor = db.rawQuery(query, arrayOf(workerEmpId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val taskId = cursor.getInt(cursor.getColumnIndex(TASK_ID))
+                val taskEstateIdFr = cursor.getInt(cursor.getColumnIndex(TASK_ESTATE_ID_FR))
+                val taskName = cursor.getString(cursor.getColumnIndex(TASK_NAME))
+                val taskDescription = cursor.getString(cursor.getColumnIndex(TASK_DESCRIPTION))
+                val taskType = cursor.getString(cursor.getColumnIndex(TASK_TYPE))
+                val taskAssignDate = cursor.getString(cursor.getColumnIndex(TASK_ASSIGN_DATE))
+                val taskProgress = cursor.getString(cursor.getColumnIndex(TASK_PROGRESS))
+                val taskDueDate = cursor.getString(cursor.getColumnIndex(TASK_DUE_DATE))
+                val taskChallenges = cursor.getString(cursor.getColumnIndex(TASK_CHALLENGES))
+                val taskSolution = cursor.getString(cursor.getColumnIndex(TASK_SOLUTION))
+
+                val task = Task(
+                    taskId,
+                    taskEstateIdFr,
+                    taskName,
+                    taskDescription,
+                    taskType,
+                    taskAssignDate,
+                    taskProgress,
+                    taskDueDate,
+                    taskChallenges,
+                    taskSolution
+                )
+                taskList.add(task)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return taskList
+    }
+
+
+    fun getCompletedTasksByEmpId(workerEmpId: Int): List<Task> {
+        val taskList = mutableListOf<Task>()
+        val db = readableDatabase
+        val query = """
+        SELECT t.*
+        FROM $TABLE_TASK t
+        JOIN $TABLE_TASK_ASSIGNMENT ta ON t.$TASK_ID = ta.$TASK_ID
+        WHERE ta.$WORKER_Employee_ID = ? AND t.$TASK_PROGRESS = 'Task Complete'
+    """
+        val cursor = db.rawQuery(query, arrayOf(workerEmpId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val taskId = cursor.getInt(cursor.getColumnIndex(TASK_ID))
+                val taskEstateIdFr = cursor.getInt(cursor.getColumnIndex(TASK_ESTATE_ID_FR))
+                val taskName = cursor.getString(cursor.getColumnIndex(TASK_NAME))
+                val taskDescription = cursor.getString(cursor.getColumnIndex(TASK_DESCRIPTION))
+                val taskType = cursor.getString(cursor.getColumnIndex(TASK_TYPE))
+                val taskAssignDate = cursor.getString(cursor.getColumnIndex(TASK_ASSIGN_DATE))
+                val taskProgress = cursor.getString(cursor.getColumnIndex(TASK_PROGRESS))
+                val taskDueDate = cursor.getString(cursor.getColumnIndex(TASK_DUE_DATE))
+                val taskChallenges = cursor.getString(cursor.getColumnIndex(TASK_CHALLENGES))
+                val taskSolution = cursor.getString(cursor.getColumnIndex(TASK_SOLUTION))
+
+                val task = Task(
+                    taskId,
+                    taskEstateIdFr,
+                    taskName,
+                    taskDescription,
+                    taskType,
+                    taskAssignDate,
+                    taskProgress,
+                    taskDueDate,
+                    taskChallenges,
+                    taskSolution
+                )
+                taskList.add(task)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return taskList
+    }
+
+
 
 
 

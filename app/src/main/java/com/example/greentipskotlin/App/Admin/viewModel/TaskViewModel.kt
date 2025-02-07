@@ -16,6 +16,12 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
     private val _tasks = MutableLiveData<List<Task>>()
     val tasks: LiveData<List<Task>> get()=_tasks
 
+    private val _tasksByEmpId = MutableLiveData<List<Task>>()
+    val tasksByEmpId: LiveData<List<Task>> get()=_tasksByEmpId
+
+    private val _completedTasksByEmpId = MutableLiveData<List<Task>>()
+    val completedTasksByEmpId: LiveData<List<Task>> get()=_completedTasksByEmpId
+
     private val _tasksByEstateId = MutableLiveData<List<Task>>()
     val tasksByEstateId: LiveData<List<Task>> get() = _tasksByEstateId
 
@@ -25,6 +31,14 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
 
     fun refreshData(){
         _tasks.value = taskDataProvider.getAllTasks()
+    }
+
+    fun refreshTaskByEmpId(workerEmpId:Int){
+        _tasksByEmpId.value = taskDataProvider.getTasksByEmpId(workerEmpId)
+    }
+
+    fun refreshCompletedTaskByEmpId(workerEmpId:Int){
+        _completedTasksByEmpId.value = taskDataProvider.getCompletedTasksByEmpId(workerEmpId)
     }
 
     fun insertTask(task: Task){

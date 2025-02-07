@@ -13,6 +13,9 @@ import com.example.greentipskotlin.App.Model.SupplierPayment
 import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivityOrderDetailsBinding
 import com.example.greentipskotlin.databinding.ActivitySupplierOrderDetailsBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -96,6 +99,28 @@ class SupplierOrderDetails : AppCompatActivity() {
 
             // Insert into Database
             modelSupplierPayment.insertSupplierOrder(supplierPayment)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                val emailSent = EmailHelper.notifySupplierPayment(
+                    supplierEmail = "kumalillankoon12@gmail.com",
+                    orderId = orderId,
+                    paymentDate = currentDate,
+                    paymentTime = currentTime,
+                    paymentType = "Bank Transfer",
+                    paymentStatus = paymentStatus,
+                    paidAmount = payingAmount,
+                    remainingAmount = remainingAmount,
+                    totalAmount = finalPrice
+                )
+
+                if (emailSent) {
+                    println("Payment notification email sent successfully.")
+                } else {
+                    println("Failed to send payment notification email.")
+                }
+            }
+
+
 
             Toast.makeText(this, "Payment recorded successfully!", Toast.LENGTH_SHORT).show()
             finish() // Close the activity

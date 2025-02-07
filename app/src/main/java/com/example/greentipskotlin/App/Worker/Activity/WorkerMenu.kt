@@ -22,6 +22,9 @@ import com.example.greentipskotlin.App.Supplier.supplierGetPaymentsFragmnet
 import com.example.greentipskotlin.App.Supplier.supplierProfileFragment
 import com.example.greentipskotlin.App.Supplier.supplierViewCatalogFragment
 import com.example.greentipskotlin.App.Supplier.supplierViewSupplyDetailsFragment
+import com.example.greentipskotlin.App.Worker.profileFragment
+import com.example.greentipskotlin.App.Worker.taskCompletionHistoryFragment
+import com.example.greentipskotlin.App.Worker.viewAllPendingTasksFragment
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
@@ -90,9 +93,9 @@ class WorkerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(supplierDashboardFragment())
-            R.id.viewAllPendingTasksFragment -> replaceFragment(supplierProfileFragment())
-            R.id.taskCompletionHistory -> replaceFragment(supplierViewCatalogFragment())
-            R.id.profileFragment -> replaceFragment(supplierViewSupplyDetailsFragment())
+            R.id.viewAllPendingTasksFragment -> replaceFragment(viewAllPendingTasksFragment())
+            R.id.taskCompletionHistory -> replaceFragment(taskCompletionHistoryFragment())
+            R.id.profileFragment -> replaceFragment(profileFragment())
 
 
             // Other fragments...

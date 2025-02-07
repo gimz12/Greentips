@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.greentipskotlin">
     <!-- Permissions for accessing storage -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -17,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreentipsKotlin"
         tools:targetApi="31">
+        <activity
+            android:name=".App.Worker.Activity.WorkerTaskDetails"
+            android:exported="false" />
         <activity
             android:name=".App.Worker.Activity.WorkerMenu"
             android:exported="false" />

@@ -13,6 +13,9 @@ import com.example.greentipskotlin.App.Model.SupplierOrder
 import com.example.greentipskotlin.App.FieldManager.Activity.SupplierOrderAdapter
 import com.example.greentipskotlin.databinding.CustomAlertDialogBinding
 import com.example.greentipskotlin.databinding.FragmentSupplierOfferManagementBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SupplierOfferManagementFragment : Fragment() {
 
@@ -71,8 +74,27 @@ class SupplierOfferManagementFragment : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 if (newStatus == "Approved") {
                     model.updateFieldManagerStatus(supplierOrder.ORDER_ID, "Approved")
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val emailSent = EmailHelper.notifyFieldManagerApproved("kumalillankoon12@gmail.com", supplierOrder.ORDER_ID)
+                        if (emailSent) {
+                            println("Field Manager Approval email sent successfully.")
+                        } else {
+                            println("Failed to send Field Manager Approval email.")
+                        }
+                    }
+
                 } else {
                     model.updateFieldManagerStatus(supplierOrder.ORDER_ID, "Declined")
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val emailSent = EmailHelper.notifyOfferDeclined("kumalillankoon12@gmail.com", supplierOrder.ORDER_ID)
+                        if (emailSent) {
+                            println("Offer Declined email sent successfully.")
+                        } else {
+                            println("Failed to send Offer Declined email.")
+                        }
+                    }
                 }
             }
             .setNegativeButton("No", null)
