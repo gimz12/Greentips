@@ -88,7 +88,7 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.supplier_order_reqFragment -> replaceFragment(supplier_order_reqFragment())
             R.id.sup_Order_HistoryFragment -> replaceFragment(sup_Order_HistoryFragment())
             R.id.buyer_Order_HisFragment -> replaceFragment(buyer_Order_HisFragment())
-            R.id.financial_ReportFragment -> replaceFragment(CatalogueItemManageFragment())
+            R.id.financial_ReportFragment -> replaceFragment(financial_ReportFragment())
             R.id.custom_ReportsFragment -> replaceFragment(BuyerCatalogueFragment())
 
 

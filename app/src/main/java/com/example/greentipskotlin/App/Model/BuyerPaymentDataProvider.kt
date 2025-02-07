@@ -7,8 +7,8 @@ class BuyerPaymentDataProvider(context: Context){
 
     private val greentipsDatabaseHelper= GreentipsDatabaseHelper(context)
 
-    fun insertBuyerPayment(buyerPayment: BuyerPayment){
-        greentipsDatabaseHelper.insertBuyerPayment(buyerPayment)
+    fun insertBuyerPayment(buyerPayment: BuyerPayment):Long{
+        return greentipsDatabaseHelper.insertBuyerPayment(buyerPayment)
     }
 
     fun getBuyerPaymentsByUserId(userId: Int): List<BuyerPayment> {

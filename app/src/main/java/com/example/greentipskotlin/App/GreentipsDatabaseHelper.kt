@@ -17,11 +17,11 @@ import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
 import com.example.greentipskotlin.App.Model.Fertilizer
 import com.example.greentipskotlin.App.Model.FieldManager
-import com.example.greentipskotlin.App.Model.FieldManagerDataProvider
 import com.example.greentipskotlin.App.Model.HarvestInfo
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Invoice
 import com.example.greentipskotlin.App.Model.OrderItem
+import com.example.greentipskotlin.App.Model.OrderItemReport
 import com.example.greentipskotlin.App.Model.Receipt
 import com.example.greentipskotlin.App.Model.Resources
 import com.example.greentipskotlin.App.Model.Supplier
@@ -2314,7 +2314,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return orderList
     }
 
-    fun insertBuyerPayment(buyerPayment: BuyerPayment){
+    fun insertBuyerPayment(buyerPayment: BuyerPayment):Long{
         val db=writableDatabase
         val values = ContentValues().apply {
             put(PAYMENT_ID,buyerPayment.PAYMENT_ID)
@@ -2325,8 +2325,10 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(PAYMENT_METHOD,buyerPayment.PAYMENT_METHOD)
             put(PAYMENT_DATE_TIME,buyerPayment.PAYMENT_DATE_TIME)
         }
-        db.insert(TABLE_BUYER_PAYMENT,null,values)
+        val paymentID = db.insert(TABLE_BUYER_PAYMENT,null,values)
         db.close()
+
+        return paymentID
     }
 
     fun getBuyerPaymentsByUserId(userId: Int): List<BuyerPayment> {
@@ -3060,6 +3062,82 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         }
         return db.update(TABLE_RESOURCES, values, "$RESOURCE_ID=?", arrayOf(resource.resourcesID.toString()))
     }
+
+    fun getRevenueReport(startDate: String, endDate: String): Double {
+        var totalRevenue = 0.0
+        val db = readableDatabase
+
+        // Query to calculate total revenue from orders and sold items (including quantity and price)
+        val query = """
+        SELECT SUM(oi.$ORDER_ITEM_TOTAL_PRICE)
+        FROM $TABLE_ORDER_ITEM oi
+        JOIN $TABLE_BUYER_ORDER bo ON oi.$ORDER_ITEM_ORDER_ID = bo.$BUYER_ORDER_ID
+        WHERE bo.$BUYER_ORDER_STATUS != 'Cancelled'
+        AND bo.$BUYER_ORDER_DATE BETWEEN ? AND ?
+    """
+
+        // Execute the query with the provided date range as arguments
+        val cursor = db.rawQuery(query, arrayOf(startDate, endDate))
+
+        // Move to the first result and retrieve the revenue if present
+        if (cursor.moveToFirst()) {
+            totalRevenue = cursor.getDouble(0)
+        }
+
+        cursor.close() // Close the cursor after use
+        return totalRevenue
+    }
+
+    fun getOrderDetails(startDate: String, endDate: String): List<OrderDetails> {
+        val orderDetailsList = mutableListOf<OrderDetails>()
+        val db = readableDatabase
+
+        val query = """
+    SELECT bo.$BUYER_ORDER_ID, bo.$BUYER_ORDER_DATE, bo.$BUYER_ORDER_COST, 
+           oi.$ORDER_ITEM_NAME, oi.$ORDER_ITEM_QUANTITY, oi.$ORDER_ITEM_TOTAL_PRICE
+    FROM $TABLE_ORDER_ITEM oi
+    JOIN $TABLE_BUYER_ORDER bo ON oi.$ORDER_ITEM_ORDER_ID = bo.$BUYER_ORDER_ID
+    WHERE bo.$BUYER_ORDER_STATUS != 'Cancelled'
+    AND bo.$BUYER_ORDER_DATE BETWEEN ? AND ?
+    ORDER BY bo.$BUYER_ORDER_DATE ASC
+"""
+
+        val cursor = db.rawQuery(query, arrayOf(startDate, endDate))
+
+        val orderMap = mutableMapOf<Int, OrderDetails>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val orderId = cursor.getInt(0)
+                val orderDate = cursor.getString(1)  // Fetching order date
+                val orderCost = cursor.getDouble(2)
+                val itemName = cursor.getString(3)
+                val quantity = cursor.getInt(4)
+                val totalPrice = cursor.getDouble(5)
+
+                // If this order already exists in the map, add the item to the list
+                val orderDetails = orderMap[orderId]
+                    ?: OrderDetails(orderId, orderDate, orderCost, mutableListOf()).also {
+                        orderMap[orderId] = it
+                    }
+
+                // Add the item to the order's item list
+                val orderItem = OrderItemReport(itemName, quantity, totalPrice)
+                orderDetails.items.add(orderItem)
+
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+
+        // Return the list of all orders with their items
+        return orderMap.values.toList()
+    }
+
+
+
+
+
 
 
 }

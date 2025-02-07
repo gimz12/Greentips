@@ -5,6 +5,7 @@ import CartAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,6 +83,10 @@ class BuyerCartFragment : Fragment() {
 
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getInt("USER_ID", -1)
+        val userAddress = sharedPreferences.getString("ADDRESS", "No address available")
+
+        binding.cartShippingDetails.text = "Shipping Address :$userAddress"
+
 
         if (userId != -1) {
             cartViewModel.fetchCartItems(userId)
@@ -89,10 +94,23 @@ class BuyerCartFragment : Fragment() {
 
         cartViewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.updateList(cartItems)
-            val totalPrice = cartItems.sumOf { it.CART_ITEM_TOTAL_PRICE.toDouble() }
-            binding.cartSubtotal.text = "Total Price: $${"%.2f".format(totalPrice)}"
+
+            // Calculate subtotal
+            val subtotal = cartItems.sumOf { it.CART_ITEM_TOTAL_PRICE.toDouble() }
+
+            // Calculate 10% transaction fee
+            val transactionFee = subtotal * 0.10
+
+            // Calculate total (subtotal + transaction fee)
+            val totalAmount = subtotal + transactionFee
+
+            // Update UI
+            binding.cartSubtotal.text = "Subtotal: Rs ${"%.2f".format(subtotal)}"
+            binding.tvTransactionFee.text = "Transaction Fee (10%): Rs ${"%.2f".format(transactionFee)}"
+            binding.cartTotal.text = "Total: Rs ${"%.2f".format(totalAmount)}"
         }
     }
+
 
     private fun setupPaymentMethodSpinner() {
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
@@ -161,7 +179,7 @@ class BuyerCartFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getInt("USER_ID", -1)
         val address = sharedPreferences.getString("ADDRESS", "Company Address")
-        val totalPriceText = binding.cartSubtotal.text.toString()
+        val totalPriceText = binding.cartTotal.text.toString()
         val totalPrice = totalPriceText.substringAfter("Total Price: $").toDoubleOrNull()
         val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
@@ -181,7 +199,9 @@ class BuyerCartFragment : Fragment() {
             )
 
             // Place order and get order ID
-            val orderId = buyerOrderViewModel.placeOrders(buyerOrder)?.toInt() ?: return
+            val orderId = buyerOrderViewModel.placeOrders(buyerOrder).toInt()
+            Log.d("OrderID", "Returned: $orderId")
+
 
 
 
@@ -214,12 +234,12 @@ class BuyerCartFragment : Fragment() {
                     PAYMENT_METHOD = paymentMethod,
                     PAYMENT_DATE_TIME = currentDate
                 )
-                val paymentId = buyerPaymentViewModel.insertBuyerPayment(buyerPayment).toString()
+                val paymentId = buyerPaymentViewModel.insertBuyerPayment(buyerPayment).toInt()
 
                 // Create an invoice (for Cash on Delivery, paymentId can be -1 or updated later)
                 val invoice = Invoice(
                     orderId = orderId,
-                    paymentId = paymentId.toInt(),
+                    paymentId = paymentId,
                     date = currentDate,
                     time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()),
                     subtotal = totalPrice,
