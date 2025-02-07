@@ -1,105 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
+
+        <TextView
+            android:id="@+id/s_pa_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Payment ID : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvSupplierPaymentId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Supplier Payment Id"
+            android:textColor="@android:color/black"
+
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/s_pa_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/s_ord_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Order ID : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/s_pa_id" />
 
         <TextView
             android:id="@+id/tvSupplierOrderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Supplier Order ID"
+            android:textColor="@android:color/black"
+
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/s_ord_id"
+            app:layout_constraintTop_toBottomOf="@+id/tvSupplierPaymentId" />
+
+        <TextView
+            android:id="@+id/sup_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Supplier ID : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/s_ord_id" />
 
         <TextView
             android:id="@+id/tvSupplierID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Supplier ID"
+            android:textColor="@android:color/black"
+
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/sup_id"
+            app:layout_constraintTop_toBottomOf="@+id/tvSupplierOrderID" />
+
+        <TextView
+            android:id="@+id/pa_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Payment Date : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sup_id" />
 
         <TextView
             android:id="@+id/tvPaymentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Payment Date"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pa_date"
+            app:layout_constraintTop_toBottomOf="@+id/tvSupplierID" />
+
+        <TextView
+            android:id="@+id/pay_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Paied Time : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pa_date" />
 
         <TextView
             android:id="@+id/tvPaymentTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Payment Time"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp" />
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pay_time"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaymentDate" />
+
+        <TextView
+            android:id="@+id/pay_typ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Payment Type : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pay_time" />
 
         <TextView
             android:id="@+id/tvPaymentType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Payment Type"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp" />
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pay_typ"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaymentTime" />
+
+        <TextView
+            android:id="@+id/pay_sts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Payment Status : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pay_typ" />
 
         <TextView
             android:id="@+id/tvPaymentStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Payment Status"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp" />
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pay_sts"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaymentType" />
+
+        <TextView
+            android:id="@+id/pay_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Amount : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pay_sts" />
 
         <TextView
             android:id="@+id/tvPaidAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Paid Amount"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp" />
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pay_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaymentStatus" />
+
+        <TextView
+            android:id="@+id/re_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Remain Amount : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pay_amount" />
 
         <TextView
             android:id="@+id/tvRemainAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Remain Amount"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp" />
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/re_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaidAmount" />
+
+        <TextView
+            android:id="@+id/total_amo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Total Amount : "
+            android:textSize="13sp"
+            android:layout_marginBottom="20dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/re_amount" />
 
         <TextView
             android:id="@+id/tvTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Total Amount"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp" />
 
-    </LinearLayout>
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/total_amo"
+            app:layout_constraintTop_toBottomOf="@+id/tvRemainAmount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
