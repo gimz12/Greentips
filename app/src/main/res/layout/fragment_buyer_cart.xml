@@ -33,14 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/cart_subtotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subtotal: Rs 5000.00"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/cart_shipping_details"
@@ -53,13 +45,23 @@
             android:layout_marginTop="10dp" />
 
         <TextView
-            android:id="@+id/cart_tax"
+            android:id="@+id/cart_subtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tax: Rs 0.00"
+            android:text="Subtotal: Rs 5000.00"
             android:textColor="@color/black"
             android:fontFamily="@font/poppins_medium"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tvTransactionFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction Fee 10 %: Rs 5000.00"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="18sp"
             android:layout_marginTop="10dp" />
 
         <TextView

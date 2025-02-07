@@ -16,8 +16,8 @@ class BuyerPaymentViewModel(application: Application):AndroidViewModel(applicati
     val buyerPayment: LiveData<List<BuyerPayment>> get()=_buyerPayments
 
 
-    fun insertBuyerPayment (buyerPayment: BuyerPayment){
-        buyerPaymentDataProvider.insertBuyerPayment(buyerPayment)
+    fun insertBuyerPayment (buyerPayment: BuyerPayment):Long{
+        return buyerPaymentDataProvider.insertBuyerPayment(buyerPayment)
     }
 
     fun refreshData(userId: Int){

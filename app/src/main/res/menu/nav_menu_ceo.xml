@@ -12,7 +12,7 @@
         <item
             android:id="@+id/assignTaskFragment"
             android:icon="@drawable/baseline_task_24"
-            android:title="Employee Management"/>
+            android:title="Create Task"/>
         <item
             android:id="@+id/task_HistoryFragment"
             android:icon="@drawable/ic_task_history"

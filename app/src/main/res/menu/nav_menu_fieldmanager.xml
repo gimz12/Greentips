@@ -38,9 +38,9 @@
             android:icon="@drawable/ic_buyer_order_history"
             android:title="Buyer Order Managemet"/>
         <item
-            android:id="@+id/reportChallenges"
+            android:id="@+id/taskManagement"
             android:icon="@drawable/ic_custom_reports"
-            android:title="Report Challenges to CEO"/>
+            android:title="Manage Tasks"/>
         <item
             android:id="@+id/supplierOrderManagement"
             android:icon="@drawable/ic_supplier_managament"

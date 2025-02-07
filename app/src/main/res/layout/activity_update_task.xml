@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".App.CEO.Activity.UpdateTask">
+
+    <!-- ScrollView to make the content scrollable -->
+    <android.widget.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#043F3F"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:elevation="4dp"
+            android:scrollbars="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update Task"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:id="@+id/tvTaskId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task ID:"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/teTaskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Task Name"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3" />
+
+            <EditText
+                android:id="@+id/teTaskType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Task Type"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/teAssignTask"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Task Assign Date"
+                    android:background="@android:drawable/editbox_background"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#D3D3D3" />
+
+                <EditText
+                    android:id="@+id/teDueDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Due Date"
+                    android:background="@android:drawable/editbox_background"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#D3D3D3"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/estate_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_border"
+                android:backgroundTint="@color/cardview_dark_background" />
+
+            <EditText
+                android:id="@+id/teTaskDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Task Description"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/updateTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Task"
+                android:background="@drawable/okbutton_background"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/tvAssignedWorkers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assigned Workers"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+
+            <ListView
+                android:id="@+id/lvAssignedWorkers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"
+                android:divider="@android:color/white"
+                android:dividerHeight="1dp" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Progress:"
+                android:textSize="14sp"
+
+                android:textColor="@color/white"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvCurrentChallenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Challenge:"
+                android:textSize="14sp"
+
+                android:textColor="@color/white"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvCurrentSolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Solution:"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter New Solution:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/teTaskSolution"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="Enter Solution"
+                android:textColorHint="@color/hintTextGrey"
+                android:textSize="12sp"
+                android:padding="12sp"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/updateSolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Update Solution"
+                android:background="@drawable/okbutton_background"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/deleteTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Task"
+                android:background="@drawable/warningbutton_background"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+    </android.widget.ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

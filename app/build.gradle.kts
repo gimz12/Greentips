@@ -53,6 +53,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation ("com.github.bumptech.glide:glide:4.13.2")
+    implementation ("com.sun.mail:android-mail:1.6.2")
+    implementation ("com.sun.mail:android-activation:1.6.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 
 

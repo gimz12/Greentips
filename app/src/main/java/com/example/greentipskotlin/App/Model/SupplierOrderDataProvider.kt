@@ -35,5 +35,21 @@ class SupplierOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.updateCeoStatus(orderId, status)
     }
 
+    fun getSupplierOrdersByUserId(userId: Int): List<SupplierOrder> {
+        return greentipsDatabaseHelper.getSupplierOrdersByUserId(userId)
+    }
+
+    fun updateSupplierOrder(supplierOrder: SupplierOrder) {
+        greentipsDatabaseHelper.updateSupplierOrder(supplierOrder)
+    }
+
+    fun deleteSupplierOrder(orderId: Int) {
+        greentipsDatabaseHelper.deleteSupplierOrder(orderId)
+    }
+
+    fun getApprovedSupplierOrders(): List<SupplierOrder> {
+        return greentipsDatabaseHelper.getApprovedSupplierOrders()
+    }
+
 
 }

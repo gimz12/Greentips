@@ -1,14 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".App.CEO.assignTaskFragment">
+    android:background="#082C2C">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task Progress Update Panel"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <!-- Task Image and Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="16dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@drawable/task"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Completed Tasks"
+                android:background="#064A4A"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <!-- Task Assignment Form -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#043F3F"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:elevation="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assign Task"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/teTaskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Task Name"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3" />
+
+            <EditText
+                android:id="@+id/teTaskType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Task Type"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/teAssignTask"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Task Assign Date"
+                    android:background="@android:drawable/editbox_background"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#D3D3D3" />
+
+                <EditText
+                    android:id="@+id/teDueDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Due Date"
+                    android:background="@android:drawable/editbox_background"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#D3D3D3"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Spinner
+                    android:id="@+id/estate_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/edit_text_border"
+                    android:backgroundTint="@color/cardview_dark_background"
+                    />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/teTaskDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Task Description"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#D3D3D3"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/insertTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Task"
+                android:background="#E53935"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

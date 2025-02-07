@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.greentipskotlin.App.Model.ExpenseDetail
 import com.example.greentipskotlin.App.Model.SupplierPayment
 import com.example.greentipskotlin.App.Model.SupplierPaymentDataProvider
 
@@ -33,6 +34,29 @@ class SupplierPaymentViewModel(application: Application) : AndroidViewModel(appl
 
     fun getPartialPaidSupplierPayments(): List<SupplierPayment> {
         return supplierPaymentDataProvider.getPartialPaidSupplierPayments()
+    }
+
+    fun updateSupplierPayment(
+        paymentId: Int,
+        newPaymentDate: String,
+        newPaymentTime: String,
+        newPaidAmount: Double,
+        newRemainAmount: Double,
+        newPaymentStatus: String
+    ): Int {
+        return supplierPaymentDataProvider.updateSupplierPayment(paymentId,newPaymentDate,newPaymentTime,newPaidAmount,newRemainAmount,newPaymentStatus)
+    }
+
+    fun getPaymentStatus(orderId: Int): String? {
+        return supplierPaymentDataProvider.getPaymentStatus(orderId)
+    }
+
+    fun getSupplierPaymentByOrderId(orderId: Int): SupplierPayment? {
+        return supplierPaymentDataProvider.getSupplierPaymentByOrderId(orderId)
+    }
+
+    fun getExpensesReport(startDate: String, endDate: String): List<ExpenseDetail> {
+        return supplierPaymentDataProvider.getExpensesReport(startDate,endDate)
     }
 
 

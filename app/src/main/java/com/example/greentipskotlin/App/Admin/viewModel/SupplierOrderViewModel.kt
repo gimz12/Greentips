@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.greentipskotlin.App.Model.SupplierOrder
 import com.example.greentipskotlin.App.Model.SupplierOrderDataProvider
+import kotlinx.coroutines.launch
 
 class SupplierOrderViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -23,9 +25,14 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
     private val _supplierOffersApprovedByCEO = MutableLiveData<List<SupplierOrder>>()
     val supplierOffersApprovedByCEO: LiveData<List<SupplierOrder>> get() = _supplierOffersApprovedByCEO
 
+    private val _supplierApprovedOrders = MutableLiveData<List<SupplierOrder>>()
+    val supplierApprovedOrders: LiveData<List<SupplierOrder>> get() = _supplierApprovedOrders
 
-    fun insertSupplierOrder(supplierOrder: SupplierOrder){
-        return supplierOrderDataProvider.insertSupplierOrder(supplierOrder)
+    private val _supplierOffersByUserId = MutableLiveData<List<SupplierOrder>>()
+    val supplierOffersByUserId: LiveData<List<SupplierOrder>> get() = _supplierOffersByUserId
+
+    fun insertSupplierOrder(supplierOrder: SupplierOrder) {
+        supplierOrderDataProvider.insertSupplierOrder(supplierOrder)
     }
 
     fun refreshData() {
@@ -48,6 +55,15 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
         _supplierOffersApprovedByCEO.value = approvedOrders
     }
 
+    fun refreshApprovedOrders() {
+        val approvedOrders = supplierOrderDataProvider.getApprovedSupplierOrders()
+        _supplierApprovedOrders.value = approvedOrders
+    }
+
+    fun getSupplierOrdersByUserId(userId: Int) {
+        val orders = supplierOrderDataProvider.getSupplierOrdersByUserId(userId)
+        _supplierOffersByUserId.postValue(orders) // Post the data to LiveData
+    }
 
     fun getPendingApproval() {
         val pendingOrders = supplierOrderDataProvider.getUnapprovedOrders()
@@ -66,5 +82,11 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
         return result
     }
 
+    fun updateSupplierOrder(supplierOrder: SupplierOrder) {
+        supplierOrderDataProvider.updateSupplierOrder(supplierOrder)
+    }
 
+    fun deleteSupplierOrder(orderId: Int) {
+        supplierOrderDataProvider.deleteSupplierOrder(orderId)
+    }
 }

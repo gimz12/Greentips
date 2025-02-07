@@ -14,6 +14,9 @@ import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.CustomAlertDialogBinding
 import com.example.greentipskotlin.databinding.FragmentSupplierOfferManagementBinding
 import com.example.greentipskotlin.databinding.FragmentSupplierOrderReqBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class supplier_order_reqFragment : Fragment() {
 
@@ -79,8 +82,28 @@ class supplier_order_reqFragment : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 if (newStatus == "Approved") {
                     model.updateCeoStatus(supplierOrder.ORDER_ID, "Approved")
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val emailSent = EmailHelper.notifyCEOApproved("kumalillankoon12@gmail.com", supplierOrder.ORDER_ID)
+                        if (emailSent) {
+                            println("CEO Approval email sent successfully.")
+                        } else {
+                            println("Failed to send CEO Approval email.")
+                        }
+                    }
+
                 } else {
                     model.updateCeoStatus(supplierOrder.ORDER_ID, "Declined")
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val emailSent = EmailHelper.notifyOfferDeclined("kumalillankoon12@gmail.com", supplierOrder.ORDER_ID)
+                        if (emailSent) {
+                            println("Offer Declined email sent successfully.")
+                        } else {
+                            println("Failed to send Offer Declined email.")
+                        }
+                    }
+
                 }
             }
             .setNegativeButton("No", null)
