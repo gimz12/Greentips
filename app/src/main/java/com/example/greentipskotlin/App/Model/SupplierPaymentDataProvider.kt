@@ -39,4 +39,8 @@ class SupplierPaymentDataProvider(context: Context) {
         return greentipsDatabaseHelper.getSupplierPaymentByOrderId(orderId)
     }
 
+    fun getExpensesReport(startDate: String, endDate: String): List<ExpenseDetail> {
+        return greentipsDatabaseHelper.getExpensesReport(startDate,endDate)
+    }
+
 }

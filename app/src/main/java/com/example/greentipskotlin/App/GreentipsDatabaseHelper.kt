@@ -15,6 +15,7 @@ import com.example.greentipskotlin.App.Model.CreditCard
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
+import com.example.greentipskotlin.App.Model.ExpenseDetail
 import com.example.greentipskotlin.App.Model.Fertilizer
 import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.HarvestInfo
@@ -3132,6 +3133,45 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         // Return the list of all orders with their items
         return orderMap.values.toList()
+    }
+
+    fun getExpensesReport(startDate: String, endDate: String): List<ExpenseDetail> {
+        val expensesList = mutableListOf<ExpenseDetail>()
+        val db = readableDatabase
+        val query = """
+        SELECT so.$SUPPLIER_ORDER_ID, s.$COLUMN_SUPPLIER_NAME, s.$COLUMN_SUPPLIER_COMPANY_NAME, 
+               so.$SUPPLIER_ITEM_NAME, so.$SUPPLIER_ITEM_QUANTITY, 
+               so.$SUPPLIER_QUANTITY_PRICE, so.$SUPPLIER_TOTAL_AMOUNT
+        FROM $TABLE_SUPPLIER_ORDER so
+        JOIN $TABLE_SUPPLIER_PAYMENT sp ON so.$SUPPLIER_ORDER_ID = sp.$SUPPLIER_PAYMENT_ORDER_ID
+        JOIN $TABLE_SUPPLIER s ON so.$SUPPLIER_USER_ID = s.$SUPPLIER_ID
+        WHERE sp.$SUPPLIER_PAYMENT_DATE BETWEEN ? AND ?
+    """
+
+        val cursor = db.rawQuery(query, arrayOf(startDate, endDate))
+
+        var subTotal = 0.0
+        if (cursor.moveToFirst()) {
+            do {
+                val orderId = cursor.getInt(0)
+                val userName = cursor.getString(1)
+                val companyName = cursor.getString(2)
+                val itemName = cursor.getString(3)
+                val itemQuantity = cursor.getInt(4)
+                val quantityPrice = cursor.getDouble(5)
+                val totalAmount = cursor.getDouble(6)
+
+                subTotal += totalAmount
+
+                expensesList.add(
+                    ExpenseDetail(orderId, userName, companyName, itemName, itemQuantity, quantityPrice, totalAmount)
+                )
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        return expensesList
     }
 
 
