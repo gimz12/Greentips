@@ -15,4 +15,8 @@ class CoconutDataProvider (context: Context){
         return greentipsDatabaseHelper.getAllCoconuts()
     }
 
+    fun getCoconutProductionReport(): List<CoconutProductionReport> {
+        return greentipsDatabaseHelper.getCoconutProductionReport()
+    }
+
 }

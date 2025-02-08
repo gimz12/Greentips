@@ -52,6 +52,7 @@ class fert_mngFragment : Fragment() {
         model.fertilizer.observe(viewLifecycleOwner){updatedList ->
             val  listToDisplay = if (isSorted) updatedList.sortedBy { it.fertilizerName } else updatedList
             fertilizeradapter.updateList(listToDisplay)
+            binding.fertilizerCounter.text=listToDisplay.size.toString()
         }
 
         return binding.root

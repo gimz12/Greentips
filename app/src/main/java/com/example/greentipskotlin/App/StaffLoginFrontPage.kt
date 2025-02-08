@@ -24,6 +24,12 @@ class StaffLoginFrontPage : AppCompatActivity() {
             startActivity(continueToLoginIntent)
 
         }
+
+        binding.loginUser.setOnClickListener{
+            val intentToUserLogin = Intent(this, User_Login::class.java)
+            startActivity(intentToUserLogin)
+        }
+
         exit.setOnClickListener(){
             finishAffinity()
         }

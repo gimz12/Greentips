@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.greentipskotlin.App.Admin.Activity.BuyerInsert
+import com.example.greentipskotlin.App.Admin.Activity.SupplierInsert
 import com.example.greentipskotlin.App.Admin.MainActivity
 import com.example.greentipskotlin.App.Admin.viewModel.EmployeeViewModel
 import com.example.greentipskotlin.App.Buyer.Activity.BuyerMenu
@@ -12,6 +16,7 @@ import com.example.greentipskotlin.App.Model.Buyer
 import com.example.greentipskotlin.App.Model.Supplier
 import com.example.greentipskotlin.App.Supplier.SupplierMenu
 import com.example.greentipskotlin.databinding.ActivityUserLoginBinding
+import com.example.greentipskotlin.databinding.CustomAlertDialogBinding
 
 class User_Login : AppCompatActivity() {
 
@@ -29,14 +34,39 @@ class User_Login : AppCompatActivity() {
 
 
         binding.staffIntent.setOnClickListener(){
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Staff_Login::class.java)
             startActivity(intent)
         }
 
         binding.forgotPasswordClickHere.setOnClickListener(){
-            val intent = Intent(this, Staff_Login::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.newUser.setOnClickListener {
+            // Inflate your custom alert dialog layout
+            val dialogBinding = CustomAlertDialogBinding.inflate(layoutInflater)
+
+            // Set the title and message of the dialog
+            dialogBinding.dialogTitle.text = "Select User Type"
+            dialogBinding.dialogMessage.text = "Please choose whether you are a Buyer or a Supplier."
+
+            // Build and show the AlertDialog with two options
+            AlertDialog.Builder(this)
+                .setView(dialogBinding.root)
+                .setPositiveButton("Buyer") { _, _ ->
+                    // Intent to BuyerInsert Activity when Buyer is chosen
+                    val intent = Intent(this, BuyerInsert::class.java)
+                    startActivity(intent)
+                }
+                .setNegativeButton("Supplier") { _, _ ->
+                    // Intent to SupplierInsert Activity when Supplier is chosen
+                    val intent = Intent(this, SupplierInsert::class.java)
+                    startActivity(intent)
+                }
+                .show()
+        }
+
 
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString().trim()

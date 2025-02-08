@@ -35,4 +35,9 @@ class BuyerOrderDataProvider(context: Context) {
     fun getOrderDetails(startDate: String, endDate: String): List<OrderDetails> {
         return greentipsDatabaseHelper.getOrderDetails(startDate, endDate)
     }
+
+    fun getBuyerOrderById(orderId: Int): BuyerOrder? {
+        return greentipsDatabaseHelper.getBuyerOrderById(orderId)
+    }
+
 }

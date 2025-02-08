@@ -48,6 +48,8 @@ class emp_mngFragment : Fragment() {
         binding.employeeRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.employeeRecyclerView.adapter = employeeAdapter
 
+
+
         addEmployeeImage.setOnClickListener {
             onClickAddNewEmployee()
         }
@@ -59,7 +61,9 @@ class emp_mngFragment : Fragment() {
         model.employees.observe(viewLifecycleOwner) { updatedList ->
             val listToDisplay = if (isSorted) updatedList.sortedBy { it.employeeName } else updatedList
             employeeAdapter.updateList(listToDisplay)
+            binding.empCount.text = listToDisplay.size.toString()
         }
+
 
         return binding.root
     }

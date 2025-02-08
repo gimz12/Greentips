@@ -180,7 +180,7 @@ class BuyerCartFragment : Fragment() {
         val userId = sharedPreferences.getInt("USER_ID", -1)
         val address = sharedPreferences.getString("ADDRESS", "Company Address")
         val totalPriceText = binding.cartTotal.text.toString()
-        val totalPrice = totalPriceText.substringAfter("Total Price: $").toDoubleOrNull()
+        val totalPrice = totalPriceText.substringAfter("Total: Rs ").toDoubleOrNull()
         val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
         if (cartAdapter.itemCount == 0) {

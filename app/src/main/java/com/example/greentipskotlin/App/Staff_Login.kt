@@ -39,6 +39,11 @@ class Staff_Login : AppCompatActivity() {
         val passwordEditText = binding.passwordTxt
         val loginButton = binding.loginBtn
 
+        binding.userIntent.setOnClickListener{
+            val intent = Intent(this, User_Login::class.java)
+            startActivity(intent)
+        }
+
 
         loginButton.setOnClickListener(){
             val username = usernameEditText.text.toString().trim()

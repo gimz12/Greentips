@@ -24,4 +24,8 @@ class BuyerPaymentViewModel(application: Application):AndroidViewModel(applicati
         val orderList = buyerPaymentDataProvider.getBuyerPaymentsByUserId(userId)
         _buyerPayments.value = orderList
     }
+
+    fun getBuyerPaymentByOrderId(orderId: Int): BuyerPayment? {
+        return buyerPaymentDataProvider.getBuyerPaymentByOrderId(orderId)
+    }
 }

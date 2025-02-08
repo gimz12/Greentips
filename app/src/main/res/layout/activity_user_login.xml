@@ -31,7 +31,7 @@
             android:fontFamily="@font/poppins_regular"
             android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
-            android:text="Welcome Back!"
+            android:text="Welcome Back, User!"
             android:textStyle="bold"
             android:textSize="25sp"
             android:textColor="@color/black"
@@ -146,6 +146,21 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/forgot_password_TextView"
             app:layout_constraintTop_toBottomOf="@+id/password_txt" />
+
+        <TextView
+            android:id="@+id/newUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="New Member?"
+            android:textColor="@color/okGreen"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/forgot_password_TextView"
+            app:layout_constraintTop_toBottomOf="@+id/staffIntent" />
 
         <Button
             android:id="@+id/loginBtn"

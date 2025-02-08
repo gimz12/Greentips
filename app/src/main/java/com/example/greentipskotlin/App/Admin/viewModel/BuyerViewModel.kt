@@ -27,5 +27,9 @@ class BuyerViewModel(application: Application):AndroidViewModel(application) {
         _buyers.value = buyerDataProvider.getAllBuyers()
     }
 
+    fun getBuyerDetailsById(buyerId: Int): Buyer? {
+        return buyerDataProvider.getBuyerDetailsById(buyerId)
+    }
+
 
 }

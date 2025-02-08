@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.greentipskotlin.App.Model.EstateDataProvider
+import com.example.greentipskotlin.App.Model.IntercropProductionReport
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.IntercropsDataProvider
 
@@ -31,5 +32,9 @@ class IntercropsViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getAllEstateNames(): List<String> {
         return estateDataProvider.getAllEstates().map { it.estateName }
+    }
+
+    fun getEstateWiseIntercropReport(): List<IntercropProductionReport> {
+        return intercropsDataProvider.getEstateWiseIntercropReport()
     }
 }

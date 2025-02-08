@@ -56,4 +56,8 @@ class BuyerOrderViewModel(application: Application) : AndroidViewModel(applicati
     fun getOrderDetails(startDate: String, endDate: String): List<OrderDetails> {
         return buyerOrderDataProvider.getOrderDetails(startDate, endDate)
     }
+
+    fun getBuyerOrderById(orderId: Int): BuyerOrder? {
+        return buyerOrderDataProvider.getBuyerOrderById(orderId)
+    }
 }

@@ -37,7 +37,7 @@ class resource_mngFragment : Fragment() {
 
 
         binding.insertResourceImageView.setOnClickListener(){
-            startActivity(Intent(requireContext(),ResourceDetailsActivity::class.java))
+            startActivity(Intent(requireContext(),ResourceInsert::class.java))
         }
 
         binding.sortButton.setOnClickListener(){
@@ -47,6 +47,7 @@ class resource_mngFragment : Fragment() {
         model.resources.observe(viewLifecycleOwner){ updatedList->
             val listToDisplay = if (isSorted) updatedList.sortedBy { it.description } else updatedList
             resourceAdapter.updateList(listToDisplay)
+            binding.resourceCount.text=listToDisplay.size.toString()
         }
 
         resourceAdapter = ResourceAdapter(emptyList()) { resource ->

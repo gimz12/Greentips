@@ -11,14 +11,16 @@ import com.example.greentipskotlin.App.Model.Cart
 import com.example.greentipskotlin.App.Model.Catalogue
 import com.example.greentipskotlin.App.Model.Ceo
 import com.example.greentipskotlin.App.Model.Coconut
+import com.example.greentipskotlin.App.Model.CoconutProductionReport
 import com.example.greentipskotlin.App.Model.CreditCard
 import com.example.greentipskotlin.App.Model.Employee
 import com.example.greentipskotlin.App.Model.EmployeePosition
 import com.example.greentipskotlin.App.Model.Estate
-import com.example.greentipskotlin.App.Model.ExpenseDetail
+import com.example.greentipskotlin.App.Model.ExpenseDetails
 import com.example.greentipskotlin.App.Model.Fertilizer
 import com.example.greentipskotlin.App.Model.FieldManager
 import com.example.greentipskotlin.App.Model.HarvestInfo
+import com.example.greentipskotlin.App.Model.IntercropProductionReport
 import com.example.greentipskotlin.App.Model.Intercrops
 import com.example.greentipskotlin.App.Model.Invoice
 import com.example.greentipskotlin.App.Model.OrderItem
@@ -2288,6 +2290,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return orderList
     }
 
+
+
     fun getAllBuyerProcessingOrder(): List<BuyerOrder> {
         val orderList = mutableListOf<BuyerOrder>()
         val db = readableDatabase
@@ -3135,8 +3139,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return orderMap.values.toList()
     }
 
-    fun getExpensesReport(startDate: String, endDate: String): List<ExpenseDetail> {
-        val expensesList = mutableListOf<ExpenseDetail>()
+    fun getExpensesReport(startDate: String, endDate: String): List<ExpenseDetails> {
+        val expensesList = mutableListOf<ExpenseDetails>()
         val db = readableDatabase
         val query = """
         SELECT so.$SUPPLIER_ORDER_ID, s.$COLUMN_SUPPLIER_NAME, s.$COLUMN_SUPPLIER_COMPANY_NAME, 
@@ -3164,7 +3168,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 subTotal += totalAmount
 
                 expensesList.add(
-                    ExpenseDetail(orderId, userName, companyName, itemName, itemQuantity, quantityPrice, totalAmount)
+                    ExpenseDetails(orderId, userName, companyName, itemName, itemQuantity, quantityPrice, totalAmount)
                 )
             } while (cursor.moveToNext())
         }
@@ -3173,6 +3177,149 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         return expensesList
     }
+
+    fun getBuyerOrderById(orderId: Int): BuyerOrder? {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(orderId.toString()))
+
+        var buyerOrder: BuyerOrder? = null
+        if (cursor.moveToFirst()) {
+            buyerOrder = BuyerOrder(
+                ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ORDER_ID)),
+                USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_USER_ID)),
+                ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
+                ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
+                ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
+                ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_SHIPPING_ADDRESS))
+            )
+        }
+        cursor.close()
+        db.close()
+
+        return buyerOrder
+    }
+
+    fun getBuyerPaymentByOrderId(orderId: Int): BuyerPayment? {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_BUYER_PAYMENT WHERE $PAYMENT_ORDER_ID = ?"
+        val cursor = db.rawQuery(query, arrayOf(orderId.toString()))
+
+        var buyerPayment: BuyerPayment? = null
+        if (cursor.moveToFirst()) {
+            buyerPayment = BuyerPayment(
+                PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_ID)),
+                PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_ORDER_ID)),
+                PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_USER_ID)),
+                PAYMENT_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(PAYMENT_AMOUNT)),
+                PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT_STATUS)),
+                PAYMENT_METHOD = cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT_METHOD)),
+                PAYMENT_DATE_TIME = cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT_DATE_TIME))
+            )
+        }
+        cursor.close()
+        db.close()
+
+        return buyerPayment
+    }
+
+    //Custom Reports -------------------------------------------------------------------------------------------------------
+
+    fun getCoconutProductionReport(): List<CoconutProductionReport> {
+        val productionList = mutableListOf<CoconutProductionReport>()
+        val db = readableDatabase
+
+        val query = """
+        SELECT 
+            $COLUMN_COCONUT_ESTATE_ID_FR, 
+            $COLUMN_COCONUT_PLANT_DATE,
+            SUM(CAST($COLUMN_NUMBER_OF_COCONUTS AS INTEGER)) AS TotalCoconuts,
+            $COLUMN_COCONUT_TREE_AGE,
+            $COLUMN_TREE_HEALTH,
+            $COLUMN_COCONUT_TREE_TYPE,
+            $COLUMN_COCONUT_ADDITIONAL_INFO
+        FROM $TABLE_COCONUT
+        GROUP BY 
+            $COLUMN_COCONUT_ESTATE_ID_FR, 
+            $COLUMN_COCONUT_PLANT_DATE,
+            $COLUMN_COCONUT_TREE_AGE, 
+            $COLUMN_TREE_HEALTH,
+            $COLUMN_COCONUT_TREE_TYPE, 
+            $COLUMN_COCONUT_ADDITIONAL_INFO
+        ORDER BY 
+            $COLUMN_COCONUT_ESTATE_ID_FR, 
+            $COLUMN_COCONUT_PLANT_DATE,
+            $COLUMN_COCONUT_TREE_AGE;
+    """
+
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val report = CoconutProductionReport(
+                    estateId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_ESTATE_ID_FR)),
+                    plantDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_PLANT_DATE)),
+                    numberOfCoconuts = cursor.getInt(cursor.getColumnIndexOrThrow("TotalCoconuts")),
+                    treeAge = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_TREE_AGE)),
+                    treeHealth = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TREE_HEALTH)),
+                    treeType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_TREE_TYPE)),
+                    additionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_ADDITIONAL_INFO))
+                )
+                productionList.add(report)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return productionList
+    }
+
+    // Database method to retrieve intercrop data
+    fun getEstateWiseIntercropReport(): List<IntercropProductionReport> {
+        val db = readableDatabase
+        val reportList = mutableListOf<IntercropProductionReport>()
+
+        // Updated query: Select the correct columns from the Intercrop table.
+        // (Assuming that TABLE_ESTATE and Estate_ID are defined elsewhere)
+        val query = """
+        SELECT i.$COLUMN_INTERCROPS_ESTATE_ID_FR, 
+               i.$COLUMN_INTERCROP_TYPE, 
+               i.$COLUMN_INTERCROP_PLANTED_DATE, 
+               i.$COLUMN_INTERCROP_ADDITIONAL_INFO
+        FROM $TABLE_INTERCROP i
+        JOIN $TABLE_ESTATE e ON i.$COLUMN_INTERCROPS_ESTATE_ID_FR = e.$Estate_ID
+    """
+
+        val cursor = db.rawQuery(query, null)
+        if (cursor.moveToFirst()) {
+            do {
+                // Use the defined constants so that the column names match exactly.
+                val estateId = cursor.getInt(cursor.getColumnIndex(COLUMN_INTERCROPS_ESTATE_ID_FR))
+                val intercropType = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_TYPE))
+                val plantedDate = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_PLANTED_DATE))
+                val additionalInfo = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_ADDITIONAL_INFO))
+
+                val report = IntercropProductionReport(
+                    estateId = estateId,
+                    intercropType = intercropType,
+                    plantedDate = plantedDate,
+                    additionalInfo = additionalInfo
+                )
+                reportList.add(report)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return reportList
+    }
+
+
+
+
+
+
+
+
 
 
 

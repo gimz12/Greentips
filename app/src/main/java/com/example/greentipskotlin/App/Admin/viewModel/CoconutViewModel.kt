@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.greentipskotlin.App.Model.Buyer
 import com.example.greentipskotlin.App.Model.Coconut
 import com.example.greentipskotlin.App.Model.CoconutDataProvider
+import com.example.greentipskotlin.App.Model.CoconutProductionReport
 import com.example.greentipskotlin.App.Model.EstateDataProvider
 
 class CoconutViewModel (application: Application):AndroidViewModel(application) {
@@ -39,6 +40,10 @@ class CoconutViewModel (application: Application):AndroidViewModel(application) 
 
     fun refreshData(){
         _coconutTrees.value = coconutDataProvider.getAllCoconutTrees()
+    }
+
+    fun getCoconutProductionReport(): List<CoconutProductionReport> {
+        return coconutDataProvider.getCoconutProductionReport()
     }
 
 }

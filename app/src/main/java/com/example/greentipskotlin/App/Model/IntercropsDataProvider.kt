@@ -2,6 +2,7 @@ package com.example.greentipskotlin.App.Model
 
 import GreentipsDatabaseHelper
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 
 class IntercropsDataProvider (context: Context) {
 
@@ -18,6 +19,10 @@ class IntercropsDataProvider (context: Context) {
 
     fun getAllInterCrops():List<Intercrops>{
         return greentipsDatabaseHelper.getAllIntercrops()
+    }
+
+    fun getEstateWiseIntercropReport(): List<IntercropProductionReport> {
+        return greentipsDatabaseHelper.getEstateWiseIntercropReport()
     }
 
 

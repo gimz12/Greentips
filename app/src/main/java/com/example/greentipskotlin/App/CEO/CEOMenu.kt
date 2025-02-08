@@ -83,13 +83,11 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.homeFragment -> replaceFragment(ceoDashboardFragment())
             R.id.assignTaskFragment -> replaceFragment(assignTaskFragment())
             R.id.task_HistoryFragment -> replaceFragment(task_HistoryFragment())
-            R.id.supplier_Reg_ReqFragment -> replaceFragment(supplier_Reg_ReqFragment())
-            R.id.buyer_RegFragment -> replaceFragment(buyer_RegFragment())
             R.id.supplier_order_reqFragment -> replaceFragment(supplier_order_reqFragment())
             R.id.sup_Order_HistoryFragment -> replaceFragment(sup_Order_HistoryFragment())
             R.id.buyer_Order_HisFragment -> replaceFragment(buyer_Order_HisFragment())
             R.id.financial_ReportFragment -> replaceFragment(financial_ReportFragment())
-            R.id.custom_ReportsFragment -> replaceFragment(BuyerCatalogueFragment())
+            R.id.custom_ReportsFragment -> replaceFragment(custom_ReportsFragment())
 
 
             // Other fragments...

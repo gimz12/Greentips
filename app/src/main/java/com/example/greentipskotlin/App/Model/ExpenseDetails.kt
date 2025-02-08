@@ -1,6 +1,6 @@
 package com.example.greentipskotlin.App.Model
 
-data class ExpenseDetail(
+data class ExpenseDetails(
     val orderId: Int,
     val userName: String,
     val companyName: String,

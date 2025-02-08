@@ -15,4 +15,8 @@ class BuyerPaymentDataProvider(context: Context){
         return greentipsDatabaseHelper.getBuyerPaymentsByUserId(userId)
     }
 
+    fun getBuyerPaymentByOrderId(orderId: Int): BuyerPayment? {
+        return greentipsDatabaseHelper.getBuyerPaymentByOrderId(orderId)
+    }
+
 }

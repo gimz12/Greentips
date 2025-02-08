@@ -44,6 +44,7 @@ class intercrops_infoFragment : Fragment() {
         model.intercrops.observe(viewLifecycleOwner) { updatedList ->
             val listToDisplay = if (isSorted) updatedList.sortedBy { it.intercropType } else updatedList
             intercropsAdapter.updateList(listToDisplay)
+            binding.intercropsCount.text=listToDisplay.size.toString()
         }
 
         return binding.root

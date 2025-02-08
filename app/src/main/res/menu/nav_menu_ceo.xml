@@ -18,14 +18,6 @@
             android:icon="@drawable/ic_task_history"
             android:title="Task History"/>
         <item
-            android:id="@+id/supplier_Reg_ReqFragment"
-            android:icon="@drawable/ic_supplier_reg"
-            android:title="Supplier Registration Requests "/>
-        <item
-            android:id="@+id/buyer_RegFragment"
-            android:icon="@drawable/ic_buyer_reg_req"
-            android:title="Buyer registration Requests"/>
-        <item
             android:id="@+id/supplier_order_reqFragment"
             android:icon="@drawable/ic_supplier_order_req"
             android:title="Supplier’s Order Request"/>

@@ -31,7 +31,7 @@
             android:fontFamily="@font/poppins_regular"
             android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
-            android:text="Welcome Back!"
+            android:text="Welcome Back Employee!"
             android:textStyle="bold"
             android:textSize="25sp"
             android:textColor="@color/black"
@@ -125,6 +125,21 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Click Here"
+            android:textColor="@color/okGreen"
+
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/forgot_password_TextView"
+            app:layout_constraintTop_toBottomOf="@+id/password_txt" />
+
+        <TextView
+            android:id="@+id/userIntent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Sign In As a User?"
             android:textColor="@color/okGreen"
 
             android:textSize="12sp"
