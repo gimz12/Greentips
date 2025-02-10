@@ -93,7 +93,6 @@ class SupplierMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(supplierDashboardFragment())
-            R.id.profileFragment -> replaceFragment(supplierProfileFragment())
             R.id.viewCatalogFragment -> replaceFragment(supplierViewCatalogFragment())
             R.id.viewSupplyDetailsFragment -> replaceFragment(supplierViewSupplyDetailsFragment())
 

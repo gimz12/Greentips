@@ -80,7 +80,6 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             R.id.viewCartFragment -> replaceFragment(BuyerCartFragment())
             R.id.orderHistoryFragment -> replaceFragment(BuyerOrderHistoryFragment())
             R.id.paymentMethodFragment -> replaceFragment(PaymentMethodFragment())
-            R.id.yourProfileFragment -> replaceFragment(sup_Order_HistoryFragment())
             R.id.log_out -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, User_Login::class.java))

@@ -70,6 +70,7 @@ class supplierViewSupplyDetailsFragment : Fragment() {
         model.supplierOffersByUserId.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
             supplierOfferAdapter.updateList(listToDisplay)
+            binding.orderCount.text=listToDisplay.size.toString()
         }
 
 
