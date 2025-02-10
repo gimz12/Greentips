@@ -186,7 +186,7 @@
                 android:id="@+id/receivingBankAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="321323"
+                android:text="8009811672"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvReceivingBankAccount"/>
@@ -207,7 +207,7 @@
                 android:id="@+id/sendingBankAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="321323"
+                android:text="8009887202"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSendingBankAccount"/>
@@ -229,7 +229,9 @@
             android:id="@+id/PayingAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="321323"
+            android:text=""
+            android:hint="Enter Amount"
+            android:textColorHint="@color/textGrey"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPayingAmount" />

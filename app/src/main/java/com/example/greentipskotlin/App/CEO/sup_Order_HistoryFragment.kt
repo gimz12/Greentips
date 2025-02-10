@@ -65,6 +65,7 @@ class sup_Order_HistoryFragment : Fragment() {
         model.supplierApprovedOrders.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
             supplierConfirmedOrderAdapter.updateList(listToDisplay)
+            binding.supplierOrderHistory.text=listToDisplay.size.toString()
         }
 
         return binding.root

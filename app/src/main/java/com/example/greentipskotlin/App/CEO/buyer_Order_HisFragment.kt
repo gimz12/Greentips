@@ -62,6 +62,7 @@ class buyer_Order_HisFragment : Fragment() {
         model.buyerOrders.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
             orderAdapter.updateList(listToDisplay)
+            binding.buyerOrderCount.text=listToDisplay.size.toString()
         }
 
         return binding.root

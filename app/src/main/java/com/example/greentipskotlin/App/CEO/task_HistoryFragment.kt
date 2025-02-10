@@ -65,11 +65,11 @@ class task_HistoryFragment : Fragment() {
         // Set up RecyclerView
         binding.taskRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.taskRecyclerView.adapter = taskAdapter
-        binding.taskCounter.text=taskAdapter.itemCount.toString()
 
         model.tasks.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.TASK_NAME } else updateList
             taskAdapter.updateList(listToDisplay)
+            binding.taskCounter.text=listToDisplay.size.toString()
         }
 
         return binding.root

@@ -18,6 +18,7 @@ import com.example.greentipskotlin.App.Admin.Activity.EstateInsert
 import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
 import com.example.greentipskotlin.App.Model.HarvestInfo
+import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
@@ -98,7 +99,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
             // Other fragments...
-            R.id.log_out -> Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+            R.id.log_out -> {
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, User_Login::class.java))
+                finish()
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

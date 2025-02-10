@@ -52,6 +52,7 @@ class supplier_order_reqFragment : Fragment() {
         model.supplierOffersApprovedByFieldManager.observe(viewLifecycleOwner) { updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
             supplierOrderAdapter.updateList(listToDisplay)
+            binding.supplierOfferCount.text=listToDisplay.size.toString()
         }
 
         binding.sortButton.setOnClickListener {
