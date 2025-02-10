@@ -89,4 +89,8 @@ class SupplierOrderViewModel(application: Application) : AndroidViewModel(applic
     fun deleteSupplierOrder(orderId: Int) {
         supplierOrderDataProvider.deleteSupplierOrder(orderId)
     }
+
+    fun getPendingSupplierOrdersCount(): Int {
+        return supplierOrderDataProvider.getPendingSupplierOrdersCount()
+    }
 }

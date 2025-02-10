@@ -3314,6 +3314,106 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
+    fun getPendingOrdersCount(userId: Int): Int {
+        val db = this.readableDatabase
+        val query = """
+            SELECT COUNT(*) 
+            FROM $TABLE_BUYER_ORDER 
+            WHERE $BUYER_USER_ID = ? 
+              AND $BUYER_ORDER_STATUS NOT IN ('Delivered', 'Cancelled')
+        """.trimIndent()
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
+
+    fun getPendingTaskCount(estateId: Int?): Int {
+        val db = this.readableDatabase
+        val query = """
+            SELECT COUNT(*) FROM $TABLE_TASK 
+            WHERE $TASK_PROGRESS != ? AND $TASK_ESTATE_ID_FR = ?
+        """.trimIndent()
+        val args = arrayOf("Task Complete", estateId.toString())
+        val cursor = db.rawQuery(query, args)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
+
+    fun getNotDeliveredOrCancelledBuyerOrdersCount(): Int {
+        val db = this.readableDatabase
+        val query = """
+        SELECT COUNT(*) FROM $TABLE_BUYER_ORDER 
+        WHERE $BUYER_ORDER_STATUS NOT IN (?, ?)
+    """.trimIndent()
+        val args = arrayOf("Delivered", "Cancelled")
+        val cursor = db.rawQuery(query, args)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
+
+
+    fun getPendingSupplierOrdersCount(): Int {
+        val db = this.readableDatabase
+        val query = """
+            SELECT COUNT(*) FROM $TABLE_SUPPLIER_ORDER 
+            WHERE $SUPPLIER_FIELDMANAGER_STATUS = ?
+        """.trimIndent()
+        val args = arrayOf("Pending")
+        val cursor = db.rawQuery(query, args)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
+
+    fun getNonCancelledBuyerOrderCount(): Int {
+        val db = this.readableDatabase
+        // Query to count orders where status is not 'Cancelled'
+        val query = "SELECT COUNT(*) FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_STATUS != ?"
+        val cursor = db.rawQuery(query, arrayOf("Cancelled"))
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
+
+    fun getSumOfNonCancelledBuyerOrderCost(): Double {
+        val db = this.readableDatabase
+        // Query to sum order costs for orders where status is not 'Cancelled'
+        val query = "SELECT SUM($BUYER_ORDER_COST) FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_STATUS != ?"
+        val cursor = db.rawQuery(query, arrayOf("Cancelled"))
+        var sum = 0.0
+        if (cursor.moveToFirst()) {
+            // Use getDouble to retrieve the sum value. It will return null as 0.0 if no rows match.
+            sum = cursor.getDouble(0)
+        }
+        cursor.close()
+        db.close()
+        return sum
+    }
+
+
 
 
 

@@ -12,7 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
+import com.example.greentipskotlin.App.Admin.coconut_infoFragment
 import com.example.greentipskotlin.App.Admin.dashboardFragment
+import com.example.greentipskotlin.App.Admin.fert_mngFragment
+import com.example.greentipskotlin.App.Admin.hvst_infoFragment
+import com.example.greentipskotlin.App.Admin.intercrops_infoFragment
+import com.example.greentipskotlin.App.Admin.resource_mngFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCatalogueFragment
 import com.example.greentipskotlin.App.CEO.assignTaskFragment
 import com.example.greentipskotlin.App.CEO.buyer_Order_HisFragment
@@ -60,7 +65,7 @@ class FieldManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
         supportActionBar?.setHomeButtonEnabled(true)
 
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(FieldManagerDashboard())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
     }
@@ -93,11 +98,11 @@ class FieldManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(FieldManagerDashboard())
-            R.id.coconutTreeManagement -> replaceFragment(assignTaskFragment())
-            R.id.intercropsManagement -> replaceFragment(task_HistoryFragment())
-            R.id.harvestingManagement -> replaceFragment(supplier_Reg_ReqFragment())
-            R.id.fertilizerManagement -> replaceFragment(buyer_RegFragment())
-            R.id.resourceManagement -> replaceFragment(supplier_order_reqFragment())
+            R.id.coconutTreeManagement -> replaceFragment(coconut_infoFragment())
+            R.id.intercropsManagement -> replaceFragment(intercrops_infoFragment())
+            R.id.harvestingManagement -> replaceFragment(hvst_infoFragment())
+            R.id.fertilizerManagement -> replaceFragment(fert_mngFragment())
+            R.id.resourceManagement -> replaceFragment(resource_mngFragment())
             R.id.catalogueManagement -> replaceFragment(CatalogueItemManageFragment())
             R.id.buyerOrderManagement -> replaceFragment(FieldManagerManageBuyerOrderFragment())
             R.id.taskManagement -> replaceFragment(ManageTaskFragment())

@@ -110,5 +110,9 @@ class TaskViewModel(application: Application):AndroidViewModel(application) {
         return taskDataProvider.updateTaskSolution(taskId,taskSolution)
     }
 
+    fun getPendingTaskCount(estateId: Int?): Int {
+        return taskDataProvider.getPendingTaskCount(estateId)
+    }
+
 
 }

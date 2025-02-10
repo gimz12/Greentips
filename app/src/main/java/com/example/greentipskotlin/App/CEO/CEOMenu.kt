@@ -16,6 +16,7 @@ import com.example.greentipskotlin.App.Admin.dashboardFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCatalogueFragment
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
 import com.example.greentipskotlin.App.Model.Catalogue
+import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
@@ -48,7 +49,7 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         supportActionBar?.setHomeButtonEnabled(true)
 
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(ceoDashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
     }
@@ -91,7 +92,11 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
 
 
             // Other fragments...
-            R.id.log_out -> Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+            R.id.log_out -> {
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, User_Login::class.java))
+                finish()
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

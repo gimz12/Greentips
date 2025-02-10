@@ -1,14 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".App.FieldManager.FieldManagerDashboard">
+    android:padding="16dp"
+    android:background="#F8F8F8">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Title -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/main_dashboard_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Dashboard"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textStyle="bold"
+        android:textColor="#062E1C"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+    <!-- Grid for Pending Cards (4 Cards) -->
+    <GridLayout
+        android:id="@+id/quick_statistics_grid0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/main_dashboard_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp">
+
+        <!-- Card 1: Pending Tasks -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_pending_tasks"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pending_tasks_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#062E1C" />
+
+                <TextView
+                    android:id="@+id/pending_tasks_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Tasks"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#062E1C" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 2: Pending Buyer Orders -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_pending_buyer_orders"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pending_buyer_orders_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#062E1C" />
+
+                <TextView
+                    android:id="@+id/pending_buyer_orders_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Buyer Orders"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#062E1C" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 3: Pending Supplier Offers -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_pending_supplier_offers"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pending_supplier_offers_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#062E1C" />
+
+                <TextView
+                    android:id="@+id/pending_supplier_offers_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Supplier Offers"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#062E1C" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 4: Pending Approvals -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_pending_approvals"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pending_approvals_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#062E1C" />
+
+                <TextView
+                    android:id="@+id/pending_approvals_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Approvals"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#062E1C" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+    <!-- Quick Statistics Section Title -->
+    <TextView
+        android:id="@+id/quick_statistics_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quick Statistics Section"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#062E1C"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/quick_statistics_grid0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Grid for Module Information (6 Modules) -->
+    <GridLayout
+        android:id="@+id/quick_statistics_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/quick_statistics_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp">
+
+        <!-- Module 1: Coconut Tree Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_coconut_tree_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/coconut_info2"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_coconut_tree_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coconut Tree\nInformation"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+
+        <!-- Module 2: Intercrop Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_intercrop_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/intercrops_info"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_intercrop_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intercrop\nInformation"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+
+        <!-- Module 3: Harvest Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_harvest_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/harvesting_final_info"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_harvest_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harvest\nInformation "
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+
+        <!-- Module 4: Fertilizer Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_fertilizer_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/fertilizer_info"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_fertilizer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fertilizer\nInformation"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+
+        <!-- Module 5: Resources Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_resources_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/res_info"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_resources_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resources\nInformation "
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+
+        <!-- Module 6: Task Information -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/module_task_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/task_info"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/module_task_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task\nInformation "
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="#062E1C" />
+        </LinearLayout>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

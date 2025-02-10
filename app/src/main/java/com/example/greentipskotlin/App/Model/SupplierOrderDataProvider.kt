@@ -51,5 +51,9 @@ class SupplierOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.getApprovedSupplierOrders()
     }
 
+    fun getPendingSupplierOrdersCount(): Int {
+        return greentipsDatabaseHelper.getPendingSupplierOrdersCount()
+    }
+
 
 }

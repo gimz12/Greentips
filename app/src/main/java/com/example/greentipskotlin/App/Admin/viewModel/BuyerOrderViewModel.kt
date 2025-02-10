@@ -60,4 +60,20 @@ class BuyerOrderViewModel(application: Application) : AndroidViewModel(applicati
     fun getBuyerOrderById(orderId: Int): BuyerOrder? {
         return buyerOrderDataProvider.getBuyerOrderById(orderId)
     }
+
+    fun getPendingOrdersCount(userId: Int): Int {
+        return buyerOrderDataProvider.getPendingOrdersCount(userId)
+    }
+
+    fun getNotDeliveredOrCancelledBuyerOrdersCount(): Int {
+        return buyerOrderDataProvider.getNotDeliveredOrCancelledBuyerOrdersCount()
+    }
+
+    fun getNonCancelledBuyerOrderCount(): Int {
+        return buyerOrderDataProvider.getNonCancelledBuyerOrderCount()
+    }
+
+    fun getSumOfNonCancelledBuyerOrderCost(): Double {
+        return buyerOrderDataProvider.getSumOfNonCancelledBuyerOrderCost()
+    }
 }

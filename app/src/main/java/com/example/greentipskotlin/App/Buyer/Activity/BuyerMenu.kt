@@ -12,12 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.greentipskotlin.App.Admin.Activity.HarvestInfomationInsert
 import com.example.greentipskotlin.App.Admin.Activity.UserProfileManagement
-import com.example.greentipskotlin.App.Admin.dashboardFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCartFragment
 import com.example.greentipskotlin.App.Buyer.BuyerCatalogueFragment
 import com.example.greentipskotlin.App.Buyer.BuyerDashboardFragment
 import com.example.greentipskotlin.App.Buyer.BuyerOrderHistoryFragment
-import com.example.greentipskotlin.App.Buyer.BuyerReviewFragment
 import com.example.greentipskotlin.App.Buyer.PaymentMethodFragment
 import com.example.greentipskotlin.App.CEO.sup_Order_HistoryFragment
 import com.example.greentipskotlin.App.User_Login
@@ -27,7 +25,7 @@ import com.google.android.material.navigation.NavigationView
 private lateinit var drawerLayout: DrawerLayout
 private lateinit var toggle: ActionBarDrawerToggle
 
-class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,39 +47,29 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        //set visible the toggleDrawer button
+        // Enable the toggle (hamburger) button in the action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        // Display BuyerDashboardFragment when first loaded
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(BuyerDashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id = item.itemId
-
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
-
-        if (id == R.id.profile) {
-            val groupMessageIntent = Intent(
-                this,
-                UserProfileManagement::class.java
-            )
-            startActivity(groupMessageIntent)
-        }else if (id == R.id.notifications){
-            val notificationIntent = Intent(
-                this,
-                HarvestInfomationInsert::class.java
-            )
-            startActivity(notificationIntent)
+        when (item.itemId) {
+            R.id.profile -> {
+                startActivity(Intent(this, UserProfileManagement::class.java))
+            }
+            R.id.notifications -> {
+                startActivity(Intent(this, HarvestInfomationInsert::class.java))
+            }
         }
-
         return true
     }
 
@@ -92,24 +80,16 @@ class BuyerMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             R.id.viewCartFragment -> replaceFragment(BuyerCartFragment())
             R.id.orderHistoryFragment -> replaceFragment(BuyerOrderHistoryFragment())
             R.id.paymentMethodFragment -> replaceFragment(PaymentMethodFragment())
-            R.id.reviewHistoryFragment -> replaceFragment(BuyerReviewFragment())
             R.id.yourProfileFragment -> replaceFragment(sup_Order_HistoryFragment())
-
-
-            // Other fragments...
             R.id.log_out -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
-
-                // Redirect to UserLogin activity
-                val intent = Intent(this, User_Login::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, User_Login::class.java))
                 finish()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
 
     private fun replaceFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()

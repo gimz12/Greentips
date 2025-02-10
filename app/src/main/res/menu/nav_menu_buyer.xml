@@ -26,10 +26,6 @@
             android:icon="@drawable/ic_buyer_payment"
             android:title="Payment Method"/>
         <item
-            android:id="@+id/reviewHistoryFragment"
-            android:icon="@drawable/ic_buyer_review"
-            android:title="View Review History"/>
-        <item
             android:id="@+id/yourProfileFragment"
             android:icon="@drawable/ic_person"
             android:title="Your Profile"/>

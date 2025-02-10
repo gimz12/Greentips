@@ -79,6 +79,10 @@ class TaskDataProvider(context: Context) {
         return greentipsDatabaseHelper.getCompletedTasksByEmpId(workerEmpId)
     }
 
+    fun getPendingTaskCount(estateId: Int?): Int {
+        return greentipsDatabaseHelper.getPendingTaskCount(estateId)
+    }
+
 
 
 }

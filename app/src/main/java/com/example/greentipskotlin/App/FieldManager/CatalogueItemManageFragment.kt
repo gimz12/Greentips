@@ -63,6 +63,7 @@ class CatalogueItemManageFragment : Fragment() {
         model.catalogItems.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.Catalogue_Name } else updateList
             catalogueItemAdapter.updateList(listToDisplay)
+            binding.catalogItemCount.text=listToDisplay.size.toString()
         }
 
 

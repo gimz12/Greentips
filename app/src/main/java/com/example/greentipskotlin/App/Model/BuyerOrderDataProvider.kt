@@ -40,4 +40,21 @@ class BuyerOrderDataProvider(context: Context) {
         return greentipsDatabaseHelper.getBuyerOrderById(orderId)
     }
 
+    fun getPendingOrdersCount(userId: Int): Int {
+        return greentipsDatabaseHelper.getPendingOrdersCount(userId)
+    }
+
+    fun getNotDeliveredOrCancelledBuyerOrdersCount(): Int {
+        return greentipsDatabaseHelper.getNotDeliveredOrCancelledBuyerOrdersCount()
+    }
+
+    fun getNonCancelledBuyerOrderCount(): Int {
+        return greentipsDatabaseHelper.getNonCancelledBuyerOrderCount()
+    }
+
+    fun getSumOfNonCancelledBuyerOrderCost(): Double {
+        return greentipsDatabaseHelper.getSumOfNonCancelledBuyerOrderCost()
+    }
+
+
 }
