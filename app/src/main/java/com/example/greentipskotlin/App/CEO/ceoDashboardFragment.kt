@@ -39,17 +39,13 @@ class ceoDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val sharedPrefs = requireActivity().getSharedPreferences("LoggedUser", Context.MODE_PRIVATE)
         val employeeId = sharedPrefs.getInt("employeeId", 0)
 
         val monthlyOrders = buyerOrderViewModel.getNonCancelledBuyerOrderCount()
         binding.monthlyOrders.text=monthlyOrders.toString()
 
-
         val monthlySales = buyerOrderViewModel.getSumOfNonCancelledBuyerOrderCost()
-        binding.monthlySales.text = monthlySales.toString()
-
-
+        binding.monthlySales.text = "Rs.$monthlySales"
     }
 }

@@ -163,6 +163,10 @@ class EmployeeViewModel (application: Application) : AndroidViewModel(applicatio
         return supplierDataProvider.getSupplierDetailsById(supplierId)
     }
 
+    fun getEmployeeCount(): Int {
+        return employeeDataProvider.getEmployeeCount()
+    }
+
 
 
 

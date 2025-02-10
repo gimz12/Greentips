@@ -37,8 +37,8 @@
         <!-- Card 1: Pending Tasks -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_pending_tasks"
-            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_width="175dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             android:layout_margin="8dp">
@@ -73,7 +73,7 @@
         <!-- Card 2: Pending Buyer Orders -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_pending_buyer_orders"
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
@@ -109,7 +109,7 @@
         <!-- Card 3: Pending Supplier Offers -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_pending_supplier_offers"
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
@@ -145,7 +145,7 @@
         <!-- Card 4: Pending Approvals -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_pending_approvals"
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"

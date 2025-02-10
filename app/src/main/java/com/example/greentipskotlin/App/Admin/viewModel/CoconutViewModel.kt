@@ -46,4 +46,8 @@ class CoconutViewModel (application: Application):AndroidViewModel(application) 
         return coconutDataProvider.getCoconutProductionReport()
     }
 
+    fun getCoconutTreeCount(): Int {
+        return coconutDataProvider.getCoconutTreeCount()
+    }
+
 }

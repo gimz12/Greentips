@@ -20,4 +20,8 @@ class SupplierDataProvider(context: Context) {
         return greentipsDatabaseHelper.getSupplierDetailsById(supplierId)
     }
 
+    fun getSupplierCount(): Int {
+        return greentipsDatabaseHelper.getSupplierCount()
+    }
+
 }

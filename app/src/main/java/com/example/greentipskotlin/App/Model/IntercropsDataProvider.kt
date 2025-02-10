@@ -25,5 +25,9 @@ class IntercropsDataProvider (context: Context) {
         return greentipsDatabaseHelper.getEstateWiseIntercropReport()
     }
 
+    fun getIntercropCount(): Int {
+        return greentipsDatabaseHelper.getIntercropCount()
+    }
+
 
 }

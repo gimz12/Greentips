@@ -19,4 +19,8 @@ class CoconutDataProvider (context: Context){
         return greentipsDatabaseHelper.getCoconutProductionReport()
     }
 
+    fun getCoconutTreeCount(): Int {
+        return greentipsDatabaseHelper.getCoconutTreeCount()
+    }
+
 }

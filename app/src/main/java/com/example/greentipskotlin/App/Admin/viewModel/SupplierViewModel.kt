@@ -31,4 +31,8 @@ class SupplierViewModel(application: Application):AndroidViewModel(application) 
         return supplierDataProvider.getSupplierDetailsById(supplierId)
     }
 
+    fun getSupplierCount(): Int {
+        return supplierDataProvider.getSupplierCount()
+    }
+
 }

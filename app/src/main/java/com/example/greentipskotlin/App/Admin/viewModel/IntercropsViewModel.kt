@@ -37,4 +37,8 @@ class IntercropsViewModel(application: Application) : AndroidViewModel(applicati
     fun getEstateWiseIntercropReport(): List<IntercropProductionReport> {
         return intercropsDataProvider.getEstateWiseIntercropReport()
     }
+
+    fun getIntercropCount(): Int {
+        return intercropsDataProvider.getIntercropCount()
+    }
 }

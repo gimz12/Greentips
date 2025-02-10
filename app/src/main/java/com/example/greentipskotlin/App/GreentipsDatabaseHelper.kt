@@ -68,88 +68,88 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         //Admin Table
         const val TABLE_ADMIN = "Admin"
         const val Admin_Employee_ID = "employee_id"
-        const val Admin_Shift_Start_Time  = "shift_start_time"
-        const val Admin_Shift_End_Time  = "shift_end_time"
+        const val Admin_Shift_Start_Time = "shift_start_time"
+        const val Admin_Shift_End_Time = "shift_end_time"
 
         //CEO Table
         const val TABLE_CEO = "Ceo"
         const val CEO_Employee_ID = "employee_id"
-        const val CEO_Skills  = "skills"
-        const val CEO_Experience  = "experience"
+        const val CEO_Skills = "skills"
+        const val CEO_Experience = "experience"
 
         //FieldManager Table
         const val TABLE_FIELD_MANAGER = "FieldManager"
         const val FIELD_MANAGER_Employee_ID = "employee_id"
-        const val FIELD_MANAGER_ESTATE_ID_FR  = "estate_id"
-        const val FIELD_MANAGER_EXPERIENCE   = "experience"
-        const val FIELD_MANAGER_QUALIFICATION    = "qualification"
+        const val FIELD_MANAGER_ESTATE_ID_FR = "estate_id"
+        const val FIELD_MANAGER_EXPERIENCE = "experience"
+        const val FIELD_MANAGER_QUALIFICATION = "qualification"
 
 
         //Worker Table
         const val TABLE_WORKER = "Worker"
         const val WORKER_Employee_ID = "employee_id"
-        const val WORKER_ESTATE_ID_FR  = "estate_id"
-        const val WORKER_Shift_Start_Time  = "shift_start_time"
-        const val WORKER_Shift_End_Time   = "shift_end_time"
-        const val WORKER_EXPERIENCE   = "qualification"
+        const val WORKER_ESTATE_ID_FR = "estate_id"
+        const val WORKER_Shift_Start_Time = "shift_start_time"
+        const val WORKER_Shift_End_Time = "shift_end_time"
+        const val WORKER_EXPERIENCE = "qualification"
 
         //Task Assignment Table
         const val TABLE_TASK_ASSIGNMENT = "Task_Assignment"
         const val TASK_ASSIGNMENT_ID = "task_assignment_id"
-        const val TASK_ASSIGNMENT_TASK_ID  = "task_id"
-        const val TASK_ASSIGNMENT_WORKER_ID  = "employee_id"
+        const val TASK_ASSIGNMENT_TASK_ID = "task_id"
+        const val TASK_ASSIGNMENT_WORKER_ID = "employee_id"
 
         //Invoice Table
         const val TABLE_INVOICE = "Invoice"
         const val INVOICE_ID = "invoice_id"
         const val INVOICE_ORDER_ID = "buyer_order_id"
-        const val INVOICE_ORDER_PAYMENT_ID  = "buyer_payment"
-        const val INVOICE_DATE  = "date"
-        const val INVOICE_TIME  = "time"
-        const val INVOICE_SUBTOTAL  = "subtotal"
-        const val INVOICE_TOTAL  = "total"
+        const val INVOICE_ORDER_PAYMENT_ID = "buyer_payment"
+        const val INVOICE_DATE = "date"
+        const val INVOICE_TIME = "time"
+        const val INVOICE_SUBTOTAL = "subtotal"
+        const val INVOICE_TOTAL = "total"
 
         //Receipt Table
         const val TABLE_RECEIPT = "Receipt"
         const val RECEIPT_ID = "invoice_id"
         const val RECEIPT_INVOICE_ID = "invoice_id"
-        const val RECEIPT_DATE  = "date"
-        const val RECEIPT_TIME  = "time"
+        const val RECEIPT_DATE = "date"
+        const val RECEIPT_TIME = "time"
 
 
         //Task Table
         const val TABLE_TASK = "Task"
         const val TASK_ID = "task_id"
-        const val TASK_ESTATE_ID_FR  = "estate_id"
-        const val TASK_NAME  = "task_name"
-        const val TASK_DESCRIPTION  = "task_description"
-        const val TASK_TYPE   = "task_type"
-        const val TASK_ASSIGN_DATE   = "task_assign_date"
-        const val TASK_PROGRESS   = "task_progress"
-        const val TASK_DUE_DATE   = "task_due_date"
-        const val TASK_CHALLENGES   = "task_challenges"
-        const val TASK_SOLUTION   = "task_solution"
+        const val TASK_ESTATE_ID_FR = "estate_id"
+        const val TASK_NAME = "task_name"
+        const val TASK_DESCRIPTION = "task_description"
+        const val TASK_TYPE = "task_type"
+        const val TASK_ASSIGN_DATE = "task_assign_date"
+        const val TASK_PROGRESS = "task_progress"
+        const val TASK_DUE_DATE = "task_due_date"
+        const val TASK_CHALLENGES = "task_challenges"
+        const val TASK_SOLUTION = "task_solution"
 
         //Catalogue Table
         const val TABLE_CATALOGUE = "Catalogue"
         const val CATALOGUE_ID = "catalogue_id"
-        const val CATALOGUE_NAME  = "catalogue_name"
-        const val CATALOGUE_ITEM_TYPE  = "catalogue_item_type"
-        const val CATALOGUE_ITEM_PRICE   = "catalogue_item_price"
-        const val CATALOGUE_ITEM_QUANTITY   = "catalogue_item_quantity"
-        const val CATALOGUE_ITEM_DESCRIPTION   = "catalogue_item_description"
-        const val CATALOGUE_ITEM_AVAILABILITY   = "catalogue_item_availability"
+        const val CATALOGUE_NAME = "catalogue_name"
+        const val CATALOGUE_ITEM_TYPE = "catalogue_item_type"
+        const val CATALOGUE_ITEM_PRICE = "catalogue_item_price"
+        const val CATALOGUE_ITEM_QUANTITY = "catalogue_item_quantity"
+        const val CATALOGUE_ITEM_DESCRIPTION = "catalogue_item_description"
+        const val CATALOGUE_ITEM_AVAILABILITY = "catalogue_item_availability"
         const val CATALOGUE_ITEM_IMAGE = "catalogue_item_image"
 
         //Cart table
         const val TABLE_CART = "Cart"
         const val CART_ID = "cart_id"
-        const val CART_USER_ID  = "cart_user_id"
-        const val CART_ITEM_NAME  = "cart_item_name"
-        const val CART_ITEM_PRICE  = "cart_item_price"
-        const val CART_ITEM_DATE  = "cart_item_date"
-        const val CART_ITEM_QUANTITY  = "cart_item_quantity"
-        const val CART_ITEM_TOTAL_PRICE  = "cart_item_total_price"
+        const val CART_USER_ID = "cart_user_id"
+        const val CART_ITEM_NAME = "cart_item_name"
+        const val CART_ITEM_PRICE = "cart_item_price"
+        const val CART_ITEM_DATE = "cart_item_date"
+        const val CART_ITEM_QUANTITY = "cart_item_quantity"
+        const val CART_ITEM_TOTAL_PRICE = "cart_item_total_price"
 
         //Buyer Order Table
         const val TABLE_BUYER_ORDER = "Buyer_Order"
@@ -165,12 +165,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val ORDER_ITEM_ID = "order_item_id"
         const val ORDER_ITEM_ORDER_ID = "order_id"
         const val ORDER_ITEM_NAME = "order_item_name"
-        const val ORDER_ITEM_QUANTITY ="order_item_quantity"
-        const val ORDER_ITEM_PRICE ="order_item_price"
-        const val ORDER_ITEM_TOTAL_PRICE ="order_item_total_price"
+        const val ORDER_ITEM_QUANTITY = "order_item_quantity"
+        const val ORDER_ITEM_PRICE = "order_item_price"
+        const val ORDER_ITEM_TOTAL_PRICE = "order_item_total_price"
 
         //Supplier Order Table
-        const val TABLE_SUPPLIER_ORDER ="Supplier_Order"
+        const val TABLE_SUPPLIER_ORDER = "Supplier_Order"
         const val SUPPLIER_ORDER_ID = "order_id"
         const val SUPPLIER_USER_ID = "user_id"
         const val SUPPLIER_ITEM_NAME = "item_name"
@@ -183,7 +183,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val SUPPLIER_CEO_STATUS = "ceo_status"
 
         //Supplier Payment Table
-        const val TABLE_SUPPLIER_PAYMENT ="Supplier_Payment"
+        const val TABLE_SUPPLIER_PAYMENT = "Supplier_Payment"
         const val SUPPLIER_PAYMENT_ID = "payment_id"
         const val SUPPLIER_PAYMENT_ORDER_ID = "order_id"
         const val SUPPLIER_PAYMENT_USER_ID = "supplier_id"
@@ -201,10 +201,10 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val PAYMENT_ID = "payment_id"
         const val PAYMENT_ORDER_ID = "order_id"
         const val PAYMENT_USER_ID = "user_id"
-        const val PAYMENT_AMOUNT ="payment_amount"
-        const val PAYMENT_STATUS ="payment_status"
-        const val PAYMENT_METHOD ="payment_method"
-        const val PAYMENT_DATE_TIME ="payment_date_time"
+        const val PAYMENT_AMOUNT = "payment_amount"
+        const val PAYMENT_STATUS = "payment_status"
+        const val PAYMENT_METHOD = "payment_method"
+        const val PAYMENT_DATE_TIME = "payment_date_time"
 
         //CreditCard
         const val TABLE_CREDIT_CARDS = "CreditCards"
@@ -227,10 +227,10 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val Coconut_ID = "id"
         const val COLUMN_COCONUT_PLANT_DATE = "plantDate"
         const val COLUMN_NUMBER_OF_COCONUTS = "numberOfCoconuts"
-        const val COLUMN_COCONUT_TREE_AGE= "coconutTreeAge"
-        const val COLUMN_TREE_HEALTH= "treeHealth"
-        const val COLUMN_COCONUT_TREE_TYPE= "coconutTreeType"
-        const val COLUMN_COCONUT_ADDITIONAL_INFO= "additionalInfo"
+        const val COLUMN_COCONUT_TREE_AGE = "coconutTreeAge"
+        const val COLUMN_TREE_HEALTH = "treeHealth"
+        const val COLUMN_COCONUT_TREE_TYPE = "coconutTreeType"
+        const val COLUMN_COCONUT_ADDITIONAL_INFO = "additionalInfo"
         const val COLUMN_COCONUT_ESTATE_ID_FR = "employeePositionId"
 
         //Buyer Table
@@ -238,44 +238,44 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         const val TABLE_BUYER = "Buyer"
         const val BUYER_ID = "id"
         const val COLUMN_BUYER_NAME = "buyerName"
-        const val COLUMN_BUYER_PHONE_NUMBER="buyerPhoneNumber"
-        const val COLUMN_BUYER_COMPANY_NAME="companyName"
-        const val COLUMN_BUYER_COMPANY_PHONE_NUMBER="companyPhoneNumber"
-        const val COLUMN_BUYER_COMPANY_ADDRESS="companyAddress"
-        const val COLUMN_BUYER_TYPE="buyerType"
-        const val COLUMN_BUYER_EMAIL="buyerEmail"
-        const val COLUMN_BUYER_USERNAME="buyerUsername"
-        const val COLUMN_BUYER_PASSWORD="buyerPassword"
+        const val COLUMN_BUYER_PHONE_NUMBER = "buyerPhoneNumber"
+        const val COLUMN_BUYER_COMPANY_NAME = "companyName"
+        const val COLUMN_BUYER_COMPANY_PHONE_NUMBER = "companyPhoneNumber"
+        const val COLUMN_BUYER_COMPANY_ADDRESS = "companyAddress"
+        const val COLUMN_BUYER_TYPE = "buyerType"
+        const val COLUMN_BUYER_EMAIL = "buyerEmail"
+        const val COLUMN_BUYER_USERNAME = "buyerUsername"
+        const val COLUMN_BUYER_PASSWORD = "buyerPassword"
 
         //Intercrop Table
         const val TABLE_INTERCROP = "Intercrop"
-        const val INTERCROPS_ID ="id"
-        const val COLUMN_INTERCROP_TYPE= "intercropType"
-        const val COLUMN_INTERCROP_PLANTED_DATE="plantedDate"
-        const val COLUMN_INTERCROP_ADDITIONAL_INFO="addtionalInfo"
-        const val COLUMN_INTERCROPS_ESTATE_ID_FR="estateId"
+        const val INTERCROPS_ID = "id"
+        const val COLUMN_INTERCROP_TYPE = "intercropType"
+        const val COLUMN_INTERCROP_PLANTED_DATE = "plantedDate"
+        const val COLUMN_INTERCROP_ADDITIONAL_INFO = "addtionalInfo"
+        const val COLUMN_INTERCROPS_ESTATE_ID_FR = "estateId"
 
         //Harvest Table
         const val TABLE_HARVEST_INFO = "HarvestInfo"
-        const val COLUMN_HARVEST_INFO_ID ="id"
-        const val COLUMN_HARVEST_INFO_TYPE= "harvestType"
-        const val COLUMN_HARVEST_INFO_HARVESTED_DATE="harvestedDate"
-        const val COLUMN_HARVEST_INFO_QUANTITY="harvestedQuantity"
-        const val COLUMN_HARVEST_INFO_ADDITIONAL_INFO="addtionalInfo"
-        const val COLUMN_HARVEST_INFO_ESTATE_ID_FR="estateId"
+        const val COLUMN_HARVEST_INFO_ID = "id"
+        const val COLUMN_HARVEST_INFO_TYPE = "harvestType"
+        const val COLUMN_HARVEST_INFO_HARVESTED_DATE = "harvestedDate"
+        const val COLUMN_HARVEST_INFO_QUANTITY = "harvestedQuantity"
+        const val COLUMN_HARVEST_INFO_ADDITIONAL_INFO = "addtionalInfo"
+        const val COLUMN_HARVEST_INFO_ESTATE_ID_FR = "estateId"
 
         //Supplier
         const val TABLE_SUPPLIER = "Supplier"
         const val SUPPLIER_ID = "id"
         const val COLUMN_SUPPLIER_NAME = "supplierName"
-        const val COLUMN_SUPPLIER_PHONE_NUMBER="supplierPhoneNumber"
-        const val COLUMN_SUPPLIER_COMPANY_NAME="companyName"
-        const val COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER="companyPhoneNumber"
-        const val COLUMN_SUPPLIER_COMPANY_ADDRESS="companyAddress"
-        const val COLUMN_SUPPLIER_TYPE="supplierType"
-        const val COLUMN_SUPPLIER_EMAIL="supplierEmail"
-        const val COLUMN_SUPPLIER_USERNAME="supplierUsername"
-        const val COLUMN_SUPPLIER_PASSWORD="supplierPassword"
+        const val COLUMN_SUPPLIER_PHONE_NUMBER = "supplierPhoneNumber"
+        const val COLUMN_SUPPLIER_COMPANY_NAME = "companyName"
+        const val COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER = "companyPhoneNumber"
+        const val COLUMN_SUPPLIER_COMPANY_ADDRESS = "companyAddress"
+        const val COLUMN_SUPPLIER_TYPE = "supplierType"
+        const val COLUMN_SUPPLIER_EMAIL = "supplierEmail"
+        const val COLUMN_SUPPLIER_USERNAME = "supplierUsername"
+        const val COLUMN_SUPPLIER_PASSWORD = "supplierPassword"
 
         //Fertilizer
         const val TABLE_FERTILIZER = "Fertilizer"
@@ -330,7 +330,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             )
         """
 
-        val createAdminTable="""
+        val createAdminTable = """
            
             CREATE TABLE $TABLE_ADMIN (
                 $Admin_Employee_ID INTEGER PRIMARY KEY ,
@@ -339,7 +339,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createCEOTable="""
+        val createCEOTable = """
            
             CREATE TABLE $TABLE_CEO (
                 $CEO_Employee_ID INTEGER PRIMARY KEY ,
@@ -348,7 +348,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createFieldManagerTable="""
+        val createFieldManagerTable = """
            
             CREATE TABLE $TABLE_FIELD_MANAGER (
                 $FIELD_MANAGER_Employee_ID INTEGER PRIMARY KEY,
@@ -360,7 +360,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         """
 
-        val createWorkerTable="""
+        val createWorkerTable = """
            
             CREATE TABLE $TABLE_WORKER (
                 $WORKER_Employee_ID INTEGER PRIMARY KEY ,
@@ -372,7 +372,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createCatalogueTable= """
+        val createCatalogueTable = """
             
             CREATE TABLE $TABLE_CATALOGUE (
                 $CATALOGUE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -387,7 +387,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createBuyerOrderTable= """
+        val createBuyerOrderTable = """
             
             CREATE TABLE $TABLE_BUYER_ORDER (
                 $BUYER_ORDER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -401,7 +401,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createBuyerOrderItems= """
+        val createBuyerOrderItems = """
             
             CREATE TABLE $TABLE_ORDER_ITEM (
                 $ORDER_ITEM_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -415,7 +415,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createCartTable= """
+        val createCartTable = """
             
             CREATE TABLE $TABLE_CART (
                 $CART_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -430,7 +430,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createBuyerPayment= """
+        val createBuyerPayment = """
             
             CREATE TABLE $TABLE_BUYER_PAYMENT (
                 $PAYMENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -446,7 +446,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createSupplierOrder= """
+        val createSupplierOrder = """
             
             CREATE TABLE $TABLE_SUPPLIER_ORDER (
                 $SUPPLIER_ORDER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -464,7 +464,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createSupplierPayment= """
+        val createSupplierPayment = """
             
             CREATE TABLE $TABLE_SUPPLIER_PAYMENT (
                 $SUPPLIER_PAYMENT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -483,7 +483,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createCreditCardsTable= """
+        val createCreditCardsTable = """
             
                 CREATE TABLE $TABLE_CREDIT_CARDS (
                 $COLUMN_CARD_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -494,9 +494,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 FOREIGN KEY ($COLUMN_USER_ID) REFERENCES $TABLE_BUYER($BUYER_ID)
     )
 """
-        
 
-        val createEstateTable= """
+
+        val createEstateTable = """
             
             CREATE TABLE $TABLE_ESTATE (
                 $Estate_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -507,7 +507,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createTaskTable= """
+        val createTaskTable = """
             
             CREATE TABLE $TABLE_TASK (
                 $TASK_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -560,7 +560,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         """
 
 
-        val createCoconutTable="""
+        val createCoconutTable = """
             CREATE TABLE $TABLE_COCONUT(
             $Coconut_ID INTEGER PRIMARY KEY AUTOINCREMENT,
             $COLUMN_COCONUT_PLANT_DATE TEXT,
@@ -575,7 +575,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             
         """
 
-        val createBuyerTable=""" CREATE TABLE $TABLE_BUYER(
+        val createBuyerTable = """ CREATE TABLE $TABLE_BUYER(
             $BUYER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
             $COLUMN_BUYER_NAME TEXT,
             $COLUMN_BUYER_PHONE_NUMBER TEXT,
@@ -587,7 +587,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_BUYER_USERNAME TEXT,
             $COLUMN_BUYER_PASSWORD TEXT)"""
 
-        val createIntercropTable=""" CREATE TABLE $TABLE_INTERCROP(
+        val createIntercropTable = """ CREATE TABLE $TABLE_INTERCROP(
             $INTERCROPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,
             $COLUMN_INTERCROP_TYPE TEXT,
             $COLUMN_INTERCROP_PLANTED_DATE TEXT,
@@ -596,7 +596,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             FOREIGN KEY ($COLUMN_INTERCROPS_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
         )"""
 
-        val createHarvestTable=""" CREATE TABLE $TABLE_HARVEST_INFO(
+        val createHarvestTable = """ CREATE TABLE $TABLE_HARVEST_INFO(
             $COLUMN_HARVEST_INFO_ID INTEGER PRIMARY KEY AUTOINCREMENT,
             $COLUMN_HARVEST_INFO_TYPE TEXT,
             $COLUMN_HARVEST_INFO_HARVESTED_DATE TEXT,
@@ -606,7 +606,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             FOREIGN KEY ($COLUMN_HARVEST_INFO_ESTATE_ID_FR) REFERENCES $TABLE_ESTATE($Estate_ID)
         )"""
 
-        val createSupplierTable=""" CREATE TABLE $TABLE_SUPPLIER(
+        val createSupplierTable = """ CREATE TABLE $TABLE_SUPPLIER(
             $SUPPLIER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
             $COLUMN_SUPPLIER_NAME TEXT,
             $COLUMN_SUPPLIER_PHONE_NUMBER TEXT,
@@ -618,7 +618,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             $COLUMN_SUPPLIER_USERNAME TEXT,
             $COLUMN_SUPPLIER_PASSWORD TEXT)"""
 
-        val createFertilizerTable="""CREATE TABLE $TABLE_FERTILIZER(
+        val createFertilizerTable = """CREATE TABLE $TABLE_FERTILIZER(
             $FERTILIZER_ID INTEGER PRIMARY KEY AUTOINCREMENT, 
             $COLUMN_FERTILIZER_NAME TEXT,
             $COLUMN_FERTILIZER_TYPE TEXT, 
@@ -670,7 +670,6 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.execSQL(createReceiptTable)
 
 
-
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -705,7 +704,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
 
     // Method to insert a new position
-    fun insertEmployeePosition(employeePosition: EmployeePosition){
+    fun insertEmployeePosition(employeePosition: EmployeePosition) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_POSITION_NAME, employeePosition.positionName)
@@ -719,20 +718,20 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
     //Method for insert a new employee
-    fun insertEmployee(employee: Employee){
+    fun insertEmployee(employee: Employee) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_EMPLOYEE_NAME,employee.employeeName)
-            put(COLUMN_PHONE,employee.phoneNumber)
-            put(COLUMN_ADDRESS,employee.address)
-            put(COLUMN_GENDER,employee.gender)
-            put(COLUMN_JOIN_DATE,employee.joinDate.toString())
-            put(COLUMN_DOB,employee.dateOfBirth.toString())
-            put(COLUMN_AGE,employee.age)
-            put(COLUMN_USERNAME,employee.username)
-            put(COLUMN_EMAIL,employee.email)
-            put(COLUMN_PASSWORD,employee.password)
-            put(COLUMN_EMPLOYEE_POSITION_ID_FR,employee.employeePositionId)
+            put(COLUMN_EMPLOYEE_NAME, employee.employeeName)
+            put(COLUMN_PHONE, employee.phoneNumber)
+            put(COLUMN_ADDRESS, employee.address)
+            put(COLUMN_GENDER, employee.gender)
+            put(COLUMN_JOIN_DATE, employee.joinDate.toString())
+            put(COLUMN_DOB, employee.dateOfBirth.toString())
+            put(COLUMN_AGE, employee.age)
+            put(COLUMN_USERNAME, employee.username)
+            put(COLUMN_EMAIL, employee.email)
+            put(COLUMN_PASSWORD, employee.password)
+            put(COLUMN_EMPLOYEE_POSITION_ID_FR, employee.employeePositionId)
             put(COLUMN_PROFILE_IMAGE, employee.profileImage)
         }
         db.insert(TABLE_EMPLOYEE, null, values)
@@ -748,14 +747,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         if (cursor.moveToFirst()) {
             do {
-                val employeeId=cursor.getInt(cursor.getColumnIndexOrThrow(Employee_ID))
+                val employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employee_ID))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME))
                 val phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE))
                 val address = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ADDRESS))
                 val gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER))
 
                 // Parsing Date fields
-                val joinDateString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_JOIN_DATE))
+                val joinDateString =
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_JOIN_DATE))
                 val dateOfBirthString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOB))
                 val joinDate = Date(joinDateString) // Or use a proper date format parser if needed
                 val dateOfBirth = Date(dateOfBirthString)
@@ -764,12 +764,32 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 val username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME))
                 val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
                 val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
-                val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
-                val profilePicture = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_PROFILE_IMAGE))
+                val positionId =
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
+                val profilePicture = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_PROFILE_IMAGE
+                    )
+                )
 
                 // Add employee to the list
-                employees.add(Employee(employeeId,name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId,profilePicture))
+                employees.add(
+                    Employee(
+                        employeeId,
+                        name,
+                        phoneNumber,
+                        address,
+                        gender,
+                        joinDate,
+                        dateOfBirth,
+                        age,
+                        username,
+                        email,
+                        password,
+                        positionId,
+                        profilePicture
+                    )
+                )
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -891,9 +911,6 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
-
-
     fun getEmployeeIdByUsername(username: String): Int? {
         val db = this.readableDatabase
         val query = "SELECT $Employee_ID FROM $TABLE_EMPLOYEE WHERE $COLUMN_USERNAME = ?"
@@ -935,12 +952,30 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             val age = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE))
             val email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL))
             val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
-            val positionId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
-            val profilePicture = cursor.getString(cursor.getColumnIndexOrThrow(
-                COLUMN_PROFILE_IMAGE))
+            val positionId =
+                cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_POSITION_ID_FR))
+            val profilePicture = cursor.getString(
+                cursor.getColumnIndexOrThrow(
+                    COLUMN_PROFILE_IMAGE
+                )
+            )
 
             // Create an Employee object with the data from the cursor
-            employee = Employee(employeeId, name, phoneNumber, address, gender, joinDate, dateOfBirth, age, username, email, password, positionId,profilePicture)
+            employee = Employee(
+                employeeId,
+                name,
+                phoneNumber,
+                address,
+                gender,
+                joinDate,
+                dateOfBirth,
+                age,
+                username,
+                email,
+                password,
+                positionId,
+                profilePicture
+            )
         }
 
         cursor.close()
@@ -983,8 +1018,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 employeeName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_NAME)),
                 phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
                 email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
-                employeePositionId = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_EMPLOYEE_POSITION_ID_FR)),
+                employeePositionId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_EMPLOYEE_POSITION_ID_FR
+                    )
+                ),
                 gender = null,
                 joinDate = null,
                 dateOfBirth = null,
@@ -1001,10 +1039,9 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
     //Admin--------------------------------------------------------------------------------------------------------------------------------
 
-    fun insertAdminDetails(admin: Admin){
+    fun insertAdminDetails(admin: Admin) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(Admin_Employee_ID, admin.EmployerId)
@@ -1027,8 +1064,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         if (cursor.moveToFirst()) {
             admin = Admin(
                 EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(Admin_Employee_ID)),
-                ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(
-                    Admin_Shift_Start_Time)),
+                ShiftStartTime = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        Admin_Shift_Start_Time
+                    )
+                ),
                 ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(Admin_Shift_End_Time))
             )
         }
@@ -1057,7 +1097,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     //CEO--------------------------------------------------------------------------------------------------------------------------------
 
-    fun insertCEODetails(ceo: Ceo){
+    fun insertCEODetails(ceo: Ceo) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(CEO_Employee_ID, ceo.EmployerId)
@@ -1080,9 +1120,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         if (cursor.moveToFirst()) {
             ceo = Ceo(
                 EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(CEO_Employee_ID)),
-                Skills = cursor.getString(cursor.getColumnIndexOrThrow(
-                    CEO_Skills)),
-                Experience  = cursor.getString(cursor.getColumnIndexOrThrow(CEO_Experience))
+                Skills = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CEO_Skills
+                    )
+                ),
+                Experience = cursor.getString(cursor.getColumnIndexOrThrow(CEO_Experience))
             )
         }
         cursor.close()
@@ -1107,7 +1150,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return rowsAffected
     }
 
-    fun insertTask(task: Task){
+    fun insertTask(task: Task) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(TASK_ESTATE_ID_FR, task.TASK_ESTATE_ID_FR)
@@ -1124,7 +1167,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
     }
 
-    fun updateTask(taskId: Int, taskName: String, taskDescription: String, taskType: String, taskAssignDate: String, taskDueDate: String, taskEstateId: Int): Int {
+    fun updateTask(
+        taskId: Int,
+        taskName: String,
+        taskDescription: String,
+        taskType: String,
+        taskAssignDate: String,
+        taskDueDate: String,
+        taskEstateId: Int
+    ): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(TASK_NAME, taskName)
@@ -1218,6 +1269,7 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return taskList
     }
+
     fun getTasksByEstateId(estateId: Int?): List<Task> {
         val taskList = mutableListOf<Task>()
         val db = this.readableDatabase
@@ -1232,9 +1284,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     TASK_ID = cursor.getInt(cursor.getColumnIndexOrThrow(TASK_ID)),
                     TASK_ESTATE_ID_FR = cursor.getInt(cursor.getColumnIndexOrThrow(TASK_ESTATE_ID_FR)),
                     TASK_NAME = cursor.getString(cursor.getColumnIndexOrThrow(TASK_NAME)),
-                    TASK_DESCRIPTION = cursor.getString(cursor.getColumnIndexOrThrow(TASK_DESCRIPTION)),
+                    TASK_DESCRIPTION = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            TASK_DESCRIPTION
+                        )
+                    ),
                     TASK_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_TYPE)),
-                    TASK_ASSIGN_DATE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_ASSIGN_DATE)),
+                    TASK_ASSIGN_DATE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            TASK_ASSIGN_DATE
+                        )
+                    ),
                     TASK_PROGRESS = cursor.getString(cursor.getColumnIndexOrThrow(TASK_PROGRESS)),
                     TASK_DUE_DATE = cursor.getString(cursor.getColumnIndexOrThrow(TASK_DUE_DATE)),
                     TASK_CHALLENGES = cursor.getString(cursor.getColumnIndexOrThrow(TASK_CHALLENGES)),
@@ -1322,18 +1382,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
     //FieldManager--------------------------------------------------------------------------------------------------------------------------------
 
-    fun insertFieldManager(fieldManager: FieldManager){
-        val db=writableDatabase
+    fun insertFieldManager(fieldManager: FieldManager) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(FIELD_MANAGER_Employee_ID,fieldManager.EmployerId)
-            put(FIELD_MANAGER_ESTATE_ID_FR,fieldManager.Estate_ID)
-            put(FIELD_MANAGER_EXPERIENCE,fieldManager.Experience)
-            put(FIELD_MANAGER_QUALIFICATION,fieldManager.Qualification)
+            put(FIELD_MANAGER_Employee_ID, fieldManager.EmployerId)
+            put(FIELD_MANAGER_ESTATE_ID_FR, fieldManager.Estate_ID)
+            put(FIELD_MANAGER_EXPERIENCE, fieldManager.Experience)
+            put(FIELD_MANAGER_QUALIFICATION, fieldManager.Qualification)
         }
-        db.insert(TABLE_FIELD_MANAGER,null,values)
+        db.insert(TABLE_FIELD_MANAGER, null, values)
         db.close()
 
     }
@@ -1349,10 +1408,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             fieldManager = FieldManager(
                 EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(FIELD_MANAGER_Employee_ID)),
                 Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(FIELD_MANAGER_ESTATE_ID_FR)),
-                Experience = cursor.getString(cursor.getColumnIndexOrThrow(
-                    FIELD_MANAGER_EXPERIENCE)),
-                Qualification  = cursor.getString(cursor.getColumnIndexOrThrow(
-                    FIELD_MANAGER_QUALIFICATION))
+                Experience = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        FIELD_MANAGER_EXPERIENCE
+                    )
+                ),
+                Qualification = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        FIELD_MANAGER_QUALIFICATION
+                    )
+                )
             )
         }
         cursor.close()
@@ -1378,19 +1443,19 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return rowsAffected
     }
 
-    fun insertCatalogueItem(catalogue: Catalogue){
-        val db=writableDatabase
+    fun insertCatalogueItem(catalogue: Catalogue) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(CATALOGUE_NAME,catalogue.Catalogue_Name)
-            put(CATALOGUE_ITEM_TYPE,catalogue.Catalogue_Item_Type)
-            put(CATALOGUE_ITEM_PRICE,catalogue.Catalogue_Item_Price)
-            put(CATALOGUE_ITEM_QUANTITY,catalogue.Catalogue_Item_Quantity)
-            put(CATALOGUE_ITEM_DESCRIPTION,catalogue.Catalogue_Item_Description)
-            put(CATALOGUE_ITEM_AVAILABILITY,catalogue.Catalogue_Item_Availability)
-            put(CATALOGUE_ITEM_IMAGE,catalogue.Catalogue_Item_Image)
+            put(CATALOGUE_NAME, catalogue.Catalogue_Name)
+            put(CATALOGUE_ITEM_TYPE, catalogue.Catalogue_Item_Type)
+            put(CATALOGUE_ITEM_PRICE, catalogue.Catalogue_Item_Price)
+            put(CATALOGUE_ITEM_QUANTITY, catalogue.Catalogue_Item_Quantity)
+            put(CATALOGUE_ITEM_DESCRIPTION, catalogue.Catalogue_Item_Description)
+            put(CATALOGUE_ITEM_AVAILABILITY, catalogue.Catalogue_Item_Availability)
+            put(CATALOGUE_ITEM_IMAGE, catalogue.Catalogue_Item_Image)
 
         }
-        db.insert(TABLE_CATALOGUE,null,values)
+        db.insert(TABLE_CATALOGUE, null, values)
         db.close()
     }
 
@@ -1405,16 +1470,31 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             catalogue = Catalogue(
                 Catalogue_Id = cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID)),
                 Catalogue_Name = cursor.getString(cursor.getColumnIndexOrThrow(CATALOGUE_NAME)),
-                Catalogue_Item_Type = cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_TYPE)),
-                Catalogue_Item_Price = cursor.getDouble(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_PRICE)),
-                Catalogue_Item_Quantity  = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_QUANTITY)),
-                Catalogue_Item_Description = cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_DESCRIPTION)),
-                Catalogue_Item_Availability = cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_AVAILABILITY))
+                Catalogue_Item_Type = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_TYPE
+                    )
+                ),
+                Catalogue_Item_Price = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_PRICE
+                    )
+                ),
+                Catalogue_Item_Quantity = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_QUANTITY
+                    )
+                ),
+                Catalogue_Item_Description = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_DESCRIPTION
+                    )
+                ),
+                Catalogue_Item_Availability = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_AVAILABILITY
+                    )
+                )
             )
         }
         cursor.close()
@@ -1449,7 +1529,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(BUYER_ORDER_STATUS, newStatus)
         }
 
-        val rowsUpdated = db.update(TABLE_BUYER_ORDER, values, "$BUYER_ORDER_ID = ?", arrayOf(orderId.toString()))
+        val rowsUpdated =
+            db.update(TABLE_BUYER_ORDER, values, "$BUYER_ORDER_ID = ?", arrayOf(orderId.toString()))
         db.close()
         return rowsUpdated > 0
     }
@@ -1475,11 +1556,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return status
     }
 
-   fun getEstateIdByEmployeeId(employeeId: Int): Int? {
+    fun getEstateIdByEmployeeId(employeeId: Int): Int? {
         val db = this.readableDatabase
         var estateId: Int? = null
 
-        val query = "SELECT $FIELD_MANAGER_ESTATE_ID_FR FROM $TABLE_FIELD_MANAGER WHERE $FIELD_MANAGER_Employee_ID = ?"
+        val query =
+            "SELECT $FIELD_MANAGER_ESTATE_ID_FR FROM $TABLE_FIELD_MANAGER WHERE $FIELD_MANAGER_Employee_ID = ?"
         val cursor = db.rawQuery(query, arrayOf(employeeId.toString()))
 
         if (cursor.moveToFirst()) {
@@ -1517,27 +1599,27 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     fun removeWorkerFromTask(taskId: Int, workerId: Int) {
         val db = writableDatabase
-        db.delete(TABLE_TASK_ASSIGNMENT, "$TASK_ID = ? AND $WORKER_Employee_ID = ?", arrayOf(taskId.toString(), workerId.toString()))
+        db.delete(
+            TABLE_TASK_ASSIGNMENT,
+            "$TASK_ID = ? AND $WORKER_Employee_ID = ?",
+            arrayOf(taskId.toString(), workerId.toString())
+        )
         db.close()
     }
 
 
-
-
-
-
     //Worker--------------------------------------------------------------------------------------------------------------------------------
 
-    fun insertWorker(worker: Worker){
-        val db=writableDatabase
+    fun insertWorker(worker: Worker) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(WORKER_Employee_ID,worker.EmployerId)
-            put(WORKER_ESTATE_ID_FR,worker.Estate_ID)
-            put(WORKER_Shift_Start_Time,worker.ShiftStartTime)
-            put(WORKER_Shift_End_Time,worker.ShiftEndTime)
-            put(WORKER_EXPERIENCE,worker.Experience)
+            put(WORKER_Employee_ID, worker.EmployerId)
+            put(WORKER_ESTATE_ID_FR, worker.Estate_ID)
+            put(WORKER_Shift_Start_Time, worker.ShiftStartTime)
+            put(WORKER_Shift_End_Time, worker.ShiftEndTime)
+            put(WORKER_EXPERIENCE, worker.Experience)
         }
-        db.insert(TABLE_WORKER,null,values)
+        db.insert(TABLE_WORKER, null, values)
         db.close()
 
     }
@@ -1553,12 +1635,21 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             worker = Worker(
                 EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
                 Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
-                ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(
-                    WORKER_Shift_Start_Time)),
-                ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(
-                    WORKER_Shift_End_Time)),
-                Experience  = cursor.getString(cursor.getColumnIndexOrThrow(
-                    WORKER_EXPERIENCE))
+                ShiftStartTime = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        WORKER_Shift_Start_Time
+                    )
+                ),
+                ShiftEndTime = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        WORKER_Shift_End_Time
+                    )
+                ),
+                Experience = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        WORKER_EXPERIENCE
+                    )
+                )
             )
         }
         cursor.close()
@@ -1596,8 +1687,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 val worker = Worker(
                     EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
                     Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
-                    ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_Start_Time)),
-                    ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_End_Time)),
+                    ShiftStartTime = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            WORKER_Shift_Start_Time
+                        )
+                    ),
+                    ShiftEndTime = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            WORKER_Shift_End_Time
+                        )
+                    ),
                     Experience = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_EXPERIENCE))
                 )
                 workersList.add(worker)
@@ -1612,16 +1711,28 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     fun getAllWorkersByEstate(estateId: Int): List<Worker> {
         val workersList = mutableListOf<Worker>()
         val db = readableDatabase
-        val query = "SELECT * FROM $TABLE_WORKER WHERE $WORKER_ESTATE_ID_FR = ?"  // Add estateId condition here
-        val cursor = db.rawQuery(query, arrayOf(estateId.toString()))  // Pass estateId as a parameter to the query
+        val query =
+            "SELECT * FROM $TABLE_WORKER WHERE $WORKER_ESTATE_ID_FR = ?"  // Add estateId condition here
+        val cursor = db.rawQuery(
+            query,
+            arrayOf(estateId.toString())
+        )  // Pass estateId as a parameter to the query
 
         if (cursor.moveToFirst()) {
             do {
                 val worker = Worker(
                     EmployerId = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_Employee_ID)),
                     Estate_ID = cursor.getInt(cursor.getColumnIndexOrThrow(WORKER_ESTATE_ID_FR)),
-                    ShiftStartTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_Start_Time)),
-                    ShiftEndTime = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_Shift_End_Time)),
+                    ShiftStartTime = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            WORKER_Shift_Start_Time
+                        )
+                    ),
+                    ShiftEndTime = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            WORKER_Shift_End_Time
+                        )
+                    ),
                     Experience = cursor.getString(cursor.getColumnIndexOrThrow(WORKER_EXPERIENCE))
                 )
                 workersList.add(worker)
@@ -1632,7 +1743,6 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         db.close()
         return workersList
     }
-
 
 
     fun getEmployeeNamesByEstateId(estateId: Int): List<String> {
@@ -1764,44 +1874,53 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
-
-
-
     //Estate--------------------------------------------------------------------------------------------------------------------------------
 
 
-
-    fun insertEstate(estate: Estate){
-        val db=writableDatabase
+    fun insertEstate(estate: Estate) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_ESTATE_NAME,estate.estateName)
-            put(COLUMN_ESTATE_LOCATION,estate.estateLocation)
-            put(COLUMN_ESTATE_SIZE,estate.estateSize)
-            put(COLUMN_ESTATE_ADDITIONAL_INFO,estate.estateAdditionalInfo)
+            put(COLUMN_ESTATE_NAME, estate.estateName)
+            put(COLUMN_ESTATE_LOCATION, estate.estateLocation)
+            put(COLUMN_ESTATE_SIZE, estate.estateSize)
+            put(COLUMN_ESTATE_ADDITIONAL_INFO, estate.estateAdditionalInfo)
         }
-        db.insert(TABLE_ESTATE,null,values)
+        db.insert(TABLE_ESTATE, null, values)
         db.close()
 
     }
 
-    fun getAllEstates():List<Estate>{
+    fun getAllEstates(): List<Estate> {
         val estates = ArrayList<Estate>()
-        val db =this.readableDatabase
-        val cursor=db.rawQuery("SELECT * FROM $TABLE_ESTATE", null)
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_ESTATE", null)
 
-        if(cursor.moveToFirst()){
-            do{
-                val estateID=cursor.getInt(cursor.getColumnIndexOrThrow(Estate_ID))
-                val estateName=cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_NAME))
-                val estateLocation=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_ESTATE_LOCATION))
-                val estateSize=cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_SIZE))
-                val estateAdditionalInfo=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_ESTATE_ADDITIONAL_INFO))
+        if (cursor.moveToFirst()) {
+            do {
+                val estateID = cursor.getInt(cursor.getColumnIndexOrThrow(Estate_ID))
+                val estateName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_NAME))
+                val estateLocation = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_ESTATE_LOCATION
+                    )
+                )
+                val estateSize = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTATE_SIZE))
+                val estateAdditionalInfo = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_ESTATE_ADDITIONAL_INFO
+                    )
+                )
 
-                estates.add(Estate(estateID,estateName,estateLocation,estateSize,estateAdditionalInfo))
-            }while (cursor.moveToNext())
+                estates.add(
+                    Estate(
+                        estateID,
+                        estateName,
+                        estateLocation,
+                        estateSize,
+                        estateAdditionalInfo
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -1809,52 +1928,82 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
-
     //Coconut----------------------------------------------------------------------------------------
 
-    fun insertCoconuts(coconut: Coconut){
+    fun insertCoconuts(coconut: Coconut) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_COCONUT_PLANT_DATE,coconut.plantDate)
-            put(COLUMN_NUMBER_OF_COCONUTS,coconut.numberOfCoconuts)
-            put(COLUMN_COCONUT_TREE_AGE,coconut.coconutTreeAge)
-            put(COLUMN_TREE_HEALTH,coconut.treeHealthStatus)
-            put(COLUMN_COCONUT_TREE_TYPE,coconut.coconutType)
-            put(COLUMN_COCONUT_ADDITIONAL_INFO,coconut.additionalCoconutInfo)
-            put(COLUMN_COCONUT_ESTATE_ID_FR,coconut.estateId)
+            put(COLUMN_COCONUT_PLANT_DATE, coconut.plantDate)
+            put(COLUMN_NUMBER_OF_COCONUTS, coconut.numberOfCoconuts)
+            put(COLUMN_COCONUT_TREE_AGE, coconut.coconutTreeAge)
+            put(COLUMN_TREE_HEALTH, coconut.treeHealthStatus)
+            put(COLUMN_COCONUT_TREE_TYPE, coconut.coconutType)
+            put(COLUMN_COCONUT_ADDITIONAL_INFO, coconut.additionalCoconutInfo)
+            put(COLUMN_COCONUT_ESTATE_ID_FR, coconut.estateId)
 
         }
-        db.insert(TABLE_COCONUT,null,values)
+        db.insert(TABLE_COCONUT, null, values)
         db.close()
     }
 
 
-    fun getAllCoconuts():List<Coconut>{
+    fun getAllCoconuts(): List<Coconut> {
         val coconuts = ArrayList<Coconut>()
-        val db =this.readableDatabase
-        val cursor=db.rawQuery("SELECT * FROM $TABLE_COCONUT", null)
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_COCONUT", null)
 
-        if(cursor.moveToFirst()){
-            do{
-                val coconutId=cursor.getInt(cursor.getColumnIndexOrThrow(Coconut_ID))
-                val estateID=cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_COCONUT_ESTATE_ID_FR))
-                val coconutTreeType=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_COCONUT_TREE_TYPE))
-                val coconutPlantedDate=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_COCONUT_PLANT_DATE))
-                val coconutAge=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_COCONUT_TREE_AGE))
-                val coconutHealth=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_TREE_HEALTH))
-                val coconutNumber=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_NUMBER_OF_COCONUTS))
-                val coconutAddtionalInfo=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_COCONUT_ADDITIONAL_INFO))
+        if (cursor.moveToFirst()) {
+            do {
+                val coconutId = cursor.getInt(cursor.getColumnIndexOrThrow(Coconut_ID))
+                val estateID = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_COCONUT_ESTATE_ID_FR
+                    )
+                )
+                val coconutTreeType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_COCONUT_TREE_TYPE
+                    )
+                )
+                val coconutPlantedDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_COCONUT_PLANT_DATE
+                    )
+                )
+                val coconutAge = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_COCONUT_TREE_AGE
+                    )
+                )
+                val coconutHealth = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_TREE_HEALTH
+                    )
+                )
+                val coconutNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_NUMBER_OF_COCONUTS
+                    )
+                )
+                val coconutAddtionalInfo = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_COCONUT_ADDITIONAL_INFO
+                    )
+                )
 
-                coconuts.add(Coconut(coconutId,coconutPlantedDate,coconutNumber,coconutAge,coconutHealth,coconutTreeType,coconutAddtionalInfo,estateID))
-            }while (cursor.moveToNext())
+                coconuts.add(
+                    Coconut(
+                        coconutId,
+                        coconutPlantedDate,
+                        coconutNumber,
+                        coconutAge,
+                        coconutHealth,
+                        coconutTreeType,
+                        coconutAddtionalInfo,
+                        estateID
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -1863,115 +2012,219 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     //Buyer--------------------------------------------------------------------------------------------------------------
 
-    fun insertBuyer(buyer: Buyer){
-        val db=writableDatabase
-        val values=ContentValues().apply {
-            put(COLUMN_BUYER_NAME,buyer.Buyer_Name)
-            put(COLUMN_BUYER_PHONE_NUMBER,buyer.Buyer_PhoneNumber)
-            put(COLUMN_BUYER_COMPANY_NAME,buyer.Buyer_Company_Name)
-            put(COLUMN_BUYER_COMPANY_PHONE_NUMBER,buyer.Buyer_Company_Number)
-            put(COLUMN_BUYER_COMPANY_ADDRESS,buyer.Buyer_Company_Address)
-            put(COLUMN_BUYER_TYPE,buyer.Buyer_Type)
-            put(COLUMN_BUYER_EMAIL,buyer.Buyer_Email)
-            put(COLUMN_BUYER_USERNAME,buyer.Buyer_Username)
-            put(COLUMN_BUYER_PASSWORD,buyer.Buyer_password)
+    fun insertBuyer(buyer: Buyer) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_BUYER_NAME, buyer.Buyer_Name)
+            put(COLUMN_BUYER_PHONE_NUMBER, buyer.Buyer_PhoneNumber)
+            put(COLUMN_BUYER_COMPANY_NAME, buyer.Buyer_Company_Name)
+            put(COLUMN_BUYER_COMPANY_PHONE_NUMBER, buyer.Buyer_Company_Number)
+            put(COLUMN_BUYER_COMPANY_ADDRESS, buyer.Buyer_Company_Address)
+            put(COLUMN_BUYER_TYPE, buyer.Buyer_Type)
+            put(COLUMN_BUYER_EMAIL, buyer.Buyer_Email)
+            put(COLUMN_BUYER_USERNAME, buyer.Buyer_Username)
+            put(COLUMN_BUYER_PASSWORD, buyer.Buyer_password)
         }
-        db.insert(TABLE_BUYER,null,values)
+        db.insert(TABLE_BUYER, null, values)
         db.close()
     }
 
-    fun getAllBuyers():List<Buyer>{
+    fun getAllBuyers(): List<Buyer> {
         val buyers = ArrayList<Buyer>()
-        val db =this.readableDatabase
-        val cursor=db.rawQuery("SELECT * FROM $TABLE_BUYER", null)
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_BUYER", null)
 
-        if(cursor.moveToFirst()){
-            do{
-                val buyerID=cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ID))
-                val buyerName=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_NAME))
-                val buyerPhoneNumber=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_PHONE_NUMBER))
-                val buyerCompanyName=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_COMPANY_NAME))
-                val buyerCompanyPhoneNumber=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_COMPANY_PHONE_NUMBER))
-                val buyerCompanyAddress=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_COMPANY_ADDRESS))
-                val buyerType=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_TYPE))
-                val buyerEmail=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_EMAIL))
-                val buyerUsername=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_USERNAME))
-                val buyerPassword=cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_BUYER_PASSWORD))
+        if (cursor.moveToFirst()) {
+            do {
+                val buyerID = cursor.getInt(cursor.getColumnIndexOrThrow(BUYER_ID))
+                val buyerName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_NAME
+                    )
+                )
+                val buyerPhoneNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_PHONE_NUMBER
+                    )
+                )
+                val buyerCompanyName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_COMPANY_NAME
+                    )
+                )
+                val buyerCompanyPhoneNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_COMPANY_PHONE_NUMBER
+                    )
+                )
+                val buyerCompanyAddress = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_COMPANY_ADDRESS
+                    )
+                )
+                val buyerType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_TYPE
+                    )
+                )
+                val buyerEmail = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_EMAIL
+                    )
+                )
+                val buyerUsername = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_USERNAME
+                    )
+                )
+                val buyerPassword = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_BUYER_PASSWORD
+                    )
+                )
 
 
-                buyers.add(Buyer(buyerID,buyerName,buyerPhoneNumber,buyerCompanyName,buyerCompanyPhoneNumber,buyerCompanyAddress,buyerType,buyerEmail,buyerUsername,buyerPassword))
-            }while (cursor.moveToNext())
+                buyers.add(
+                    Buyer(
+                        buyerID,
+                        buyerName,
+                        buyerPhoneNumber,
+                        buyerCompanyName,
+                        buyerCompanyPhoneNumber,
+                        buyerCompanyAddress,
+                        buyerType,
+                        buyerEmail,
+                        buyerUsername,
+                        buyerPassword
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return buyers
     }
 
-    fun getAllBuyerCatalogueItems():List<Catalogue>{
+    fun getAllBuyerCatalogueItems(): List<Catalogue> {
         val catalogues = ArrayList<Catalogue>()
-        val db =this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Buyer' AND $CATALOGUE_ITEM_AVAILABILITY = 'Available'", null)
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Buyer' AND $CATALOGUE_ITEM_AVAILABILITY = 'Available'",
+            null
+        )
 
-        if(cursor.moveToFirst()){
-            do{
-                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
-                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_NAME))
-                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_TYPE))
-                val cataloguePrice=cursor.getDouble(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_PRICE))
-                val catalogueQuantity=cursor.getInt(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_QUANTITY))
-                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_DESCRIPTION))
-                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_AVAILABILITY))
-                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_IMAGE))
+        if (cursor.moveToFirst()) {
+            do {
+                val catalogueID = cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_NAME
+                    )
+                )
+                val catalogueType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_TYPE
+                    )
+                )
+                val cataloguePrice = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_PRICE
+                    )
+                )
+                val catalogueQuantity = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_QUANTITY
+                    )
+                )
+                val catalogueDescription = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_DESCRIPTION
+                    )
+                )
+                val catalogueAvailability = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_AVAILABILITY
+                    )
+                )
+                val catalogueItemImage = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_IMAGE
+                    )
+                )
 
 
 
-                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,cataloguePrice,catalogueQuantity,catalogueDescription,catalogueAvailability,catalogueItemImage))
-            }while (cursor.moveToNext())
+                catalogues.add(
+                    Catalogue(
+                        catalogueID,
+                        catalogueName,
+                        catalogueType,
+                        cataloguePrice,
+                        catalogueQuantity,
+                        catalogueDescription,
+                        catalogueAvailability,
+                        catalogueItemImage
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return catalogues
     }
 
-    fun getAllSupplierCatalogueItems():List<Catalogue>{
+    fun getAllSupplierCatalogueItems(): List<Catalogue> {
         val catalogues = ArrayList<Catalogue>()
-        val db =this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Supplier' AND $CATALOGUE_ITEM_AVAILABILITY = 'Need'", null)
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_CATALOGUE WHERE $CATALOGUE_ITEM_TYPE = 'Supplier' AND $CATALOGUE_ITEM_AVAILABILITY = 'Need'",
+            null
+        )
 
-        if(cursor.moveToFirst()){
-            do{
-                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
-                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_NAME))
-                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_TYPE))
-                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_DESCRIPTION))
-                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_AVAILABILITY))
-                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_IMAGE))
+        if (cursor.moveToFirst()) {
+            do {
+                val catalogueID = cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_NAME
+                    )
+                )
+                val catalogueType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_TYPE
+                    )
+                )
+                val catalogueDescription = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_DESCRIPTION
+                    )
+                )
+                val catalogueAvailability = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_AVAILABILITY
+                    )
+                )
+                val catalogueItemImage = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_IMAGE
+                    )
+                )
 
 
 
-                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,null,null,catalogueDescription,catalogueAvailability,catalogueItemImage))
-            }while (cursor.moveToNext())
+                catalogues.add(
+                    Catalogue(
+                        catalogueID,
+                        catalogueName,
+                        catalogueType,
+                        null,
+                        null,
+                        catalogueDescription,
+                        catalogueAvailability,
+                        catalogueItemImage
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -1979,50 +2232,82 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-    fun getAllCatalogueItems():List<Catalogue>{
+    fun getAllCatalogueItems(): List<Catalogue> {
         val catalogues = ArrayList<Catalogue>()
-        val db =this.readableDatabase
+        val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_CATALOGUE", null)
 
-        if(cursor.moveToFirst()){
-            do{
-                val catalogueID=cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
-                val catalogueName=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_NAME))
-                val catalogueType=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_TYPE))
-                val cataloguePrice=cursor.getDouble(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_PRICE))
-                val catalogueQuantity=cursor.getInt(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_QUANTITY))
-                val catalogueDescription=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_DESCRIPTION))
-                val catalogueAvailability=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_AVAILABILITY))
-                val catalogueItemImage=cursor.getString(cursor.getColumnIndexOrThrow(
-                    CATALOGUE_ITEM_IMAGE))
+        if (cursor.moveToFirst()) {
+            do {
+                val catalogueID = cursor.getInt(cursor.getColumnIndexOrThrow(CATALOGUE_ID))
+                val catalogueName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_NAME
+                    )
+                )
+                val catalogueType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_TYPE
+                    )
+                )
+                val cataloguePrice = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_PRICE
+                    )
+                )
+                val catalogueQuantity = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_QUANTITY
+                    )
+                )
+                val catalogueDescription = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_DESCRIPTION
+                    )
+                )
+                val catalogueAvailability = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_AVAILABILITY
+                    )
+                )
+                val catalogueItemImage = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        CATALOGUE_ITEM_IMAGE
+                    )
+                )
 
 
 
-                catalogues.add(Catalogue(catalogueID,catalogueName,catalogueType,cataloguePrice,catalogueQuantity,catalogueDescription,catalogueAvailability,catalogueItemImage))
-            }while (cursor.moveToNext())
+                catalogues.add(
+                    Catalogue(
+                        catalogueID,
+                        catalogueName,
+                        catalogueType,
+                        cataloguePrice,
+                        catalogueQuantity,
+                        catalogueDescription,
+                        catalogueAvailability,
+                        catalogueItemImage
+                    )
+                )
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return catalogues
     }
 
-    fun addItemToCart(cart: Cart){
-        val db=writableDatabase
+    fun addItemToCart(cart: Cart) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(CART_USER_ID,cart.CART_USER_ID)
-            put(CART_ITEM_NAME,cart.CART_ITEM_NAME)
-            put(CART_ITEM_PRICE,cart.CART_ITEM_PRICE)
-            put(CART_ITEM_QUANTITY,cart.CART_ITEM_QUANTITY)
-            put(CART_ITEM_DATE,cart.CART_ITEM_DATE)
-            put(CART_ITEM_TOTAL_PRICE,cart.CART_ITEM_TOTAL_PRICE)
+            put(CART_USER_ID, cart.CART_USER_ID)
+            put(CART_ITEM_NAME, cart.CART_ITEM_NAME)
+            put(CART_ITEM_PRICE, cart.CART_ITEM_PRICE)
+            put(CART_ITEM_QUANTITY, cart.CART_ITEM_QUANTITY)
+            put(CART_ITEM_DATE, cart.CART_ITEM_DATE)
+            put(CART_ITEM_TOTAL_PRICE, cart.CART_ITEM_TOTAL_PRICE)
         }
-        db.insert(TABLE_CART,null,values)
+        db.insert(TABLE_CART, null, values)
         db.close()
     }
 
@@ -2040,9 +2325,17 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     CART_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(CART_USER_ID)),
                     CART_ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(CART_ITEM_NAME)),
                     CART_ITEM_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(CART_ITEM_PRICE)),
-                    CART_ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(CART_ITEM_QUANTITY)),
+                    CART_ITEM_QUANTITY = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            CART_ITEM_QUANTITY
+                        )
+                    ),
                     CART_ITEM_DATE = cursor.getString(cursor.getColumnIndexOrThrow(CART_ITEM_DATE)),
-                    CART_ITEM_TOTAL_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(CART_ITEM_TOTAL_PRICE))
+                    CART_ITEM_TOTAL_PRICE = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            CART_ITEM_TOTAL_PRICE
+                        )
+                    )
                 )
                 cartList.add(cart)
             } while (cursor.moveToNext())
@@ -2185,7 +2478,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_USER_ID)),
                     cardNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CARD_NUMBER)),
                     expiryDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EXPIRY_DATE)),
-                    cardHolderName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CARD_HOLDER_NAME))
+                    cardHolderName = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            COLUMN_CARD_HOLDER_NAME
+                        )
+                    )
                 )
             )
         }
@@ -2193,14 +2490,14 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return creditCards
     }
 
-    fun placeOrder(buyerOrder: BuyerOrder): Long{
-        val db=writableDatabase
+    fun placeOrder(buyerOrder: BuyerOrder): Long {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(BUYER_USER_ID,buyerOrder.USER_ID)
-            put(BUYER_ORDER_COST,buyerOrder.ORDER_COST)
-            put(BUYER_ORDER_DATE,buyerOrder.ORDER_DATE)
-            put(BUYER_ORDER_STATUS,buyerOrder.ORDER_STATUS)
-            put(BUYER_ORDER_SHIPPING_ADDRESS,buyerOrder.ORDER_SHIPPING_ADDRESS)
+            put(BUYER_USER_ID, buyerOrder.USER_ID)
+            put(BUYER_ORDER_COST, buyerOrder.ORDER_COST)
+            put(BUYER_ORDER_DATE, buyerOrder.ORDER_DATE)
+            put(BUYER_ORDER_STATUS, buyerOrder.ORDER_STATUS)
+            put(BUYER_ORDER_SHIPPING_ADDRESS, buyerOrder.ORDER_SHIPPING_ADDRESS)
         }
         val orderId = db.insert(TABLE_BUYER_ORDER, null, values)
         db.close()
@@ -2211,7 +2508,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         val db = this.writableDatabase
         return try {
             // Delete all cart items for the given user
-            val rowsAffected = db.delete(TABLE_CART, "$CART_USER_ID = ?", arrayOf(userId.toString()))
+            val rowsAffected =
+                db.delete(TABLE_CART, "$CART_USER_ID = ?", arrayOf(userId.toString()))
             rowsAffected > 0
         } catch (e: Exception) {
             e.printStackTrace()
@@ -2221,16 +2519,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         }
     }
 
-    fun insertOrderItem(orderItem: OrderItem){
-        val db=writableDatabase
+    fun insertOrderItem(orderItem: OrderItem) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(ORDER_ITEM_ORDER_ID,orderItem.ORDER_ITEM_ORDER_ID)
-            put(ORDER_ITEM_NAME,orderItem.ORDER_ITEM_NAME)
-            put(ORDER_ITEM_PRICE,orderItem.ORDER_ITEM_PRICE)
-            put(ORDER_ITEM_QUANTITY,orderItem.ORDER_ITEM_QUANTITY)
-            put(ORDER_ITEM_TOTAL_PRICE,orderItem.ORDER_ITEM_TOTAL_PRICE)
+            put(ORDER_ITEM_ORDER_ID, orderItem.ORDER_ITEM_ORDER_ID)
+            put(ORDER_ITEM_NAME, orderItem.ORDER_ITEM_NAME)
+            put(ORDER_ITEM_PRICE, orderItem.ORDER_ITEM_PRICE)
+            put(ORDER_ITEM_QUANTITY, orderItem.ORDER_ITEM_QUANTITY)
+            put(ORDER_ITEM_TOTAL_PRICE, orderItem.ORDER_ITEM_TOTAL_PRICE)
         }
-        db.insert(TABLE_ORDER_ITEM,null,values)
+        db.insert(TABLE_ORDER_ITEM, null, values)
         db.close()
     }
 
@@ -2254,8 +2552,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 ORDER_ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(ORDER_ITEM_NAME)),
                 ORDER_ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(ORDER_ITEM_QUANTITY)),
                 ORDER_ITEM_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(ORDER_ITEM_PRICE)),
-                ORDER_ITEM_TOTAL_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(
-                    ORDER_ITEM_TOTAL_PRICE))
+                ORDER_ITEM_TOTAL_PRICE = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        ORDER_ITEM_TOTAL_PRICE
+                    )
+                )
             )
             orderItems.add(item)
         }
@@ -2278,8 +2579,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
                     ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
                     ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
-                    ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(
-                        BUYER_ORDER_SHIPPING_ADDRESS)),
+                    ORDER_SHIPPING_ADDRESS = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            BUYER_ORDER_SHIPPING_ADDRESS
+                        )
+                    ),
                 )
                 orderList.add(buyerOrder)
             } while (cursor.moveToNext())
@@ -2289,7 +2593,6 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         return orderList
     }
-
 
 
     fun getAllBuyerProcessingOrder(): List<BuyerOrder> {
@@ -2307,8 +2610,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
                     ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
                     ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
-                    ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(
-                        BUYER_ORDER_SHIPPING_ADDRESS)),
+                    ORDER_SHIPPING_ADDRESS = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            BUYER_ORDER_SHIPPING_ADDRESS
+                        )
+                    ),
                 )
                 orderList.add(buyerOrder)
             } while (cursor.moveToNext())
@@ -2319,18 +2625,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return orderList
     }
 
-    fun insertBuyerPayment(buyerPayment: BuyerPayment):Long{
-        val db=writableDatabase
+    fun insertBuyerPayment(buyerPayment: BuyerPayment): Long {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(PAYMENT_ID,buyerPayment.PAYMENT_ID)
-            put(PAYMENT_ORDER_ID,buyerPayment.PAYMENT_ORDER_ID)
-            put(PAYMENT_USER_ID,buyerPayment.PAYMENT_USER_ID)
-            put(PAYMENT_AMOUNT,buyerPayment.PAYMENT_AMOUNT)
-            put(PAYMENT_STATUS,buyerPayment.PAYMENT_STATUS)
-            put(PAYMENT_METHOD,buyerPayment.PAYMENT_METHOD)
-            put(PAYMENT_DATE_TIME,buyerPayment.PAYMENT_DATE_TIME)
+            put(PAYMENT_ID, buyerPayment.PAYMENT_ID)
+            put(PAYMENT_ORDER_ID, buyerPayment.PAYMENT_ORDER_ID)
+            put(PAYMENT_USER_ID, buyerPayment.PAYMENT_USER_ID)
+            put(PAYMENT_AMOUNT, buyerPayment.PAYMENT_AMOUNT)
+            put(PAYMENT_STATUS, buyerPayment.PAYMENT_STATUS)
+            put(PAYMENT_METHOD, buyerPayment.PAYMENT_METHOD)
+            put(PAYMENT_DATE_TIME, buyerPayment.PAYMENT_DATE_TIME)
         }
-        val paymentID = db.insert(TABLE_BUYER_PAYMENT,null,values)
+        val paymentID = db.insert(TABLE_BUYER_PAYMENT, null, values)
         db.close()
 
         return paymentID
@@ -2351,10 +2657,16 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(PAYMENT_USER_ID)),
                     PAYMENT_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(PAYMENT_AMOUNT)),
                     PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT_STATUS)),
-                    PAYMENT_METHOD = cursor.getString(cursor.getColumnIndexOrThrow(
-                        PAYMENT_METHOD)),
-                    PAYMENT_DATE_TIME = cursor.getString(cursor.getColumnIndexOrThrow(
-                        PAYMENT_DATE_TIME)),
+                    PAYMENT_METHOD = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            PAYMENT_METHOD
+                        )
+                    ),
+                    PAYMENT_DATE_TIME = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            PAYMENT_DATE_TIME
+                        )
+                    ),
                 )
                 buyerPaymentList.add(buyerPayment)
             } while (cursor.moveToNext())
@@ -2366,45 +2678,59 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
-
-
-
-
-
     //Intercrops--------------------------------------------------------------------------------------------------------------
 
-    fun insertInterCrops(intercrops: Intercrops){
-        val db=writableDatabase
+    fun insertInterCrops(intercrops: Intercrops) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(INTERCROPS_ID,intercrops.intercropId)
-            put(COLUMN_INTERCROP_TYPE,intercrops.intercropType)
-            put(COLUMN_INTERCROP_PLANTED_DATE,intercrops.intercropPlantedDate)
-            put(COLUMN_INTERCROP_ADDITIONAL_INFO,intercrops.intercropAddtionalInfo)
-            put(COLUMN_INTERCROPS_ESTATE_ID_FR,intercrops.intercropEstateID)
+            put(INTERCROPS_ID, intercrops.intercropId)
+            put(COLUMN_INTERCROP_TYPE, intercrops.intercropType)
+            put(COLUMN_INTERCROP_PLANTED_DATE, intercrops.intercropPlantedDate)
+            put(COLUMN_INTERCROP_ADDITIONAL_INFO, intercrops.intercropAddtionalInfo)
+            put(COLUMN_INTERCROPS_ESTATE_ID_FR, intercrops.intercropEstateID)
         }
-        db.insert(TABLE_INTERCROP,null,values)
+        db.insert(TABLE_INTERCROP, null, values)
         db.close()
     }
 
-    fun getAllIntercrops():List<Intercrops>{
+    fun getAllIntercrops(): List<Intercrops> {
         val intercrops = ArrayList<Intercrops>()
         val db = writableDatabase
-        val cursor=db.rawQuery("SELECT * FROM $TABLE_INTERCROP",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_INTERCROP", null)
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 val intercropId = cursor.getInt(cursor.getColumnIndexOrThrow(INTERCROPS_ID))
-                val intercropEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_INTERCROPS_ESTATE_ID_FR))
-                val intercropsType = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_INTERCROP_TYPE))
-                val intercropPlantedDate = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_INTERCROP_PLANTED_DATE))
-                val intercropAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_INTERCROP_ADDITIONAL_INFO))
-                intercrops.add(Intercrops(intercropId,intercropsType,intercropPlantedDate,intercropAdditionalInfo,intercropEstateId))
-            }while (cursor.moveToNext())
+                val intercropEstateId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_INTERCROPS_ESTATE_ID_FR
+                    )
+                )
+                val intercropsType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_INTERCROP_TYPE
+                    )
+                )
+                val intercropPlantedDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_INTERCROP_PLANTED_DATE
+                    )
+                )
+                val intercropAdditionalInfo = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_INTERCROP_ADDITIONAL_INFO
+                    )
+                )
+                intercrops.add(
+                    Intercrops(
+                        intercropId,
+                        intercropsType,
+                        intercropPlantedDate,
+                        intercropAdditionalInfo,
+                        intercropEstateId
+                    )
+                )
+            } while (cursor.moveToNext())
         }
 
         cursor.close()
@@ -2427,7 +2753,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 val id = getInt(getColumnIndexOrThrow(INTERCROPS_ID))
                 val intercropType = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_TYPE))
                 val plantedDate = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_PLANTED_DATE))
-                val additionalInfo = getString(getColumnIndexOrThrow(COLUMN_INTERCROP_ADDITIONAL_INFO))
+                val additionalInfo =
+                    getString(getColumnIndexOrThrow(COLUMN_INTERCROP_ADDITIONAL_INFO))
                 intercrops.add(Intercrops(id, intercropType, plantedDate, additionalInfo, estateId))
             }
         }
@@ -2436,58 +2763,76 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
     //HarvestInfo--------------------------------------------------------------------------------------------------------------
 
-    fun insertHarvestInfo(harvestInfo: HarvestInfo){
-        val db=writableDatabase
+    fun insertHarvestInfo(harvestInfo: HarvestInfo) {
+        val db = writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_HARVEST_INFO_ID,harvestInfo.harvestID)
-            put(COLUMN_HARVEST_INFO_TYPE,harvestInfo.harvestType)
-            put(COLUMN_HARVEST_INFO_HARVESTED_DATE,harvestInfo.harvestDate)
-            put(COLUMN_HARVEST_INFO_QUANTITY,harvestInfo.harvestQuantity)
-            put(COLUMN_HARVEST_INFO_ADDITIONAL_INFO,harvestInfo.harvestAddtional_Info)
-            put(COLUMN_HARVEST_INFO_ESTATE_ID_FR,harvestInfo.harvestEstate)
+            put(COLUMN_HARVEST_INFO_ID, harvestInfo.harvestID)
+            put(COLUMN_HARVEST_INFO_TYPE, harvestInfo.harvestType)
+            put(COLUMN_HARVEST_INFO_HARVESTED_DATE, harvestInfo.harvestDate)
+            put(COLUMN_HARVEST_INFO_QUANTITY, harvestInfo.harvestQuantity)
+            put(COLUMN_HARVEST_INFO_ADDITIONAL_INFO, harvestInfo.harvestAddtional_Info)
+            put(COLUMN_HARVEST_INFO_ESTATE_ID_FR, harvestInfo.harvestEstate)
         }
-        db.insert(TABLE_HARVEST_INFO,null,values)
+        db.insert(TABLE_HARVEST_INFO, null, values)
         db.close()
     }
 
-    fun getAllHarvestInfo():List<HarvestInfo>{
-        val harvestInfos= ArrayList<HarvestInfo>()
+    fun getAllHarvestInfo(): List<HarvestInfo> {
+        val harvestInfos = ArrayList<HarvestInfo>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_HARVEST_INFO",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_HARVEST_INFO", null)
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
-                val harvestInfoId = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_ID))
+                val harvestInfoId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_ID
+                    )
+                )
 
-                val harvestInfoEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_ESTATE_ID_FR))
+                val harvestInfoEstateId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_ESTATE_ID_FR
+                    )
+                )
 
-                val harvestInfoCropType = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_TYPE))
+                val harvestInfoCropType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_TYPE
+                    )
+                )
 
-                val harvestInfoDate = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_HARVESTED_DATE))
+                val harvestInfoDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_HARVESTED_DATE
+                    )
+                )
 
-                val harvestInfoQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_QUANTITY))
+                val harvestInfoQuantity = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_QUANTITY
+                    )
+                )
 
-                val harvestInfoAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_HARVEST_INFO_ADDITIONAL_INFO))
+                val harvestInfoAdditionalInfo = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_HARVEST_INFO_ADDITIONAL_INFO
+                    )
+                )
 
                 harvestInfos.add(
-                    HarvestInfo(harvestInfoId,
-                    harvestInfoCropType,
-                    harvestInfoDate,
-                    harvestInfoQuantity,
-                    harvestInfoAdditionalInfo,
-                    harvestInfoEstateId)
+                    HarvestInfo(
+                        harvestInfoId,
+                        harvestInfoCropType,
+                        harvestInfoDate,
+                        harvestInfoQuantity,
+                        harvestInfoAdditionalInfo,
+                        harvestInfoEstateId
+                    )
                 )
-            }
-                while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -2496,74 +2841,103 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     //Supplier--------------------------------------------------------------------------------------------------------------
 
-    fun insertSupplier(supplier: Supplier){
+    fun insertSupplier(supplier: Supplier) {
         val db = writableDatabase
-        val values=ContentValues().apply {
-            put(SUPPLIER_ID,supplier.Supplier_Id)
-            put(COLUMN_SUPPLIER_NAME,supplier.Supplier_Name)
-            put(COLUMN_SUPPLIER_PHONE_NUMBER,supplier.Supplier_PhoneNumber)
-            put(COLUMN_SUPPLIER_COMPANY_NAME,supplier.Supplier_Company_Name)
-            put(COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER,supplier.Supplier_Company_Number)
-            put(COLUMN_SUPPLIER_COMPANY_ADDRESS,supplier.Supplier_Company_Address)
-            put(COLUMN_SUPPLIER_TYPE,supplier.Supplier_Type)
-            put(COLUMN_SUPPLIER_EMAIL,supplier.Supplier_Email)
-            put(COLUMN_SUPPLIER_USERNAME,supplier.Supplier_Username)
-            put(COLUMN_SUPPLIER_PASSWORD,supplier.Supplier_password)
+        val values = ContentValues().apply {
+            put(SUPPLIER_ID, supplier.Supplier_Id)
+            put(COLUMN_SUPPLIER_NAME, supplier.Supplier_Name)
+            put(COLUMN_SUPPLIER_PHONE_NUMBER, supplier.Supplier_PhoneNumber)
+            put(COLUMN_SUPPLIER_COMPANY_NAME, supplier.Supplier_Company_Name)
+            put(COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER, supplier.Supplier_Company_Number)
+            put(COLUMN_SUPPLIER_COMPANY_ADDRESS, supplier.Supplier_Company_Address)
+            put(COLUMN_SUPPLIER_TYPE, supplier.Supplier_Type)
+            put(COLUMN_SUPPLIER_EMAIL, supplier.Supplier_Email)
+            put(COLUMN_SUPPLIER_USERNAME, supplier.Supplier_Username)
+            put(COLUMN_SUPPLIER_PASSWORD, supplier.Supplier_password)
         }
-        db.insert(TABLE_SUPPLIER,null,values)
+        db.insert(TABLE_SUPPLIER, null, values)
         db.close()
     }
 
-    fun getAllSupplier():List<Supplier>{
-        val suppliers= ArrayList<Supplier>()
+    fun getAllSupplier(): List<Supplier> {
+        val suppliers = ArrayList<Supplier>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_SUPPLIER",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_SUPPLIER", null)
 
-        if (cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 val supplierId = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ID))
 
-                val supplierName = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_NAME))
-
-                val supplierPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_PHONE_NUMBER))
-
-                val supplierCompanyName = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_COMPANY_NAME))
-
-                val supplierCompanyPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER))
-
-                val supplierComapnyAddress = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_COMPANY_ADDRESS))
-
-                val supllierType = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_TYPE))
-
-                val supplierEmail = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_EMAIL))
-
-                val supplierUsername = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_USERNAME))
-
-                val supplierPassword = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_SUPPLIER_PASSWORD))
-
-                suppliers.add(Supplier(supplierId,
-                    supplierName,
-                    supplierPhoneNumber,
-                    supplierCompanyName,
-                    supplierCompanyPhoneNumber,
-                    supplierComapnyAddress,
-                    supllierType,
-                    supplierEmail,
-                    supplierUsername,
-                    supplierPassword)
+                val supplierName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_NAME
+                    )
                 )
 
-            }
-                while (cursor.moveToNext())
+                val supplierPhoneNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_PHONE_NUMBER
+                    )
+                )
+
+                val supplierCompanyName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_COMPANY_NAME
+                    )
+                )
+
+                val supplierCompanyPhoneNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_COMPANY_PHONE_NUMBER
+                    )
+                )
+
+                val supplierComapnyAddress = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_COMPANY_ADDRESS
+                    )
+                )
+
+                val supllierType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_TYPE
+                    )
+                )
+
+                val supplierEmail = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_EMAIL
+                    )
+                )
+
+                val supplierUsername = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_USERNAME
+                    )
+                )
+
+                val supplierPassword = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_SUPPLIER_PASSWORD
+                    )
+                )
+
+                suppliers.add(
+                    Supplier(
+                        supplierId,
+                        supplierName,
+                        supplierPhoneNumber,
+                        supplierCompanyName,
+                        supplierCompanyPhoneNumber,
+                        supplierComapnyAddress,
+                        supllierType,
+                        supplierEmail,
+                        supplierUsername,
+                        supplierPassword
+                    )
+                )
+
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -2572,100 +2946,126 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     //Fertilizer--------------------------------------------------------------------------------------------------------------
 
-    fun insertFertilizer(fertilizer: Fertilizer){
+    fun insertFertilizer(fertilizer: Fertilizer) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(FERTILIZER_ID,fertilizer.fertilizerId)
-            put(COLUMN_FERTILIZER_NAME,fertilizer.fertilizerName)
-            put(COLUMN_FERTILIZER_TYPE,fertilizer.fertilizerType)
-            put(COLUMN_FERTILIZER_QUANTITY,fertilizer.fertilizerQuantity)
-            put(COLUMN_FERTILIZER_DATE,fertilizer.fertilizerDate)
-            put(COLUMN_FERTILIZER_COMPOSITION,fertilizer.fertilizerComposition)
-            put(COLUMN_FERTILIZER_ADDITIONAL_INFO,fertilizer.fertilizerAdditionalInfo)
-            put(COLUMN_FERTILIZE_ESTATE_ID_FR,fertilizer.fertilizerEstateId)
+            put(FERTILIZER_ID, fertilizer.fertilizerId)
+            put(COLUMN_FERTILIZER_NAME, fertilizer.fertilizerName)
+            put(COLUMN_FERTILIZER_TYPE, fertilizer.fertilizerType)
+            put(COLUMN_FERTILIZER_QUANTITY, fertilizer.fertilizerQuantity)
+            put(COLUMN_FERTILIZER_DATE, fertilizer.fertilizerDate)
+            put(COLUMN_FERTILIZER_COMPOSITION, fertilizer.fertilizerComposition)
+            put(COLUMN_FERTILIZER_ADDITIONAL_INFO, fertilizer.fertilizerAdditionalInfo)
+            put(COLUMN_FERTILIZE_ESTATE_ID_FR, fertilizer.fertilizerEstateId)
         }
-        db.insert(TABLE_FERTILIZER,null,values)
+        db.insert(TABLE_FERTILIZER, null, values)
         db.close()
     }
 
-    fun getAllFertilizer():List<Fertilizer>{
-        val fertilizers= ArrayList<Fertilizer>()
+    fun getAllFertilizer(): List<Fertilizer> {
+        val fertilizers = ArrayList<Fertilizer>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_FERTILIZER",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_FERTILIZER", null)
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 val fertilizerId = cursor.getInt(cursor.getColumnIndexOrThrow(FERTILIZER_ID))
 
-                val fertilizerName = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_NAME))
-                val fertilizerType = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_TYPE))
-                val fertilizerDate = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_DATE))
-                val fertilizerQuantity = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_QUANTITY))
-                val fertilizerComposition = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_COMPOSITION))
-                val fertilizerAdditionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZER_ADDITIONAL_INFO))
-                val fertilizerEstateId = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_FERTILIZE_ESTATE_ID_FR))
+                val fertilizerName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_NAME
+                    )
+                )
+                val fertilizerType = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_TYPE
+                    )
+                )
+                val fertilizerDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_DATE
+                    )
+                )
+                val fertilizerQuantity = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_QUANTITY
+                    )
+                )
+                val fertilizerComposition = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_COMPOSITION
+                    )
+                )
+                val fertilizerAdditionalInfo = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZER_ADDITIONAL_INFO
+                    )
+                )
+                val fertilizerEstateId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_FERTILIZE_ESTATE_ID_FR
+                    )
+                )
 
-                fertilizers.add(Fertilizer(fertilizerId,fertilizerName,
-                    fertilizerType,
-                    fertilizerDate,
-                    fertilizerQuantity,
-                    fertilizerComposition,
-                    fertilizerAdditionalInfo,
-                    fertilizerEstateId))
+                fertilizers.add(
+                    Fertilizer(
+                        fertilizerId, fertilizerName,
+                        fertilizerType,
+                        fertilizerDate,
+                        fertilizerQuantity,
+                        fertilizerComposition,
+                        fertilizerAdditionalInfo,
+                        fertilizerEstateId
+                    )
+                )
 
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return fertilizers
     }
 
-    fun insertSupplierOrder(supplierOrder: SupplierOrder){
+    fun insertSupplierOrder(supplierOrder: SupplierOrder) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(SUPPLIER_ORDER_ID,supplierOrder.ORDER_ID)
-            put(SUPPLIER_USER_ID,supplierOrder.USER_ID)
-            put(SUPPLIER_ITEM_NAME,supplierOrder.ITEM_NAME)
-            put(SUPPLIER_ITEM_QUANTITY,supplierOrder.ITEM_QUANTITY)
-            put(SUPPLIER_ITEM_DESCRIPTION,supplierOrder.ITEM_DESCRIPTION)
-            put(SUPPLIER_ESTIMATE_DELIVERY_DATE,supplierOrder.ESTIMATE_DELIVERY_DATE)
-            put(SUPPLIER_QUANTITY_PRICE,supplierOrder.QUANTITY_PRICE)
-            put(SUPPLIER_TOTAL_AMOUNT,supplierOrder.TOTAL_AMOUNT)
-            put(SUPPLIER_FIELDMANAGER_STATUS,supplierOrder.FIELDMANAGER_STATUS)
-            put(SUPPLIER_CEO_STATUS,supplierOrder.CEO_STATUS)
+            put(SUPPLIER_ORDER_ID, supplierOrder.ORDER_ID)
+            put(SUPPLIER_USER_ID, supplierOrder.USER_ID)
+            put(SUPPLIER_ITEM_NAME, supplierOrder.ITEM_NAME)
+            put(SUPPLIER_ITEM_QUANTITY, supplierOrder.ITEM_QUANTITY)
+            put(SUPPLIER_ITEM_DESCRIPTION, supplierOrder.ITEM_DESCRIPTION)
+            put(SUPPLIER_ESTIMATE_DELIVERY_DATE, supplierOrder.ESTIMATE_DELIVERY_DATE)
+            put(SUPPLIER_QUANTITY_PRICE, supplierOrder.QUANTITY_PRICE)
+            put(SUPPLIER_TOTAL_AMOUNT, supplierOrder.TOTAL_AMOUNT)
+            put(SUPPLIER_FIELDMANAGER_STATUS, supplierOrder.FIELDMANAGER_STATUS)
+            put(SUPPLIER_CEO_STATUS, supplierOrder.CEO_STATUS)
         }
-        db.insert(TABLE_SUPPLIER_ORDER,null,values)
+        db.insert(TABLE_SUPPLIER_ORDER, null, values)
         db.close()
     }
 
-    fun insertSupplierPayment(supplierPayment: SupplierPayment){
+    fun insertSupplierPayment(supplierPayment: SupplierPayment) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(SUPPLIER_PAYMENT_ID,supplierPayment.PAYMENT_ID)
-            put(SUPPLIER_PAYMENT_ORDER_ID,supplierPayment.PAYMENT_ORDER_ID)
-            put(SUPPLIER_PAYMENT_USER_ID,supplierPayment.PAYMENT_USER_ID)
-            put(SUPPLIER_PAYMENT_DATE,supplierPayment.PAYMENT_DATE)
-            put(SUPPLIER_PAYMENT_TIME,supplierPayment.PAYMENT_TIME)
-            put(SUPPLIER_PAYMENT_TYPE,supplierPayment.PAYMENT_TYPE)
-            put(SUPPLIER_PAYMENT_STATUS,supplierPayment.PAYMENT_STATUS)
-            put(SUPPLIER_REMAIN_AMOUNT,supplierPayment.REMAIN_AMOUNT)
-            put(SUPPLIER_PAID_AMOUNT,supplierPayment.PAID_AMOUNT)
-            put(SUPPLIER_PAYMENT_TOTAL_AMOUNT,supplierPayment.TOTAL_AMOUNT)
+            put(SUPPLIER_PAYMENT_ID, supplierPayment.PAYMENT_ID)
+            put(SUPPLIER_PAYMENT_ORDER_ID, supplierPayment.PAYMENT_ORDER_ID)
+            put(SUPPLIER_PAYMENT_USER_ID, supplierPayment.PAYMENT_USER_ID)
+            put(SUPPLIER_PAYMENT_DATE, supplierPayment.PAYMENT_DATE)
+            put(SUPPLIER_PAYMENT_TIME, supplierPayment.PAYMENT_TIME)
+            put(SUPPLIER_PAYMENT_TYPE, supplierPayment.PAYMENT_TYPE)
+            put(SUPPLIER_PAYMENT_STATUS, supplierPayment.PAYMENT_STATUS)
+            put(SUPPLIER_REMAIN_AMOUNT, supplierPayment.REMAIN_AMOUNT)
+            put(SUPPLIER_PAID_AMOUNT, supplierPayment.PAID_AMOUNT)
+            put(SUPPLIER_PAYMENT_TOTAL_AMOUNT, supplierPayment.TOTAL_AMOUNT)
         }
-        db.insert(TABLE_SUPPLIER_PAYMENT,null,values)
+        db.insert(TABLE_SUPPLIER_PAYMENT, null, values)
         db.close()
     }
 
     fun getFieldManagerApprovedSupplierOrders(): List<SupplierOrder> {
         val orders = mutableListOf<SupplierOrder>()
-        val query = "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved' AND $SUPPLIER_CEO_STATUS = 'Pending'"
+        val query =
+            "SELECT * FROM $TABLE_SUPPLIER_ORDER WHERE $SUPPLIER_FIELDMANAGER_STATUS = 'Approved' AND $SUPPLIER_CEO_STATUS = 'Pending'"
         val db = this.readableDatabase
         val cursor = db.rawQuery(query, null)
 
@@ -2761,10 +3161,18 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             ITEM_NAME = cursor.getString(cursor.getColumnIndex(SUPPLIER_ITEM_NAME)),
             ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndex(SUPPLIER_ITEM_QUANTITY)),
             ITEM_DESCRIPTION = cursor.getString(cursor.getColumnIndex(SUPPLIER_ITEM_DESCRIPTION)),
-            ESTIMATE_DELIVERY_DATE = cursor.getString(cursor.getColumnIndex(SUPPLIER_ESTIMATE_DELIVERY_DATE)),
+            ESTIMATE_DELIVERY_DATE = cursor.getString(
+                cursor.getColumnIndex(
+                    SUPPLIER_ESTIMATE_DELIVERY_DATE
+                )
+            ),
             QUANTITY_PRICE = cursor.getDouble(cursor.getColumnIndex(SUPPLIER_QUANTITY_PRICE)),
             TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndex(SUPPLIER_TOTAL_AMOUNT)),
-            FIELDMANAGER_STATUS = cursor.getString(cursor.getColumnIndex(SUPPLIER_FIELDMANAGER_STATUS)),
+            FIELDMANAGER_STATUS = cursor.getString(
+                cursor.getColumnIndex(
+                    SUPPLIER_FIELDMANAGER_STATUS
+                )
+            ),
             CEO_STATUS = cursor.getString(cursor.getColumnIndex(SUPPLIER_CEO_STATUS))
         )
     }
@@ -2821,15 +3229,47 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             do {
                 val payment = SupplierPayment(
                     PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
-                    PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
-                    PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
-                    PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
-                    PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
-                    PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
-                    PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
-                    REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
+                    PAYMENT_ORDER_ID = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_ORDER_ID
+                        )
+                    ),
+                    PAYMENT_USER_ID = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_USER_ID
+                        )
+                    ),
+                    PAYMENT_DATE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_DATE
+                        )
+                    ),
+                    PAYMENT_TIME = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TIME
+                        )
+                    ),
+                    PAYMENT_TYPE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TYPE
+                        )
+                    ),
+                    PAYMENT_STATUS = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_STATUS
+                        )
+                    ),
+                    REMAIN_AMOUNT = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_REMAIN_AMOUNT
+                        )
+                    ),
                     PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
-                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+                    TOTAL_AMOUNT = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TOTAL_AMOUNT
+                        )
+                    )
                 )
                 payments.add(payment)
             } while (cursor.moveToNext())
@@ -2853,15 +3293,47 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             do {
                 val payment = SupplierPayment(
                     PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
-                    PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
-                    PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
-                    PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
-                    PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
-                    PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
-                    PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
-                    REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
+                    PAYMENT_ORDER_ID = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_ORDER_ID
+                        )
+                    ),
+                    PAYMENT_USER_ID = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_USER_ID
+                        )
+                    ),
+                    PAYMENT_DATE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_DATE
+                        )
+                    ),
+                    PAYMENT_TIME = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TIME
+                        )
+                    ),
+                    PAYMENT_TYPE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TYPE
+                        )
+                    ),
+                    PAYMENT_STATUS = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_STATUS
+                        )
+                    ),
+                    REMAIN_AMOUNT = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_REMAIN_AMOUNT
+                        )
+                    ),
                     PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
-                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+                    TOTAL_AMOUNT = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_PAYMENT_TOTAL_AMOUNT
+                        )
+                    )
                 )
                 partialPaidPayments.add(payment)
             } while (cursor.moveToNext())
@@ -2900,7 +3372,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
     fun getPaymentStatus(orderId: Int): String? {
         val db = readableDatabase
-        val query = "SELECT $SUPPLIER_PAYMENT_STATUS FROM $TABLE_SUPPLIER_PAYMENT WHERE $SUPPLIER_PAYMENT_ORDER_ID = ?"
+        val query =
+            "SELECT $SUPPLIER_PAYMENT_STATUS FROM $TABLE_SUPPLIER_PAYMENT WHERE $SUPPLIER_PAYMENT_ORDER_ID = ?"
         val cursor = db.rawQuery(query, arrayOf(orderId.toString()))
 
         var paymentStatus: String? = null
@@ -2934,12 +3407,36 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                     ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ORDER_ID)),
                     USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_USER_ID)),
                     ITEM_NAME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_NAME)),
-                    ITEM_QUANTITY = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_QUANTITY)),
-                    ITEM_DESCRIPTION = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ITEM_DESCRIPTION)),
-                    ESTIMATE_DELIVERY_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_ESTIMATE_DELIVERY_DATE)),
-                    QUANTITY_PRICE = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_QUANTITY_PRICE)),
-                    TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_TOTAL_AMOUNT)),
-                    FIELDMANAGER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_FIELDMANAGER_STATUS)),
+                    ITEM_QUANTITY = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_ITEM_QUANTITY
+                        )
+                    ),
+                    ITEM_DESCRIPTION = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_ITEM_DESCRIPTION
+                        )
+                    ),
+                    ESTIMATE_DELIVERY_DATE = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_ESTIMATE_DELIVERY_DATE
+                        )
+                    ),
+                    QUANTITY_PRICE = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_QUANTITY_PRICE
+                        )
+                    ),
+                    TOTAL_AMOUNT = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_TOTAL_AMOUNT
+                        )
+                    ),
+                    FIELDMANAGER_STATUS = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            SUPPLIER_FIELDMANAGER_STATUS
+                        )
+                    ),
                     CEO_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_CEO_STATUS))
                 )
                 supplierOrders.add(order)
@@ -2982,15 +3479,31 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         if (cursor.moveToFirst()) {
             supplierPayment = SupplierPayment(
                 PAYMENT_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ID)),
-                PAYMENT_ORDER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_ORDER_ID)),
-                PAYMENT_USER_ID = cursor.getInt(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_USER_ID)),
+                PAYMENT_ORDER_ID = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        SUPPLIER_PAYMENT_ORDER_ID
+                    )
+                ),
+                PAYMENT_USER_ID = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        SUPPLIER_PAYMENT_USER_ID
+                    )
+                ),
                 PAYMENT_DATE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_DATE)),
                 PAYMENT_TIME = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TIME)),
                 PAYMENT_TYPE = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TYPE)),
-                PAYMENT_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_STATUS)),
+                PAYMENT_STATUS = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        SUPPLIER_PAYMENT_STATUS
+                    )
+                ),
                 REMAIN_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_REMAIN_AMOUNT)),
                 PAID_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAID_AMOUNT)),
-                TOTAL_AMOUNT = cursor.getDouble(cursor.getColumnIndexOrThrow(SUPPLIER_PAYMENT_TOTAL_AMOUNT))
+                TOTAL_AMOUNT = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        SUPPLIER_PAYMENT_TOTAL_AMOUNT
+                    )
+                )
             )
         }
 
@@ -3000,51 +3513,69 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     }
 
 
-
     //Resources--------------------------------------------------------------------------------------------------------------
 
-    fun insertResource(resources: Resources){
+    fun insertResource(resources: Resources) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(RESOURCE_ID,resources.resourcesID)
-            put(COLUMN_RESOURCES_DESCRIPTION,resources.description)
-            put(COLUMN_RESOURCES_DATE,resources.date)
-            put(COLUMN_RESOURCES_BILL_NUMBER,resources.billNumber)
-            put(COLUMN_RESOURCES_AMOUNT,resources.amount)
-            put(COLUMN_RESOURCES_ESTATE_ID_FR,resources.resourcesEstate)
+            put(RESOURCE_ID, resources.resourcesID)
+            put(COLUMN_RESOURCES_DESCRIPTION, resources.description)
+            put(COLUMN_RESOURCES_DATE, resources.date)
+            put(COLUMN_RESOURCES_BILL_NUMBER, resources.billNumber)
+            put(COLUMN_RESOURCES_AMOUNT, resources.amount)
+            put(COLUMN_RESOURCES_ESTATE_ID_FR, resources.resourcesEstate)
 
         }
-        db.insert(TABLE_RESOURCES,null,values)
+        db.insert(TABLE_RESOURCES, null, values)
         db.close()
     }
 
-    fun getAllResources():List<Resources>{
-        val resources= ArrayList<Resources>()
+    fun getAllResources(): List<Resources> {
+        val resources = ArrayList<Resources>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_RESOURCES",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_RESOURCES", null)
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 val resourcesId = cursor.getInt(cursor.getColumnIndexOrThrow(RESOURCE_ID))
 
-                val resourcesDescription = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_RESOURCES_DESCRIPTION))
-                val resourcesDate = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_RESOURCES_DATE))
-                val resourcesBillNumber = cursor.getString(cursor.getColumnIndexOrThrow(
-                    COLUMN_RESOURCES_BILL_NUMBER))
-                val resourcesAmount = cursor.getDouble(cursor.getColumnIndexOrThrow(
-                    COLUMN_RESOURCES_AMOUNT))
-                val resourcesEstate = cursor.getInt(cursor.getColumnIndexOrThrow(
-                    COLUMN_RESOURCES_ESTATE_ID_FR))
+                val resourcesDescription = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_RESOURCES_DESCRIPTION
+                    )
+                )
+                val resourcesDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_RESOURCES_DATE
+                    )
+                )
+                val resourcesBillNumber = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_RESOURCES_BILL_NUMBER
+                    )
+                )
+                val resourcesAmount = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_RESOURCES_AMOUNT
+                    )
+                )
+                val resourcesEstate = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(
+                        COLUMN_RESOURCES_ESTATE_ID_FR
+                    )
+                )
 
-                resources.add(Resources(resourcesId,resourcesDescription,
-                    resourcesDate,
-                    resourcesBillNumber,
-                    resourcesAmount,
-                    resourcesEstate))
+                resources.add(
+                    Resources(
+                        resourcesId, resourcesDescription,
+                        resourcesDate,
+                        resourcesBillNumber,
+                        resourcesAmount,
+                        resourcesEstate
+                    )
+                )
 
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -3065,7 +3596,12 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
             put(COLUMN_RESOURCES_AMOUNT, resource.amount)
             put(COLUMN_RESOURCES_ESTATE_ID_FR, resource.resourcesEstate)
         }
-        return db.update(TABLE_RESOURCES, values, "$RESOURCE_ID=?", arrayOf(resource.resourcesID.toString()))
+        return db.update(
+            TABLE_RESOURCES,
+            values,
+            "$RESOURCE_ID=?",
+            arrayOf(resource.resourcesID.toString())
+        )
     }
 
     fun getRevenueReport(startDate: String, endDate: String): Double {
@@ -3168,7 +3704,15 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 subTotal += totalAmount
 
                 expensesList.add(
-                    ExpenseDetails(orderId, userName, companyName, itemName, itemQuantity, quantityPrice, totalAmount)
+                    ExpenseDetails(
+                        orderId,
+                        userName,
+                        companyName,
+                        itemName,
+                        itemQuantity,
+                        quantityPrice,
+                        totalAmount
+                    )
                 )
             } while (cursor.moveToNext())
         }
@@ -3191,7 +3735,11 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 ORDER_COST = cursor.getDouble(cursor.getColumnIndexOrThrow(BUYER_ORDER_COST)),
                 ORDER_DATE = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_DATE)),
                 ORDER_STATUS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_STATUS)),
-                ORDER_SHIPPING_ADDRESS = cursor.getString(cursor.getColumnIndexOrThrow(BUYER_ORDER_SHIPPING_ADDRESS))
+                ORDER_SHIPPING_ADDRESS = cursor.getString(
+                    cursor.getColumnIndexOrThrow(
+                        BUYER_ORDER_SHIPPING_ADDRESS
+                    )
+                )
             )
         }
         cursor.close()
@@ -3257,13 +3805,29 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         if (cursor.moveToFirst()) {
             do {
                 val report = CoconutProductionReport(
-                    estateId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_ESTATE_ID_FR)),
-                    plantDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_PLANT_DATE)),
+                    estateId = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(
+                            COLUMN_COCONUT_ESTATE_ID_FR
+                        )
+                    ),
+                    plantDate = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            COLUMN_COCONUT_PLANT_DATE
+                        )
+                    ),
                     numberOfCoconuts = cursor.getInt(cursor.getColumnIndexOrThrow("TotalCoconuts")),
                     treeAge = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_TREE_AGE)),
                     treeHealth = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TREE_HEALTH)),
-                    treeType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_TREE_TYPE)),
-                    additionalInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COCONUT_ADDITIONAL_INFO))
+                    treeType = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            COLUMN_COCONUT_TREE_TYPE
+                        )
+                    ),
+                    additionalInfo = cursor.getString(
+                        cursor.getColumnIndexOrThrow(
+                            COLUMN_COCONUT_ADDITIONAL_INFO
+                        )
+                    )
                 )
                 productionList.add(report)
             } while (cursor.moveToNext())
@@ -3297,8 +3861,10 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
                 // Use the defined constants so that the column names match exactly.
                 val estateId = cursor.getInt(cursor.getColumnIndex(COLUMN_INTERCROPS_ESTATE_ID_FR))
                 val intercropType = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_TYPE))
-                val plantedDate = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_PLANTED_DATE))
-                val additionalInfo = cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_ADDITIONAL_INFO))
+                val plantedDate =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_PLANTED_DATE))
+                val additionalInfo =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_INTERCROP_ADDITIONAL_INFO))
 
                 val report = IntercropProductionReport(
                     estateId = estateId,
@@ -3401,7 +3967,8 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
     fun getSumOfNonCancelledBuyerOrderCost(): Double {
         val db = this.readableDatabase
         // Query to sum order costs for orders where status is not 'Cancelled'
-        val query = "SELECT SUM($BUYER_ORDER_COST) FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_STATUS != ?"
+        val query =
+            "SELECT SUM($BUYER_ORDER_COST) FROM $TABLE_BUYER_ORDER WHERE $BUYER_ORDER_STATUS != ?"
         val cursor = db.rawQuery(query, arrayOf("Cancelled"))
         var sum = 0.0
         if (cursor.moveToFirst()) {
@@ -3413,18 +3980,56 @@ class GreentipsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         return sum
     }
 
+    fun getEmployeeCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_EMPLOYEE"
+        val cursor = db.rawQuery(query, null)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
 
+    fun getCoconutTreeCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_COCONUT"
+        val cursor = db.rawQuery(query, null)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
 
+    fun getIntercropCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_INTERCROP"
+        val cursor = db.rawQuery(query, null)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
 
-
-
-
-
-
-
-
-
-
-
+    fun getSupplierCount(): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_SUPPLIER"
+        val cursor = db.rawQuery(query, null)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return count
+    }
 
 }

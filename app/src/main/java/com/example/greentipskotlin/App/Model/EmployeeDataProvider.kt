@@ -48,5 +48,9 @@ class EmployeeDataProvider (context: Context){
         return greentipsDatabaseHelper.getEmployeeById(id)
     }
 
+    fun getEmployeeCount(): Int {
+        return greentipsDatabaseHelper.getEmployeeCount()
+    }
+
 
 }
