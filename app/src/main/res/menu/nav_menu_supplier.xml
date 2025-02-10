@@ -10,25 +10,18 @@
             android:icon="@drawable/ic_dashboard"
             android:title="DashBoard"/>
         <item
-            android:id="@+id/profileFragment"
-            android:icon="@drawable/baseline_task_24"
-            android:title="Profile"/>
-        <item
             android:id="@+id/viewCatalogFragment"
             android:icon="@drawable/ic_task_history"
             android:title="View Catalog"/>
         <item
             android:id="@+id/viewSupplyDetailsFragment"
-            android:icon="@drawable/ic_supplier_reg"
+            android:icon="@drawable/ic_harvest_infomation"
             android:title="View Supply Details"/>
         <item
-            android:id="@+id/getPaymentsFragment"
-            android:icon="@drawable/ic_buyer_reg_req"
-            android:title="Get Payments"/>
-        <item
-            android:id="@+id/approvedOrderEmailsFragment"
-            android:icon="@drawable/ic_supplier_order_req"
-            android:title="Approved Order Emails"/>
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/ic_person"
+            android:title="Profile"/>
+
 
 
     </group>

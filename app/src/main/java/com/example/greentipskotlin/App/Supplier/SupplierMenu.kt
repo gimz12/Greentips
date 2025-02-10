@@ -24,6 +24,7 @@ import com.example.greentipskotlin.App.CEO.sup_Order_HistoryFragment
 import com.example.greentipskotlin.App.CEO.supplier_Reg_ReqFragment
 import com.example.greentipskotlin.App.CEO.supplier_order_reqFragment
 import com.example.greentipskotlin.App.CEO.task_HistoryFragment
+import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
 import com.google.android.material.navigation.NavigationView
 
@@ -58,7 +59,7 @@ class SupplierMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(supplierDashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
 
@@ -95,12 +96,16 @@ class SupplierMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.profileFragment -> replaceFragment(supplierProfileFragment())
             R.id.viewCatalogFragment -> replaceFragment(supplierViewCatalogFragment())
             R.id.viewSupplyDetailsFragment -> replaceFragment(supplierViewSupplyDetailsFragment())
-            R.id.getPaymentsFragment -> replaceFragment(supplierGetPaymentsFragmnet())
-            R.id.approvedOrderEmailsFragment -> replaceFragment(supplierApprovedOrderEmailFragment())
 
 
             // Other fragments...
-            R.id.log_out -> Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+            R.id.log_out -> {
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, User_Login::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

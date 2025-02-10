@@ -72,6 +72,7 @@ class PendingSupplierOrdersFragment : Fragment() {
         model.supplierPendingOrders.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.PAYMENT_DATE } else updateList
             supplierPendingOrderAdapter.updateList(listToDisplay)
+            binding.pendingSupplierOrderCount.text=listToDisplay.size.toString()
         }
 
 

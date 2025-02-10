@@ -68,6 +68,7 @@ class ConfirmedSupplierOrderFragment : Fragment() {
         model.supplierOffersApprovedByCEO.observe(viewLifecycleOwner){updateList ->
             val listToDisplay = if (isSorted) updateList.sortedBy { it.ORDER_ID } else updateList
             supplierConfirmedOrderAdapter.updateList(listToDisplay)
+            binding.confirmedSupplierOrderCount.text=listToDisplay.size.toString()
         }
 
         return binding.root

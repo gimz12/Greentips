@@ -26,6 +26,8 @@ import com.example.greentipskotlin.App.CEO.task_HistoryFragment
 import com.example.greentipskotlin.App.FieldManager.CatalogueItemManageFragment
 import com.example.greentipskotlin.App.FieldManager.FieldManagerDashboard
 import com.example.greentipskotlin.App.FinanceManager.ConfirmedSupplierOrderFragment
+import com.example.greentipskotlin.App.FinanceManager.FinanceManagerDashboardFragment
+import com.example.greentipskotlin.App.FinanceManager.FinancialReportsFragment
 import com.example.greentipskotlin.App.FinanceManager.PendingSupplierOrdersFragment
 import com.example.greentipskotlin.App.User_Login
 import com.example.greentipskotlin.R
@@ -60,7 +62,7 @@ class FinanceManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemS
         supportActionBar?.setHomeButtonEnabled(true)
 
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(FinanceManagerDashboardFragment())
             navigationView.setCheckedItem(R.id.homeFragment)
         }
     }
@@ -95,13 +97,8 @@ class FinanceManagerMenu : AppCompatActivity(), NavigationView.OnNavigationItemS
             R.id.homeFragment -> replaceFragment(FieldManagerDashboard())
             R.id.confirmedSupplierOrderFragment -> replaceFragment(ConfirmedSupplierOrderFragment())
             R.id.pendingSupplierOrderFragment -> replaceFragment(PendingSupplierOrdersFragment())
-            R.id.harvestingManagement -> replaceFragment(supplier_Reg_ReqFragment())
-            R.id.fertilizerManagement -> replaceFragment(buyer_RegFragment())
-            R.id.resourceManagement -> replaceFragment(supplier_order_reqFragment())
-            R.id.catalogueManagement -> replaceFragment(CatalogueItemManageFragment())
-            R.id.buyerOrderManagement -> replaceFragment(buyer_Order_HisFragment())
-            R.id.reportChallenges -> replaceFragment(CatalogueItemManageFragment())
-            R.id.requestGoods -> replaceFragment(BuyerCatalogueFragment())
+            R.id.PaymentRecordsFragment -> replaceFragment(PaymentRecordsFragment())
+            R.id.financialReportsFragment -> replaceFragment(FinancialReportsFragment())
 
 
             // Other fragments...

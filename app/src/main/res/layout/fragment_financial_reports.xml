@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Revenue Report"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="8dp"/>
+
+    <EditText
+        android:fontFamily="@font/poppins_regular"
+        android:id="@+id/etStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start Date"
+        android:focusable="false"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/etEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Date"
+        android:focusable="false"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btnGenerateReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generate Report"
+        android:background="@drawable/okbutton_background"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tvRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Revenue: Rs 0.00"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btnExportPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Export to PDF"
+        android:background="@drawable/okbutton_background"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etExStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Date"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/etExEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="End Date"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/btnExGenerateReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/okbutton_background"
+            android:text="Generate Report"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tvExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Expenses: Rs 0.00"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/btnExExportPdf"
+            android:layout_width="match_parent"
+            android:background="@drawable/okbutton_background"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_height="wrap_content"
+            android:text="Export to PDF"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+

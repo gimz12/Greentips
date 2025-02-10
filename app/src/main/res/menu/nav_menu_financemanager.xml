@@ -21,30 +21,12 @@
             android:id="@+id/pendingSupplierOrderFragment"
             android:icon="@drawable/ic_harvest_infomation"
             android:title="Supplier Pending Payments "/>
+
         <item
-            android:id="@+id/fertilizerManagement"
-            android:icon="@drawable/ic_fertilizer_management"
-            android:title="Fertilizer Management"/>
-        <item
-            android:id="@+id/resourceManagement"
-            android:icon="@drawable/ic_resource_management"
-            android:title="Resource Management"/>
-        <item
-            android:id="@+id/catalogueManagement"
-            android:icon="@drawable/catalogue"
-            android:title="Catalogue Management"/>
-        <item
-            android:id="@+id/buyerOrderManagement"
-            android:icon="@drawable/ic_buyer_order_history"
-            android:title="Buyer Order Managemet"/>
-        <item
-            android:id="@+id/reportChallenges"
-            android:icon="@drawable/ic_custom_reports"
-            android:title="Report Challenges to CEO"/>
-        <item
-            android:id="@+id/requestGoods"
-            android:icon="@drawable/ic_supplier_managament"
-            android:title="Request Goods"/>
+            android:id="@+id/financialReportsFragment"
+            android:icon="@drawable/ic_financial_reports"
+            android:title="Financial Reports "/>
+
 
     </group>
 
