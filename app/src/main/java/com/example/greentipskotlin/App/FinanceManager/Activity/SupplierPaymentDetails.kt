@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.greentipskotlin.App.Admin.viewModel.SupplierPaymentViewModel
 import com.example.greentipskotlin.App.Admin.viewModel.SupplierViewModel
-import com.example.greentipskotlin.R
 import com.example.greentipskotlin.databinding.ActivitySupplierPaymentDetailsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

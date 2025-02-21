@@ -58,7 +58,7 @@ class CeoDetailsInsert : AppCompatActivity() {
                         ).show()
 
                         // Navigate back to the EmployeeFragment
-                        navigateToEmployeeFragment()
+                        finish()
                     } else {
                         Toast.makeText(
                             this,
@@ -72,14 +72,6 @@ class CeoDetailsInsert : AppCompatActivity() {
 
     }
     private fun navigateToEmployeeFragment() {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        // Replace the current fragment with EmployeeFragment
-        fragmentTransaction.replace(R.id.fragment_container, emp_mngFragment())  // Use correct container ID
-        fragmentTransaction.addToBackStack(null)  // Optional if you want to keep the back stack
-        fragmentTransaction.commit()
-
         finish()  // Close the activity after fragment transaction
     }
 }
