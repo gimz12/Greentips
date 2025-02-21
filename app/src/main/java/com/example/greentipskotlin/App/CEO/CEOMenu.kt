@@ -23,11 +23,16 @@ import com.google.android.material.navigation.NavigationView
 private lateinit var drawerLayout: DrawerLayout
 private lateinit var toggle: ActionBarDrawerToggle
 
-class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ceomenu)
 
+        // Initialize Drawer
         drawerLayout = findViewById(R.id.drawer_layout_CEO)
 
         // Initialize navigationView and set listener
@@ -44,36 +49,33 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        //set visible the toggleDrawer button
+        // Set visible the toggleDrawer button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        // Load default fragment (do not add to back stack)
         if (savedInstanceState == null) {
-            replaceFragment(ceoDashboardFragment())
+            replaceFragment(ceoDashboardFragment(), addToBackStack = false)
             navigationView.setCheckedItem(R.id.homeFragment)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         val id = item.itemId
 
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
 
-        if (id == R.id.profile) {
-            val groupMessageIntent = Intent(
-                this,
-                UserProfileManagement::class.java
-            )
-            startActivity(groupMessageIntent)
-        }else if (id == R.id.notifications){
-            val notificationIntent = Intent(
-                this,
-                HarvestInfomationInsert::class.java
-            )
-            startActivity(notificationIntent)
+        when (id) {
+            R.id.profile -> {
+                val profileIntent = Intent(this, UserProfileManagement::class.java)
+                startActivity(profileIntent)
+            }
+            R.id.notifications -> {
+                val notificationIntent = Intent(this, HarvestInfomationInsert::class.java)
+                startActivity(notificationIntent)
+            }
         }
 
         return true
@@ -89,9 +91,6 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.buyer_Order_HisFragment -> replaceFragment(buyer_Order_HisFragment())
             R.id.financial_ReportFragment -> replaceFragment(financial_ReportFragment())
             R.id.custom_ReportsFragment -> replaceFragment(custom_ReportsFragment())
-
-
-            // Other fragments...
             R.id.log_out -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, User_Login::class.java))
@@ -102,10 +101,22 @@ class CEOMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

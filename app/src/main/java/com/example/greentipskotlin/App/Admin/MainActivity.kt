@@ -26,6 +26,10 @@ private lateinit var drawerLayout: DrawerLayout
 private lateinit var toggle: ActionBarDrawerToggle
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,43 +51,38 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        //set visible the toggleDrawer button
+        // Set visible the toggleDrawer button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        // Load default fragment (do not add to back stack)
         if (savedInstanceState == null) {
-            replaceFragment(dashboardFragment())
+            replaceFragment(dashboardFragment(), addToBackStack = false)
             navigationView.setCheckedItem(R.id.homeFragment)
         }
     }
 
-    //toggle Drawer click action
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         val id = item.itemId
 
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
 
-        if (id == R.id.profile) {
-            val groupMessageIntent = Intent(
-                this,
-                UserProfileManagement::class.java
-            )
-            startActivity(groupMessageIntent)
-        }else if (id == R.id.notifications){
-            val notificationIntent = Intent(
-                this,
-                HarvestInfomationInsert::class.java
-            )
-            startActivity(notificationIntent)
+        when (id) {
+            R.id.profile -> {
+                val profileIntent = Intent(this, UserProfileManagement::class.java)
+                startActivity(profileIntent)
+            }
+            R.id.notifications -> {
+                val notificationIntent = Intent(this, HarvestInfomationInsert::class.java)
+                startActivity(notificationIntent)
+            }
         }
 
         return true
     }
 
-    //to navigate Through the navigation drawer
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(dashboardFragment())
@@ -96,9 +95,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.harvest_infoFragmnet -> replaceFragment(hvst_infoFragment())
             R.id.res_mngFragmenet -> replaceFragment(resource_mngFragment())
             R.id.fert_mngFragment -> replaceFragment(fert_mngFragment())
-
-
-            // Other fragments...
             R.id.log_out -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, User_Login::class.java))
@@ -109,25 +105,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
+        } else if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
         } else {
             super.onBackPressed()
         }
     }
 
-    // method needed to connect menu and actionbar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
-
 }
