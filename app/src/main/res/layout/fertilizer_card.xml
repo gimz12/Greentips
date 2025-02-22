@@ -1,92 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="282dp"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
 
+        <TextView
+            android:id="@+id/Fe_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Fertilizer ID : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvFertilizerID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer ID"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/Fe_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Fe_es_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Fertilizer Estate ID : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Fe_id" />
 
         <TextView
             android:id="@+id/tvFertilizerEstateID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer Estate ID"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
 
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/Fe_es_id"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerID" />
+
+        <TextView
+            android:id="@+id/Fe_nam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Fertilizer Name : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Fe_es_id" />
 
         <TextView
             android:id="@+id/tvFertilizerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer Name"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Fe_es_id"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerEstateID" />
+
+        <TextView
+            android:id="@+id/Fe_ty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Fertilizer Type : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Fe_nam" />
 
         <TextView
             android:id="@+id/tvFertilizerType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer Type"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
 
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Fe_ty"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerName" />
+
+        <TextView
+            android:id="@+id/Re_da"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Received Date : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Fe_ty" />
 
         <TextView
             android:id="@+id/tvFertilizerReceivedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Received Date"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Re_da"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerType" />
+
+        <TextView
+            android:id="@+id/Fe_qu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Fertilizer Qunatity : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Re_da" />
 
         <TextView
             android:id="@+id/tvFertilizerQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer Qunatity"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/Fe_qu"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerReceivedDate" />
+
+        <TextView
+            android:id="@+id/com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Composition : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Fe_qu" />
 
         <TextView
             android:id="@+id/tvFertilizerComposition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Composition"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
 
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/com"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerQuantity" />
+
+        <TextView
+            android:id="@+id/ad_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Addtional Infomation : "
+            android:textSize="13dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/com" />
 
         <TextView
             android:id="@+id/tvFertilizerAdditionalInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Fertilizer Addtional Infomation"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toEndOf="@+id/ad_info"
+            app:layout_constraintTop_toBottomOf="@+id/tvFertilizerComposition" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

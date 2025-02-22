@@ -1,94 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="5dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="310dp"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
 
+
+        <TextView
+            android:id="@+id/coc_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Coconut ID : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvCoconutID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Coconut Tree ID"
+            android:textColor="@android:color/black"
+
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/coc_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/coc_es_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Estate ID : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_id" />
 
         <TextView
             android:id="@+id/tvCoconutEstateID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Coconut Estate ID"
+            android:textColor="@android:color/black"
+
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            app:layout_constraintStart_toEndOf="@+id/coc_es_id"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutID" />
+
+        <TextView
+            android:id="@+id/coc_typ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Coconut Tree Type : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_es_id" />
 
 
         <TextView
             android:id="@+id/tvCoconutTreeType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Coconut Tree Type"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/coc_typ"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutEstateID" />
+
+        <TextView
+            android:id="@+id/coc_pla_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Plant Date : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_typ" />
 
 
         <TextView
             android:id="@+id/tvCoconutPlantedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Planted Date"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/coc_pla_date"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutTreeType" />
+
+        <TextView
+            android:id="@+id/coc_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Tree Age : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_pla_date" />
 
 
         <TextView
             android:id="@+id/tvCoconutTreeAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Age"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/coc_pla_date"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutTreeType" />
+
+        <TextView
+            android:id="@+id/coc_heal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Tree Health : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_age" />
+
 
         <TextView
             android:id="@+id/tvCoconutTreeHealthStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Health Status"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
 
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/coc_heal"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutTreeAge" />
+
+        <TextView
+            android:id="@+id/coc_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Coconut Harvest count : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_heal" />
 
         <TextView
             android:id="@+id/tvCoconutNumbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Number of Coconut Harvested From the Tree"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+            android:textSize="15sp"
+
+            app:layout_constraintStart_toEndOf="@+id/coc_num"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutTreeHealthStatus" />
+
+        <TextView
+            android:id="@+id/ad_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Additional Information : "
+            android:textSize="13sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coc_num" />
 
         <TextView
             android:id="@+id/tvCoconutAdditionalInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Coconut Addtional Infomation"
-            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/ad_in"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoconutNumbers" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
